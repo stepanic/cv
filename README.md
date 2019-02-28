@@ -6,7 +6,7 @@ city: Donja Lomnica
 postcode: 10412
 phone: +385 (0)99 96 79 022
 email: stepanic.matija@gmail.com
-date: 22 November 2014
+date: 19 December 1990
 ...
 
 ### Personal summary
