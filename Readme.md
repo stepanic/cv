@@ -4,7 +4,7 @@ website: https://stepanic.github.io/cv
 street: Skolska 5
 city: Donja Lomnica
 postcode: 10412
-phone: +12 (0)3456 7891011
+phone: +385 (0)99 96 79 022
 email: your.email@address.com
 date: 22 November 2014
 ...
