@@ -1,9 +1,9 @@
 ---
 title: 'Matija Stepanic'
 website: https://stepanic.github.io/cv
-street: Street address
-city: City
-postcode: Postal code
+street: Skolska 5
+city: Donja Lomnica
+postcode: 10412
 phone: +12 (0)3456 7891011
 email: your.email@address.com
 date: 22 November 2014
