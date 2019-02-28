@@ -1,6 +1,6 @@
 ---
-title: 'Your Name'
-website: http://yourwebsite.com
+title: 'Matija Stepanic'
+website: https://stepanic.github.io/cv
 street: Street address
 city: City
 postcode: Postal code
