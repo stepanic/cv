@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-12T08:51:03Z",
+  "updated": "2026-06-12T13:25:52Z",
   "profile": {
     "created_at": "2010-06-26T16:20:43Z",
     "followers": 39,
@@ -8,16 +8,11 @@
     "public_repos": 106
   },
   "lastYear": {
-    "totalContributions": 29447,
-    "commits": 28378,
+    "totalContributions": 29463,
+    "commits": 28384,
     "pullRequests": 68,
     "issues": 8,
     "topRepositories": [
-      {
-        "repo": "domovinatv/dataset.domovina.tv",
-        "url": "https://github.com/domovinatv/dataset.domovina.tv",
-        "commits": 26604
-      },
       {
         "repo": "domovinatv/fetch.domovina.tv",
         "url": "https://github.com/domovinatv/fetch.domovina.tv",
@@ -41,7 +36,7 @@
       {
         "repo": "domovinatv/domovina-api",
         "url": "https://github.com/domovinatv/domovina-api",
-        "commits": 83
+        "commits": 84
       },
       {
         "repo": "domovinatv/domovina-rag",
@@ -61,7 +56,7 @@
       {
         "repo": "lojtrica/dv-lojtrica-flyer",
         "url": "https://github.com/lojtrica/dv-lojtrica-flyer",
-        "commits": 48
+        "commits": 49
       },
       {
         "repo": "DeoOptimoMaximo/Pediludium",
@@ -84,8 +79,8 @@
         "commits": 30
       },
       {
-        "repo": "spremni/domovina-wallet",
-        "url": "https://github.com/spremni/domovina-wallet",
+        "repo": "domovinatv/sms.domovina.ai",
+        "url": "https://github.com/domovinatv/sms.domovina.ai",
         "commits": 28
       }
     ],
@@ -300,7 +295,7 @@
       },
       {
         "weekStart": "2026-06-07",
-        "count": 1290
+        "count": 1306
       }
     ]
   },
@@ -311,19 +306,19 @@
     },
     {
       "name": "JavaScript",
-      "size": 2018975
+      "size": 2033597
+    },
+    {
+      "name": "TypeScript",
+      "size": 960343
     },
     {
       "name": "Liquid",
       "size": 953987
     },
     {
-      "name": "TypeScript",
-      "size": 889290
-    },
-    {
       "name": "CSS",
-      "size": 709393
+      "size": 709888
     },
     {
       "name": "HTML",
@@ -331,7 +326,7 @@
     },
     {
       "name": "Shell",
-      "size": 153085
+      "size": 156905
     },
     {
       "name": "MATLAB",

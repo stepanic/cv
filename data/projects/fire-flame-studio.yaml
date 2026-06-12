@@ -1,7 +1,7 @@
 id: fire-flame-studio
 name: Fire Flame Studio
 featured: false
-order: 12
+order: 13
 period: { start: "2026", end: null }
 role: { en: Author, hr: Autor }
 links:

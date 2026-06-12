@@ -51,7 +51,7 @@ function Entry({ item }: { item: ExperienceItem }) {
 
       <p className="mt-4 max-w-3xl text-sm leading-relaxed text-inkSoft">{lt(item.summary)}</p>
 
-      <ul className="mt-4 max-w-3xl space-y-2.5">
+      <ul className="mt-4 max-w-4xl space-y-2.5">
         {item.bullets.map((bullet, i) => (
           <li key={i} className="flex gap-3 text-sm leading-relaxed text-inkMuted">
             <span className="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-accent" aria-hidden />

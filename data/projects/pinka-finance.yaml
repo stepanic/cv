@@ -7,20 +7,39 @@ role: { en: Co-founder & lead engineer, hr: Suosnivač i glavni inženjer }
 links:
   - { label: Live, url: "https://pinka.finance" }
   - { label: GitHub org, url: "https://github.com/pinka-finance" }
-tech: [Next.js 14, TypeScript, Cloudflare Workers, D1, Tailwind, Safe, Solidity]
+  - { label: pinka-app, url: "https://github.com/pinka-finance/pinka-app" }
+tech: [Next.js 14, TypeScript, Solidity, Foundry, Safe, Gnosis Chain, Monerium EURe, Supabase, Cloudflare, Tailwind]
 summary:
   en: >-
-    On-chain crowdfunding platform. Bilingual (HR/EN) marketing site and
-    campaign/checkout app built as Next.js static exports served by Cloudflare
-    Workers with D1, with Safe smart-account integration for on-chain funds.
+    Group-fundraising platform bridging bank transfers and on-chain money.
+    Campaign & checkout app (Next.js 14) where backers pay by scanning a
+    SEPA EPC QR code or on-chain via Monerium EURe on Gnosis Chain; Foundry
+    smart-contract suite (PinkaFactory, PinkaToken, PinkaCrowdfund) supports
+    four parallel investment paths — ERC677 transferAndCall, approve+invest,
+    SEPA bank transfer via Monerium webhook, and Safe multisig.
   hr: >-
-    On-chain crowdfunding platforma. Dvojezični (HR/EN) marketing web i
-    aplikacija za kampanje i checkout kao Next.js static export na Cloudflare
-    Workersima s D1 bazom, uz Safe smart-account integraciju za on-chain
-    sredstva.
+    Platforma za grupno financiranje koja spaja bankovne transfere i
+    on-chain novac. Aplikacija za kampanje i checkout (Next.js 14) u kojoj
+    uplatitelji plaćaju skeniranjem SEPA EPC QR koda ili on-chain kroz
+    Monerium EURe na Gnosis Chainu; Foundry paket pametnih ugovora
+    (PinkaFactory, PinkaToken, PinkaCrowdfund) podržava četiri paralelna
+    puta ulaganja — ERC677 transferAndCall, approve+invest, SEPA transfer
+    kroz Monerium webhook i Safe multisig.
 highlights:
-  - en: Custom React i18n engine with CLDR plural rules for Croatian
-    hr: Vlastiti React i18n engine s CLDR pluralima za hrvatski
-  - en: Edge-first architecture — zero servers, D1 for signups and campaigns
-    hr: Edge-first arhitektura — nula servera, D1 za prijave i kampanje
-tags: [web3, nextjs, cloudflare, i18n, fintech]
+  - en: >-
+      Runs standalone or framed inside Safe{Wallet} as a Safe App — the
+      wallet SDK transparently routes transactions through the host Safe
+    hr: >-
+      Radi samostalno ili uokvirena unutar Safe{Wallet}a kao Safe App —
+      wallet SDK transparentno usmjerava transakcije kroz host Safe
+  - en: >-
+      RLS-gated Supabase schema with Edge Functions orchestrating
+      contribution state; no plaintext secrets (SEPA profile IDs stored as
+      keccak256 hashes)
+    hr: >-
+      RLS-zaštićena Supabase shema s Edge Functions koje orkestriraju stanje
+      uplata; bez čistih tajni (SEPA ID-evi profila spremljeni kao keccak256
+      hashevi)
+  - en: Bilingual (HR/EN) marketing site with a custom React i18n engine (CLDR plurals)
+    hr: Dvojezični (HR/EN) marketing web s vlastitim React i18n engineom (CLDR plurali)
+tags: [web3, nextjs, cloudflare, i18n, fintech, solidity]

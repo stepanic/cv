@@ -1,7 +1,7 @@
 id: cravat-shopify-theme
 name: Cravat Shopify Theme
 featured: false
-order: 13
+order: 14
 period: { start: "2026", end: null }
 role: { en: Author, hr: Autor }
 links:

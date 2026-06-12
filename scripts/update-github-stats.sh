@@ -52,9 +52,12 @@ jq -n \
       commits: $contrib.totalCommitContributions,
       pullRequests: $contrib.totalPullRequestContributions,
       issues: $contrib.totalIssueContributions,
+      # dataset.domovina.tv is an automated dataset backup — its bot-like
+      # commit volume would drown out the real work, so it is excluded.
       topRepositories: [
         $contrib.commitContributionsByRepository[]
         | select(.repository.isPrivate | not)
+        | select(.repository.nameWithOwner != "domovinatv/dataset.domovina.tv")
         | {repo: .repository.nameWithOwner, url: .repository.url, commits: .contributions.totalCount}
       ],
       # Weekly series for the activity chart (sum of daily counts per week).

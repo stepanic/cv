@@ -18,7 +18,7 @@
 #let projects = {
   let files = (
     "domovina", "pinka-finance", "flutter-certilia", "firepixy", "scanshop",
-    "ff-blinkid", "microblink", "ff-toolkit", "modric-lottery-verify",
+    "ff-blinkid", "microblink", "ff-toolkit", "pediludium", "modric-lottery-verify",
     "flutterflow-socket", "mobile-phone-proxy", "fire-flame-studio",
     "cravat-shopify-theme", "dotclaude-sync", "croatian-tools",
   )

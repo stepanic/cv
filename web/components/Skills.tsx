@@ -9,7 +9,7 @@ export function Skills({ groups }: { groups: SkillGroup[] }) {
 
   return (
     <Section id="skills" heading={t("skills.heading")} subheading={t("skills.subheading")}>
-      <div className="grid gap-8 md:grid-cols-2">
+      <div className="grid gap-8 md:grid-cols-2 2xl:grid-cols-3">
         {groups.map((group) => (
           <div key={lt(group.group)}>
             <h3 className="text-sm font-semibold uppercase tracking-wider text-inkMuted">

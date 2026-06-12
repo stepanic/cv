@@ -36,38 +36,48 @@ experience:
         priority: 1
       - text:
           en: >-
-            Built an automated media-ingestion and dataset pipeline
-            (fetch.domovina.tv, dataset.domovina.tv) that continuously indexes
-            Croatian podcasts into structured, searchable datasets — 26,000+
-            automated commits in the last year.
+            Built a 12-step media-ingestion pipeline (fetch.domovina.tv) that
+            has processed 1,843 Croatian podcast episodes into ~92,000
+            semantic RAG chunks: Whisper.cpp on Metal and NVIDIA Canary on
+            Colab GPUs for ASR, pyannote diarization, Gemini summarisation via
+            multi-region Vertex AI rotation.
           hr: >-
-            Izgradio automatizirani pipeline za prikupljanje medija i datasete
-            (fetch.domovina.tv, dataset.domovina.tv) koji kontinuirano indeksira
-            hrvatske podcaste u strukturirane, pretražive datasete — 26.000+
-            automatiziranih commitova u zadnjih godinu dana.
-        tags: [data, automation, pipelines]
+            Izgradio 12-koračni pipeline za obradu medija (fetch.domovina.tv)
+            koji je obradio 1.843 epizode hrvatskih podcasta u ~92.000
+            semantičkih RAG chunkova: Whisper.cpp na Metalu i NVIDIA Canary na
+            Colab GPU-ima za ASR, pyannote dijarizacija, Gemini sažimanje kroz
+            multi-region Vertex AI rotaciju.
+        tags: [data, automation, pipelines, ai]
         priority: 2
       - text:
           en: >-
-            Implemented RAG search over the media archive (domovina-rag) and a
-            public MCP server exposing podcast search and analytics to AI
-            assistants.
+            Implemented RAG search over the archive — bge-m3 embeddings in
+            ClickHouse (HNSW, ~10–50 ms) with PostgreSQL metadata — and a
+            production MCP server (mcp.domovina.ai) with OAuth, per-client
+            rate limiting and an audit dashboard, usable from Claude, ChatGPT
+            and Cursor.
           hr: >-
-            Implementirao RAG pretragu nad medijskom arhivom (domovina-rag) i
-            javni MCP server koji AI asistentima izlaže pretragu podcasta i
-            analitiku.
+            Implementirao RAG pretragu nad arhivom — bge-m3 embeddinzi u
+            ClickHouseu (HNSW, ~10–50 ms) s PostgreSQL metapodacima — i
+            produkcijski MCP server (mcp.domovina.ai) s OAuthom, rate
+            limitingom po klijentu i audit dashboardom, dostupan iz Claudea,
+            ChatGPT-a i Cursora.
         tags: [ai, rag, mcp]
         priority: 1
       - text:
           en: >-
-            Built the payment rail pay.domovina.ai (Cloudflare Workers) and
-            supporting services: SMS gateway, elections data, interactive map
-            of Croatia, media kit.
+            Built pay.domovina.ai — SEPA EPC QR, Croatian HUB3 PDF417 and
+            EIP-681 barcodes from a single form, with Safe 2/3 multisig
+            routing of Monerium EURe on Gnosis Chain — plus a self-hosted SMS
+            gateway, a catalogue of 901 Croatian football clubs and an
+            interactive map of Croatia.
           hr: >-
-            Izgradio payment rail pay.domovina.ai (Cloudflare Workers) i
-            prateće servise: SMS gateway, izborne podatke, interaktivnu kartu
-            Hrvatske, media kit.
-        tags: [cloudflare, payments, workers]
+            Izgradio pay.domovina.ai — SEPA EPC QR, hrvatski HUB3 PDF417 i
+            EIP-681 barkodovi iz jedne forme, sa Safe 2/3 multisig
+            usmjeravanjem Monerium EURe na Gnosis Chainu — uz self-hosted SMS
+            gateway, katalog 901 hrvatskog nogometnog kluba i interaktivnu
+            kartu Hrvatske.
+        tags: [cloudflare, payments, workers, web3]
         priority: 2
 
   - id: pinka
@@ -101,15 +111,29 @@ experience:
         priority: 1
       - text:
           en: >-
-            Integrated on-chain flows with Safe (Gnosis) smart accounts and
-            stablecoin payments; independently verified a public on-chain
-            lottery (modric-lottery-verify) used by a fan-token community.
+            Designed a Foundry smart-contract suite (factory + ERC20Permit
+            token + crowdfund) on Gnosis Chain with four parallel investment
+            paths — ERC677 transferAndCall, approve+invest, SEPA via Monerium
+            webhook, Safe multisig — and shipped the app as a Safe App that
+            also runs framed inside Safe{Wallet}.
           hr: >-
-            Integrirao on-chain tokove sa Safe (Gnosis) smart računima i
-            stablecoin plaćanjima; nezavisno verificirao javnu on-chain
-            lutriju (modric-lottery-verify) fan-token zajednice.
-        tags: [blockchain, solidity, web3]
+            Dizajnirao Foundry paket pametnih ugovora (factory + ERC20Permit
+            token + crowdfund) na Gnosis Chainu s četiri paralelna puta
+            ulaganja — ERC677 transferAndCall, approve+invest, SEPA kroz
+            Monerium webhook, Safe multisig — i isporučio aplikaciju kao Safe
+            App koja radi i uokvirena u Safe{Wallet}u.
+        tags: [blockchain, solidity, web3, safe]
         priority: 2
+      - text:
+          en: >-
+            Independently verified a public on-chain fan-token lottery
+            (modric-lottery-verify) with reproducible scripts over chain data.
+          hr: >-
+            Nezavisno verificirao javnu on-chain fan-token lutriju
+            (modric-lottery-verify) reproducibilnim skriptama nad podacima s
+            chaina.
+        tags: [blockchain, web3, verification]
+        priority: 3
 
   - id: italk
     company: ITalk Ltd.

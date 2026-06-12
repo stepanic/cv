@@ -134,7 +134,7 @@ function HistoryBlock({ history }: { history: NonNullable<ClaudeCodeStats["histo
         {t("claude.historyTitle")}
       </h3>
       <p className="mt-1 max-w-3xl text-xs text-inkMuted">{t("claude.historySub")}</p>
-      <ul className="mt-4 grid gap-4 sm:grid-cols-2">
+      <ul className="mt-4 grid gap-4 sm:grid-cols-2 2xl:grid-cols-4">
         {rows.map((r) => (
           <li key={r.key} className="rounded-lg border border-line bg-surface p-4">
             <div className="flex items-start justify-between gap-2">
@@ -433,7 +433,7 @@ export function ClaudeCode({ claude }: { claude: ClaudeCodeStats }) {
       subheading={t("claude.subheading", { date: sinceDate })}
     >
       {/* Big numbers */}
-      <div className="grid grid-cols-2 gap-4 lg:grid-cols-3">
+      <div className="grid grid-cols-2 gap-4 lg:grid-cols-3 2xl:grid-cols-6">
         <StatCard
           accent
           value={compactNumber(totals.tokens, locale)}

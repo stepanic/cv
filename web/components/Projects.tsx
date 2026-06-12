@@ -113,7 +113,7 @@ export function Projects({ projects }: { projects: Project[] }) {
 
   return (
     <Section id="projects" heading={t("projects.heading")} subheading={t("projects.subheading")}>
-      <div className="grid gap-5 md:grid-cols-2">
+      <div className="grid gap-5 md:grid-cols-2 2xl:grid-cols-3">
         {featured.map((project) => (
           <FeaturedCard key={project.id} project={project} />
         ))}
@@ -124,7 +124,7 @@ export function Projects({ projects }: { projects: Project[] }) {
           <h3 className="mt-14 text-sm font-semibold uppercase tracking-wider text-inkMuted">
             {t("projects.more")}
           </h3>
-          <ul className="mt-4 grid gap-3 lg:grid-cols-2">
+          <ul className="mt-4 grid gap-3 lg:grid-cols-2 2xl:grid-cols-3">
             {rest.map((project) => (
               <CompactRow key={project.id} project={project} />
             ))}

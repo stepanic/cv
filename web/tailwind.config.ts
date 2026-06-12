@@ -10,8 +10,11 @@ const config: Config = {
         sm: "2rem",
         lg: "3rem",
       },
+      // Let desktop breathe: fluid until xl, then a wide cap instead of the
+      // old 1120px column.
       screens: {
-        "2xl": "1120px",
+        xl: "1280px",
+        "2xl": "1480px",
       },
     },
     extend: {
@@ -63,7 +66,7 @@ const config: Config = {
         ],
       },
       maxWidth: {
-        content: "1120px",
+        content: "1480px",
       },
       keyframes: {
         "fade-in": {

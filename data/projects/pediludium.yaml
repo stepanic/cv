@@ -1,0 +1,24 @@
+id: pediludium
+name: Pediludium
+featured: false
+order: 9
+period: { start: "2025", end: null }
+role: { en: Author, hr: Autor }
+links:
+  - { label: GitHub, url: "https://github.com/DeoOptimoMaximo/Pediludium" }
+tech: [Next.js, TypeScript, Supabase, PostgreSQL, Playwright, Docker]
+summary:
+  en: >-
+    Realtime football analytics and prediction platform for the FIFA World
+    Cup 2026 (48 teams, 104 matches): a TypeScript fetcher using real-Chrome
+    transport to handle TLS-fingerprint anti-bot protection, normalised
+    Supabase/Postgres schema as single source of truth, baseline ELO +
+    Poisson prediction models and a Next.js visualisation frontend.
+  hr: >-
+    Realtime platforma za nogometnu analitiku i predikcije za FIFA Svjetsko
+    prvenstvo 2026. (48 reprezentacija, 104 utakmice): TypeScript fetcher s
+    transportom pravog Chromea za zaobilaženje TLS-fingerprint anti-bot
+    zaštite, normalizirana Supabase/Postgres shema kao jedini izvor istine,
+    osnovni ELO + Poisson modeli predikcije i Next.js frontend za
+    vizualizaciju.
+tags: [analytics, sports, nextjs, data]

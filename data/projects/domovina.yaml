@@ -7,23 +7,57 @@ role: { en: Founder & sole engineer, hr: Osnivač i jedini inženjer }
 links:
   - { label: Live, url: "https://domovina.ai" }
   - { label: GitHub org, url: "https://github.com/domovinatv" }
-tech: [Flutter, Dart, Supabase, PostgreSQL, Cloudflare Workers, D1, Kong, Coolify, RAG, MCP, Python]
+  - { label: MCP server, url: "https://mcp.domovina.ai/health" }
+  - { label: pay.domovina.ai, url: "https://pay.domovina.ai" }
+  - { label: klubovi.domovina.ai, url: "https://klubovi.domovina.ai" }
+tech: [Flutter, Dart, Python, Node.js, TypeScript, Supabase, PostgreSQL, ClickHouse, Whisper, Gemini, Cloudflare Workers, D1, Coolify, RAG, MCP, Safe]
 summary:
   en: >-
-    AI-native Croatian media platform: a continuously updated archive of
-    Croatian podcasts and video with full-text and semantic (RAG) search,
-    structured open datasets, a public MCP server for AI assistants, payment
-    rail, and Flutter apps targeting web, mobile and TV.
+    AI-native Croatian media platform of 20 active repositories, built
+    end-to-end by one engineer. An automated pipeline (Whisper.cpp on Metal,
+    NVIDIA Canary on Colab GPUs, pyannote diarization, Gemini via multi-region
+    Vertex AI) has processed 1,843 podcast episodes into ~92,000 semantic RAG
+    chunks, searchable through a public MCP server and a Flutter app that
+    ships to web (WASM), iOS, Android and Android TV.
   hr: >-
-    AI-native hrvatska medijska platforma: kontinuirano ažurirana arhiva
-    hrvatskih podcasta i videa s punotekstnom i semantičkom (RAG) pretragom,
-    strukturirani otvoreni dataseti, javni MCP server za AI asistente,
-    payment rail i Flutter aplikacije za web, mobitele i TV.
+    AI-native hrvatska medijska platforma od 20 aktivnih repozitorija,
+    izgrađena end-to-end od jednog inženjera. Automatizirani pipeline
+    (Whisper.cpp na Metalu, NVIDIA Canary na Colab GPU-ima, pyannote
+    dijarizacija, Gemini kroz multi-region Vertex AI) obradio je 1.843
+    epizode podcasta u ~92.000 semantičkih RAG chunkova, pretraživih kroz
+    javni MCP server i Flutter aplikaciju za web (WASM), iOS, Android i
+    Android TV.
 highlights:
-  - en: 27+ repositories in the ecosystem; 26,000+ automated dataset commits in one year
-    hr: 27+ repozitorija u ekosustavu; 26.000+ automatiziranih dataset commitova u godinu dana
-  - en: Self-hosted Supabase behind Kong gateway on Coolify, Cloudflare Tunnel edge
-    hr: Self-hosted Supabase iza Kong gatewaya na Coolifyju, Cloudflare Tunnel edge
-  - en: Built end-to-end by one engineer using agentic AI development
-    hr: Izgrađeno end-to-end od jednog inženjera agentnim AI razvojem
-tags: [ai, flutter, data, cloudflare, media]
+  - en: >-
+      RAG search with bge-m3 embeddings in ClickHouse (HNSW, ~10–50 ms) +
+      PostgreSQL metadata; production MCP server with OAuth, rate limiting
+      and an audit dashboard
+    hr: >-
+      RAG pretraga s bge-m3 embeddinzima u ClickHouseu (HNSW, ~10–50 ms) +
+      PostgreSQL metapodaci; produkcijski MCP server s OAuthom, rate
+      limitingom i audit dashboardom
+  - en: >-
+      pay.domovina.ai — three payment formats from one form (SEPA EPC QR,
+      Croatian HUB3 PDF417, EIP-681) with Safe 2/3 multisig routing of
+      Monerium EURe on Gnosis Chain
+    hr: >-
+      pay.domovina.ai — tri formata plaćanja iz jedne forme (SEPA EPC QR,
+      hrvatski HUB3 PDF417, EIP-681) sa Safe 2/3 multisig usmjeravanjem
+      Monerium EURe na Gnosis Chainu
+  - en: >-
+      klubovi.domovina.ai — open catalogue of 901 Croatian football clubs,
+      100% geocoded, ingested from 6+ sources (incl. TLS-fingerprint-aware
+      scraping) with AI-audited 89–93/100 accuracy
+    hr: >-
+      klubovi.domovina.ai — otvoreni katalog 901 hrvatskog nogometnog kluba,
+      100% geokodiran, prikupljen iz 6+ izvora (uklj. scraping svjestan TLS
+      fingerprinta) s AI-auditiranom točnošću 89–93/100
+  - en: >-
+      Self-hosted Supabase SSO (passkeys + Croatian eID via flutter_certilia)
+      behind Cloudflare Tunnel on Coolify; self-hosted SMS gateway with an
+      Android device as the sender
+    hr: >-
+      Self-hosted Supabase SSO (passkeys + hrvatski eID kroz flutter_certilia)
+      iza Cloudflare Tunnela na Coolifyju; self-hosted SMS gateway s Android
+      uređajem kao pošiljateljem
+tags: [ai, flutter, data, cloudflare, media, rag, payments]

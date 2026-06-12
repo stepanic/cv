@@ -1,7 +1,7 @@
 id: dotclaude-sync
 name: dotclaude-sync
 featured: false
-order: 14
+order: 15
 period: { start: "2026", end: null }
 role: { en: Author, hr: Autor }
 links:

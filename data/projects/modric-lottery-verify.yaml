@@ -1,7 +1,7 @@
 id: modric-lottery-verify
 name: $MODRIC Lottery Verification
 featured: false
-order: 9
+order: 10
 period: { start: "2026", end: "2026" }
 role: { en: Independent verifier, hr: Nezavisni verifikator }
 links:

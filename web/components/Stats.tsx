@@ -105,7 +105,7 @@ export function Stats({ github }: { github: GithubStats }) {
       <h4 className="mt-10 text-sm font-semibold uppercase tracking-wider text-inkMuted">
         {t("stats.topRepos")}
       </h4>
-      <ul className="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+      <ul className="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
         {ly.topRepositories.slice(0, 6).map((repo) => (
           <li key={repo.repo}>
             <a
