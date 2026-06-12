@@ -72,6 +72,13 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en">
       <body>
         <script
+          // Apply the persisted theme before first paint to avoid a flash of
+          // the wrong theme (key must match components/ThemeToggle.tsx).
+          dangerouslySetInnerHTML={{
+            __html: `try{if(localStorage.getItem("stepanic.theme")==="domovina")document.documentElement.dataset.theme="domovina"}catch(e){}`,
+          }}
+        />
+        <script
           type="application/ld+json"
           // JSON-LD Person schema for rich search results.
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

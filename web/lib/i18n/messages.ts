@@ -24,6 +24,8 @@ const en = {
     ariaLabel: "Main navigation",
     homeAria: "Matija Stepanić — top of page",
     langSwitchAria: "Choose language",
+    themeToDomovina: "Switch to DOMOVINA theme (light, Croatian colors)",
+    themeToDev: "Switch to developer theme (dark)",
   },
 
   hero: {
@@ -159,6 +161,8 @@ const hr: Messages = {
     ariaLabel: "Glavna navigacija",
     homeAria: "Matija Stepanić — vrh stranice",
     langSwitchAria: "Odaberi jezik",
+    themeToDomovina: "Prebaci na DOMOVINA temu (svijetla, hrvatske boje)",
+    themeToDev: "Prebaci na developersku temu (tamna)",
   },
 
   hero: {

@@ -1,6 +1,7 @@
 "use client";
 
 import { useI18n, type Locale } from "@/lib/i18n";
+import { ThemeToggle } from "./ThemeToggle";
 
 const NAV_ITEMS = [
   { href: "#stats", key: "nav.stats" },
@@ -56,13 +57,16 @@ export function Header() {
           ))}
         </nav>
 
-        <div
-          role="group"
-          aria-label={t("nav.langSwitchAria")}
-          className="flex items-center gap-1 rounded-md border border-line p-0.5"
-        >
-          <LangButton target="hr" />
-          <LangButton target="en" />
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
+          <div
+            role="group"
+            aria-label={t("nav.langSwitchAria")}
+            className="flex items-center gap-1 rounded-md border border-line p-0.5"
+          >
+            <LangButton target="hr" />
+            <LangButton target="en" />
+          </div>
         </div>
       </div>
     </header>

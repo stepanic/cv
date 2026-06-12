@@ -2,8 +2,46 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+ * Two themes, one semantic palette (see tailwind.config.ts):
+ *  - default      → dark "developer" theme, Croatian-red accent
+ *  - [data-theme="domovina"] → light DOMOVINA branding (navy #002F6C +
+ *    flag red, tricolor stripe) shared across domovina.ai products.
+ * Triplet values ("11 14 19") feed rgb(var() / <alpha-value>) so Tailwind
+ * opacity modifiers like bg-bg/85 keep working in both themes.
+ */
 :root {
   color-scheme: dark;
+  --c-bg: 11 14 19;
+  --c-surface: 17 21 28;
+  --c-surface-hover: 22 27 36;
+  --c-line: rgba(255, 255, 255, 0.08);
+  --c-ink: 232 234 237;
+  --c-ink-soft: 184 189 198;
+  --c-ink-muted: 126 133 144;
+  --c-accent: 230 57 70;
+  --c-accent-bright: 242 89 101;
+  --c-accent-soft: rgba(230, 57, 70, 0.12);
+  --c-accent-border: rgba(230, 57, 70, 0.35);
+  --c-selection-bg: rgba(230, 57, 70, 0.35);
+  --c-selection-ink: #ffffff;
+}
+
+[data-theme="domovina"] {
+  color-scheme: light;
+  --c-bg: 255 255 255;
+  --c-surface: 246 248 252;
+  --c-surface-hover: 237 241 248;
+  --c-line: #dbe2f0;
+  --c-ink: 14 26 51; /* #0E1A33 — navy-based ink */
+  --c-ink-soft: 90 98 122; /* #5A627A */
+  --c-ink-muted: 138 147 160; /* #8A93A0 */
+  --c-accent: 0 47 108; /* DOMOVINA navy #002F6C */
+  --c-accent-bright: 230 29 47; /* flag red #E61D2F */
+  --c-accent-soft: rgba(0, 47, 108, 0.06);
+  --c-accent-border: rgba(0, 47, 108, 0.22);
+  --c-selection-bg: rgba(0, 47, 108, 0.18);
+  --c-selection-ink: #0e1a33;
 }
 
 html {
@@ -16,9 +54,27 @@ body {
   @apply bg-bg text-ink antialiased;
 }
 
+/* DOMOVINA tricolor brand stripe — the shared motif across domovina.ai
+   products: fixed 6px red/white/navy bar above everything. */
+[data-theme="domovina"] body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  z-index: 60;
+  background: linear-gradient(
+    to bottom,
+    #ff0000 0 33.4%,
+    #ffffff 33.4% 66.7%,
+    #002f6c 66.7% 100%
+  );
+}
+
 ::selection {
-  background: rgba(230, 57, 70, 0.35);
-  color: #fff;
+  background: var(--c-selection-bg);
+  color: var(--c-selection-ink);
 }
 
 @layer utilities {

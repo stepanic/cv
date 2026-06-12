@@ -19,19 +19,21 @@ const config: Config = {
     },
     extend: {
       colors: {
-        // Dark theme palette with a single Croatian-red accent.
-        bg: "#0B0E13",
-        surface: "#11151C",
-        surfaceHover: "#161B24",
-        line: "rgba(255, 255, 255, 0.08)",
-        ink: "#E8EAED",
-        inkSoft: "#B8BDC6",
-        inkMuted: "#7E8590",
+        // Semantic tokens resolved from CSS variables in globals.css, so the
+        // whole palette swaps at runtime: default dark "developer" theme vs.
+        // light DOMOVINA branding under html[data-theme="domovina"].
+        bg: "rgb(var(--c-bg) / <alpha-value>)",
+        surface: "rgb(var(--c-surface) / <alpha-value>)",
+        surfaceHover: "rgb(var(--c-surface-hover) / <alpha-value>)",
+        line: "var(--c-line)",
+        ink: "rgb(var(--c-ink) / <alpha-value>)",
+        inkSoft: "rgb(var(--c-ink-soft) / <alpha-value>)",
+        inkMuted: "rgb(var(--c-ink-muted) / <alpha-value>)",
         accent: {
-          DEFAULT: "#E63946",
-          soft: "rgba(230, 57, 70, 0.12)",
-          border: "rgba(230, 57, 70, 0.35)",
-          bright: "#F25965",
+          DEFAULT: "rgb(var(--c-accent) / <alpha-value>)",
+          soft: "var(--c-accent-soft)",
+          border: "var(--c-accent-border)",
+          bright: "rgb(var(--c-accent-bright) / <alpha-value>)",
         },
       },
       fontFamily: {
