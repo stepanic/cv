@@ -1,0 +1,249 @@
+# Work experience, reverse-chronological. Each bullet has bilingual text plus
+# `tags` used by the tailoring pipeline (applications/) to emphasise or drop
+# bullets per job application, and by the one-page variant (priority: 1 = must
+# keep, 3 = first to drop).
+experience:
+  - id: domovina
+    company: DOMOVINA.tv / DOMOVINA.ai
+    url: https://domovina.ai
+    role:
+      en: Founder & Lead Engineer
+      hr: Osnivač i glavni inženjer
+    start: "2025-06"
+    end: null
+    location: { en: "Zagreb, Croatia — remote", hr: "Zagreb — remote" }
+    summary:
+      en: >-
+        AI-native Croatian media platform: podcast/video archive with search,
+        RAG and structured datasets, apps for web, mobile and TV.
+      hr: >-
+        AI-native hrvatska medijska platforma: arhiva podcasta i videa s
+        pretragom, RAG-om i strukturiranim datasetima, aplikacije za web,
+        mobitele i TV.
+    bullets:
+      - text:
+          en: >-
+            Designed and built the full platform solo using agentic AI
+            development: Flutter app (web, iOS, Android, TV), self-hosted
+            Supabase backend behind Kong on Coolify, and a Cloudflare edge
+            layer — 29,000+ GitHub contributions across the ecosystem in one year.
+          hr: >-
+            Dizajnirao i samostalno izgradio cijelu platformu agentnim AI
+            razvojem: Flutter aplikacija (web, iOS, Android, TV), self-hosted
+            Supabase backend iza Konga na Coolifyju i Cloudflare edge sloj —
+            29.000+ GitHub contributiona kroz ekosustav u godinu dana.
+        tags: [flutter, supabase, cloudflare, ai, architecture]
+        priority: 1
+      - text:
+          en: >-
+            Built an automated media-ingestion and dataset pipeline
+            (fetch.domovina.tv, dataset.domovina.tv) that continuously indexes
+            Croatian podcasts into structured, searchable datasets — 26,000+
+            automated commits in the last year.
+          hr: >-
+            Izgradio automatizirani pipeline za prikupljanje medija i datasete
+            (fetch.domovina.tv, dataset.domovina.tv) koji kontinuirano indeksira
+            hrvatske podcaste u strukturirane, pretražive datasete — 26.000+
+            automatiziranih commitova u zadnjih godinu dana.
+        tags: [data, automation, pipelines]
+        priority: 2
+      - text:
+          en: >-
+            Implemented RAG search over the media archive (domovina-rag) and a
+            public MCP server exposing podcast search and analytics to AI
+            assistants.
+          hr: >-
+            Implementirao RAG pretragu nad medijskom arhivom (domovina-rag) i
+            javni MCP server koji AI asistentima izlaže pretragu podcasta i
+            analitiku.
+        tags: [ai, rag, mcp]
+        priority: 1
+      - text:
+          en: >-
+            Built the payment rail pay.domovina.ai (Cloudflare Workers) and
+            supporting services: SMS gateway, elections data, interactive map
+            of Croatia, media kit.
+          hr: >-
+            Izgradio payment rail pay.domovina.ai (Cloudflare Workers) i
+            prateće servise: SMS gateway, izborne podatke, interaktivnu kartu
+            Hrvatske, media kit.
+        tags: [cloudflare, payments, workers]
+        priority: 2
+
+  - id: pinka
+    company: PINKA Finance
+    url: https://pinka.finance
+    role:
+      en: Co-Founder & Lead Engineer
+      hr: Suosnivač i glavni inženjer
+    start: "2025-09"
+    end: null
+    location: { en: Remote, hr: Remote }
+    summary:
+      en: >-
+        On-chain crowdfunding platform — bilingual landing and campaign app on
+        Cloudflare (Workers, D1), Next.js 14, Safe smart accounts.
+      hr: >-
+        On-chain crowdfunding platforma — dvojezični landing i aplikacija za
+        kampanje na Cloudflareu (Workers, D1), Next.js 14, Safe smart računi.
+    bullets:
+      - text:
+          en: >-
+            Architected and shipped the bilingual (HR/EN) marketing site and
+            campaign/checkout app: Next.js 14 static export served by Cloudflare
+            Workers with D1, custom i18n engine with CLDR plural rules.
+          hr: >-
+            Arhitektura i isporuka dvojezičnog (HR/EN) marketing weba i
+            aplikacije za kampanje i checkout: Next.js 14 static export na
+            Cloudflare Workersima s D1 bazom, vlastiti i18n engine s CLDR
+            pluralima.
+        tags: [nextjs, cloudflare, i18n, typescript]
+        priority: 1
+      - text:
+          en: >-
+            Integrated on-chain flows with Safe (Gnosis) smart accounts and
+            stablecoin payments; independently verified a public on-chain
+            lottery (modric-lottery-verify) used by a fan-token community.
+          hr: >-
+            Integrirao on-chain tokove sa Safe (Gnosis) smart računima i
+            stablecoin plaćanjima; nezavisno verificirao javnu on-chain
+            lutriju (modric-lottery-verify) fan-token zajednice.
+        tags: [blockchain, solidity, web3]
+        priority: 2
+
+  - id: italk
+    company: ITalk Ltd.
+    url: https://italk.hr
+    role:
+      en: Founder, CEO & Senior Software Engineer
+      hr: Osnivač, direktor i senior softverski inženjer
+    start: "2016-01"
+    end: null
+    location: { en: "Zagreb, Croatia", hr: "Zagreb" }
+    summary:
+      en: >-
+        Boutique software consultancy. Toptal Verified Expert (since 2022),
+        certified FlutterFlow Expert (since May 2022), 50+ FlutterFlow
+        consulting projects, full-stack delivery for international clients.
+      hr: >-
+        Butik softverski konzalting. Toptal Verified Expert (od 2022.),
+        certificirani FlutterFlow Expert (od svibnja 2022.), 50+ FlutterFlow
+        konzultantskih projekata, full-stack isporuka za međunarodne klijente.
+    bullets:
+      - text:
+          en: >-
+            Worked as a FlutterFlow expert/consultant on 50+ projects:
+            custom Flutter features, Firebase Cloud Functions integrations,
+            published reusable open-source FlutterFlow components.
+          hr: >-
+            Radio kao FlutterFlow expert/konzultant na 50+ projekata:
+            custom Flutter funkcionalnosti, integracije kroz Firebase Cloud
+            Functions, objavio reusable open-source FlutterFlow komponente.
+        tags: [flutterflow, flutter, firebase, consulting]
+        priority: 1
+      - text:
+          en: >-
+            Built a FlutterFlow identity-document scanning widget on top of
+            BlinkID native SDKs, adopted by 1,119 different FlutterFlow
+            projects.
+          hr: >-
+            Izradio FlutterFlow widget za skeniranje osobnih dokumenata na
+            BlinkID native SDK-ovima, korišten u 1.119 različitih FlutterFlow
+            projekata.
+        tags: [flutterflow, mobile, sdk, ocr]
+        priority: 1
+      - text:
+          en: >-
+            Developed FirePixy — photo-booth & event photo crowdsourcing
+            platform: Node.js serverless backend (Firebase), Angular PWA, WPF
+            photo-booth app integrated with the Canon EOS SDK.
+          hr: >-
+            Razvio FirePixy — platformu za photo boothove i crowdsourcing
+            fotografija s događanja: Node.js serverless backend (Firebase),
+            Angular PWA, WPF photo-booth aplikacija s Canon EOS SDK-om.
+        tags: [nodejs, firebase, angular, product]
+        priority: 2
+      - text:
+          en: >-
+            Led a team of 9 building ScanShop, a self-checkout retail platform:
+            architecture and backend with NestJS + Parse Server, Angular PWA,
+            native iOS/Android apps.
+          hr: >-
+            Vodio tim od 9 ljudi na ScanShopu, self-checkout retail platformi:
+            arhitektura i backend s NestJS + Parse Serverom, Angular PWA,
+            native iOS/Android aplikacije.
+        tags: [nestjs, leadership, architecture, mobile]
+        priority: 1
+      - text:
+          en: >-
+            Consulted for Microblink: server-side OCR bridge with API-key
+            management for their SaaS, and a JavaScript web component +
+            desktop-to-mobile handoff flow for document scanning.
+          hr: >-
+            Konzultant za Microblink: server-side OCR most s upravljanjem API
+            ključevima za njihov SaaS te JavaScript web komponenta i
+            desktop-to-mobile handoff za skeniranje dokumenata.
+        tags: [ocr, saas, javascript, consulting]
+        priority: 2
+      - text:
+          en: >-
+            Built the backend for Tempo, an EU-funds project progress-tracking
+            application (NestJS, Parse Server, Firebase), and a static-site
+            platform (Angular + Scully + Flamelink CMS) powering multiple
+            production sites since 2020.
+          hr: >-
+            Izgradio backend za Tempo, aplikaciju za praćenje napretka
+            EU-projekata (NestJS, Parse Server, Firebase), i static-site
+            platformu (Angular + Scully + Flamelink CMS) koja od 2020. pokreće
+            više produkcijskih stranica.
+        tags: [nestjs, firebase, angular, cms]
+        priority: 3
+
+  - id: freelance
+    company:
+      en: Freelance
+      hr: Freelance
+    role:
+      en: Software Engineer
+      hr: Softverski inženjer
+    start: "2006-01"
+    end: "2016-01"
+    location: { en: "Zagreb, Croatia", hr: "Zagreb" }
+    summary:
+      en: >-
+        Ten years of freelance full-stack work: 100+ commercial websites and
+        internal tools, long-lived production systems.
+      hr: >-
+        Deset godina freelance full-stack rada: 100+ komercijalnih web
+        stranica i internih alata, dugovječni produkcijski sustavi.
+    bullets:
+      - text:
+          en: >-
+            Developed an internal CRM for membership and activities of a
+            Croatian public organisation — in production since 2008 with
+            ~1,500 active users.
+          hr: >-
+            Razvio interni CRM za članstvo i aktivnosti hrvatske javne
+            organizacije — u produkciji od 2008. s ~1.500 aktivnih korisnika.
+        tags: [php, mysql, crm]
+        priority: 1
+      - text:
+          en: >-
+            Built a custom CMS and website for a Croatian business news agency;
+            co-founded and built the backend of Mobicon, a crowd-microphone
+            application.
+          hr: >-
+            Izradio custom CMS i web za hrvatsku poslovnu novinsku agenciju;
+            suosnivač i autor backenda Mobicona, aplikacije za "crowd
+            microphone".
+        tags: [php, nodejs, cms]
+        priority: 2
+      - text:
+          en: >-
+            Delivered 100+ commercial websites and internal tools (PHP, Java,
+            Node.js, MySQL/PostgreSQL/MongoDB, AWS, Spring Boot, Yii).
+          hr: >-
+            Isporučio 100+ komercijalnih web stranica i internih alata (PHP,
+            Java, Node.js, MySQL/PostgreSQL/MongoDB, AWS, Spring Boot, Yii).
+        tags: [php, java, fullstack]
+        priority: 3

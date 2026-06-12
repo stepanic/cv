@@ -1,0 +1,28 @@
+education:
+  - degree:
+      en: Master of Science in Computer Science
+      hr: Magistar računarstva
+    school:
+      en: University of Zagreb, Faculty of Electrical Engineering and Computing (FER)
+      hr: Sveučilište u Zagrebu, Fakultet elektrotehnike i računarstva (FER)
+    start: "2013"
+    end: "2015"
+    location: { en: "Zagreb, Croatia", hr: Zagreb }
+  - degree:
+      en: Bachelor of Science in Computer Science
+      hr: Prvostupnik računarstva
+    school:
+      en: University of Zagreb, Faculty of Electrical Engineering and Computing (FER)
+      hr: Sveučilište u Zagrebu, Fakultet elektrotehnike i računarstva (FER)
+    start: "2009"
+    end: "2013"
+    location: { en: "Zagreb, Croatia", hr: Zagreb }
+
+certifications:
+  - name: { en: Toptal Verified Expert in Engineering, hr: Toptal Verified Expert in Engineering }
+    issuer: Toptal
+    date: "2022-02"
+    url: https://www.toptal.com/resume/matija-stepanic
+  - name: { en: Certified FlutterFlow Expert, hr: Certificirani FlutterFlow Expert }
+    issuer: FlutterFlow
+    date: "2022-05"

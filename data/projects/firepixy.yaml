@@ -1,0 +1,23 @@
+id: firepixy
+name: FirePixy
+featured: true
+order: 4
+period: { start: "2017", end: null }
+role: { en: Creator, hr: Autor }
+links: []
+tech: [Node.js, Firebase, Angular, WPF, Canon EDSDK, Flutter]
+summary:
+  en: >-
+    Complete platform for photo booths and photo walls at weddings and
+    community events: serverless Node.js backend on Firebase, Angular PWA for
+    guests, WPF photo-booth application integrated with Canon EOS DSLR cameras
+    and on-site printing, Flutter mobile apps.
+  hr: >-
+    Kompletna platforma za photo boothove i foto-zidove na vjenčanjima i
+    događanjima: serverless Node.js backend na Firebaseu, Angular PWA za
+    goste, WPF photo-booth aplikacija s Canon EOS DSLR kamerama i printanjem
+    na licu mjesta, Flutter mobilne aplikacije.
+highlights:
+  - en: Runs production events end-to-end — capture, moderation, projection, print
+    hr: Pokriva događanja end-to-end — snimanje, moderacija, projekcija, print
+tags: [product, nodejs, firebase, hardware]

@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Keep anchored sections clear of the sticky header. */
+  scroll-padding-top: 5rem;
+}
+
+body {
+  @apply bg-bg text-ink antialiased;
+}
+
+::selection {
+  background: rgba(230, 57, 70, 0.35);
+  color: #fff;
+}
+
+@layer utilities {
+  .link-accent {
+    @apply text-accent-bright underline decoration-accent-border underline-offset-4 transition-colors hover:text-ink;
+  }
+}

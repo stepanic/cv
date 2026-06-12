@@ -1,0 +1,29 @@
+id: domovina
+name: DOMOVINA.tv / DOMOVINA.ai
+featured: true
+order: 1
+period: { start: "2025", end: null }
+role: { en: Founder & sole engineer, hr: Osnivač i jedini inženjer }
+links:
+  - { label: Live, url: "https://domovina.ai" }
+  - { label: GitHub org, url: "https://github.com/domovinatv" }
+tech: [Flutter, Dart, Supabase, PostgreSQL, Cloudflare Workers, D1, Kong, Coolify, RAG, MCP, Python]
+summary:
+  en: >-
+    AI-native Croatian media platform: a continuously updated archive of
+    Croatian podcasts and video with full-text and semantic (RAG) search,
+    structured open datasets, a public MCP server for AI assistants, payment
+    rail, and Flutter apps targeting web, mobile and TV.
+  hr: >-
+    AI-native hrvatska medijska platforma: kontinuirano ažurirana arhiva
+    hrvatskih podcasta i videa s punotekstnom i semantičkom (RAG) pretragom,
+    strukturirani otvoreni dataseti, javni MCP server za AI asistente,
+    payment rail i Flutter aplikacije za web, mobitele i TV.
+highlights:
+  - en: 27+ repositories in the ecosystem; 26,000+ automated dataset commits in one year
+    hr: 27+ repozitorija u ekosustavu; 26.000+ automatiziranih dataset commitova u godinu dana
+  - en: Self-hosted Supabase behind Kong gateway on Coolify, Cloudflare Tunnel edge
+    hr: Self-hosted Supabase iza Kong gatewaya na Coolifyju, Cloudflare Tunnel edge
+  - en: Built end-to-end by one engineer using agentic AI development
+    hr: Izgrađeno end-to-end od jednog inženjera agentnim AI razvojem
+tags: [ai, flutter, data, cloudflare, media]

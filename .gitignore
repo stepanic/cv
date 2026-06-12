@@ -1,0 +1,16 @@
+# Dependencies & build output
+node_modules/
+web/out/
+web/.next/
+.firecrawl/
+
+# Real job applications are PRIVATE — synced to stepanic/cv-private.
+# Only the public workflow docs and template stay in this repo.
+applications/*
+!applications/README.md
+!applications/_template/
+
+# OS / editor noise
+.DS_Store
+*.log
+.wrangler/

@@ -1,0 +1,17 @@
+id: fire-flame-studio
+name: Fire Flame Studio
+featured: false
+order: 12
+period: { start: "2026", end: null }
+role: { en: Author, hr: Autor }
+links:
+  - { label: GitHub, url: "https://github.com/stepanic/fire-flame-studio" }
+tech: [Flutter, Dart, Firebase Admin]
+summary:
+  en: >-
+    Open-source Firebase Admin GUI built with Flutter — a desktop alternative
+    to the Firebase Console.
+  hr: >-
+    Open-source Firebase Admin GUI izgrađen u Flutteru — desktop alternativa
+    Firebase Consoleu.
+tags: [opensource, flutter, firebase, devtools]

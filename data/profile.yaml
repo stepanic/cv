@@ -1,0 +1,47 @@
+# Identity & contact — single source of truth for all CV variants.
+# Every human-readable field is bilingual: { en: ..., hr: ... }.
+name: Matija Stepanić
+name_ascii: Matija Stepanic
+title:
+  en: Senior Software Engineer · Full-Stack & AI-Native Development
+  hr: Senior softverski inženjer · Full-stack i AI-native razvoj
+location:
+  en: Zagreb, Croatia (CET, UTC+1)
+  hr: Zagreb, Hrvatska (CET, UTC+1)
+email: stepanic.matija@gmail.com
+website: https://stepanic.domovina.ai
+company: ITalk Ltd.
+summary:
+  en: >-
+    Software engineer with 20 years of professional experience (since 2006) and
+    200+ delivered projects. MSc in Computer Science (FER, University of Zagreb).
+    Founder & CEO of ITalk Ltd., Toptal Verified Expert, certified FlutterFlow
+    Expert since 2022 with 50+ FlutterFlow consulting projects. Currently building
+    AI-native products end-to-end: the DOMOVINA media-AI platform (Flutter,
+    self-hosted Supabase, RAG, payments) and PINKA on-chain crowdfunding.
+    29,000+ GitHub contributions in the last year, working open-source-first
+    with agentic AI tooling (Claude Code power user, top usage percentile).
+  hr: >-
+    Softverski inženjer s 20 godina profesionalnog iskustva (od 2006.) i 200+
+    isporučenih projekata. Magistar računarstva (FER, Sveučilište u Zagrebu).
+    Osnivač i direktor ITalk d.o.o., Toptal Verified Expert, certificirani
+    FlutterFlow Expert od 2022. s 50+ FlutterFlow konzultantskih projekata.
+    Trenutno gradim AI-native proizvode od početka do kraja: DOMOVINA medijsku
+    AI platformu (Flutter, self-hosted Supabase, RAG, plaćanja) i PINKA on-chain
+    crowdfunding. 29.000+ GitHub contributiona u zadnjih godinu dana, radim
+    open-source-first uz agentni AI tooling (Claude Code power user, najviši
+    percentil korištenja).
+links:
+  - label: GitHub
+    url: https://github.com/stepanic
+  - label: LinkedIn
+    url: https://www.linkedin.com/in/stepanic/
+  - label: Toptal
+    url: https://www.toptal.com/resume/matija-stepanic
+  - label: DOMOVINA.ai
+    url: https://domovina.ai
+languages:
+  - name: { en: Croatian, hr: Hrvatski }
+    level: { en: Native, hr: Materinski }
+  - name: { en: English, hr: Engleski }
+    level: { en: Full professional proficiency, hr: Puna profesionalna razina }

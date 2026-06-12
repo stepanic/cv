@@ -1,0 +1,20 @@
+id: flutter-certilia
+name: flutter_certilia
+featured: true
+order: 3
+period: { start: "2025", end: null }
+role: { en: Author & maintainer, hr: Autor i održavatelj }
+links:
+  - { label: GitHub, url: "https://github.com/stepanic/flutter_certilia" }
+  - { label: Docs, url: "https://github.com/stepanic/flutter-certilia-docs" }
+tech: [Flutter, Dart, OAuth2, eID]
+summary:
+  en: >-
+    Open-source Flutter package for the Certilia Identity API — Croatian
+    national eID (NIAS) authentication for Flutter apps, with documentation
+    site. 110+ commits in the last year.
+  hr: >-
+    Open-source Flutter paket za Certilia Identity API — autentikacija
+    hrvatskim eID-om (NIAS) u Flutter aplikacijama, s dokumentacijskim webom.
+    110+ commitova u zadnjih godinu dana.
+tags: [opensource, flutter, identity, croatia]

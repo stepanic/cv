@@ -1,0 +1,19 @@
+id: mobile-phone-proxy
+name: mobile-phone-proxy
+featured: false
+order: 11
+period: { start: "2026", end: null }
+role: { en: Author, hr: Autor }
+links:
+  - { label: GitHub, url: "https://github.com/stepanic/mobile-phone-proxy" }
+tech: [Swift, Kotlin, iOS, Android, Networking]
+summary:
+  en: >-
+    Native iOS and Android apps that turn a phone into an HTTP CONNECT proxy,
+    routing traffic out over cellular while the listener sits on Wi-Fi — no
+    third-party servers.
+  hr: >-
+    Native iOS i Android aplikacije koje pretvaraju mobitel u HTTP CONNECT
+    proxy: promet izlazi kroz mobilnu mrežu dok listener radi na Wi-Fiju —
+    bez ikakvih trećih servera.
+tags: [opensource, networking, ios, android]

@@ -1,0 +1,26 @@
+id: pinka-finance
+name: PINKA Finance
+featured: true
+order: 2
+period: { start: "2025", end: null }
+role: { en: Co-founder & lead engineer, hr: Suosnivač i glavni inženjer }
+links:
+  - { label: Live, url: "https://pinka.finance" }
+  - { label: GitHub org, url: "https://github.com/pinka-finance" }
+tech: [Next.js 14, TypeScript, Cloudflare Workers, D1, Tailwind, Safe, Solidity]
+summary:
+  en: >-
+    On-chain crowdfunding platform. Bilingual (HR/EN) marketing site and
+    campaign/checkout app built as Next.js static exports served by Cloudflare
+    Workers with D1, with Safe smart-account integration for on-chain funds.
+  hr: >-
+    On-chain crowdfunding platforma. Dvojezični (HR/EN) marketing web i
+    aplikacija za kampanje i checkout kao Next.js static export na Cloudflare
+    Workersima s D1 bazom, uz Safe smart-account integraciju za on-chain
+    sredstva.
+highlights:
+  - en: Custom React i18n engine with CLDR plural rules for Croatian
+    hr: Vlastiti React i18n engine s CLDR pluralima za hrvatski
+  - en: Edge-first architecture — zero servers, D1 for signups and campaigns
+    hr: Edge-first arhitektura — nula servera, D1 za prijave i kampanje
+tags: [web3, nextjs, cloudflare, i18n, fintech]

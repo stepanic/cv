@@ -1,0 +1,17 @@
+id: cravat-shopify-theme
+name: Cravat Shopify Theme
+featured: false
+order: 13
+period: { start: "2026", end: null }
+role: { en: Author, hr: Autor }
+links:
+  - { label: GitHub, url: "https://github.com/stepanic/cravat-shopify-theme" }
+tech: [Shopify, Liquid, JavaScript]
+summary:
+  en: >-
+    Open-source premium Shopify 2.0 theme — lightning-fast, conversion
+    optimised, mobile-first, built with Croatian craftsmanship.
+  hr: >-
+    Open-source premium Shopify 2.0 tema — brza, optimizirana za konverzije,
+    mobile-first, izrađena s hrvatskom pažnjom prema detalju.
+tags: [opensource, shopify, ecommerce]

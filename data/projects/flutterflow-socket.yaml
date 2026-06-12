@@ -1,0 +1,21 @@
+id: flutterflow-socket
+name: FlutterFlow Socket
+featured: false
+order: 10
+period: { start: "2023", end: null }
+role: { en: Author, hr: Autor }
+links:
+  - { label: GitHub, url: "https://github.com/stepanic/flutterflow-socket" }
+tech: [Node.js, Bash, Flutter, GitHub Webhooks]
+summary:
+  en: >-
+    CLI tool extending the Flutter CLI: a local Node.js listener receives
+    GitHub webhooks on FlutterFlow pushes, verifies commit signatures, merges
+    changes into the working branch and hot-reloads running Flutter processes
+    via Unix signals.
+  hr: >-
+    CLI alat koji proširuje Flutter CLI: lokalni Node.js listener prima GitHub
+    webhookove na FlutterFlow push, verificira potpise commitova, spaja
+    promjene u radni branch i hot-reloada pokrenute Flutter procese Unix
+    signalima.
+tags: [opensource, devtools, flutterflow]

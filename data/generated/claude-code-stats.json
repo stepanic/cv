@@ -1,0 +1,36 @@
+{
+  "updated": "2026-06-12T08:52:29Z",
+  "note": "Aggregate counts from local Claude Code transcripts; no content is published. Transcript figures cover the local retention window (~30 days); statsCache tracks history since Dec 2025.",
+  "sessionFiles": 454,
+  "retentionWindowDays": 30,
+  "projects": 55,
+  "transcriptSizeMB": 500,
+  "transcriptEvents": 152124,
+  "firstSession": "2026-05-12",
+  "lastSession": "2026-06-12",
+  "monthlySessions": [
+    {
+      "month": "2026-05",
+      "sessions": 126
+    },
+    {
+      "month": "2026-06",
+      "sessions": 101
+    }
+  ],
+  "statsCache": {
+    "trackedSince": "2025-12-20T11:46:21.018Z",
+    "computedAt": "2026-04-29",
+    "totalMessages": 27959,
+    "totalSessions": 60,
+    "longestSessionMessages": 767,
+    "models": [
+      "claude-haiku-4-5-20251001",
+      "claude-opus-4-5-20251101",
+      "claude-opus-4-6",
+      "claude-opus-4-7",
+      "claude-sonnet-4-5-20250929",
+      "claude-sonnet-4-6"
+    ]
+  }
+}

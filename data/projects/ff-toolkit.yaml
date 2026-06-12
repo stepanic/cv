@@ -1,0 +1,22 @@
+id: ff-toolkit
+name: FlutterFlow Open-Source Toolkit
+featured: false
+order: 8
+period: { start: "2022", end: null }
+role: { en: Author, hr: Autor }
+links:
+  - { label: "Drag & drop upload", url: "https://github.com/stepanic/mp-ff-super_drag_and_drop" }
+  - { label: Encrypt, url: "https://github.com/stepanic/mp-ff-encrypt" }
+tech: [FlutterFlow, Flutter, Firebase Storage, Cryptography]
+summary:
+  en: >-
+    A set of reusable open-source FlutterFlow components: multi-file upload to
+    Firebase Storage with progress streams and drag-and-drop, Salsa20-based
+    string encryption actions, and barcode/QR generation with encrypted
+    payloads.
+  hr: >-
+    Skup reusable open-source FlutterFlow komponenti: multi-file upload na
+    Firebase Storage s progress streamovima i drag-and-dropom, Salsa20 akcije
+    za enkripciju stringova te generiranje barkodova/QR kodova s kriptiranim
+    sadržajem.
+tags: [opensource, flutterflow, firebase]

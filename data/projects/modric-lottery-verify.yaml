@@ -1,0 +1,19 @@
+id: modric-lottery-verify
+name: $MODRIC Lottery Verification
+featured: false
+order: 9
+period: { start: "2026", end: "2026" }
+role: { en: Independent verifier, hr: Nezavisni verifikator }
+links:
+  - { label: GitHub, url: "https://github.com/stepanic/modric-lottery-verify" }
+tech: [Blockchain, EVM, JavaScript]
+summary:
+  en: >-
+    Independent on-chain verification of the Trendex $MODRIC fan-token lottery
+    winners across all three draws — reproducible scripts anyone can run
+    against chain data.
+  hr: >-
+    Nezavisna on-chain verifikacija dobitnika Trendex $MODRIC fan-token
+    lutrije kroz sva tri izvlačenja — reproducibilne skripte koje svatko može
+    pokrenuti nad podacima s chaina.
+tags: [opensource, web3, verification]

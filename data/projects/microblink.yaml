@@ -1,0 +1,20 @@
+id: microblink
+name: Microblink OCR Integrations
+featured: false
+order: 7
+period: { start: "2018", end: "2020" }
+role: { en: Consultant, hr: Konzultant }
+links: []
+tech: [Node.js, Web Components, Angular, Firebase, OCR]
+summary:
+  en: >-
+    Consulting for Microblink (BlinkID): server-side bridge to a native OCR
+    engine with API-key management for their SaaS, a standalone JavaScript web
+    component for camera capture and cloud OCR, and a desktop-to-mobile
+    handoff flow using Cloud Firestore.
+  hr: >-
+    Konzalting za Microblink (BlinkID): server-side most prema native OCR
+    engineu s upravljanjem API ključevima za njihov SaaS, samostojeća
+    JavaScript web komponenta za snimanje kamerom i cloud OCR te
+    desktop-to-mobile handoff preko Cloud Firestorea.
+tags: [consulting, ocr, javascript, saas]

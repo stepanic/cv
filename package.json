@@ -1,0 +1,23 @@
+{
+  "name": "cv",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Single source of truth for Matija Stepanić's CV — data, PDF builds, website and job-application tooling",
+  "type": "module",
+  "scripts": {
+    "validate": "node scripts/validate.mjs",
+    "stats:github": "bash scripts/update-github-stats.sh",
+    "stats:claude": "bash scripts/update-claude-stats.sh",
+    "stats": "npm run stats:github && npm run stats:claude",
+    "pdf": "bash scripts/build-pdf.sh",
+    "web:dev": "npm --prefix web run dev",
+    "web:build": "npm run validate && npm --prefix web run build",
+    "deploy": "npm run web:build && npx wrangler deploy -c web/wrangler.jsonc",
+    "build": "npm run validate && npm run pdf && npm run web:build"
+  },
+  "devDependencies": {
+    "ajv": "^8.17.1",
+    "js-yaml": "^4.1.0"
+  },
+  "engines": { "node": ">=20" }
+}

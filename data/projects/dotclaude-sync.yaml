@@ -1,0 +1,19 @@
+id: dotclaude-sync
+name: dotclaude-sync
+featured: false
+order: 14
+period: { start: "2026", end: null }
+role: { en: Author, hr: Autor }
+links:
+  - { label: GitHub, url: "https://github.com/stepanic/dotclaude-sync" }
+tech: [Bash, launchd, rclone, Git]
+summary:
+  en: >-
+    Daily backup of ~/.claude (Claude Code config, memory, sessions,
+    transcripts) to a local git repo plus a private rclone remote, scheduled
+    with macOS launchd. Scripts only — the data stays private.
+  hr: >-
+    Dnevni backup ~/.claude direktorija (Claude Code konfiguracija, memorija,
+    sessioni, transkripti) u lokalni git repo i privatni rclone remote,
+    raspoređeno kroz macOS launchd. Samo skripte — podaci ostaju privatni.
+tags: [opensource, devtools, ai, automation]

@@ -1,0 +1,21 @@
+id: scanshop
+name: ScanShop
+featured: true
+order: 5
+period: { start: "2018", end: "2021" }
+role: { en: Architect & backend lead (team of 9), hr: Arhitekt i backend lead (tim od 9) }
+links: []
+tech: [NestJS, Parse Server, Firebase, Angular, Swift, Kotlin]
+summary:
+  en: >-
+    Self-checkout native mobile application for retail stores. Defined the
+    architecture and built the backend (NestJS + Parse Server + Firebase)
+    while leading a team of nine across backend, Angular PWA and native
+    iOS/Android apps. Contributed improvements back to the open-source Parse
+    Dashboard project.
+  hr: >-
+    Self-checkout native mobilna aplikacija za maloprodaju. Definirao
+    arhitekturu i izgradio backend (NestJS + Parse Server + Firebase) vodeći
+    tim od devet ljudi kroz backend, Angular PWA i native iOS/Android
+    aplikacije. Doprinosi vraćeni u open-source Parse Dashboard.
+tags: [leadership, nestjs, retail, mobile]

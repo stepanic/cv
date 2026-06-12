@@ -1,0 +1,23 @@
+id: ff-blinkid
+name: FlutterFlow BlinkID Widget
+featured: true
+order: 6
+period: { start: "2022", end: "2024" }
+role: { en: Author, hr: Autor }
+links: []
+tech: [FlutterFlow, Flutter, BlinkID, iOS, Android]
+summary:
+  en: >-
+    Custom FlutterFlow widget wrapping native iOS/Android identity-document
+    scanning SDKs (BlinkID). Reads identity documents with the device camera
+    and returns structured data into FlutterFlow action chains. Adopted by
+    1,119 different FlutterFlow projects.
+  hr: >-
+    Custom FlutterFlow widget koji omata native iOS/Android SDK-ove za
+    skeniranje osobnih dokumenata (BlinkID). Čita dokumente kamerom uređaja i
+    vraća strukturirane podatke u FlutterFlow action chainove. Korišten u
+    1.119 različitih FlutterFlow projekata.
+highlights:
+  - en: 1,119 FlutterFlow projects adopted the widget
+    hr: 1.119 FlutterFlow projekata koristi widget
+tags: [flutterflow, ocr, mobile, sdk]

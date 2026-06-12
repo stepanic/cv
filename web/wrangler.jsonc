@@ -1,0 +1,22 @@
+{
+  // Assets-only Worker: no `main` script — Cloudflare serves ./out directly.
+  // Deploy with: npm run deploy (next build && wrangler deploy)
+  "name": "stepanic-cv",
+  "compatibility_date": "2025-05-01",
+  "account_id": "7dc7167b7e2e00923bfa7cd697df14e4",
+
+  // Keep the *.workers.dev preview URL active alongside the custom route.
+  "workers_dev": true,
+
+  "assets": {
+    "directory": "./out",
+    "not_found_handling": "single-page-application"
+  },
+
+  // Custom domain: Cloudflare creates and manages the DNS record for
+  // stepanic.domovina.ai automatically (the zone has no record for it yet,
+  // so a plain zone route would never receive traffic).
+  "routes": [
+    { "pattern": "stepanic.domovina.ai", "custom_domain": true }
+  ]
+}

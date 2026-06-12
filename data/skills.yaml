@@ -1,0 +1,56 @@
+# Skills grouped for display; `years` = years of professional use (as of 2026).
+# `core: true` marks skills shown in the one-page variant.
+skills:
+  - group: { en: Languages, hr: Jezici }
+    items:
+      - { name: TypeScript / JavaScript, years: 15, core: true }
+      - { name: Dart, years: 7, core: true }
+      - { name: SQL, years: 18 }
+      - { name: Bash, years: 15 }
+      - { name: PHP, years: 18 }
+      - { name: Python, years: 6 }
+      - { name: Solidity, years: 3 }
+      - { name: Java, years: 10 }
+      - { name: Kotlin, years: 4 }
+      - { name: Swift, years: 4 }
+      - { name: HTML / CSS / SCSS, years: 20 }
+
+  - group: { en: Frameworks & Runtimes, hr: Frameworci i runtimeovi }
+    items:
+      - { name: Node.js, years: 15, core: true }
+      - { name: Flutter, years: 7, core: true }
+      - { name: FlutterFlow, years: 5, core: true }
+      - { name: Next.js / React, years: 5, core: true }
+      - { name: NestJS, years: 8 }
+      - { name: Angular, years: 10 }
+      - { name: Parse Server, years: 8 }
+
+  - group: { en: Cloud & Infrastructure, hr: Cloud i infrastruktura }
+    items:
+      - { name: "Cloudflare (Workers, D1, R2, Pages)", years: 3, core: true }
+      - { name: Firebase / GCP, years: 12, core: true }
+      - { name: Supabase (self-hosted), years: 2, core: true }
+      - { name: Docker / Coolify, years: 9 }
+      - { name: AWS, years: 8 }
+      - { name: CI/CD (GitHub Actions), years: 8 }
+      - { name: PostgreSQL / MySQL / MongoDB, years: 15 }
+
+  - group: { en: AI Engineering, hr: AI inženjering }
+    items:
+      - { name: Agentic development (Claude Code), years: 2, core: true }
+      - { name: RAG pipelines, years: 2, core: true }
+      - { name: MCP servers, years: 2, core: true }
+      - { name: "LLM APIs (Anthropic, OpenAI)", years: 3 }
+
+  - group: { en: Web3 / Blockchain, hr: Web3 / Blockchain }
+    items:
+      - { name: EVM / Solidity, years: 3 }
+      - { name: Safe smart accounts, years: 2 }
+      - { name: On-chain verification, years: 2 }
+
+  - group: { en: Other, hr: Ostalo }
+    items:
+      - { name: Software architecture, years: 14, core: true }
+      - { name: Team leadership, years: 8 }
+      - { name: OCR / identity documents (BlinkID), years: 7 }
+      - { name: "Payments (Stripe, stablecoins, SMS)", years: 6 }

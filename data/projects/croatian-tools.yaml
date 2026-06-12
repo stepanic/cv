@@ -1,0 +1,21 @@
+id: croatian-tools
+name: Croatian Open-Source Tools
+featured: false
+order: 15
+period: { start: "2025", end: null }
+role: { en: Author, hr: Autor }
+links:
+  - { label: ADHD provjera, url: "https://github.com/stepanic/adhd-provjera" }
+  - { label: Satnica, url: "https://github.com/stepanic/satnica-time-tracker" }
+  - { label: DOMOVINA browser, url: "https://github.com/stepanic/domovina-browser" }
+tech: [TypeScript, Swift, WebKit, PWA]
+summary:
+  en: >-
+    A collection of small open-source tools for the Croatian community: an
+    offline ASRS v1.1 ADHD self-assessment web app, "Satnica" offline time
+    tracking for freelancers, and a minimal native macOS WebKit browser.
+  hr: >-
+    Kolekcija malih open-source alata za hrvatsku zajednicu: offline web
+    aplikacija za samoprocjenu ADHD-a (ASRS v1.1), "Satnica" offline praćenje
+    radnih sati za freelancere i minimalni native macOS WebKit preglednik.
+tags: [opensource, croatia, tools]
