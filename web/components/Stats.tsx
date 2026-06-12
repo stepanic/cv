@@ -1,7 +1,7 @@
 "use client";
 
-import { Bot, GitCommitHorizontal, Github } from "lucide-react";
-import type { ClaudeCodeStats, GithubStats } from "@/lib/types";
+import { GitCommitHorizontal, Github } from "lucide-react";
+import type { GithubStats } from "@/lib/types";
 import { useI18n } from "@/lib/i18n";
 import { Section } from "./Section";
 
@@ -77,7 +77,7 @@ function WeeklyChart({ weekly }: { weekly: GithubStats["lastYear"]["weekly"] }) 
   );
 }
 
-export function Stats({ github, claude }: { github: GithubStats; claude: ClaudeCodeStats }) {
+export function Stats({ github }: { github: GithubStats }) {
   const { t, n, locale } = useI18n();
   const ly = github.lastYear;
 
@@ -125,23 +125,6 @@ export function Stats({ github, claude }: { github: GithubStats; claude: ClaudeC
           </li>
         ))}
       </ul>
-
-      {/* Claude Code / AI-native development */}
-      <h3 className="mt-14 flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-inkMuted">
-        <Bot className="h-4 w-4" aria-hidden />
-        {t("stats.aiNative")}
-      </h3>
-      <p className="mt-2 max-w-2xl text-sm text-inkMuted">{t("stats.aiNativeBlurb")}</p>
-      <div className="mt-4 grid grid-cols-2 gap-4 lg:grid-cols-4">
-        <StatCard
-          accent
-          value={n(claude.sessionFiles)}
-          label={t("stats.ccSessions", { days: claude.retentionWindowDays })}
-        />
-        <StatCard value={n(claude.projects)} label={t("stats.ccProjects")} />
-        <StatCard value={n(claude.transcriptEvents)} label={t("stats.ccEvents")} />
-        <StatCard value={n(claude.statsCache.totalMessages)} label={t("stats.ccMessages")} />
-      </div>
 
       <p className="mt-6 text-xs text-inkMuted">{t("stats.updated", { date: updatedDate })}</p>
     </Section>

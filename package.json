@@ -7,7 +7,7 @@
   "scripts": {
     "validate": "node scripts/validate.mjs",
     "stats:github": "bash scripts/update-github-stats.sh",
-    "stats:claude": "bash scripts/update-claude-stats.sh",
+    "stats:claude": "node scripts/mine-claude-history.mjs",
     "stats": "npm run stats:github && npm run stats:claude",
     "pdf": "bash scripts/build-pdf.sh",
     "web:dev": "npm --prefix web run dev",

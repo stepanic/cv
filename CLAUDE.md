@@ -29,8 +29,12 @@ which is gitignored and synced to the private repo `stepanic/cv-private`).
 
 CI (`.github/workflows/ci.yml`) re-validates and rebuilds on every push;
 `stats.yml` refreshes GitHub stats weekly. Claude Code stats can only be
-updated locally (they read `~/.claude`): run `npm run stats:claude` from this
-machine whenever convenient.
+updated locally: `npm run stats:claude` runs
+`scripts/mine-claude-history.mjs`, which stitches live `~/.claude`
+transcripts, the git history of `~/git/stepanic/dotclaude-backup` (daily
+snapshots — extends past the 30-day retention) and `stats-cache.json`, with
+CodexBar-style token counting and per-model API pricing. Aggregates only —
+never publish transcript content.
 
 ## Job application workflow ("ubaci proposal, dobij sve")
 

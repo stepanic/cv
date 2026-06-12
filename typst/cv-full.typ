@@ -41,7 +41,7 @@
     align: center,
     [#text(weight: "bold", size: 12pt, fill: accent, fmt-num(gh.lastYear.totalContributions)) \ #L.contributions],
     [#text(weight: "bold", size: 12pt, fill: accent, str(gh.profile.public_repos)) \ #L.publicRepos],
-    [#text(weight: "bold", size: 12pt, fill: accent, str(cc.sessionFiles)) \ #L.aiNative],
+    [#text(weight: "bold", size: 12pt, fill: accent, fmt-billions(cc.totals.tokens)) \ #L.aiNative],
   )
 ]
 

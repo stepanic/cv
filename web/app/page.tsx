@@ -2,6 +2,7 @@ import { loadCvData } from "@/lib/data";
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { Stats } from "@/components/Stats";
+import { ClaudeCode } from "@/components/ClaudeCode";
 import { Experience } from "@/components/Experience";
 import { Projects } from "@/components/Projects";
 import { Skills } from "@/components/Skills";
@@ -18,7 +19,8 @@ export default function Page() {
       <Header />
       <main id="content">
         <Hero profile={data.profile} />
-        <Stats github={data.github} claude={data.claude} />
+        <Stats github={data.github} />
+        <ClaudeCode claude={data.claude} />
         <Experience items={data.experience} />
         <Projects projects={data.projects} />
         <Skills groups={data.skills} />

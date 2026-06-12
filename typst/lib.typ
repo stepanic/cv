@@ -40,7 +40,7 @@
     stats: "By the Numbers",
     contributions: "GitHub contributions (last 12 months)",
     publicRepos: "public repositories",
-    aiNative: "AI-native development: Claude Code sessions (last 30 days)",
+    aiNative: "tokens processed with Claude Code since 2025",
     years: "yrs",
   ),
   hr: (
@@ -56,7 +56,7 @@
     stats: "U brojkama",
     contributions: "GitHub contributiona (zadnjih 12 mjeseci)",
     publicRepos: "javnih repozitorija",
-    aiNative: "AI-native razvoj: Claude Code sessioni (zadnjih 30 dana)",
+    aiNative: "tokena obrađeno s Claude Codeom od 2025.",
     years: "god",
   ),
 ).at(lang)
@@ -70,6 +70,9 @@
 #let fmt-period(start, end) = fmt-date(start) + " – " + fmt-date(end)
 
 #let accent = rgb("#C1272D") // Croatian red, used sparingly
+
+// Compact billions, e.g. 7751614716 → "7.75B".
+#let fmt-billions(n) = str(calc.round(n / 1000000000, digits: 2)) + "B"
 
 // Thousands separator for big numbers.
 #let fmt-num(n) = {

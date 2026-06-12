@@ -16,6 +16,7 @@ const en = {
 
   nav: {
     stats: "Stats",
+    claudeCode: "Claude Code",
     experience: "Experience",
     projects: "Projects",
     skills: "Skills",
@@ -36,8 +37,7 @@ const en = {
 
   stats: {
     heading: "Live stats",
-    subheading:
-      "Pulled automatically from GitHub and local Claude Code transcripts — regenerated on every build.",
+    subheading: "Pulled automatically from GitHub — regenerated on every build.",
     github: "GitHub — last 12 months",
     contributions: "Contributions",
     commits: "Commits",
@@ -51,13 +51,44 @@ const en = {
     } satisfies Plural as Plural,
     weeklyChartTitle: "Weekly contributions, last 12 months",
     weeklyChartAria: "Bar chart of weekly GitHub contributions over the last year",
-    aiNative: "AI-native development",
-    aiNativeBlurb:
-      "Daily agentic development with Claude Code — measured from local session transcripts, not self-reported.",
-    ccSessions: "Sessions (last {days} days)",
-    ccProjects: "Projects worked on",
-    ccEvents: "Transcript events",
-    ccMessages: "Messages since Dec 2025",
+    updated: "Updated {date}",
+  },
+
+  claude: {
+    heading: "Claude Code — AI-native engineering",
+    subheading:
+      "Using Claude Code daily since {date} — telemetry mined from local transcripts and daily git snapshots, not self-reported.",
+    tokens: "tokens processed",
+    apiValue: "API-equivalent value",
+    sessions: "sessions",
+    sessionsSub: "across {projects} projects",
+    messages: "messages",
+    messagesSub: "{toolCalls} tool calls",
+    launches: "Claude Code launches",
+    launchesSub: "since {date}",
+    longestSession: "longest session",
+    longestSessionValue: "{hours}h",
+    longestSessionSub: "{messages} messages · {toolCalls} tool calls",
+    monthlyTitle: "Tokens per month",
+    monthlyAria: "Bar chart of Claude Code tokens processed per month",
+    gapLabelTop: "{from}–{to}",
+    gapLabelBottom: "data lost",
+    gapNote:
+      "{from}–{to}: data lost (corrupted install) — real usage is higher than shown.",
+    modelMix: "Model mix",
+    modelMixSub: "Share of total tokens per model.",
+    otherModels: "other",
+    hourTitle: "When the work happens",
+    hourSub: "Message events by local hour of day.",
+    hourAria: "Histogram of Claude Code activity by hour of day",
+    recursionTitle: "Recursion",
+    recursionPre:
+      "These numbers survive Claude Code's 30-day transcript retention only because of ",
+    recursionMid:
+      " — a backup tool for Claude Code's own state, built with Claude Code. Token counting borrows from ",
+    recursionPost: ". Tools maintaining the telemetry of the tools that built them.",
+    methodologyLabel: "Methodology",
+    methodologyLink: "miner script",
     updated: "Updated {date}",
   },
 
@@ -102,6 +133,7 @@ const hr: Messages = {
 
   nav: {
     stats: "Statistika",
+    claudeCode: "Claude Code",
     experience: "Iskustvo",
     projects: "Projekti",
     skills: "Vještine",
@@ -122,8 +154,7 @@ const hr: Messages = {
 
   stats: {
     heading: "Statistika uživo",
-    subheading:
-      "Automatski povučeno s GitHuba i iz lokalnih Claude Code transkripata — regenerira se pri svakom buildu.",
+    subheading: "Automatski povučeno s GitHuba — regenerira se pri svakom buildu.",
     github: "GitHub — zadnjih 12 mjeseci",
     contributions: "Contributiona",
     commits: "Commitova",
@@ -138,13 +169,44 @@ const hr: Messages = {
     },
     weeklyChartTitle: "Tjedni contributioni, zadnjih 12 mjeseci",
     weeklyChartAria: "Stupčasti graf tjednih GitHub contributiona u zadnjih godinu dana",
-    aiNative: "AI-native razvoj",
-    aiNativeBlurb:
-      "Svakodnevni agentni razvoj s Claude Codeom — mjereno iz lokalnih transkripata sessiona, ne samoprocjena.",
-    ccSessions: "Sessiona (zadnjih {days} dana)",
-    ccProjects: "Projekata u radu",
-    ccEvents: "Eventa u transkriptima",
-    ccMessages: "Poruka od prosinca 2025.",
+    updated: "Ažurirano {date}",
+  },
+
+  claude: {
+    heading: "Claude Code — AI-native inženjering",
+    subheading:
+      "Claude Code u svakodnevnoj upotrebi od {date} — telemetrija iskopana iz lokalnih transkripata i dnevnih git snapshotova, ne samoprocjena.",
+    tokens: "tokena obrađeno",
+    apiValue: "API-ekvivalentna vrijednost",
+    sessions: "sessiona",
+    sessionsSub: "kroz {projects} projekata",
+    messages: "poruka",
+    messagesSub: "{toolCalls} tool callova",
+    launches: "pokretanja Claude Codea",
+    launchesSub: "od {date}",
+    longestSession: "najduži session",
+    longestSessionValue: "{hours}h",
+    longestSessionSub: "{messages} poruka · {toolCalls} tool callova",
+    monthlyTitle: "Tokeni po mjesecu",
+    monthlyAria: "Stupčasti graf tokena obrađenih u Claude Codeu po mjesecu",
+    gapLabelTop: "{from}–{to}",
+    gapLabelBottom: "podaci izgubljeni",
+    gapNote:
+      "{from}–{to}: podaci izgubljeni (korumpirana instalacija) — stvarna upotreba veća je od prikazane.",
+    modelMix: "Omjer modela",
+    modelMixSub: "Udio ukupnih tokena po modelu.",
+    otherModels: "ostali",
+    hourTitle: "Kada se radi",
+    hourSub: "Eventi poruka po lokalnom satu u danu.",
+    hourAria: "Histogram aktivnosti u Claude Codeu po satu u danu",
+    recursionTitle: "Rekurzija",
+    recursionPre:
+      "Ove brojke preživljavaju Claude Codeovu 30-dnevnu retenciju transkripata samo zahvaljujući alatu ",
+    recursionMid:
+      " — backupu stanja samog Claude Codea, izgrađenom Claude Codeom. Brojanje tokena posuđuje od ",
+    recursionPost: ". Alati koji održavaju telemetriju alata koji su ih izgradili.",
+    methodologyLabel: "Metodologija",
+    methodologyLink: "skripta za rudarenje",
     updated: "Ažurirano {date}",
   },
 

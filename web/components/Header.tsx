@@ -4,6 +4,7 @@ import { useI18n, type Locale } from "@/lib/i18n";
 
 const NAV_ITEMS = [
   { href: "#stats", key: "nav.stats" },
+  { href: "#claude-code", key: "nav.claudeCode" },
   { href: "#experience", key: "nav.experience" },
   { href: "#projects", key: "nav.projects" },
   { href: "#skills", key: "nav.skills" },

@@ -105,25 +105,55 @@ export interface GithubStats {
   languages: { name: string; size: number }[];
 }
 
+export interface ClaudeModelUsage {
+  model: string;
+  inputTokens: number;
+  outputTokens: number;
+  cacheReadTokens: number;
+  cacheWriteTokens: number;
+  totalTokens: number;
+  apiEquivalentUSD: number;
+}
+
+export interface ClaudeMonthly {
+  month: string; // "YYYY-MM"
+  sessions: number;
+  messages: number;
+  toolCalls: number;
+  tokens: number;
+  apiEquivalentUSD: number;
+  source?: string;
+}
+
 export interface ClaudeCodeStats {
   updated: string;
   note: string;
-  sessionFiles: number;
-  retentionWindowDays: number;
-  projects: number;
-  transcriptSizeMB: number;
-  transcriptEvents: number;
-  firstSession: string;
-  lastSession: string;
-  monthlySessions: { month: string; sessions: number }[];
+  usingSince: string;
+  numStartups: number;
+  knownGap: { from: string; to: string; reason: string };
+  totals: {
+    sessions: number;
+    projects: number;
+    messages: number;
+    toolCalls: number;
+    transcriptEvents: number;
+    tokens: number;
+    outputTokens: number;
+    apiEquivalentUSD: number;
+  };
+  byModel: ClaudeModelUsage[];
+  monthly: ClaudeMonthly[];
+  /** 24 ints: message events per local hour of day. */
+  hourHistogram: number[];
+  longestSession: { messages: number; toolCalls: number; hours: number };
   statsCache: {
     trackedSince: string;
     computedAt: string;
     totalMessages: number;
     totalSessions: number;
-    longestSessionMessages: number;
     models: string[];
   };
+  recursion: string;
 }
 
 export interface CvData {
