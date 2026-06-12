@@ -1,0 +1,43 @@
+name: Weekly stats refresh
+
+on:
+  schedule:
+    - cron: "17 5 * * 1" # Mondays 05:17 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Needs a classic PAT (repo, read:user) in the STATS_TOKEN secret —
+      # the default actions token has no `viewer` identity for the
+      # contributions GraphQL query.
+      - name: Refresh GitHub stats
+        env:
+          GH_TOKEN: ${{ secrets.STATS_TOKEN }}
+        run: |
+          if [ -z "$GH_TOKEN" ]; then
+            echo "STATS_TOKEN secret not set — skipping refresh." && exit 0
+          fi
+          bash scripts/update-github-stats.sh
+
+      - name: Rebuild PDFs with fresh numbers
+        uses: typst-community/setup-typst@v4
+      - run: bash scripts/build-pdf.sh
+
+      - name: Commit & push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/generated dist
+          if git diff --cached --quiet; then
+            echo "No changes."
+          else
+            git commit -m "chore: weekly stats refresh"
+            git push
+          fi

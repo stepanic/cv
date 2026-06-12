@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  validate-and-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Validate CV data against schema
+        run: |
+          npm ci
+          npm run validate
+
+      - name: Build PDFs
+        uses: typst-community/setup-typst@v4
+      - run: bash scripts/build-pdf.sh /tmp/pdf-check
+
+      - name: Build website
+        run: |
+          npm ci --prefix web
+          npm run build --prefix web
+
+      - name: Deploy to Cloudflare (main only)
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: |
+          if [ -n "$CLOUDFLARE_API_TOKEN" ]; then
+            npx wrangler deploy -c web/wrangler.jsonc
+          else
+            echo "CLOUDFLARE_API_TOKEN not set — skipping deploy."
+          fi
