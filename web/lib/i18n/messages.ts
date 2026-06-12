@@ -57,7 +57,7 @@ const en = {
   claude: {
     heading: "Claude Code — AI-native engineering",
     subheading:
-      "Using Claude Code daily since {date} — telemetry mined from local transcripts and daily git snapshots, not self-reported.",
+      "Using Claude Code daily since {date} — telemetry mined from local transcripts, daily git snapshots and a sourced public usage record.",
     tokens: "tokens processed",
     apiValue: "API-equivalent value",
     sessions: "sessions",
@@ -74,7 +74,7 @@ const en = {
     gapLabelTop: "{from}–{to}",
     gapLabelBottom: "data lost",
     gapNote:
-      "{from}–{to}: data lost (corrupted install) — real usage is higher than shown.",
+      "{from}–{to}: partial data — timestamp-less legacy history format, a July 2025 corruption event (5 files) and undocumented gaps (Apr 2025; Aug–Oct 2025). Real usage is higher than shown.",
     modelMix: "Model mix",
     modelMixSub: "Share of total tokens per model.",
     otherModels: "other",
@@ -90,6 +90,24 @@ const en = {
     methodologyLabel: "Methodology",
     methodologyLink: "miner script",
     updated: "Updated {date}",
+    historyTitle: "History & spend — the wider record",
+    historySub:
+      "Figures the local mining cannot see, taken from a sourced public usage record (invoices and product screenshots). Each carries its verification status.",
+    verified: "verified",
+    estimated: "estimated",
+    histConvos: "Claude.ai conversations",
+    histConvosSub: "point-in-time snapshot, {date} · Pro plan",
+    histSpend: "total Anthropic spend",
+    histSpendSub: "{invoices} invoices · {from} → {to} ({months} months) · avg €{avg}/mo",
+    histPeak: "peak plan period",
+    histPeakSub: "€{monthly}/mo × 5 = €{total} ({period})",
+    histEarly: "reconstructed early era",
+    histEarlySub:
+      "{period}: {prompts} prompts · {projects} projects · ~{messages} messages (July 2025 corruption event)",
+    histSnapshot: "/stats snapshot ({date})",
+    histSnapshotSub:
+      "{sessions} sessions · longest {longest} · {streak}-day streak · most active day {mostActive}",
+    historyDocLink: "Full sourced record",
   },
 
   experience: {
@@ -175,7 +193,7 @@ const hr: Messages = {
   claude: {
     heading: "Claude Code — AI-native inženjering",
     subheading:
-      "Claude Code u svakodnevnoj upotrebi od {date} — telemetrija iskopana iz lokalnih transkripata i dnevnih git snapshotova, ne samoprocjena.",
+      "Claude Code u svakodnevnoj upotrebi od {date} — telemetrija iskopana iz lokalnih transkripata, dnevnih git snapshotova i izvorima potkrijepljenog javnog zapisa.",
     tokens: "tokena obrađeno",
     apiValue: "API-ekvivalentna vrijednost",
     sessions: "sessiona",
@@ -192,7 +210,7 @@ const hr: Messages = {
     gapLabelTop: "{from}–{to}",
     gapLabelBottom: "podaci izgubljeni",
     gapNote:
-      "{from}–{to}: podaci izgubljeni (korumpirana instalacija) — stvarna upotreba veća je od prikazane.",
+      "{from}–{to}: djelomični podaci — legacy format povijesti bez timestampova, korupcija datoteka u srpnju 2025. (5 datoteka) i nedokumentirane rupe (tra 2025.; kol–lis 2025.). Stvarna upotreba veća je od prikazane.",
     modelMix: "Omjer modela",
     modelMixSub: "Udio ukupnih tokena po modelu.",
     otherModels: "ostali",
@@ -208,6 +226,24 @@ const hr: Messages = {
     methodologyLabel: "Metodologija",
     methodologyLink: "skripta za rudarenje",
     updated: "Ažurirano {date}",
+    historyTitle: "Povijest i potrošnja — širi zapis",
+    historySub:
+      "Brojke koje lokalno rudarenje ne vidi, preuzete iz izvorima potkrijepljenog javnog zapisa (računi i snimke zaslona proizvoda). Svaka nosi status verifikacije.",
+    verified: "verificirano",
+    estimated: "procjena",
+    histConvos: "Claude.ai razgovora",
+    histConvosSub: "snimka stanja, {date} · Pro plan",
+    histSpend: "ukupna potrošnja na Anthropic",
+    histSpendSub: "{invoices} računa · {from} → {to} ({months} mjeseci) · prosjek €{avg}/mj",
+    histPeak: "razdoblje najvišeg plana",
+    histPeakSub: "€{monthly}/mj × 5 = €{total} ({period})",
+    histEarly: "rekonstruirana rana era",
+    histEarlySub:
+      "{period}: {prompts} promptova · {projects} projekata · ~{messages} poruka (korupcija datoteka, srpanj 2025.)",
+    histSnapshot: "/stats snimka ({date})",
+    histSnapshotSub:
+      "{sessions} sessiona · najduži {longest} · streak {streak} dana · najaktivniji dan {mostActive}",
+    historyDocLink: "Cijeli potkrijepljeni zapis",
   },
 
   experience: {

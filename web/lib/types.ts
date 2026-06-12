@@ -154,6 +154,51 @@ export interface ClaudeCodeStats {
     models: string[];
   };
   recursion: string;
+  usingSinceStatus: "verified" | "estimated";
+  installFirstStart: string | null;
+  /** Curated manual history (data/claude-history.yaml ← docs/claude-usage-history.md). */
+  history: ClaudeHistory | null;
+}
+
+export interface ClaudeHistory {
+  source: string;
+  documentDate: string;
+  claudeCode: {
+    usingSince: { value: string; status: string };
+    corruptionEvent: { date: string; detail: string; status: string };
+    undocumentedGaps: string[];
+    reconstructed: {
+      period: string;
+      prompts: number;
+      projects: number;
+      appStarts: number;
+      approxMessages: number;
+      status: string;
+    };
+    earlyStatsSnapshot: {
+      capturedAt: string;
+      sessions: number;
+      longestSession: string;
+      activeDays: string;
+      longestStreakDays: number;
+      mostActiveDay: string;
+      status: string;
+    };
+  };
+  claudeAi: {
+    conversations: { value: number; capturedAt: string; status: string };
+    plan: string;
+  };
+  billing: {
+    currency: string;
+    totalGross: { value: number; status: string };
+    invoices: number;
+    span: { from: string; to: string; months: number };
+    averagePerMonth: number;
+    peakPlan: { period: string; monthly: number; total: number };
+    note: string;
+  };
+  policy: { noPercentileClaims: boolean };
 }
 
 export interface CvData {

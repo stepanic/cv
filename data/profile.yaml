@@ -20,8 +20,8 @@ summary:
     AI-native products end-to-end: the DOMOVINA media-AI platform (Flutter,
     self-hosted Supabase, RAG, payments) and PINKA on-chain crowdfunding.
     29,000+ GitHub contributions in the last year, working open-source-first
-    with agentic AI tooling — 7B+ tokens processed with Claude Code
-    (top usage percentile).
+    with agentic AI tooling — 7B+ tokens processed with Claude Code, fully
+    documented in a sourced public usage record.
   hr: >-
     Softverski inženjer s 20 godina profesionalnog iskustva (od 2006.) i 200+
     isporučenih projekata. Magistar računarstva (FER, Sveučilište u Zagrebu).
@@ -31,7 +31,7 @@ summary:
     AI platformu (Flutter, self-hosted Supabase, RAG, plaćanja) i PINKA on-chain
     crowdfunding. 29.000+ GitHub contributiona u zadnjih godinu dana, radim
     open-source-first uz agentni AI tooling — 7+ milijardi tokena obrađeno
-    Claude Codeom (najviši percentil korištenja).
+    Claude Codeom, u cijelosti dokumentirano u javnom zapisu s izvorima.
 links:
   - label: GitHub
     url: https://github.com/stepanic

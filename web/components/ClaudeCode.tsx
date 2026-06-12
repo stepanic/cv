@@ -14,6 +14,8 @@ const DOTCLAUDE_SYNC_URL = "https://github.com/stepanic/dotclaude-sync";
 const CODEXBAR_URL = "https://github.com/stepanic/CodexBar";
 const MINER_URL =
   "https://github.com/stepanic/cv/blob/main/scripts/mine-claude-history.mjs";
+const USAGE_RECORD_URL =
+  "https://github.com/stepanic/cv/blob/main/docs/claude-usage-history.md";
 
 function StatCard({
   value,
@@ -43,6 +45,117 @@ function StatCard({
       </p>
       <p className="mt-1 text-sm text-inkMuted">{label}</p>
       {sub ? <p className="mt-0.5 text-xs text-inkMuted/80">{sub}</p> : null}
+    </div>
+  );
+}
+
+/** Verification-status badge matching the public record's [VERIFIED]/[ESTIMATED] tags. */
+function StatusBadge({ status }: { status: string }) {
+  const { t } = useI18n();
+  const verified = status === "verified";
+  return (
+    <span
+      className={`rounded px-1.5 py-0.5 font-mono text-[10px] uppercase tracking-wider ${
+        verified ? "bg-accent-soft text-accent-bright" : "bg-surface text-inkMuted"
+      }`}
+    >
+      {t(verified ? "claude.verified" : "claude.estimated")}
+    </span>
+  );
+}
+
+/** Facts local mining cannot see: Claude.ai, billing, pre-Dec-2025 era. */
+function HistoryBlock({ history }: { history: NonNullable<ClaudeCodeStats["history"]> }) {
+  const { t, n, locale } = useI18n();
+  const hrLoc = locale === "hr" ? "hr-HR" : "en-US";
+  const spend = history.billing.totalGross.value.toLocaleString(hrLoc, {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
+  const snap = history.claudeCode.earlyStatsSnapshot;
+  const early = history.claudeCode.reconstructed;
+
+  const rows = [
+    {
+      key: "convos",
+      value: n(history.claudeAi.conversations.value),
+      label: t("claude.histConvos"),
+      sub: t("claude.histConvosSub", {
+        date: formatYearMonth(history.claudeAi.conversations.capturedAt, locale),
+      }),
+      status: history.claudeAi.conversations.status,
+    },
+    {
+      key: "spend",
+      value: `€${spend}`,
+      label: t("claude.histSpend"),
+      sub: t("claude.histSpendSub", {
+        invoices: history.billing.invoices,
+        from: formatYearMonth(history.billing.span.from.slice(0, 7), locale),
+        to: formatYearMonth(history.billing.span.to.slice(0, 7), locale),
+        months: history.billing.span.months,
+        avg: history.billing.averagePerMonth.toLocaleString(hrLoc, {
+          maximumFractionDigits: 0,
+        }),
+      }),
+      status: history.billing.totalGross.status,
+    },
+    {
+      key: "early",
+      value: n(early.prompts),
+      label: t("claude.histEarly"),
+      sub: t("claude.histEarlySub", {
+        period: early.period,
+        prompts: n(early.prompts),
+        projects: early.projects,
+        messages: n(early.approxMessages),
+      }),
+      status: early.status,
+    },
+    {
+      key: "snapshot",
+      value: n(snap.sessions),
+      label: t("claude.histSnapshot", {
+        date: formatYearMonth(snap.capturedAt, locale),
+      }),
+      sub: t("claude.histSnapshotSub", {
+        sessions: n(snap.sessions),
+        longest: snap.longestSession,
+        streak: snap.longestStreakDays,
+        mostActive: snap.mostActiveDay,
+      }),
+      status: snap.status,
+    },
+  ];
+
+  return (
+    <div className="mt-10">
+      <h3 className="text-sm font-semibold uppercase tracking-wider text-inkMuted">
+        {t("claude.historyTitle")}
+      </h3>
+      <p className="mt-1 max-w-3xl text-xs text-inkMuted">{t("claude.historySub")}</p>
+      <ul className="mt-4 grid gap-4 sm:grid-cols-2">
+        {rows.map((r) => (
+          <li key={r.key} className="rounded-lg border border-line bg-surface p-4">
+            <div className="flex items-start justify-between gap-2">
+              <p className="text-2xl font-bold tabular-nums text-ink">{r.value}</p>
+              <StatusBadge status={r.status} />
+            </div>
+            <p className="mt-1 text-sm text-inkMuted">{r.label}</p>
+            <p className="mt-0.5 text-xs text-inkMuted/80">{r.sub}</p>
+          </li>
+        ))}
+      </ul>
+      <p className="mt-3 text-xs">
+        <a
+          href={USAGE_RECORD_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-inkMuted underline decoration-line underline-offset-2 hover:text-inkSoft"
+        >
+          {t("claude.historyDocLink")} →
+        </a>
+      </p>
     </div>
   );
 }
@@ -292,9 +405,16 @@ export function ClaudeCode({ claude }: { claude: ClaudeCodeStats }) {
   const { t, n, locale } = useI18n();
   const totals = claude.totals;
 
+  const dateFmt = { year: "numeric", month: "long" } as const;
   const sinceDate = new Date(claude.usingSince).toLocaleDateString(
     locale === "hr" ? "hr-HR" : "en-US",
-    { year: "numeric", month: "long" },
+    dateFmt,
+  );
+  // numStartups counts launches of the current install only — it post-dates
+  // the corruption-era reinstalls, so it must not claim the earlier start date.
+  const launchesSince = new Date(claude.installFirstStart ?? claude.usingSince).toLocaleDateString(
+    locale === "hr" ? "hr-HR" : "en-US",
+    dateFmt,
   );
   const updatedDate = new Date(claude.updated).toLocaleDateString(
     locale === "hr" ? "hr-HR" : "en-US",
@@ -333,7 +453,7 @@ export function ClaudeCode({ claude }: { claude: ClaudeCodeStats }) {
         <StatCard
           value={n(claude.numStartups)}
           label={t("claude.launches")}
-          sub={t("claude.launchesSub", { date: sinceDate })}
+          sub={t("claude.launchesSub", { date: launchesSince })}
         />
         <StatCard
           value={t("claude.longestSessionValue", { hours: longestHours })}
@@ -346,6 +466,8 @@ export function ClaudeCode({ claude }: { claude: ClaudeCodeStats }) {
       </div>
 
       <MonthlyChart monthly={claude.monthly} gap={claude.knownGap} />
+
+      {claude.history ? <HistoryBlock history={claude.history} /> : null}
 
       <div className="mt-10 grid gap-10 lg:grid-cols-2">
         <ModelMix byModel={claude.byModel} />

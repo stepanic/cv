@@ -1,0 +1,55 @@
+# Curated Claude usage history — manually maintained facts that local mining
+# cannot recover (pre-Dec-2025 era, Claude.ai, Anthropic billing).
+# Source of truth: docs/claude-usage-history.md (full sourced public record).
+# Every figure carries its verification status from that document:
+#   verified  = product screenshot or invoice
+#   estimated = reconstruction with stated method
+# NEVER add figures here that are not in (or added to) the source document.
+source: docs/claude-usage-history.md
+documentDate: "2026-06-12"
+
+claudeCode:
+  # Self-reported start of daily use (document §3); predates the current
+  # install's firstStartTime (2025-05-14) which survived the July 2025
+  # corruption-era reinstalls.
+  usingSince: { value: "2025-04", status: estimated }
+  corruptionEvent:
+    date: "2025-07"
+    detail: "Local history corruption — 5 corrupted files, data only partially readable"
+    status: estimated
+  undocumentedGaps: ["2025-04", "2025-08 → 2025-10"]
+  reconstructed:
+    period: "2025-05 → 2025-07"
+    prompts: 481
+    projects: 18
+    appStarts: 59
+    approxMessages: 9600
+    status: estimated
+  earlyStatsSnapshot:
+    capturedAt: "2026-01"
+    sessions: 103
+    longestSession: "2d 14h 53min"
+    activeDays: "30 / 67"
+    longestStreakDays: 5
+    mostActiveDay: "2025-12-10"
+    status: verified
+
+claudeAi:
+  conversations: { value: 1290, capturedAt: "2026-01", status: verified }
+  plan: Pro
+
+billing:
+  currency: EUR
+  totalGross: { value: 1662.58, status: verified }
+  invoices: 38
+  span: { from: "2025-02-20", to: "2026-05-27", months: 16 }
+  averagePerMonth: 103.91
+  peakPlan: { period: "2025-07 → 2025-11", monthly: 180, total: 900 }
+  note: >-
+    Gross total across all Anthropic products (Claude.ai subscription, Claude
+    Code, API); one invoice (2025-04-20) partially refunded.
+
+policy:
+  # The public record deliberately removed unsourced "top X% user" claims —
+  # Anthropic publishes no user-base distribution to verify them against.
+  noPercentileClaims: true

@@ -1,22 +1,91 @@
 {
-  "updated": "2026-06-12T12:28:26.775Z",
+  "updated": "2026-06-12T13:10:23.376Z",
   "note": "Aggregate telemetry mined from local Claude Code transcripts, daily git snapshots (dotclaude-sync) and Claude Code's own stats cache. Best-effort reconstruction — real usage is higher (see knownGap). No conversation content is published.",
-  "usingSince": "2025-05-14T08:56:17.111Z",
+  "usingSince": "2025-04",
+  "usingSinceStatus": "estimated",
+  "installFirstStart": "2025-05-14T08:56:17.111Z",
   "numStartups": 552,
   "knownGap": {
-    "from": "2025-05",
+    "from": "2025-04",
     "to": "2025-12",
-    "reason": "A corrupted installation forced a fresh reinstall; transcripts and stats from the first months are lost. Counts below therefore UNDERSTATE total usage."
+    "reason": "Pre-Dec-2025 data is partial: a timestamp-less legacy history format, a July 2025 corruption event (5 files), and undocumented gaps (Apr 2025; Aug–Oct 2025). Counts below therefore UNDERSTATE total usage."
+  },
+  "history": {
+    "source": "docs/claude-usage-history.md",
+    "documentDate": "2026-06-12",
+    "claudeCode": {
+      "usingSince": {
+        "value": "2025-04",
+        "status": "estimated"
+      },
+      "corruptionEvent": {
+        "date": "2025-07",
+        "detail": "Local history corruption — 5 corrupted files, data only partially readable",
+        "status": "estimated"
+      },
+      "undocumentedGaps": [
+        "2025-04",
+        "2025-08 → 2025-10"
+      ],
+      "reconstructed": {
+        "period": "2025-05 → 2025-07",
+        "prompts": 481,
+        "projects": 18,
+        "appStarts": 59,
+        "approxMessages": 9600,
+        "status": "estimated"
+      },
+      "earlyStatsSnapshot": {
+        "capturedAt": "2026-01",
+        "sessions": 103,
+        "longestSession": "2 days 14 h 53 min",
+        "activeDays": "30 / 67",
+        "longestStreakDays": 5,
+        "mostActiveDay": "2025-12-10",
+        "status": "verified"
+      }
+    },
+    "claudeAi": {
+      "conversations": {
+        "value": 1290,
+        "capturedAt": "2026-01",
+        "status": "verified"
+      },
+      "plan": "Pro"
+    },
+    "billing": {
+      "currency": "EUR",
+      "totalGross": {
+        "value": 1662.58,
+        "status": "verified"
+      },
+      "invoices": 38,
+      "span": {
+        "from": "2025-02-20",
+        "to": "2026-05-27",
+        "months": 16
+      },
+      "averagePerMonth": 103.91,
+      "peakPlan": {
+        "period": "2025-07 → 2025-11",
+        "monthly": 180,
+        "total": 900
+      },
+      "note": "Gross total across all Anthropic products (Claude.ai subscription, Claude Code, API); one invoice (2025-04-20) partially refunded."
+    },
+    "policy": {
+      "noPercentileClaims": true
+    }
   },
   "totals": {
     "sessions": 313,
     "projects": 40,
-    "messages": 149690,
-    "toolCalls": 46856,
-    "transcriptEvents": 137727,
-    "tokens": 7751614716,
-    "outputTokens": 35756872,
-    "apiEquivalentUSD": 6041.97
+    "messages": 149894,
+    "toolCalls": 46926,
+    "transcriptEvents": 137931,
+    "tokens": 7758137093,
+    "outputTokens": 35783375,
+    "apiEquivalentUSD": 6050.96
   },
   "byModel": [
     {
@@ -39,12 +108,12 @@
     },
     {
       "model": "claude-fable-5",
-      "inputTokens": 538052,
-      "outputTokens": 2089383,
-      "cacheReadTokens": 444164353,
-      "cacheWriteTokens": 12530411,
-      "totalTokens": 459322199,
-      "apiEquivalentUSD": 710.64
+      "inputTokens": 547706,
+      "outputTokens": 2115886,
+      "cacheReadTokens": 450556852,
+      "cacheWriteTokens": 12624132,
+      "totalTokens": 465844576,
+      "apiEquivalentUSD": 719.63
     },
     {
       "model": "claude-opus-4-6",
@@ -136,10 +205,10 @@
     {
       "month": "2026-06",
       "sessions": 108,
-      "messages": 49458,
-      "toolCalls": 15892,
-      "tokens": 2781889968,
-      "apiEquivalentUSD": 2390.08
+      "messages": 49662,
+      "toolCalls": 15962,
+      "tokens": 2788412345,
+      "apiEquivalentUSD": 2399.07
     }
   ],
   "hourHistogram": [
@@ -157,8 +226,8 @@
     9563,
     9386,
     11437,
-    13589,
-    10880,
+    13774,
+    10899,
     9583,
     7974,
     5776,

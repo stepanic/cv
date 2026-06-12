@@ -21,6 +21,7 @@ import { execSync, spawn } from "node:child_process";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { homedir } from "node:os";
+import yaml from "js-yaml";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const CLAUDE_DIR = process.env.CLAUDE_DIR ?? join(homedir(), ".claude");
@@ -188,6 +189,12 @@ if (existsSync(cj)) {
   meta = { firstStartTime: j.firstStartTime, numStartups: j.numStartups };
 }
 
+// Curated manual history (billing, Claude.ai, pre-Dec-2025 era) — facts the
+// mining cannot recover, sourced from docs/claude-usage-history.md.
+let manual = null;
+const manualPath = join(root, "data/claude-history.yaml");
+if (existsSync(manualPath)) manual = yaml.load(readFileSync(manualPath, "utf8"));
+
 // ── Emit ─────────────────────────────────────────────────────────────────────
 const projects = new Set(
   liveFiles.map((f) => f.split("/projects/")[1].split("/")[0]),
@@ -211,14 +218,20 @@ const out = {
   updated: new Date().toISOString(),
   note:
     "Aggregate telemetry mined from local Claude Code transcripts, daily git snapshots (dotclaude-sync) and Claude Code's own stats cache. Best-effort reconstruction — real usage is higher (see knownGap). No conversation content is published.",
-  usingSince: meta.firstStartTime ?? null,
+  // Daily use began ~April 2025 (estimated, see docs/claude-usage-history.md);
+  // firstStartTime belongs to the current install, which post-dates the July
+  // 2025 corruption-era reinstalls.
+  usingSince: manual?.claudeCode?.usingSince?.value ?? meta.firstStartTime ?? null,
+  usingSinceStatus: manual ? "estimated" : "verified",
+  installFirstStart: meta.firstStartTime ?? null,
   numStartups: meta.numStartups ?? null,
   knownGap: {
-    from: meta.firstStartTime?.slice(0, 7) ?? "2025-05",
+    from: manual?.claudeCode?.usingSince?.value ?? "2025-04",
     to: "2025-12",
     reason:
-      "A corrupted installation forced a fresh reinstall; transcripts and stats from the first months are lost. Counts below therefore UNDERSTATE total usage.",
+      "Pre-Dec-2025 data is partial: a timestamp-less legacy history format, a July 2025 corruption event (5 files), and undocumented gaps (Apr 2025; Aug–Oct 2025). Counts below therefore UNDERSTATE total usage.",
   },
+  history: manual,
   totals: {
     sessions: sessions.size,
     projects,
