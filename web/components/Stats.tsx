@@ -1,9 +1,86 @@
 "use client";
 
-import { GitCommitHorizontal, Github } from "lucide-react";
+import { GitCommitHorizontal, Github, Trophy } from "lucide-react";
 import type { GithubStats } from "@/lib/types";
 import { useI18n } from "@/lib/i18n";
 import { Section } from "./Section";
+
+// committers.top — most active GitHub users in Croatia. Screenshot captured
+// 2026-06-25 17:14 CET; the rank is real but currently inflated by a bulk
+// dataset repo (see the honest caveat below) until the upstream PRs land.
+const COMMITTERS_TOP_URL = "https://committers.top/croatia_public";
+const DATASET_REPO_URL = "https://github.com/domovinatv/dataset.domovina.tv";
+const PR_131_URL = "https://github.com/ashkulz/committers.top/pull/131";
+const PR_132_URL = "https://github.com/ashkulz/committers.top/pull/132";
+const RANK_SHOT = "/committers-top-croatia-2026-06-25.png";
+
+/** "#1 in Croatia" callout — ranking screenshot + honest anomaly caveat. */
+function CommittersRank() {
+  const { t } = useI18n();
+  return (
+    <div className="mt-10">
+      <h4 className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-inkMuted">
+        <Trophy className="h-4 w-4 text-accent-bright" aria-hidden />
+        {t("stats.ranking.heading")}
+      </h4>
+      <div className="mt-4 grid gap-5 rounded-lg border border-accent-border bg-accent-soft p-5 lg:grid-cols-[minmax(0,260px)_1fr] lg:items-start">
+        <a
+          href={COMMITTERS_TOP_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block overflow-hidden rounded-md border border-line bg-surface"
+        >
+          {/* Plain <img>: the site is a static export with no image optimizer. */}
+          <img
+            src={RANK_SHOT}
+            alt={t("stats.ranking.alt")}
+            width={1790}
+            height={1836}
+            loading="lazy"
+            className="h-auto w-full"
+          />
+        </a>
+        <div>
+          <p className="text-3xl font-bold text-accent-bright sm:text-4xl">
+            {t("stats.ranking.rank")}
+          </p>
+          <p className="mt-1 text-sm font-medium text-ink">{t("stats.ranking.title")}</p>
+          <p className="mt-1 text-xs text-inkMuted">{t("stats.ranking.caption")}</p>
+          <p className="mt-4 rounded-md border border-line bg-surface p-4 text-sm leading-relaxed text-inkSoft">
+            {t("stats.ranking.caveatPre")}
+            <a
+              href={DATASET_REPO_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-mono text-xs text-accent-bright underline-offset-2 hover:underline"
+            >
+              domovinatv/dataset.domovina.tv
+            </a>
+            {t("stats.ranking.caveatMid1")}
+            <a
+              href={PR_131_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-accent-bright underline-offset-2 hover:underline"
+            >
+              #131
+            </a>
+            {t("stats.ranking.caveatMid2")}
+            <a
+              href={PR_132_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-accent-bright underline-offset-2 hover:underline"
+            >
+              #132
+            </a>
+            {t("stats.ranking.caveatPost")}
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 function StatCard({
   value,
@@ -125,6 +202,8 @@ export function Stats({ github }: { github: GithubStats }) {
           </li>
         ))}
       </ul>
+
+      <CommittersRank />
 
       <p className="mt-6 text-xs text-inkMuted">{t("stats.updated", { date: updatedDate })}</p>
     </Section>

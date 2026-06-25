@@ -54,6 +54,17 @@ const en = {
     weeklyChartTitle: "Weekly contributions, last 12 months",
     weeklyChartAria: "Bar chart of weekly GitHub contributions over the last year",
     updated: "Updated {date}",
+    ranking: {
+      heading: "Croatia ranking",
+      rank: "#1",
+      title: "Most active GitHub user in Croatia",
+      caption: "committers.top/croatia_public — 28,611 contributions · captured 25 Jun 2026, 17:14 CET",
+      alt: "committers.top ranking of the most active GitHub users in Croatia, Matija Stepanić listed first",
+      caveatPre: "Honest caveat — this #1 is, for now, an anomaly: the ranking still counts the bulk commits from the ",
+      caveatMid1: " dataset repo. Once my two upstream fixes — ",
+      caveatMid2: " and ",
+      caveatPost: " — are merged into committers.top, the number becomes real.",
+    },
   },
 
   claude: {
@@ -192,6 +203,17 @@ const hr: Messages = {
     weeklyChartTitle: "Tjedni contributioni, zadnjih 12 mjeseci",
     weeklyChartAria: "Stupčasti graf tjednih GitHub contributiona u zadnjih godinu dana",
     updated: "Ažurirano {date}",
+    ranking: {
+      heading: "Poredak u Hrvatskoj",
+      rank: "#1",
+      title: "Najaktivniji GitHub korisnik u Hrvatskoj",
+      caption: "committers.top/croatia_public — 28.611 contributiona · snimljeno 25. lip 2026., 17:14 CET",
+      alt: "committers.top poredak najaktivnijih GitHub korisnika u Hrvatskoj, Matija Stepanić na prvom mjestu",
+      caveatPre: "Pošteno upozorenje — ovo prvo mjesto je, zasad, anomalija: poredak još uvijek broji bulk commitove iz repozitorija ",
+      caveatMid1: ". Kad moja dva upstream popravka — ",
+      caveatMid2: " i ",
+      caveatPost: " — budu mergeani u committers.top, brojka postaje stvarna.",
+    },
   },
 
   claude: {
