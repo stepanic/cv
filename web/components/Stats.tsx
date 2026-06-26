@@ -1,6 +1,7 @@
 "use client";
 
-import { GitCommitHorizontal, Github, Trophy } from "lucide-react";
+import { useState } from "react";
+import { Check, Copy, GitCommitHorizontal, Github, Trophy } from "lucide-react";
 import type { GithubStats } from "@/lib/types";
 import { useI18n } from "@/lib/i18n";
 import { Section } from "./Section";
@@ -17,8 +18,10 @@ const PR_131_URL = "https://github.com/ashkulz/committers.top/pull/131";
 const PR_132_URL = "https://github.com/ashkulz/committers.top/pull/132";
 const RAW_SHOT = "/committers-top-croatia-2026-06-25.png";
 const RAW_OTS = "/committers-top-croatia-2026-06-25.png.ots";
+const RAW_SHA256 = "3b31569f8363d8053159516fdb7e6a4d211e2d80fc34591bfca09bf0a50ad01c";
 const FIXED_SHOT = "/committers-top-croatia-corrected-2026-06-25.png";
 const FIXED_OTS = "/committers-top-croatia-corrected-2026-06-25.png.ots";
+const FIXED_SHA256 = "eed9cd32cac122eeea74fd8f11634ba1b022545857395901e08cbc3c255d8054";
 const PROOF_DOC_URL =
   "https://github.com/stepanic/cv/blob/main/docs/committers-top-timestamps.md";
 const OTS_SITE_URL = "https://opentimestamps.org/";
@@ -27,10 +30,50 @@ const OTS_SITE_URL = "https://opentimestamps.org/";
 const GH_RAW = "https://raw.githubusercontent.com/stepanic/cv/main/web/public";
 const ghRaw = (localPath: string) => `${GH_RAW}${localPath}`;
 
+/** The image's SHA-256, monospace and copy-to-clipboard — the value that
+ *  opentimestamps.org/#info expects when looking a timestamp up by hash. */
+function CopyableHash({ hash }: { hash: string }) {
+  const { t } = useI18n();
+  const [copied, setCopied] = useState(false);
+  async function copy() {
+    try {
+      await navigator.clipboard.writeText(hash);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 1500);
+    } catch {
+      /* clipboard blocked — the text is still selectable manually */
+    }
+  }
+  return (
+    <div className="mt-2">
+      <span className="text-xs font-semibold uppercase tracking-wider text-inkMuted">
+        {t("stats.ranking.verify.sha256")}
+      </span>
+      <button
+        type="button"
+        onClick={copy}
+        aria-label={copied ? t("stats.ranking.verify.copied") : t("stats.ranking.verify.copy")}
+        title={copied ? t("stats.ranking.verify.copied") : t("stats.ranking.verify.copy")}
+        className="mt-0.5 flex w-full items-center gap-2 rounded-md border border-line bg-surface px-2.5 py-1.5 text-left transition-colors hover:border-accent-border"
+      >
+        <code className="min-w-0 flex-1 select-all break-all font-mono text-[11px] leading-relaxed text-inkSoft">
+          {hash}
+        </code>
+        {copied ? (
+          <Check className="h-3.5 w-3.5 shrink-0 text-accent-bright" aria-hidden />
+        ) : (
+          <Copy className="h-3.5 w-3.5 shrink-0 text-inkMuted" aria-hidden />
+        )}
+      </button>
+    </div>
+  );
+}
+
 function RankShot({
   href,
   src,
   ots,
+  sha256,
   alt,
   label,
   caption,
@@ -38,6 +81,7 @@ function RankShot({
   href: string;
   src: string;
   ots: string;
+  sha256: string;
   alt: string;
   label: string;
   caption: string;
@@ -58,6 +102,7 @@ function RankShot({
         <span className="text-xs font-semibold uppercase tracking-wider text-inkMuted">{label}</span>
         <span className="mt-0.5 block text-sm font-medium text-ink">{caption}</span>
       </figcaption>
+      <CopyableHash hash={sha256} />
       {/* In-browser, trustless verification straight against the Bitcoin chain. */}
       <OtsVerify pngUrl={src} otsUrl={ots} />
       {/* Or download both files and verify the pair by hand on opentimestamps.org. */}
@@ -99,6 +144,7 @@ function CommittersRank() {
             href={COMMITTERS_TOP_URL}
             src={RAW_SHOT}
             ots={RAW_OTS}
+            sha256={RAW_SHA256}
             alt={t("stats.ranking.rawAlt")}
             label={t("stats.ranking.rawLabel")}
             caption={t("stats.ranking.rawCaption")}
@@ -107,6 +153,7 @@ function CommittersRank() {
             href={FORK_URL}
             src={FIXED_SHOT}
             ots={FIXED_OTS}
+            sha256={FIXED_SHA256}
             alt={t("stats.ranking.fixedAlt")}
             label={t("stats.ranking.fixedLabel")}
             caption={t("stats.ranking.fixedCaption")}
