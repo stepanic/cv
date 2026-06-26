@@ -169,11 +169,13 @@ function cleanModelName(model: string): string {
 function MonthlyChart({
   monthly,
   gap,
+  reconstructed,
 }: {
   monthly: ClaudeCodeStats["monthly"];
   gap: ClaudeCodeStats["knownGap"];
+  reconstructed?: { prompts: number; projects: number } | null;
 }) {
-  const { t, locale } = useI18n();
+  const { t, n, locale } = useI18n();
 
   const W = 720;
   const H = 196;
@@ -288,7 +290,14 @@ function MonthlyChart({
         })}
       </svg>
       <figcaption className="mt-2 text-xs text-inkMuted">
-        {t("claude.gapNote", { from: gapFrom, to: gapTo })}
+        {reconstructed
+          ? t("claude.gapNoteFull", {
+              from: gapFrom,
+              to: gapTo,
+              prompts: n(reconstructed.prompts),
+              projects: reconstructed.projects,
+            })
+          : t("claude.gapNote", { from: gapFrom, to: gapTo })}
       </figcaption>
     </figure>
   );
@@ -465,7 +474,11 @@ export function ClaudeCode({ claude }: { claude: ClaudeCodeStats }) {
         />
       </div>
 
-      <MonthlyChart monthly={claude.monthly} gap={claude.knownGap} />
+      <MonthlyChart
+        monthly={claude.monthly}
+        gap={claude.knownGap}
+        reconstructed={claude.history?.claudeCode.reconstructed ?? null}
+      />
 
       {claude.history ? <HistoryBlock history={claude.history} /> : null}
 

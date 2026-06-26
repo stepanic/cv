@@ -117,6 +117,8 @@ const en = {
     gapLabelBottom: "data lost",
     gapNote:
       "{from}–{to}: partial data — timestamp-less legacy history format, a July 2025 corruption event (5 files) and undocumented gaps (Apr 2025; Aug–Oct 2025). Real usage is higher than shown.",
+    gapNoteFull:
+      "Daily use began {from} — but the {from}–{to} stretch is only partially recorded: a timestamp-less legacy format, a July 2025 corruption event (5 files), and automated backups that began only in 2026. The reconstructed May–Jul 2025 slice alone holds ~{prompts} prompts across {projects} projects; the bars understate the early period, not the usage.",
     modelMix: "Model mix",
     modelMixSub: "Share of total tokens per model.",
     otherModels: "other",
@@ -295,6 +297,8 @@ const hr: Messages = {
     gapLabelBottom: "podaci izgubljeni",
     gapNote:
       "{from}–{to}: djelomični podaci — legacy format povijesti bez timestampova, korupcija datoteka u srpnju 2025. (5 datoteka) i nedokumentirane rupe (tra 2025.; kol–lis 2025.). Stvarna upotreba veća je od prikazane.",
+    gapNoteFull:
+      "Svakodnevna upotreba počela je {from} — no razdoblje {from}–{to} samo je djelomično zabilježeno: legacy format bez timestampova, korupcija datoteka u srpnju 2025. (5 datoteka) i automatski backupi koji su krenuli tek 2026. Samo rekonstruirani isječak svi–srp 2025. sadrži ~{prompts} promptova kroz {projects} projekata; stupci podcjenjuju rano razdoblje, ne upotrebu.",
     modelMix: "Omjer modela",
     modelMixSub: "Udio ukupnih tokena po modelu.",
     otherModels: "ostali",
