@@ -44,22 +44,22 @@ ots info web/public/committers-top-croatia-2026-06-25.png.ots
 
 Or drag the `.png` + `.ots` pair into <https://opentimestamps.org/>.
 
-## Status
+## Status — confirmed on-chain ✅
 
-As of stamping (2026-06-25 17:21 / 17:37 CET) both proofs hold **pending
-attestations** on four calendar servers (`alice` / `bob` opentimestamps.org,
-eternitywall, catallaxy). They complete once the next Bitcoin block including
-each calendar's commitment is mined (typically a few hours). To finish the
-proof and embed the concrete block height:
+Both proofs are now **permanently anchored in the Bitcoin blockchain**.
 
-```sh
-ots upgrade web/public/committers-top-croatia-2026-06-25.png.ots
-ots upgrade web/public/committers-top-croatia-corrected-2026-06-25.png.ots
-```
+- Submitted to OpenTimestamps: 2026-06-25 **15:21 UTC** (raw) / **15:37 UTC**
+  (corrected) — i.e. 17:21 / 17:37 CEST.
+- First permanent Bitcoin confirmation: block **955363**, mined 2026-06-25
+  **17:15:14 UTC** (merkle root `5501939a981545541076d55b0f8307ef0631702844719185d7834639d6cbd772`).
+- Elapsed submission → permanent record: **~1h 54m** (raw) / **~1h 38m**
+  (corrected).
+- Both commitments additionally landed in blocks 955367, 955390 and 955417 via
+  the other calendars.
 
-Then re-commit the upgraded `.ots` files. Even pending, the calendars'
-signatures already fix the time; the upgrade only swaps the calendar promise
-for the on-chain block proof.
+`ots upgrade` has been run and the on-chain `.ots` files committed; `ots verify`
+now resolves to the Bitcoin block header attestation with no calendar trust
+required.
 
 ## Live
 
