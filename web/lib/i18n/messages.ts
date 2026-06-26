@@ -72,6 +72,19 @@ const en = {
       proofRaw: "raw .ots",
       proofFixed: "corrected .ots",
       proofDoc: "how to verify",
+      verify: {
+        button: "Verify in your browser",
+        running: "Verifying — hashing, reading proof, querying Bitcoin…",
+        okPrefix: "Verified against the Bitcoin blockchain",
+        okBlock: "Block {height} · {date} UTC.",
+        okDetail:
+          "Image SHA-256 matches the proof, and the proof's merkle root matches the on-chain block header. No trust in this site or the calendar servers required.",
+        viewBlock: "view block ↗",
+        failHash: "Image does not match the proof — the file changed.",
+        failNoBtc: "No Bitcoin attestation in the proof yet (still pending).",
+        failNet: "Could not reach a Bitcoin block explorer — try again.",
+        failMerkle: "Merkle root does not match the block header.",
+      },
     },
   },
 
@@ -229,6 +242,19 @@ const hr: Messages = {
       proofRaw: "sirovi .ots",
       proofFixed: "ispravljeni .ots",
       proofDoc: "kako provjeriti",
+      verify: {
+        button: "Provjeri u svom browseru",
+        running: "Provjeravam — hashiram, čitam proof, pitam Bitcoin…",
+        okPrefix: "Provjereno na Bitcoin blockchainu",
+        okBlock: "Blok {height} · {date} UTC.",
+        okDetail:
+          "SHA-256 slike odgovara proofu, a merkle root proofa odgovara block headeru na lancu. Bez povjerenja u ovaj site ili kalendar servere.",
+        viewBlock: "vidi blok ↗",
+        failHash: "Slika ne odgovara proofu — datoteka je promijenjena.",
+        failNoBtc: "Proof još nema Bitcoin atestaciju (još je pending).",
+        failNet: "Bitcoin block explorer nedostupan — pokušaj ponovno.",
+        failMerkle: "Merkle root ne odgovara block headeru.",
+      },
     },
   },
 

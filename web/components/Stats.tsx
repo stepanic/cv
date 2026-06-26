@@ -4,6 +4,7 @@ import { GitCommitHorizontal, Github, Trophy } from "lucide-react";
 import type { GithubStats } from "@/lib/types";
 import { useI18n } from "@/lib/i18n";
 import { Section } from "./Section";
+import { OtsVerify } from "./OtsVerify";
 
 // committers.top — most active GitHub users in Croatia. Two screenshots,
 // 2026-06-25: the raw list ranks me #1 (an anomaly inflated by a bulk dataset
@@ -24,12 +25,14 @@ const PROOF_DOC_URL =
 function RankShot({
   href,
   src,
+  ots,
   alt,
   label,
   caption,
 }: {
   href: string;
   src: string;
+  ots: string;
   alt: string;
   label: string;
   caption: string;
@@ -49,6 +52,8 @@ function RankShot({
         <span className="text-xs font-semibold uppercase tracking-wider text-inkMuted">{label}</span>
         <span className="mt-0.5 block text-sm font-medium text-ink">{caption}</span>
       </figcaption>
+      {/* In-browser, trustless verification straight against the Bitcoin chain. */}
+      <OtsVerify pngUrl={src} otsUrl={ots} />
     </figure>
   );
 }
@@ -71,6 +76,7 @@ function CommittersRank() {
           <RankShot
             href={COMMITTERS_TOP_URL}
             src={RAW_SHOT}
+            ots={RAW_OTS}
             alt={t("stats.ranking.rawAlt")}
             label={t("stats.ranking.rawLabel")}
             caption={t("stats.ranking.rawCaption")}
@@ -78,6 +84,7 @@ function CommittersRank() {
           <RankShot
             href={FORK_URL}
             src={FIXED_SHOT}
+            ots={FIXED_OTS}
             alt={t("stats.ranking.fixedAlt")}
             label={t("stats.ranking.fixedLabel")}
             caption={t("stats.ranking.fixedCaption")}
