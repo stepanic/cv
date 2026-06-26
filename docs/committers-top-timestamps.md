@@ -42,7 +42,20 @@ ots verify web/public/committers-top-croatia-corrected-2026-06-25.png.ots
 ots info web/public/committers-top-croatia-2026-06-25.png.ots
 ```
 
-Or drag the `.png` + `.ots` pair into <https://opentimestamps.org/>.
+### Verify by hand — download the files
+
+You need **both** the image and its `.ots`, byte-for-byte. Grab the matching
+pair from GitHub raw:
+
+| Shot | Image (PNG) | Proof (.ots) |
+|---|---|---|
+| Raw #1 | [download](https://raw.githubusercontent.com/stepanic/cv/main/web/public/committers-top-croatia-2026-06-25.png) | [download](https://raw.githubusercontent.com/stepanic/cv/main/web/public/committers-top-croatia-2026-06-25.png.ots) |
+| Corrected #13 | [download](https://raw.githubusercontent.com/stepanic/cv/main/web/public/committers-top-croatia-corrected-2026-06-25.png) | [download](https://raw.githubusercontent.com/stepanic/cv/main/web/public/committers-top-croatia-corrected-2026-06-25.png.ots) |
+
+Then drop **both files of a pair** into <https://opentimestamps.org/> (it
+hashes the image locally and checks the `.ots` against Bitcoin), or run
+`ots verify <file>.ots` with the `.png` beside it. Do not re-save or re-encode
+the PNG — any byte change alters its SHA-256 and the proof will no longer match.
 
 ## Status — confirmed on-chain ✅
 

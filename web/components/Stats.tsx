@@ -21,6 +21,11 @@ const FIXED_SHOT = "/committers-top-croatia-corrected-2026-06-25.png";
 const FIXED_OTS = "/committers-top-croatia-corrected-2026-06-25.png.ots";
 const PROOF_DOC_URL =
   "https://github.com/stepanic/cv/blob/main/docs/committers-top-timestamps.md";
+const OTS_SITE_URL = "https://opentimestamps.org/";
+// GitHub raw, so anyone can download the exact bytes of image + proof and
+// verify the pair by hand on opentimestamps.org.
+const GH_RAW = "https://raw.githubusercontent.com/stepanic/cv/main/web/public";
+const ghRaw = (localPath: string) => `${GH_RAW}${localPath}`;
 
 function RankShot({
   href,
@@ -37,6 +42,7 @@ function RankShot({
   label: string;
   caption: string;
 }) {
+  const { t } = useI18n();
   return (
     <figure>
       <a
@@ -54,6 +60,22 @@ function RankShot({
       </figcaption>
       {/* In-browser, trustless verification straight against the Bitcoin chain. */}
       <OtsVerify pngUrl={src} otsUrl={ots} />
+      {/* Or download both files and verify the pair by hand on opentimestamps.org. */}
+      <p className="mt-2 text-xs text-inkMuted">
+        {t("stats.ranking.verify.manualPre")}
+        <a href={ghRaw(src)} target="_blank" rel="noopener noreferrer" className="text-accent-bright underline-offset-2 hover:underline">
+          {t("stats.ranking.verify.manualImage")}
+        </a>
+        {" + "}
+        <a href={ghRaw(ots)} target="_blank" rel="noopener noreferrer" className="text-accent-bright underline-offset-2 hover:underline">
+          {t("stats.ranking.verify.manualOts")}
+        </a>
+        {t("stats.ranking.verify.manualMid")}
+        <a href={OTS_SITE_URL} target="_blank" rel="noopener noreferrer" className="text-accent-bright underline-offset-2 hover:underline">
+          opentimestamps.org
+        </a>
+        {t("stats.ranking.verify.manualPost")}
+      </p>
     </figure>
   );
 }
