@@ -4,7 +4,7 @@
 // local transcripts + daily git snapshots (see scripts/mine-claude-history.mjs
 // in the repo). All charts are hand-rolled inline SVG — no chart library.
 
-import { Repeat2 } from "lucide-react";
+import { EyeOff, Repeat2 } from "lucide-react";
 import type { ClaudeCodeStats } from "@/lib/types";
 import { useI18n, formatYearMonth } from "@/lib/i18n";
 import { compactNumber } from "@/lib/format";
@@ -16,6 +16,8 @@ const MINER_URL =
   "https://github.com/stepanic/cv/blob/main/scripts/mine-claude-history.mjs";
 const USAGE_RECORD_URL =
   "https://github.com/stepanic/cv/blob/main/docs/claude-usage-history.md";
+const DAILY_RECON_URL =
+  "https://github.com/stepanic/cv/blob/main/docs/claude-code-daily-reconstruction-2026.md";
 
 function StatCard({
   value,
@@ -146,7 +148,7 @@ function HistoryBlock({ history }: { history: NonNullable<ClaudeCodeStats["histo
           </li>
         ))}
       </ul>
-      <p className="mt-3 text-xs">
+      <p className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-xs">
         <a
           href={USAGE_RECORD_URL}
           target="_blank"
@@ -154,6 +156,14 @@ function HistoryBlock({ history }: { history: NonNullable<ClaudeCodeStats["histo
           className="text-inkMuted underline decoration-line underline-offset-2 hover:text-inkSoft"
         >
           {t("claude.historyDocLink")} →
+        </a>
+        <a
+          href={DAILY_RECON_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-inkMuted underline decoration-line underline-offset-2 hover:text-inkSoft"
+        >
+          {t("claude.dailyDocLink")} →
         </a>
       </p>
     </div>
@@ -300,6 +310,159 @@ function MonthlyChart({
           : t("claude.gapNote", { from: gapFrom, to: gapTo })}
       </figcaption>
     </figure>
+  );
+}
+
+/** Daily API-equivalent spend (USD) — sqrt-scaled inline-SVG bars, same hatched
+ *  knownGap treatment as MonthlyChart; peak day labelled, every bar tooltipped. */
+function DailyChart({
+  daily,
+  gap,
+}: {
+  daily: ClaudeCodeStats["daily"];
+  gap: ClaudeCodeStats["knownGap"];
+}) {
+  const { t, n, locale } = useI18n();
+
+  const W = 720;
+  const H = 200;
+  const TOP = 20; // room for the peak value label
+  const BOTTOM = 18; // room for month labels
+  const chartH = H - TOP - BOTTOM;
+  const baseline = TOP + chartH;
+
+  const GAP_W = 72; // hatched knownGap region (the lost pre-2026 era)
+  const GAP_PAD = 12;
+  const barGap = 1.5;
+  const x0 = GAP_W + GAP_PAD;
+  const count = daily.length || 1;
+  const barW = (W - x0 - barGap * (count - 1)) / count;
+
+  // sqrt scale: daily spend spans <$1 to >$500.
+  const sqrtMax = Math.sqrt(Math.max(...daily.map((d) => d.usd), 1));
+  const peakIdx = daily.reduce((best, d, i) => (d.usd > daily[best]!.usd ? i : best), 0);
+
+  const gapFrom = formatYearMonth(gap.from, locale);
+  const gapTo = formatYearMonth(gap.to, locale);
+  const usd0 = (v: number) => `$${n(Math.round(v))}`;
+
+  return (
+    <figure className="mt-10">
+      <h3 className="text-sm font-semibold uppercase tracking-wider text-inkMuted">
+        {t("claude.dailyTitle")}
+      </h3>
+      <svg
+        viewBox={`0 0 ${W} ${H}`}
+        role="img"
+        aria-label={t("claude.dailyAria")}
+        className="mt-4 h-auto w-full"
+      >
+        <defs>
+          <pattern
+            id="cc-daily-gap-hatch"
+            width="7"
+            height="7"
+            patternUnits="userSpaceOnUse"
+            patternTransform="rotate(45)"
+          >
+            <line x1="0" y1="0" x2="0" y2="7" className="stroke-inkMuted" strokeWidth="1" opacity="0.35" />
+          </pattern>
+        </defs>
+
+        {/* knownGap placeholder — the lost era before daily transcripts begin */}
+        <rect
+          x={0.75}
+          y={TOP + 0.75}
+          width={GAP_W - 1.5}
+          height={chartH - 1.5}
+          rx={5}
+          fill="url(#cc-daily-gap-hatch)"
+          className="stroke-inkMuted"
+          strokeWidth="1"
+          strokeDasharray="4 4"
+          opacity="0.7"
+        />
+        <text x={GAP_W / 2} y={TOP + chartH / 2 - 4} textAnchor="middle" fontSize="10" className="fill-inkMuted">
+          {t("claude.gapLabelTop", { from: gapFrom, to: gapTo })}
+        </text>
+        <text x={GAP_W / 2} y={TOP + chartH / 2 + 10} textAnchor="middle" fontSize="10" className="fill-inkMuted">
+          {t("claude.gapLabelBottom")}
+        </text>
+
+        {daily.map((d, i) => {
+          const x = x0 + i * (barW + barGap);
+          const h = d.usd <= 0 ? 1.5 : Math.max((Math.sqrt(d.usd) / sqrtMax) * chartH, 2);
+          const monthStart = i === 0 || d.day.slice(5, 7) !== daily[i - 1]!.day.slice(5, 7);
+          return (
+            <g key={d.day}>
+              <rect
+                x={x}
+                y={baseline - h}
+                width={barW}
+                height={h}
+                rx={1}
+                className="fill-accent"
+                opacity={0.4 + 0.6 * (Math.sqrt(d.usd) / sqrtMax)}
+              >
+                <title>{`${d.day}: ${usd0(d.usd)}`}</title>
+              </rect>
+              {i === peakIdx ? (
+                <text
+                  x={x + barW / 2}
+                  y={Math.max(baseline - h - 5, 11)}
+                  textAnchor="middle"
+                  fontSize="10"
+                  className="fill-inkSoft"
+                >
+                  {usd0(d.usd)}
+                </text>
+              ) : null}
+              {monthStart ? (
+                <text x={x} y={H - 4} textAnchor="start" fontSize="9" className="fill-inkMuted">
+                  {formatYearMonth(d.day.slice(0, 7), locale)}
+                </text>
+              ) : null}
+            </g>
+          );
+        })}
+      </svg>
+      <figcaption className="mt-2 text-xs text-inkMuted">
+        {t("claude.dailyNote")}{" "}
+        <a
+          href={DAILY_RECON_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline decoration-line underline-offset-2 hover:text-inkSoft"
+        >
+          {t("claude.dailyDocLink")} →
+        </a>
+      </figcaption>
+    </figure>
+  );
+}
+
+/** The 30-day retention blind spot, in dollars — local window vs full record. */
+function BlindSpot({ recovered }: { recovered: ClaudeCodeStats["recovered"] }) {
+  const { t, n } = useI18n();
+  const usd0 = (v: number) => `$${n(Math.round(v))}`;
+  return (
+    <aside className="mt-6 rounded-lg border border-accent-border bg-accent-soft p-5">
+      <h3 className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-accent-bright">
+        <EyeOff className="h-4 w-4" aria-hidden />
+        {t("claude.blindSpotTitle")}
+      </h3>
+      <p className="mt-2 max-w-3xl text-sm leading-relaxed text-inkSoft">
+        {t("claude.blindSpotBody", {
+          local: usd0(recovered.localUSD),
+          full: usd0(recovered.fullUSD),
+          window: recovered.window,
+          retention: recovered.retentionDays,
+        })}
+      </p>
+      <p className="mt-2 text-sm font-semibold text-accent-bright">
+        {t("claude.blindSpotRecovered", { delta: usd0(recovered.deltaUSD) })}
+      </p>
+    </aside>
   );
 }
 
@@ -479,6 +642,9 @@ export function ClaudeCode({ claude }: { claude: ClaudeCodeStats }) {
         gap={claude.knownGap}
         reconstructed={claude.history?.claudeCode.reconstructed ?? null}
       />
+
+      <DailyChart daily={claude.daily} gap={claude.knownGap} />
+      <BlindSpot recovered={claude.recovered} />
 
       {claude.history ? <HistoryBlock history={claude.history} /> : null}
 

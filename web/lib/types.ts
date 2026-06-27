@@ -125,6 +125,25 @@ export interface ClaudeMonthly {
   source?: string;
 }
 
+export interface ClaudeDaily {
+  day: string; // "YYYY-MM-DD"
+  tokens: number;
+  usd: number;
+}
+
+export interface ClaudeRecovered {
+  /** Full lookback window, days (90). */
+  window: number;
+  /** Local transcript retention, days (Claude Code's cleanupPeriodDays default, 30). */
+  retentionDays: number;
+  /** Spend inside the retention window — what a local-only monitor can still see. */
+  localUSD: number;
+  /** Full spend across the window, from the backup-stitched record. */
+  fullUSD: number;
+  /** fullUSD − localUSD: spend default pruning drops, recovered from backup. */
+  deltaUSD: number;
+}
+
 export interface ClaudeCodeStats {
   updated: string;
   note: string;
@@ -143,6 +162,10 @@ export interface ClaudeCodeStats {
   };
   byModel: ClaudeModelUsage[];
   monthly: ClaudeMonthly[];
+  /** Per-day spend ledger (transcript-derived; same dedup/pricing path as monthly). */
+  daily: ClaudeDaily[];
+  /** 30-day retention blind spot: local-retention window vs full backup-stitched record. */
+  recovered: ClaudeRecovered;
   /** 24 ints: message events per local hour of day. */
   hourHistogram: number[];
   longestSession: { messages: number; toolCalls: number; hours: number };

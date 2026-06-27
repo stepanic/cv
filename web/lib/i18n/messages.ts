@@ -120,6 +120,15 @@ const en = {
       "{from}–{to}: partial data — timestamp-less legacy history format, a July 2025 corruption event (5 files) and undocumented gaps (Apr 2025; Aug–Oct 2025). Real usage is higher than shown.",
     gapNoteFull:
       "Daily use began {from} — but the {from}–{to} stretch is only partially recorded: a timestamp-less legacy format, a July 2025 corruption event (5 files), and automated backups that began only in 2026. The reconstructed May–Jul 2025 slice alone holds ~{prompts} prompts across {projects} projects; the bars understate the early period, not the usage.",
+    dailyTitle: "Daily spend",
+    dailyAria: "Bar chart of daily Claude Code API-equivalent spend in US dollars",
+    dailyNote:
+      "API-equivalent spend per day, reconstructed from backup-stitched transcripts (1-hour cache priced ×2, matching CodexBar).",
+    dailyDocLink: "Daily reconstruction",
+    blindSpotTitle: "The 30-day blind spot",
+    blindSpotBody:
+      "A local-only monitor like CodexBar sees ~{local} of the last {window} days — Claude Code prunes local transcripts after cleanupPeriodDays (default {retention}). The backup-stitched record shows ~{full}.",
+    blindSpotRecovered: "+{delta} recovered from the dotclaude-sync backup.",
     modelMix: "Model mix",
     modelMixSub: "Share of total tokens per model.",
     otherModels: "other",
@@ -310,6 +319,15 @@ const hr: Messages = {
       "{from}–{to}: djelomični podaci — legacy format povijesti bez timestampova, korupcija datoteka u srpnju 2025. (5 datoteka) i nedokumentirane rupe (tra 2025.; kol–lis 2025.). Stvarna upotreba veća je od prikazane.",
     gapNoteFull:
       "Svakodnevna upotreba počela je {from} — no razdoblje {from}–{to} samo je djelomično zabilježeno: legacy format bez timestampova, korupcija datoteka u srpnju 2025. (5 datoteka) i automatski backupi koji su krenuli tek 2026. Samo rekonstruirani isječak svi–srp 2025. sadrži ~{prompts} promptova kroz {projects} projekata; stupci podcjenjuju rano razdoblje, ne upotrebu.",
+    dailyTitle: "Dnevna potrošnja",
+    dailyAria: "Stupčasti graf dnevne API-ekvivalentne potrošnje u Claude Codeu u američkim dolarima",
+    dailyNote:
+      "API-ekvivalentna potrošnja po danu, rekonstruirana iz backupom spojenih transkripata (1-satni cache naplaćen ×2, kao u CodexBaru).",
+    dailyDocLink: "Dnevna rekonstrukcija",
+    blindSpotTitle: "Slijepa točka od 30 dana",
+    blindSpotBody:
+      "Lokalni monitor poput CodexBara vidi ~{local} zadnjih {window} dana — Claude Code briše lokalne transkripte nakon cleanupPeriodDays (zadano {retention}). Backupom spojeni zapis pokazuje ~{full}.",
+    blindSpotRecovered: "+{delta} oporavljeno iz dotclaude-sync backupa.",
     modelMix: "Omjer modela",
     modelMixSub: "Udio ukupnih tokena po modelu.",
     otherModels: "ostali",

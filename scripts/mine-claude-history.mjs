@@ -42,10 +42,12 @@ const seenMsg = new Set(); // message.id:requestId — dedup across snapshots
 const sessions = new Map(); // sessionId → {first, last, messages, toolCalls}
 const byModel = new Map(); // model → {in, out, cr, cw, usd}
 const monthly = new Map(); // YYYY-MM → {sessions:Set, messages, toolCalls, tokens, usd}
+const daily = new Map(); // YYYY-MM-DD → {tokens, usd} — same dedup/pricing path as monthly
 const hourCounts = new Array(24).fill(0);
 let events = 0;
 
 const monthOf = (ts) => ts.slice(0, 7);
+const dayOf = (ts) => ts.slice(0, 10);
 const bump = (map, key, init) => map.get(key) ?? map.set(key, init).get(key);
 
 function ingestLine(line, sessionIdHint) {
@@ -103,6 +105,11 @@ function ingestLine(line, sessionIdHint) {
   mm.usd += usd;
   m.tokens += inT + outT + crT + cwT;
   m.usd += usd;
+  // Per-day aggregate — same dedup/pricing path as monthly.
+  const day = dayOf(ts);
+  const d = bump(daily, day, { tokens: 0, usd: 0 });
+  d.tokens += inT + outT + crT + cwT;
+  d.usd += usd;
 }
 
 // ── 1. Live transcripts ──────────────────────────────────────────────────────
@@ -221,6 +228,40 @@ const totalsByModel = [...byModel]
 
 const longest = [...sessions.values()].sort((a, b) => b.messages - a.messages)[0];
 
+const round2 = (x) => Math.round(x * 100) / 100;
+
+// Per-day spend ledger (transcript-derived; pre-transcript months stay in the
+// hatched knownGap, not here).
+const dailyArr = [...daily]
+  .sort(([a], [b]) => a.localeCompare(b))
+  .map(([day, d]) => ({ day, tokens: d.tokens, usd: round2(d.usd) }));
+
+// 30-day retention blind spot. Claude Code prunes local transcripts after
+// cleanupPeriodDays (default 30), so a local-only monitor (e.g. CodexBar) can
+// only ever report the last ~30 days. localUSD is the spend inside that
+// retention window; fullUSD is the full 90-day backup-stitched record; the
+// delta is what default pruning drops and the dotclaude-sync backup recovers.
+// (This equals a pure "live ~/.claude only" measure when local is actually
+// pruned to 30 days, and stays meaningful when — as now — it is not.)
+const RECOVER_WINDOW = 90;
+const RETENTION_DAYS = 30;
+const dayCutoff = (n) => new Date(Date.now() - n * 86400000).toISOString().slice(0, 10);
+const fullCutoff = dayCutoff(RECOVER_WINDOW);
+const localCutoff = dayCutoff(RETENTION_DAYS);
+let fullUSD = 0;
+let localUSD = 0;
+for (const [day, d] of daily) {
+  if (day >= fullCutoff) fullUSD += d.usd;
+  if (day >= localCutoff) localUSD += d.usd;
+}
+const recovered = {
+  window: RECOVER_WINDOW,
+  retentionDays: RETENTION_DAYS,
+  localUSD: round2(localUSD),
+  fullUSD: round2(fullUSD),
+  deltaUSD: round2(fullUSD - localUSD),
+};
+
 const out = {
   updated: new Date().toISOString(),
   note:
@@ -262,6 +303,8 @@ const out = {
       apiEquivalentUSD: Math.round(m.usd * 100) / 100,
       ...(m.source ? { source: m.source } : {}),
     })),
+  daily: dailyArr,
+  recovered,
   hourHistogram: hourCounts,
   longestSession: longest
     ? {
