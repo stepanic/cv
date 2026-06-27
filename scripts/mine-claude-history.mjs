@@ -86,8 +86,15 @@ function ingestLine(line, sessionIdHint) {
   const outT = u.output_tokens ?? 0;
   const crT = u.cache_read_input_tokens ?? 0;
   const cwT = u.cache_creation_input_tokens ?? 0;
+  // 1-hour cache-creation tokens bill at 2× the input rate; only 5-minute
+  // cache-creation uses p.cw. Mirrors CodexBar's claudeCostUSD — without this
+  // the total under-counts on opus[1m]-heavy usage, where 1h cache dominates.
+  const cw1hT = Math.min(cwT, u.cache_creation?.ephemeral_1h_input_tokens ?? 0);
+  const cw5mT = cwT - cw1hT;
   const p = priceFor(model);
-  const usd = p ? inT * p.in + outT * p.out + crT * p.cr + cwT * p.cw : 0;
+  const usd = p
+    ? inT * p.in + outT * p.out + crT * p.cr + cw5mT * p.cw + cw1hT * p.in * 2
+    : 0;
   const mm = bump(byModel, model, { in: 0, out: 0, cr: 0, cw: 0, usd: 0 });
   mm.in += inT;
   mm.out += outT;
