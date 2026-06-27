@@ -52,6 +52,9 @@ html {
 
 body {
   @apply bg-bg text-ink antialiased;
+  /* Let full-bleed (100vw) children escape the container without adding a
+     horizontal scrollbar. `clip` (not `hidden`) keeps the sticky header working. */
+  overflow-x: clip;
 }
 
 /* DOMOVINA tricolor brand stripe — the shared motif across domovina.ai
@@ -80,6 +83,13 @@ body {
 @layer utilities {
   .link-accent {
     @apply text-accent-bright underline decoration-accent-border underline-offset-4 transition-colors hover:text-ink;
+  }
+
+  /* Break an element out of the centered container to span the full viewport. */
+  .full-bleed {
+    width: 100vw;
+    margin-left: 50%;
+    transform: translateX(-50%);
   }
 }
 

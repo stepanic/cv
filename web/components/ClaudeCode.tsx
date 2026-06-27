@@ -314,7 +314,8 @@ function MonthlyChart({
 }
 
 /** Daily API-equivalent spend (USD) — sqrt-scaled inline-SVG bars, same hatched
- *  knownGap treatment as MonthlyChart; peak day labelled, every bar tooltipped. */
+ *  knownGap treatment as MonthlyChart. Rendered full-bleed (100vw) with a wide
+ *  viewBox so the ~80 daily bars breathe and month labels never collide. */
 function DailyChart({
   daily,
   gap,
@@ -324,16 +325,18 @@ function DailyChart({
 }) {
   const { t, n, locale } = useI18n();
 
-  const W = 720;
+  // Wide viewBox: at 100vw the SVG scales uniformly, so a generous coordinate
+  // space (not the display width) is what keeps fixed-size labels from colliding.
+  const W = 1440;
   const H = 200;
-  const TOP = 20; // room for the peak value label
-  const BOTTOM = 18; // room for month labels
+  const TOP = 22; // room for the peak value label
+  const BOTTOM = 22; // room for month labels
   const chartH = H - TOP - BOTTOM;
   const baseline = TOP + chartH;
 
-  const GAP_W = 72; // hatched knownGap region (the lost pre-2026 era)
-  const GAP_PAD = 12;
-  const barGap = 1.5;
+  const GAP_W = 110; // hatched knownGap region (the lost pre-2026 era)
+  const GAP_PAD = 18;
+  const barGap = 2;
   const x0 = GAP_W + GAP_PAD;
   const count = daily.length || 1;
   const barW = (W - x0 - barGap * (count - 1)) / count;
@@ -342,90 +345,117 @@ function DailyChart({
   const sqrtMax = Math.sqrt(Math.max(...daily.map((d) => d.usd), 1));
   const peakIdx = daily.reduce((best, d, i) => (d.usd > daily[best]!.usd ? i : best), 0);
 
+  // One centered label per month, skipped when too close to the previous one so
+  // the dense early months (few days each) never overlap. Year only on the last.
+  const groups: { ym: string; start: number; end: number }[] = [];
+  daily.forEach((d, i) => {
+    const ym = d.day.slice(0, 7);
+    const last = groups[groups.length - 1];
+    if (last && last.ym === ym) last.end = i;
+    else groups.push({ ym, start: i, end: i });
+  });
+  const MIN_LABEL_GAP = 42;
+  const monthLabels: { x: number; text: string }[] = [];
+  let lastLabelX = -Infinity;
+  groups.forEach((g, gi) => {
+    const x = x0 + ((g.start + g.end) / 2) * (barW + barGap) + barW / 2;
+    if (x - lastLabelX < MIN_LABEL_GAP) return;
+    lastLabelX = x;
+    const full = formatYearMonth(g.ym, locale);
+    monthLabels.push({ x, text: gi === groups.length - 1 ? full : (full.split(" ")[0] ?? full) });
+  });
+
   const gapFrom = formatYearMonth(gap.from, locale);
   const gapTo = formatYearMonth(gap.to, locale);
   const usd0 = (v: number) => `$${n(Math.round(v))}`;
+  const cy = TOP + chartH / 2;
 
   return (
     <figure className="mt-10">
       <h3 className="text-sm font-semibold uppercase tracking-wider text-inkMuted">
         {t("claude.dailyTitle")}
       </h3>
-      <svg
-        viewBox={`0 0 ${W} ${H}`}
-        role="img"
-        aria-label={t("claude.dailyAria")}
-        className="mt-4 h-auto w-full"
-      >
-        <defs>
-          <pattern
-            id="cc-daily-gap-hatch"
-            width="7"
-            height="7"
-            patternUnits="userSpaceOnUse"
-            patternTransform="rotate(45)"
-          >
-            <line x1="0" y1="0" x2="0" y2="7" className="stroke-inkMuted" strokeWidth="1" opacity="0.35" />
-          </pattern>
-        </defs>
+      {/* Full-bleed: break out of the centered container to span the viewport. */}
+      <div className="full-bleed mt-4 px-4 sm:px-8">
+        <svg
+          viewBox={`0 0 ${W} ${H}`}
+          role="img"
+          aria-label={t("claude.dailyAria")}
+          className="h-auto w-full"
+        >
+          <defs>
+            <pattern
+              id="cc-daily-gap-hatch"
+              width="7"
+              height="7"
+              patternUnits="userSpaceOnUse"
+              patternTransform="rotate(45)"
+            >
+              <line x1="0" y1="0" x2="0" y2="7" className="stroke-inkMuted" strokeWidth="1" opacity="0.35" />
+            </pattern>
+          </defs>
 
-        {/* knownGap placeholder — the lost era before daily transcripts begin */}
-        <rect
-          x={0.75}
-          y={TOP + 0.75}
-          width={GAP_W - 1.5}
-          height={chartH - 1.5}
-          rx={5}
-          fill="url(#cc-daily-gap-hatch)"
-          className="stroke-inkMuted"
-          strokeWidth="1"
-          strokeDasharray="4 4"
-          opacity="0.7"
-        />
-        <text x={GAP_W / 2} y={TOP + chartH / 2 - 4} textAnchor="middle" fontSize="10" className="fill-inkMuted">
-          {t("claude.gapLabelTop", { from: gapFrom, to: gapTo })}
-        </text>
-        <text x={GAP_W / 2} y={TOP + chartH / 2 + 10} textAnchor="middle" fontSize="10" className="fill-inkMuted">
-          {t("claude.gapLabelBottom")}
-        </text>
+          {/* knownGap placeholder — the lost era before daily transcripts begin */}
+          <rect
+            x={0.75}
+            y={TOP + 0.75}
+            width={GAP_W - 1.5}
+            height={chartH - 1.5}
+            rx={5}
+            fill="url(#cc-daily-gap-hatch)"
+            className="stroke-inkMuted"
+            strokeWidth="1"
+            strokeDasharray="4 4"
+            opacity="0.7"
+          />
+          <text x={GAP_W / 2} y={cy - 12} textAnchor="middle" fontSize="11" className="fill-inkMuted">
+            {gapFrom}
+          </text>
+          <text x={GAP_W / 2} y={cy + 2} textAnchor="middle" fontSize="11" className="fill-inkMuted">
+            –{gapTo}
+          </text>
+          <text x={GAP_W / 2} y={cy + 16} textAnchor="middle" fontSize="11" className="fill-inkMuted">
+            {t("claude.gapLabelBottom")}
+          </text>
 
-        {daily.map((d, i) => {
-          const x = x0 + i * (barW + barGap);
-          const h = d.usd <= 0 ? 1.5 : Math.max((Math.sqrt(d.usd) / sqrtMax) * chartH, 2);
-          const monthStart = i === 0 || d.day.slice(5, 7) !== daily[i - 1]!.day.slice(5, 7);
-          return (
-            <g key={d.day}>
-              <rect
-                x={x}
-                y={baseline - h}
-                width={barW}
-                height={h}
-                rx={1}
-                className="fill-accent"
-                opacity={0.4 + 0.6 * (Math.sqrt(d.usd) / sqrtMax)}
-              >
-                <title>{`${d.day}: ${usd0(d.usd)}`}</title>
-              </rect>
-              {i === peakIdx ? (
-                <text
-                  x={x + barW / 2}
-                  y={Math.max(baseline - h - 5, 11)}
-                  textAnchor="middle"
-                  fontSize="10"
-                  className="fill-inkSoft"
+          {daily.map((d, i) => {
+            const x = x0 + i * (barW + barGap);
+            const h = d.usd <= 0 ? 1.5 : Math.max((Math.sqrt(d.usd) / sqrtMax) * chartH, 2);
+            return (
+              <g key={d.day}>
+                <rect
+                  x={x}
+                  y={baseline - h}
+                  width={barW}
+                  height={h}
+                  rx={1}
+                  className="fill-accent"
+                  opacity={0.4 + 0.6 * (Math.sqrt(d.usd) / sqrtMax)}
                 >
-                  {usd0(d.usd)}
-                </text>
-              ) : null}
-              {monthStart ? (
-                <text x={x} y={H - 4} textAnchor="start" fontSize="9" className="fill-inkMuted">
-                  {formatYearMonth(d.day.slice(0, 7), locale)}
-                </text>
-              ) : null}
-            </g>
-          );
-        })}
-      </svg>
+                  <title>{`${d.day}: ${usd0(d.usd)}`}</title>
+                </rect>
+                {i === peakIdx ? (
+                  <text
+                    x={x + barW / 2}
+                    y={Math.max(baseline - h - 6, 12)}
+                    textAnchor="middle"
+                    fontSize="12"
+                    className="fill-inkSoft"
+                  >
+                    {usd0(d.usd)}
+                  </text>
+                ) : null}
+              </g>
+            );
+          })}
+
+          {monthLabels.map((l) => (
+            <text key={l.text + l.x} x={l.x} y={H - 6} textAnchor="middle" fontSize="11" className="fill-inkMuted">
+              {l.text}
+            </text>
+          ))}
+        </svg>
+      </div>
       <figcaption className="mt-2 text-xs text-inkMuted">
         {t("claude.dailyNote")}{" "}
         <a
