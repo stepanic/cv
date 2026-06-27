@@ -21,6 +21,7 @@ const en = {
     projects: "Projects",
     skills: "Skills",
     education: "Education",
+    blog: "Blog",
     ariaLabel: "Main navigation",
     homeAria: "Matija Stepanić — top of page",
     langSwitchAria: "Choose language",
@@ -184,6 +185,15 @@ const en = {
     lastUpdated: "Data last updated {date}",
     repo: "View the repo",
   },
+
+  blog: {
+    title: "Blog",
+    subtitle: "Occasional notes on AI-native engineering.",
+    backToCv: "Back to CV",
+    allPosts: "All posts",
+    readPost: "Read",
+    sources: "Sources",
+  },
 };
 
 export type Messages = typeof en;
@@ -200,6 +210,7 @@ const hr: Messages = {
     projects: "Projekti",
     skills: "Vještine",
     education: "Obrazovanje",
+    blog: "Blog",
     ariaLabel: "Glavna navigacija",
     homeAria: "Matija Stepanić — vrh stranice",
     langSwitchAria: "Odaberi jezik",
@@ -368,6 +379,15 @@ const hr: Messages = {
     builtFrom: "Izgrađeno iz jednog izvora istine —",
     lastUpdated: "Podaci zadnji put ažurirani {date}",
     repo: "Pogledaj repozitorij",
+  },
+
+  blog: {
+    title: "Blog",
+    subtitle: "Povremene bilješke o AI-native inženjeringu.",
+    backToCv: "Natrag na CV",
+    allPosts: "Svi članci",
+    readPost: "Pročitaj",
+    sources: "Izvori",
   },
 };
 

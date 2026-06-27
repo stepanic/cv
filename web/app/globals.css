@@ -82,3 +82,40 @@ body {
     @apply text-accent-bright underline decoration-accent-border underline-offset-4 transition-colors hover:text-ink;
   }
 }
+
+/* Long-form blog prose rendered from markdown (components/BlogArticle.tsx). */
+@layer components {
+  .prose-cv {
+    @apply text-[15px] leading-relaxed text-inkSoft;
+  }
+  .prose-cv h2 {
+    @apply mt-9 mb-3 text-lg font-bold text-ink;
+  }
+  .prose-cv h3 {
+    @apply mt-7 mb-2 text-base font-semibold text-ink;
+  }
+  .prose-cv p {
+    @apply my-4;
+  }
+  .prose-cv ul {
+    @apply my-4 list-disc space-y-1.5 pl-5;
+  }
+  .prose-cv ol {
+    @apply my-4 list-decimal space-y-1.5 pl-5;
+  }
+  .prose-cv li {
+    @apply pl-1;
+  }
+  .prose-cv strong {
+    @apply font-semibold text-ink;
+  }
+  .prose-cv a {
+    @apply text-accent-bright underline decoration-accent-border underline-offset-4 transition-colors hover:text-ink;
+  }
+  .prose-cv code {
+    @apply rounded bg-surface px-1.5 py-0.5 font-mono text-[13px] text-ink;
+  }
+  .prose-cv em {
+    @apply italic;
+  }
+}
