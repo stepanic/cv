@@ -14,6 +14,99 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "three-years-of-revenuecat-manual-to-agentic",
+    date: "2026-06-28",
+    tags: ["RevenueCat", "In-App Purchases", "Flutter", "Claude Code", "AI-native"],
+    title: {
+      en: "Three years of RevenueCat, from docs-in-a-second-tab to an agent shipping the whole paywall",
+      hr: "Tri godine RevenueCata, od dokumentacije-u-drugom-tabu do agenta koji isporuči cijeli paywall",
+    },
+    lead: {
+      en: "I've shipped RevenueCat to production across three Flutter apps since 2023. The SDK barely changed; the way I integrate it changed completely — from reading every doc by hand to an agent wiring the entire monetization layer.",
+      hr: "RevenueCat isporučujem u produkciju kroz tri Flutter aplikacije od 2023. SDK se jedva mijenjao; način na koji ga integriram promijenio se posve — od ručnog čitanja svake stranice dokumentacije do agenta koji ožiči cijeli sloj naplate.",
+    },
+    body: {
+      en: `I've shipped RevenueCat to production for three years across three Flutter apps. The interesting part isn't the SDK — it's how the *way* I integrate it changed: from reading every doc by hand in 2023, to an agent wiring the entire monetization layer in 2026. \`purchases_flutter\` itself climbed 8.10 → 9.9 → 10.x across the three, but that's the least interesting number here.
+
+## 2023 — the manual era (The Birth Deck)
+
+My first RevenueCat commit is literally named "Setup RevenueCat", dated 15 February 2023, in [The Birth Deck](https://apps.apple.com/us/app/the-birth-deck/id1672044071) — a FlutterFlow app I built for a consulting client. Back then "integration" meant a hand-written wrapper around \`purchases_flutter\` (8.10.1), products configured by clicking around the dashboard, and the docs open in a second tab.
+
+The paywall started granular — individual cards, videos, a birth packing list, two bundles — and over three years collapsed to a single monthly subscription. The last edit (March 2026) is the *only* hand-written commit among ~40 FlutterFlow codegen syncs on those files. That long, messy evolution is the honest shape of a real subscription product: you don't get the catalogue right on day one.
+
+## 2025 — cross-platform, 100% agent-built (smpltsk)
+
+[smpltsk](https://apps.apple.com/app/smpltsk/id6751039190) is a task app I built end-to-end as the sole engineer for a consulting client — and **83% of its commits (447 of 536) are co-authored by Claude Code**. RevenueCat is the system of record: a ~400-line service over \`purchases_flutter\` (9.9.0), a single \`premium_access\` entitlement, monthly / annual / a capped lifetime tier, [live on Google Play](https://play.google.com/store/apps/details?id=com.smpltsk) and the App Store through the full review gauntlet. The parts I'm proud of are the seams:
+
+- **One paywall, two billing systems.** Mobile (iOS / Android / macOS) goes through RevenueCat; web and desktop fall back to Stripe in the same service, with a Cloud Functions webhook reconciling subscription state into Firestore. The app never has to care which rail a user came in on.
+- **Provisioning as code.** A single \`config.json\` is the source of truth, and Node scripts drive App Store Connect (API key), Google Play (service account) and RevenueCat's REST API v2 to create the products — plus a TestStore setup so the whole flow is testable without waiting on store review.
+
+## 2026 — the agentic era (Perfect Training)
+
+The most recent integration — **Perfect Training**, a sports-training app — went in over a two-day Claude Code sprint. As I write this it's in review on both stores (Apple came back with a few details to fix; the Android build has been pending production review for nine days — that part is never fast), so there are no live numbers yet — but the architecture is the most interesting of the three. RevenueCat identity is linked to Firebase Auth (including already-signed-in sessions), and a RevenueCat webhook writes entitlement state into Firestore.
+
+The detail I like most is a security one: the webhook validates the incoming \`app_user_id\` against a strict UID regex *before* it ever touches a Firestore path — so a malicious client can't smuggle a crafted user id to write into someone else's document. It also deep-merges only the subscription fields the server owns, deliberately leaving admin-owned fields (like a manual override) untouched, and gates SANDBOX vs PRODUCTION events. Webhooks act on the real world; the blast radius has to be bounded.
+
+## The thing that closes the arc
+
+This week I installed RevenueCat's own AI Toolkit — their Claude Code plugin plus a hosted MCP server — and went through it skill by skill. It configures the RevenueCat side (apps, products, entitlements, offerings) and reads store product state, but creating the actual products in App Store Connect, Play Console and Stripe still lands on a human. That's the same boundary I hit doing it by hand: the agent reaches a long way, and then there's a seam where the stores don't expose an API and a person steps in.
+
+One security nuance worth knowing if you ship RevenueCat: the publishable SDK key in your app binary is *public* by design — anyone can pull it out of an APK. It identifies the app; it does **not** authorize reading the app's revenue. That's why features like Verified Metrics are explicitly opt-in: identity is not authorization. A good principle to carry into anything agent-facing.
+
+Three apps, three years, one direction of travel: from me reading the docs to an agent writing the integration — with the human still owning the seams the machine can't reach yet.`,
+      hr: `RevenueCat isporučujem u produkciju već tri godine, kroz tri Flutter aplikacije. Zanimljiv dio nije SDK — nego kako se *način* na koji ga integriram promijenio: od ručnog čitanja svake stranice dokumentacije 2023., do agenta koji 2026. ožiči cijeli sloj naplate. Sam \`purchases_flutter\` popeo se 8.10 → 9.9 → 10.x kroz te tri aplikacije, ali to je ovdje najmanje zanimljiva brojka.
+
+## 2023. — ručna era (The Birth Deck)
+
+Moj prvi RevenueCat commit doslovno se zove "Setup RevenueCat", datiran 15. veljače 2023., u [The Birth Decku](https://apps.apple.com/us/app/the-birth-deck/id1672044071) — FlutterFlow aplikaciji koju sam izradio za konzultantskog klijenta. Tada je "integracija" značila ručno napisan wrapper oko \`purchases_flutter\` (8.10.1), produkte konfigurirane klikanjem po dashboardu i dokumentaciju otvorenu u drugom tabu.
+
+Paywall je krenuo granularno — pojedinačne kartice, videi, popis za bolnicu, dva bundlea — i kroz tri godine se sveo na jednu mjesečnu pretplatu. Zadnja izmjena (ožujak 2026.) *jedini* je ručno napisan commit među ~40 FlutterFlow codegen syncova na tim datotekama. Ta duga, neuredna evolucija pošten je oblik stvarnog pretplatničkog proizvoda: katalog ne pogodiš prvi dan.
+
+## 2025. — cross-platform, 100% agentski (smpltsk)
+
+[smpltsk](https://apps.apple.com/app/smpltsk/id6751039190) je task aplikacija koju sam izradio od početka do kraja kao jedini inženjer za konzultantskog klijenta — i **83% njezinih commitova (447 od 536) co-authored je s Claude Codeom**. RevenueCat je sustav istine: servis od ~400 linija nad \`purchases_flutter\` (9.9.0), jedan \`premium_access\` entitlement, mjesečna / godišnja / ograničena doživotna razina, [živo na Google Playu](https://play.google.com/store/apps/details?id=com.smpltsk) i App Storeu kroz cijeli review. Najponosniji sam na šavove:
+
+- **Jedan paywall, dva sustava naplate.** Mobitel (iOS / Android / macOS) ide kroz RevenueCat; web i desktop padaju na Stripe u istom servisu, a Cloud Functions webhook usklađuje stanje pretplate u Firestore. Aplikaciju ne zanima kojom je prugom korisnik ušao.
+- **Provisioning kao kod.** Jedan \`config.json\` je izvor istine, a Node skripte voze App Store Connect (API ključ), Google Play (service account) i RevenueCat REST API v2 da kreiraju produkte — plus TestStore setup da je cijeli tok testabilan bez čekanja na store review.
+
+## 2026. — agentska era (Perfect Training)
+
+Najnovija integracija — **Perfect Training**, aplikacija za sportski trening — ušla je u dvodnevnom Claude Code sprintu. Dok ovo pišem, u review je na obje trgovine (Apple je vratio par detalja za popraviti; Android build već devet dana čeka produkcijski review — taj dio nikad nije brz), pa još nema živih brojki — ali arhitektura je najzanimljivija od sve tri. RevenueCat identitet vezan je uz Firebase Auth (uključujući već prijavljene sesije), a RevenueCat webhook upisuje stanje entitlementa u Firestore.
+
+Detalj koji najviše volim sigurnosni je: webhook validira dolazni \`app_user_id\` strogim UID regexom *prije* nego što dotakne ijednu Firestore putanju — pa zlonamjerni klijent ne može prokrijumčariti izmišljeni user id da piše u tuđi dokument. Uz to deep-merge dira samo polja pretplate u vlasništvu servera, namjerno ostavljajući polja u vlasništvu admina (poput ručnog override-a) netaknutima, i razdvaja SANDBOX od PRODUCTION događaja. Webhookovi djeluju na stvarni svijet; domet štete mora biti omeđen.
+
+## Što zatvara luk
+
+Ovaj tjedan sam instalirao RevenueCatov vlastiti AI Toolkit — njihov Claude Code plugin plus hostani MCP server — i prošao ga skill po skill. Konfigurira RevenueCat stranu (apps, produkte, entitlemente, offeringe) i čita stanje store produkata, ali kreiranje samih produkata na App Store Connectu, Play Consoleu i Stripeu i dalje pada na čovjeka. To je ista granica na koju sam naišao radeći ručno: agent doseže jako daleko, a onda dođe šav gdje trgovine ne nude API i čovjek uskoči.
+
+Jedna sigurnosna nijansa koju vrijedi znati ako isporučuješ RevenueCat: publishable SDK ključ u binaryju aplikacije *javan* je po dizajnu — svatko ga može izvući iz APK-a. On identificira aplikaciju; **ne** ovlašćuje čitanje njezine zarade. Zato su značajke poput Verified Metrics izrijekom opt-in: identitet nije autorizacija. Dobar princip za sve što je okrenuto agentima.
+
+Tri aplikacije, tri godine, jedan smjer kretanja: od mene koji čitam dokumentaciju do agenta koji piše integraciju — uz čovjeka koji i dalje drži šavove do kojih stroj još ne doseže.`,
+    },
+    sources: [
+      {
+        title: "RevenueCat AI Toolkit — Claude Code plugin + MCP server",
+        url: "https://github.com/RevenueCat/ai-toolkit",
+      },
+      {
+        title: "RevenueCat MCP server — docs",
+        url: "https://www.revenuecat.com/docs/tools/mcp",
+      },
+      {
+        title: "smpltsk — App Store",
+        url: "https://apps.apple.com/app/smpltsk/id6751039190",
+      },
+      {
+        title: "The Birth Deck — App Store",
+        url: "https://apps.apple.com/us/app/the-birth-deck/id1672044071",
+      },
+      {
+        title: "RevenueCat Verified Metrics — trustless live revenue proof",
+        url: "https://www.revenuecat.com/verified",
+      },
+    ],
+  },
+  {
     slug: "claude-code-limit-increases-2026",
     date: "2026-06-27",
     tags: ["Claude Code", "Anthropic", "AI-native"],
