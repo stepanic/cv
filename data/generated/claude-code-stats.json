@@ -1,10 +1,10 @@
 {
-  "updated": "2026-06-27T14:52:08.608Z",
+  "updated": "2026-07-09T09:30:02.971Z",
   "note": "Aggregate telemetry mined from local Claude Code transcripts, daily git snapshots (dotclaude-sync) and Claude Code's own stats cache. Best-effort reconstruction — real usage is higher (see knownGap). No conversation content is published.",
   "usingSince": "2025-04",
   "usingSinceStatus": "estimated",
   "installFirstStart": "2025-05-14T08:56:17.111Z",
-  "numStartups": 682,
+  "numStartups": 818,
   "knownGap": {
     "from": "2025-04",
     "to": "2025-12",
@@ -78,24 +78,24 @@
     }
   },
   "totals": {
-    "sessions": 2160,
-    "projects": 94,
-    "messages": 235562,
-    "toolCalls": 75088,
-    "transcriptEvents": 223599,
-    "tokens": 10837751845,
-    "outputTokens": 51221427,
-    "apiEquivalentUSD": 9342.95
+    "sessions": 2474,
+    "projects": 111,
+    "messages": 280032,
+    "toolCalls": 89189,
+    "transcriptEvents": 268069,
+    "tokens": 12466488051,
+    "outputTokens": 60268099,
+    "apiEquivalentUSD": 11261.76
   },
   "byModel": [
     {
       "model": "claude-opus-4-8",
-      "inputTokens": 7528943,
-      "outputTokens": 26313179,
-      "cacheReadTokens": 5223869038,
-      "cacheWriteTokens": 150073953,
-      "totalTokens": 5407785113,
-      "apiEquivalentUSD": 4660.58
+      "inputTokens": 15559380,
+      "outputTokens": 33390569,
+      "cacheReadTokens": 6422988038,
+      "cacheWriteTokens": 200912443,
+      "totalTokens": 6672850430,
+      "apiEquivalentUSD": 5920.63
     },
     {
       "model": "claude-opus-4-7",
@@ -108,21 +108,21 @@
     },
     {
       "model": "claude-fable-5",
-      "inputTokens": 644001,
-      "outputTokens": 2301274,
-      "cacheReadTokens": 476984830,
-      "cacheWriteTokens": 13478809,
-      "totalTokens": 493408914,
-      "apiEquivalentUSD": 858.53
+      "inputTokens": 1299536,
+      "outputTokens": 3835066,
+      "cacheReadTokens": 796277479,
+      "cacheWriteTokens": 24467604,
+      "totalTokens": 825879685,
+      "apiEquivalentUSD": 1470.76
     },
     {
       "model": "claude-haiku-4-5-20251001",
-      "inputTokens": 150537,
-      "outputTokens": 1601330,
-      "cacheReadTokens": 166881017,
-      "cacheWriteTokens": 19107498,
-      "totalTokens": 187740382,
-      "apiEquivalentUSD": 55.25
+      "inputTokens": 155015,
+      "outputTokens": 1604155,
+      "cacheReadTokens": 172673658,
+      "cacheWriteTokens": 19457605,
+      "totalTokens": 193890433,
+      "apiEquivalentUSD": 56.28
     },
     {
       "model": "claude-opus-4-6",
@@ -135,12 +135,21 @@
     },
     {
       "model": "claude-sonnet-4-6",
-      "inputTokens": 82701,
-      "outputTokens": 730233,
-      "cacheReadTokens": 50124413,
-      "cacheWriteTokens": 3813370,
-      "totalTokens": 54750717,
-      "apiEquivalentUSD": 47.87
+      "inputTokens": 96514,
+      "outputTokens": 861554,
+      "cacheReadTokens": 52686361,
+      "cacheWriteTokens": 4489599,
+      "totalTokens": 58134028,
+      "apiEquivalentUSD": 54.7
+    },
+    {
+      "model": "claude-sonnet-5",
+      "inputTokens": 1789791,
+      "outputTokens": 301344,
+      "cacheReadTokens": 15257270,
+      "cacheWriteTokens": 4318351,
+      "totalTokens": 21666756,
+      "apiEquivalentUSD": 38.67
     },
     {
       "model": "claude-opus-4-5-20251101",
@@ -204,11 +213,19 @@
     },
     {
       "month": "2026-06",
-      "sessions": 1955,
-      "messages": 131611,
-      "toolCalls": 42807,
-      "tokens": 5868027097,
-      "apiEquivalentUSD": 5305.79
+      "sessions": 2016,
+      "messages": 144103,
+      "toolCalls": 46920,
+      "tokens": 6320265326,
+      "apiEquivalentUSD": 5728.68
+    },
+    {
+      "month": "2026-07",
+      "sessions": 257,
+      "messages": 31978,
+      "toolCalls": 9988,
+      "tokens": 1176497977,
+      "apiEquivalentUSD": 1495.94
     }
   ],
   "daily": [
@@ -604,42 +621,102 @@
     },
     {
       "day": "2026-06-27",
-      "tokens": 247634081,
-      "usd": 200.94
+      "tokens": 311831925,
+      "usd": 261.03
+    },
+    {
+      "day": "2026-06-28",
+      "tokens": 84781833,
+      "usd": 81.36
+    },
+    {
+      "day": "2026-06-29",
+      "tokens": 66262043,
+      "usd": 67.5
+    },
+    {
+      "day": "2026-06-30",
+      "tokens": 236996509,
+      "usd": 213.94
+    },
+    {
+      "day": "2026-07-01",
+      "tokens": 61104024,
+      "usd": 65.34
+    },
+    {
+      "day": "2026-07-02",
+      "tokens": 90565725,
+      "usd": 110.74
+    },
+    {
+      "day": "2026-07-03",
+      "tokens": 261884063,
+      "usd": 257.87
+    },
+    {
+      "day": "2026-07-04",
+      "tokens": 216233189,
+      "usd": 315.63
+    },
+    {
+      "day": "2026-07-05",
+      "tokens": 900385,
+      "usd": 9.23
+    },
+    {
+      "day": "2026-07-06",
+      "tokens": 187726972,
+      "usd": 269.32
+    },
+    {
+      "day": "2026-07-07",
+      "tokens": 247358739,
+      "usd": 349.83
+    },
+    {
+      "day": "2026-07-08",
+      "tokens": 104956407,
+      "usd": 108.02
+    },
+    {
+      "day": "2026-07-09",
+      "tokens": 5768473,
+      "usd": 9.96
     }
   ],
   "recovered": {
     "window": 90,
     "retentionDays": 30,
-    "localUSD": 6037.62,
-    "fullUSD": 9308.51,
-    "deltaUSD": 3270.89
+    "localUSD": 5923.01,
+    "fullUSD": 11227.34,
+    "deltaUSD": 5304.33
   },
   "hourHistogram": [
-    9847,
-    7955,
-    5163,
-    2017,
-    1790,
-    1893,
-    4308,
-    5499,
-    9561,
-    12461,
-    10615,
-    15699,
-    13955,
-    15934,
-    18532,
-    19537,
-    15361,
-    11696,
-    7452,
-    6487,
-    2970,
-    3767,
-    8402,
-    12698
+    11161,
+    10493,
+    6804,
+    2197,
+    2298,
+    2396,
+    4594,
+    5760,
+    11907,
+    16679,
+    11780,
+    20004,
+    15575,
+    17773,
+    21688,
+    20865,
+    17908,
+    15591,
+    9382,
+    7162,
+    5703,
+    5056,
+    11886,
+    13407
   ],
   "longestSession": {
     "messages": 19834,
@@ -648,9 +725,9 @@
   },
   "statsCache": {
     "trackedSince": "2025-12-20T11:46:21.018Z",
-    "computedAt": "2026-06-25",
-    "totalMessages": 141701,
-    "totalSessions": 2007,
+    "computedAt": "2026-07-07",
+    "totalMessages": 182948,
+    "totalSessions": 2290,
     "models": [
       "claude-opus-4-5-20251101",
       "claude-sonnet-4-5-20250929",
@@ -659,7 +736,8 @@
       "claude-opus-4-7",
       "claude-sonnet-4-6",
       "claude-opus-4-8",
-      "claude-fable-5"
+      "claude-fable-5",
+      "claude-sonnet-5"
     ]
   },
   "recursion": "These numbers survive Claude Code's 30-day transcript retention because of dotclaude-sync — a backup tool for Claude Code's own state, built with Claude Code (github.com/stepanic/dotclaude-sync)."
