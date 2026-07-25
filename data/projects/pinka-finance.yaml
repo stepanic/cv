@@ -1,7 +1,7 @@
 id: pinka-finance
 name: PINKA Finance
 featured: true
-order: 2
+order: 3
 period: { start: "2025", end: null }
 role: { en: Co-founder & lead engineer, hr: Suosnivač i glavni inženjer }
 links:

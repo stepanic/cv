@@ -4,6 +4,7 @@ featured: true
 order: 1
 period: { start: "2025", end: null }
 role: { en: Founder & sole engineer, hr: Osnivač i jedini inženjer }
+ecosystem: domovina
 links:
   - { label: Live, url: "https://domovina.ai" }
   - { label: GitHub org, url: "https://github.com/domovinatv" }

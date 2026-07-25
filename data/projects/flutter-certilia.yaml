@@ -1,7 +1,7 @@
 id: flutter-certilia
 name: flutter_certilia
 featured: true
-order: 3
+order: 4
 period: { start: "2025", end: null }
 role: { en: Author & maintainer, hr: Autor i održavatelj }
 links:

@@ -1,0 +1,35 @@
+id: domovina-api
+name: api.domovina.ai — self-hosted Supabase & SSO
+featured: false
+order: 27
+ecosystem: domovina
+period: { start: "2026", end: null }
+role: { en: Author, hr: Autor }
+links:
+  - { label: GitHub, url: "https://github.com/domovinatv/domovina-api" }
+tech: [Supabase, PostgreSQL, Coolify, Docker, Cloudflare Tunnel, PLpgSQL, Oracle Cloud ARM]
+summary:
+  en: >-
+    Single identity provider and API for every domovina.* product. A fully
+    self-hosted Supabase stack (Postgres, GoTrue, PostgREST, Realtime, Storage,
+    Edge Functions, Studio, Logflare, MinIO) deployed through Coolify on Oracle
+    Cloud ARM and exposed only through a Cloudflare Tunnel — no inbound ports.
+    Infrastructure as code: migrations, RLS policies, tunnel ingress and
+    runbooks live in the repo, secrets never do.
+  hr: >-
+    Jedinstveni identity provider i API za sve domovina.* proizvode. Potpuno
+    self-hosted Supabase stack (Postgres, GoTrue, PostgREST, Realtime, Storage,
+    Edge Functions, Studio, Logflare, MinIO) deployan kroz Coolify na Oracle
+    Cloud ARM i izložen isključivo kroz Cloudflare Tunnel — bez ijednog
+    otvorenog porta. Infrastruktura kao kod: migracije, RLS politike, tunnel
+    ingress i runbookovi žive u repou, tajne nikad.
+highlights:
+  - en: >-
+      SSO across the ecosystem with passkeys and Croatian eID (via the
+      flutter_certilia package from this same portfolio) as first-class login
+      methods
+    hr: >-
+      SSO kroz cijeli ekosustav s passkeyevima i hrvatskim eID-om (kroz paket
+      flutter_certilia iz istog ovog portfelja) kao ravnopravnim načinima
+      prijave
+tags: [infra, selfhosted, supabase, cloudflare, devops, identity]

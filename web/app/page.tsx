@@ -5,6 +5,7 @@ import { Stats } from "@/components/Stats";
 import { ClaudeCode } from "@/components/ClaudeCode";
 import { Experience } from "@/components/Experience";
 import { Projects } from "@/components/Projects";
+import { OpenSource } from "@/components/OpenSource";
 import { Skills } from "@/components/Skills";
 import { Education } from "@/components/Education";
 import { Footer } from "@/components/Footer";
@@ -23,6 +24,7 @@ export default function Page() {
         <ClaudeCode claude={data.claude} />
         <Experience items={data.experience} />
         <Projects projects={data.projects} />
+        <OpenSource repos={data.repos} />
         <Skills groups={data.skills} />
         <Education education={data.education} certifications={data.certifications} />
       </main>

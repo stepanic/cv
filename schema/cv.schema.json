@@ -185,6 +185,7 @@
           "additionalProperties": false
         },
         "role": { "$ref": "#/$defs/bilingual" },
+        "ecosystem": { "type": "string", "pattern": "^[a-z0-9-]+$" },
         "links": { "type": "array", "items": { "$ref": "#/$defs/link" } },
         "tech": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
         "summary": { "$ref": "#/$defs/bilingual" },

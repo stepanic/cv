@@ -111,6 +111,12 @@ export function Projects({ projects }: { projects: Project[] }) {
   const featured = projects.filter((p) => p.featured);
   const rest = projects.filter((p) => !p.featured);
 
+  // The DOMOVINA platform has grown a dozen parts that each stand alone as a
+  // public repo and deployment — grouping them keeps that legible instead of
+  // burying them in one undifferentiated "more projects" list.
+  const domovina = rest.filter((p) => p.ecosystem === "domovina");
+  const standalone = rest.filter((p) => p.ecosystem !== "domovina");
+
   return (
     <Section id="projects" heading={t("projects.heading")} subheading={t("projects.subheading")}>
       <div className="grid gap-5 md:grid-cols-2 2xl:grid-cols-3">
@@ -119,13 +125,29 @@ export function Projects({ projects }: { projects: Project[] }) {
         ))}
       </div>
 
-      {rest.length > 0 ? (
+      {domovina.length > 0 ? (
         <>
           <h3 className="mt-14 text-sm font-semibold uppercase tracking-wider text-inkMuted">
-            {t("projects.more")}
+            {t("projects.ecosystemDomovina")}
+          </h3>
+          <p className="mt-1 max-w-2xl text-xs text-inkMuted">
+            {t("projects.ecosystemDomovinaNote")}
+          </p>
+          <ul className="mt-4 grid gap-3 lg:grid-cols-2 2xl:grid-cols-3">
+            {domovina.map((project) => (
+              <CompactRow key={project.id} project={project} />
+            ))}
+          </ul>
+        </>
+      ) : null}
+
+      {standalone.length > 0 ? (
+        <>
+          <h3 className="mt-14 text-sm font-semibold uppercase tracking-wider text-inkMuted">
+            {domovina.length > 0 ? t("projects.standalone") : t("projects.more")}
           </h3>
           <ul className="mt-4 grid gap-3 lg:grid-cols-2 2xl:grid-cols-3">
-            {rest.map((project) => (
+            {standalone.map((project) => (
               <CompactRow key={project.id} project={project} />
             ))}
           </ul>

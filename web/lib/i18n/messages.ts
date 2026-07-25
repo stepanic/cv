@@ -19,6 +19,7 @@ const en = {
     claudeCode: "Claude Code",
     experience: "Experience",
     projects: "Projects",
+    openSource: "Open source",
     skills: "Skills",
     education: "Education",
     blog: "Blog",
@@ -176,6 +177,35 @@ const en = {
     featured: "Featured",
     more: "More projects",
     visit: "Visit",
+    ecosystemDomovina: "DOMOVINA ecosystem",
+    ecosystemDomovinaNote:
+      "One platform, many standalone parts — each is its own public repository and, where it has a UI, its own live deployment.",
+    standalone: "Standalone projects",
+  },
+
+  openSource: {
+    heading: "Open source",
+    subheading:
+      "Every public repository I own, generated straight from the GitHub API on each build. Forks and consulting-client work are excluded.",
+    repos: "public repositories",
+    stars: "stars",
+    languages: "languages",
+    active: "active in the last 90 days",
+    allRepos: "All repositories",
+    showAll: "Show all {count}",
+    showLess: "Show fewer",
+    archived: "archived",
+    updatedOn: "updated {date}",
+    sortNote: "Sorted by most recently pushed.",
+    owners: {
+      stepanic: "Personal",
+      domovinatv: "DOMOVINA",
+      ffhr: "FlutterFlow Croatia",
+      "pinka-finance": "Pinka Finance",
+      "mariko-p": "Mariko",
+      italkco: "iTalk",
+      loopusdev: "Loopus",
+    } as Record<string, string>,
   },
 
   skills: {
@@ -217,6 +247,7 @@ const hr: Messages = {
     claudeCode: "Claude Code",
     experience: "Iskustvo",
     projects: "Projekti",
+    openSource: "Open source",
     skills: "Vještine",
     education: "Obrazovanje",
     blog: "Blog",
@@ -375,6 +406,35 @@ const hr: Messages = {
     featured: "Istaknuto",
     more: "Ostali projekti",
     visit: "Posjeti",
+    ecosystemDomovina: "DOMOVINA ekosustav",
+    ecosystemDomovinaNote:
+      "Jedna platforma, mnogo samostalnih dijelova — svaki je zaseban javni repozitorij i, gdje ima sučelje, vlastiti live deployment.",
+    standalone: "Samostalni projekti",
+  },
+
+  openSource: {
+    heading: "Open source",
+    subheading:
+      "Svi javni repozitoriji kojih sam vlasnik, generirani izravno iz GitHub API-ja pri svakom buildu. Forkovi i konzultantski rad za klijente su izuzeti.",
+    repos: "javnih repozitorija",
+    stars: "zvjezdica",
+    languages: "jezika",
+    active: "aktivnih zadnjih 90 dana",
+    allRepos: "Svi repozitoriji",
+    showAll: "Prikaži svih {count}",
+    showLess: "Prikaži manje",
+    archived: "arhiviran",
+    updatedOn: "ažurirano {date}",
+    sortNote: "Poredano po zadnjoj promjeni.",
+    owners: {
+      stepanic: "Osobno",
+      domovinatv: "DOMOVINA",
+      ffhr: "FlutterFlow Hrvatska",
+      "pinka-finance": "Pinka Finance",
+      "mariko-p": "Mariko",
+      italkco: "iTalk",
+      loopusdev: "Loopus",
+    } as Record<string, string>,
   },
 
   skills: {

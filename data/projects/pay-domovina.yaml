@@ -1,0 +1,34 @@
+id: pay-domovina
+name: pay.domovina.ai — payment barcodes & EURe bridge
+featured: false
+order: 24
+ecosystem: domovina
+period: { start: "2026", end: null }
+role: { en: Author, hr: Autor }
+links:
+  - { label: Live, url: "https://pay.domovina.ai" }
+  - { label: GitHub, url: "https://github.com/domovinatv/pay.domovina.ai" }
+tech: [Flutter, Dart, WASM, Cloudflare Workers, D1, KV, Safe, Zodiac, Gnosis Chain, Monerium]
+summary:
+  en: >-
+    One form, three interoperable payment formats: a SEPA EPC QR that parses
+    correctly in Revolut, Wise and iOS banking apps; a full 14-field Croatian
+    HUB3 PDF417 for domestic mobile banking; and an EIP-681 deep link that
+    MetaMask and Rainbow read as a ready transaction. Bridges classic IBAN
+    payments to Monerium EURe on Gnosis Chain.
+  hr: >-
+    Jedna forma, tri međusobno kompatibilna formata plaćanja: SEPA EPC QR koji
+    se ispravno parsira u Revolutu, Wiseu i iOS bankarskim aplikacijama; puni
+    14-poljni hrvatski HUB3 PDF417 za domaće mobilno bankarstvo; i EIP-681
+    deep link koji MetaMask i Rainbow čitaju kao gotovu transakciju. Most
+    između klasičnih IBAN plaćanja i Monerium EURe na Gnosis Chainu.
+highlights:
+  - en: >-
+      On-chain routing through a Safe 2/3 multisig with a Zodiac Roles
+      Modifier — user transfers need two of three signatures, while the daily
+      IBAN→EURe leg runs through a backend signer restricted to a single role
+    hr: >-
+      On-chain rutiranje kroz Safe 2/3 multisig sa Zodiac Roles Modifierom —
+      korisnički prijenosi traže dva od tri potpisa, dok dnevna IBAN→EURe
+      dionica ide kroz backend signera ograničenog na jednu jedinu ulogu
+tags: [opensource, web3, payments, flutter, cloudflare, fintech]

@@ -1,7 +1,7 @@
 id: scanshop
 name: ScanShop
 featured: true
-order: 5
+order: 6
 period: { start: "2018", end: "2021" }
 role: { en: Architect & backend lead (team of 9), hr: Arhitekt i backend lead (tim od 9) }
 links: []

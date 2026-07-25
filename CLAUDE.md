@@ -6,6 +6,30 @@ through Claude Code sessions. Public repo — never commit secrets, client
 names under NDA, or real job applications (those live in `applications/*`,
 which is gitignored and synced to the private repo `stepanic/cv-private`).
 
+## What may be published (hard rule)
+
+Matija's **own** work may be catalogued and published. Work done **for
+consulting clients** may not — no company names, no live URLs, no
+screenshots, even when the deployment is technically public and even when he
+holds the credentials for it. This repo is public, so the exclusion list is
+*not* written down here either; naming the clients would leak exactly what
+the rule protects.
+
+The mechanism is therefore an **allow-list, never a deny-list**: only the
+accounts named below are publishable, and anything not named is excluded by
+default. Do not add an owner to an allow-list without asking him first.
+
+- **Cloudflare accounts** — his own: `D.O.M.` (the `domovina.*` estate),
+  `airKUNA`, `ITalk`. Every other account on his `wrangler whoami` list
+  belongs to a client: never enumerate, catalogue or link it.
+- **GitHub owners** — his own: `stepanic`, `domovinatv`, `ffhr`,
+  `pinka-finance`, `mariko-p`, `italkco`, `loopusdev`. This list is encoded
+  as `ALLOW_OWNERS` in `scripts/update-repos.mjs`.
+
+When client work is technically interesting, describe the **architecture
+generically** with no identifying detail, or leave it out. A white-label
+product deployed under a client's account is client-owned by default.
+
 ## Layout
 
 - `data/` — **the only place CV content is edited.** Bilingual fields are

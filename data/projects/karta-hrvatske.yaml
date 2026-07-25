@@ -1,0 +1,27 @@
+id: karta-hrvatske
+name: gis.domovina.ai — interactive map of Croatia
+featured: false
+order: 23
+ecosystem: domovina
+period: { start: "2026", end: null }
+role: { en: Author, hr: Autor }
+links:
+  - { label: Live, url: "https://gis.domovina.ai" }
+  - { label: GitHub, url: "https://github.com/domovinatv/karta-hrvatske" }
+tech: [React, MapLibre GL, PMTiles, Flutter, Python, GeoJSON, Cloudflare Pages]
+summary:
+  en: >-
+    Interactive map of Croatia — municipalities, counties, settlements,
+    football clubs and airports. A monorepo where one Python data layer
+    generates all GeoJSON and topology, feeding two independent clients that
+    share no code: a React + MapLibre + PMTiles web app in production and a
+    Flutter build for iOS and Android. Layers load lazily; tiles come from
+    free OpenFreeMap rather than a paid provider.
+  hr: >-
+    Interaktivna karta Republike Hrvatske — JLS-ovi, županije, naselja,
+    nogometni klubovi i aerodromi. Monorepo u kojem jedan Python podatkovni
+    sloj generira sav GeoJSON i topologiju te hrani dva nezavisna klijenta bez
+    dijeljenog koda: produkcijski React + MapLibre + PMTiles web i Flutter
+    build za iOS i Android. Layeri se učitavaju lijeno, a tileovi dolaze s
+    besplatnog OpenFreeMapa umjesto od plaćenog davatelja.
+tags: [opensource, gis, croatia, react, flutter, cloudflare]

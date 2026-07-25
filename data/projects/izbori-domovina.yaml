@@ -1,0 +1,27 @@
+id: izbori-domovina
+name: izbori.domovina.ai — Croatian election archive mirror
+featured: false
+order: 22
+ecosystem: domovina
+period: { start: "2026", end: null }
+role: { en: Author, hr: Autor }
+links:
+  - { label: Live, url: "https://izbori.domovina.ai" }
+  - { label: GitHub, url: "https://github.com/domovinatv/izbori.domovina.ai" }
+tech: [Python, SQLite, FTS5, Cloudflare Workers]
+summary:
+  en: >-
+    Offline mirror and searchable index of the official Croatian election
+    archive. The state archive is an AngularJS SPA with no API — results are
+    static JSON/CSV addressed by an undocumented county → municipality →
+    polling-station scheme, and the code lists live only inside the app's DAO
+    JavaScript. Reverse-engineered both, mirrored ~70,000 result files down to
+    individual polling stations, and indexed them into SQLite with FTS5.
+  hr: >-
+    Offline mirror i pretraživ indeks službene arhive izbora RH. Državna
+    arhiva je AngularJS SPA bez pravog API-ja — rezultati su statični JSON/CSV
+    adresirani nedokumentiranom shemom županija → grad/općina → biračko
+    mjesto, a šifrarnici žive samo u DAO JavaScriptu aplikacije. Oboje je
+    reverse-engineerano, ~70.000 datoteka rezultata do razine pojedinog
+    biračkog mjesta mirrorirano i indeksirano u SQLite s FTS5.
+tags: [opensource, opendata, croatia, civic, python]

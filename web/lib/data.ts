@@ -14,6 +14,7 @@ import type {
   GithubStats,
   Profile,
   Project,
+  RepoIndex,
   SkillGroup,
 } from "./types";
 
@@ -45,6 +46,17 @@ export function loadCvData(): CvData {
 
   const github = readJson<GithubStats>("generated/github-stats.json");
   const claude = readJson<ClaudeCodeStats>("generated/claude-code-stats.json");
+  const repos = readJson<RepoIndex>("generated/repos.json");
 
-  return { profile, experience, skills, education, certifications, projects, github, claude };
+  return {
+    profile,
+    experience,
+    skills,
+    education,
+    certifications,
+    projects,
+    github,
+    claude,
+    repos,
+  };
 }

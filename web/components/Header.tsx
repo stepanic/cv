@@ -11,6 +11,7 @@ const NAV_ITEMS = [
   { href: "/#claude-code", key: "nav.claudeCode" },
   { href: "/#experience", key: "nav.experience" },
   { href: "/#projects", key: "nav.projects" },
+  { href: "/#open-source", key: "nav.openSource" },
   { href: "/#skills", key: "nav.skills" },
   { href: "/#education", key: "nav.education" },
   { href: "/blog", key: "nav.blog" },

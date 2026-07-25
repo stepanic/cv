@@ -1,0 +1,44 @@
+id: domovina-pipeline
+name: DOMOVINA AI pipeline (fetch · pipeline · dataset)
+featured: false
+order: 18
+ecosystem: domovina
+period: { start: "2026", end: null }
+role: { en: Author, hr: Autor }
+links:
+  - { label: fetch.domovina.tv, url: "https://github.com/domovinatv/fetch.domovina.tv" }
+  - { label: pipeline.domovina.ai, url: "https://pipeline.domovina.ai" }
+  - { label: Open dataset, url: "https://github.com/domovinatv/dataset.domovina.tv" }
+tech: [Python, TypeScript, Whisper.cpp, NVIDIA Canary, pyannote, Gemini, Vertex AI, Cloudflare Workers, D1, R2, rclone]
+summary:
+  en: >-
+    A 12-step media pipeline that turns a YouTube URL into a searchable,
+    illustrated article: yt-dlp fetch, ASR on Metal (Whisper.cpp) and Colab
+    GPUs (NVIDIA Canary), pyannote speaker diarization, Gemini summarization
+    via multi-region Vertex AI, screenshots, RAG chunking and CDN publish.
+    2,695 episodes across 42 channels are released as an open text dataset.
+  hr: >-
+    Medijski pipeline od 12 koraka koji YouTube URL pretvara u pretraživ,
+    ilustriran članak: yt-dlp dohvat, ASR na Metalu (Whisper.cpp) i Colab
+    GPU-ima (NVIDIA Canary), pyannote dijarizacija govornika, Gemini
+    sažimanje kroz multi-region Vertex AI, screenshotovi, RAG chunkanje i
+    objava na CDN. 2.695 epizoda u 42 kanala objavljeno je kao otvoreni
+    tekstualni dataset.
+highlights:
+  - en: >-
+      Hybrid cloud/local topology: a Cloudflare Worker + D1 holds the job
+      queue, a bridge on a Mac Mini behind NAT pulls work, so heavy GPU steps
+      run on owned hardware while the control plane stays on the edge
+    hr: >-
+      Hibridna cloud/lokalna topologija: Cloudflare Worker + D1 drže red
+      poslova, a bridge na Mac Miniju iza NAT-a ih povlači — teški GPU koraci
+      trče na vlastitom hardveru, a upravljački sloj ostaje na edgeu
+  - en: >-
+      domovina-cutter serves chapter clips lazily — cut once with ffmpeg,
+      cached forever on R2/CDN, with single-flight coalescing so concurrent
+      requests never cut twice
+    hr: >-
+      domovina-cutter poslužuje isječke poglavlja lijeno — izreže se jednom
+      ffmpegom, zauvijek keširano na R2/CDN-u, sa single-flight sažimanjem da
+      paralelni zahtjevi nikad ne režu dvaput
+tags: [opensource, ai, media, pipeline, cloudflare, asr, data]

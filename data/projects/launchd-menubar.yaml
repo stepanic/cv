@@ -1,0 +1,21 @@
+id: launchd-menubar
+name: LaunchdBar — macOS launchd viewer
+featured: false
+order: 31
+period: { start: "2026", end: null }
+role: { en: Author, hr: Autor }
+links:
+  - { label: GitHub, url: "https://github.com/stepanic/launchd-menubar" }
+tech: [Swift, SwiftUI, MenuBarExtra, launchd]
+summary:
+  en: >-
+    A macOS menu-bar app that makes launchd legible: lists agents and daemons,
+    their schedules, last exit codes and log paths, so scheduled jobs can be
+    inspected without reciting launchctl incantations. Written to keep an eye
+    on the nightly jobs that drive the rest of this portfolio.
+  hr: >-
+    macOS menu-bar aplikacija koja launchd čini čitljivim: prikazuje agente i
+    daemone, njihove rasporede, zadnje izlazne kodove i putanje do logova, pa
+    se raspoređeni poslovi mogu pregledati bez recitiranja launchctl naredbi.
+    Napisano da drži na oku noćne poslove koji pogone ostatak ovog portfelja.
+tags: [opensource, swift, macos, devtools]

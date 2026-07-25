@@ -1,0 +1,36 @@
+id: domovina-fiskal
+name: domovina-fiskal — open-source Croatian e-invoicing
+featured: false
+order: 25
+ecosystem: domovina
+period: { start: "2026", end: null }
+role: { en: Author, hr: Autor }
+links:
+  - { label: Live, url: "https://fiskal.domovina.ai" }
+  - { label: Backend, url: "https://github.com/domovinatv/domovina-fiskal" }
+  - { label: Dashboard, url: "https://github.com/domovinatv/domovina-fiskal-app" }
+tech: [TypeScript, Hono, Cloudflare Workers, D1, Next.js, XML-DSIG, UBL, Peppol]
+summary:
+  en: >-
+    Open-source alternative to closed Croatian invoicing SaaS: a multi-tenant
+    service that takes a structured JSON invoice, fiscalises it against the tax
+    authority (ZKI/JIR, XML-DSIG with FINA/AKD certificates), renders a PDF with
+    QR code and optionally emails it. Scoped in two waves — retail fiscalisation
+    1.0 and the mandatory 2026 e-invoicing regime (EN 16931 / UBL / Peppol).
+  hr: >-
+    Open-source alternativa zatvorenim hrvatskim SaaS-ovima za račune:
+    multi-tenant servis koji preuzme strukturirani JSON račun, fiskalizira ga
+    prema Poreznoj upravi (ZKI/JIR, XML-DSIG s FINA/AKD certifikatima),
+    generira PDF s QR kodom i po želji ga pošalje e-mailom. Opseg u dva vala —
+    fiskalizacija 1.0 za maloprodaju i obvezno e-fakturiranje od 2026.
+    (EN 16931 / UBL / Peppol).
+highlights:
+  - en: >-
+      Built knowledge-first — the legal, technical and certificate landscape
+      was written up as a single source of truth before any implementation,
+      so the edge cases are documented rather than discovered in production
+    hr: >-
+      Građeno znanjem prije koda — pravni, tehnički i certifikacijski krajolik
+      zapisan je kao jedinstveni izvor istine prije implementacije, pa su
+      rubni slučajevi dokumentirani, a ne otkriveni u produkciji
+tags: [opensource, fintech, croatia, cloudflare, saas, compliance]

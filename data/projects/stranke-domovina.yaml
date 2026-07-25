@@ -1,0 +1,27 @@
+id: stranke-domovina
+name: stranke.domovina.ai — Croatian political party registry
+featured: false
+order: 20
+ecosystem: domovina
+period: { start: "2026", end: null }
+role: { en: Author, hr: Autor }
+links:
+  - { label: Live, url: "https://stranke.domovina.ai" }
+  - { label: GitHub, url: "https://github.com/domovinatv/stranke.domovina.ai" }
+tech: [Python, SQLite, FastAPI, HTMX, Leaflet, Cloudflare Pages]
+summary:
+  en: >-
+    Open catalogue of every political party ever registered in Croatia — 434
+    parties (155 active, 279 dissolved) with registry identifiers, seat
+    addresses, status and dates, 541 persons authorised to represent them,
+    4,203 historical offices and mandates, name-change history and
+    geocoordinates. Sourced from the Ministry of Justice registry via
+    data.gov.hr, cross-checked against National Library authority files.
+  hr: >-
+    Otvoreni katalog svih političkih stranaka ikad registriranih u Hrvatskoj —
+    434 stranke (155 aktivnih, 279 ugašenih) s registarskim identifikatorima,
+    adresama sjedišta, statusom i datumima, 541 osobom ovlaštenom za
+    zastupanje, 4.203 povijesne funkcije i mandata, poviješću promjena imena
+    i geokoordinatama. Izvor: Registar MPU preko data.gov.hr, unakrsno
+    provjereno NSK normativnim datotekama.
+tags: [opensource, opendata, croatia, civic, python]

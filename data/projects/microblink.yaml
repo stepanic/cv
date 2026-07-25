@@ -1,7 +1,7 @@
 id: microblink
 name: Microblink OCR Integrations
 featured: false
-order: 7
+order: 8
 period: { start: "2018", end: "2020" }
 role: { en: Consultant, hr: Konzultant }
 links: []

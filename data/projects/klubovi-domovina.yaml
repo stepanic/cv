@@ -1,0 +1,36 @@
+id: klubovi-domovina
+name: klubovi.domovina.ai — Croatian football club registry
+featured: false
+order: 19
+ecosystem: domovina
+period: { start: "2026", end: null }
+role: { en: Author, hr: Autor }
+links:
+  - { label: Live, url: "https://klubovi.domovina.ai" }
+  - { label: GitHub, url: "https://github.com/domovinatv/klubovi.domovina.ai" }
+tech: [Python, React, SQLite, FastAPI, HTMX, Cloudflare Pages, Cloudflare Workers]
+summary:
+  en: >-
+    Open public catalogue of every Croatian football club from the top flight
+    down to the 8th tier — 901 clubs, all geocoded, with contacts, leagues per
+    season, presidents, stadiums, founding years and crests. Compiled from six
+    public registries by an idempotent, fully reproducible ingest pipeline;
+    data quality is sampled and scored by parallel AI verification runs at
+    89–93/100. MIT code, CC-BY 4.0 data.
+  hr: >-
+    Otvoreni javni katalog svih hrvatskih nogometnih klubova od HNL-a do
+    3. ŽNL — 901 klub, svi geokodirani, s kontaktima, ligama po sezonama,
+    predsjednicima, stadionima, godinama osnutka i grbovima. Prikupljeno iz
+    šest javnih registara idempotentnim, potpuno ponovljivim ingest
+    pipelineom; kvaliteta podataka uzorkuje se i ocjenjuje paralelnim AI
+    provjerama na 89–93/100. Kod MIT, podaci CC-BY 4.0.
+highlights:
+  - en: >-
+      The whole catalogue ships as a 113 KB gzipped JSON — the PWA filters
+      901 clubs entirely client-side, works offline, and a Worker injects
+      per-club OG tags for sharing
+    hr: >-
+      Cijeli katalog stane u 113 KB gzipanog JSON-a — PWA filtrira 901 klub
+      isključivo na klijentu, radi offline, a Worker ubacuje OG tagove po
+      klubu za dijeljenje
+tags: [opensource, opendata, croatia, sports, python, cloudflare]

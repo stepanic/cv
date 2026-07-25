@@ -1,0 +1,44 @@
+id: domovina-rag
+name: domovina-rag — RAG backend & public MCP server
+featured: true
+order: 2
+ecosystem: domovina
+period: { start: "2026", end: null }
+role: { en: Author, hr: Autor }
+links:
+  - { label: GitHub, url: "https://github.com/domovinatv/domovina-rag" }
+  - { label: MCP endpoint, url: "https://mcp.domovina.ai/health" }
+  - { label: Stats dashboard, url: "https://stats.domovina.ai" }
+tech: [TypeScript, Python, ClickHouse, PostgreSQL, bge-m3, MCP, Cloudflare R2, Coolify, Docker]
+summary:
+  en: >-
+    Self-hosted semantic-search backend over a Croatian podcast corpus:
+    ~92,000 RAG chunks from 1,843 episodes, embedded with bge-m3 and stored
+    in ClickHouse (HNSW vector index, ~10–50 ms queries) alongside
+    PostgreSQL as the transactional source of truth. Exposed worldwide
+    through a production MCP server, so Claude Desktop, Claude.ai, ChatGPT
+    and Cursor can query the corpus as a native tool.
+  hr: >-
+    Self-hosted backend za semantičku pretragu hrvatskog podcast korpusa:
+    ~92.000 RAG chunkova iz 1.843 epizode, embeddani s bge-m3 i spremljeni
+    u ClickHouse (HNSW vektorski indeks, upiti ~10–50 ms) uz PostgreSQL kao
+    transakcijsku istinu. Izložen svijetu kroz produkcijski MCP server, pa
+    ga Claude Desktop, Claude.ai, ChatGPT i Cursor koriste kao nativni alat.
+highlights:
+  - en: >-
+      Split-brain deployment: embeddings computed on Apple Silicon (MPS GPU)
+      locally, snapshotted to Cloudflare R2 with ClickHouse BACKUP TABLE, then
+      restored read-only on a Coolify VPS that serves the public endpoint
+    hr: >-
+      Podijeljena arhitektura: embeddinzi se računaju lokalno na Apple Siliconu
+      (MPS GPU), snapshotaju na Cloudflare R2 kroz ClickHouse BACKUP TABLE, pa
+      restoraju read-only na Coolify VPS koji poslužuje javni endpoint
+  - en: >-
+      MCP server with OAuth, API keys, rate limiting and an audit dashboard —
+      one of the few publicly reachable MCP servers serving a Croatian-language
+      corpus
+    hr: >-
+      MCP server s OAuthom, API ključevima, rate limitingom i audit dashboardom
+      — jedan od rijetkih javno dostupnih MCP servera nad korpusom na hrvatskom
+      jeziku
+tags: [opensource, ai, rag, mcp, clickhouse, data, croatia]

@@ -1,0 +1,40 @@
+id: producer-domovina
+name: Producer — macOS podcast studio
+featured: false
+order: 29
+ecosystem: domovina
+period: { start: "2026", end: null }
+role: { en: Author, hr: Autor }
+links:
+  - { label: GitHub, url: "https://github.com/domovinatv/producer.domovina.tv" }
+tech: [Swift, SwiftUI, CoreAudio, AVFoundation, Cloudflare R2, Python, ffmpeg]
+summary:
+  en: >-
+    Open-source replacement for Riverside.fm, built for a real weekly podcast.
+    Records two RØDE PodMic USB microphones as isolated 24-bit tracks plus a
+    Lumix camera over an Elgato capture card, uploading segments to Cloudflare
+    R2 while recording is still running.
+  hr: >-
+    Open-source zamjena za Riverside.fm, izgrađena za stvarni tjedni podcast.
+    Snima dva RØDE PodMic USB mikrofona kao izolirane 24-bitne tragove i Lumix
+    kameru preko Elgato capture kartice, uz slanje segmenata na Cloudflare R2
+    dok snimanje još traje.
+highlights:
+  - en: >-
+      Sync is arithmetic, not correlation: CoreAudio and AVFoundation stamp
+      samples from the same mach_absolute_time clock, so the offset between
+      tracks is exact — cross-correlation is kept only for the camera's SD
+      card, which runs its own clock
+    hr: >-
+      Sinkronizacija je aritmetika, a ne korelacija: CoreAudio i AVFoundation
+      označavaju uzorke istim mach_absolute_time satom, pa je pomak između
+      tragova egzaktan — korelacija ostaje samo za SD karticu kamere, koja ima
+      vlastiti sat
+  - en: >-
+      Per-channel clock drift measured live in ppm and corrected in post;
+      if the Mac dies mid-session the recording is reconstructed from the R2
+      segments
+    hr: >-
+      Drift sata mjeri se uživo po kanalu u ppm i ispravlja u postprodukciji;
+      ako Mac otkaže usred sesije, snimka se rekonstruira iz R2 segmenata
+tags: [opensource, swift, macos, audio, media, cloudflare]

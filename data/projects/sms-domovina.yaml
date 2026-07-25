@@ -1,0 +1,25 @@
+id: sms-domovina
+name: sms.domovina.ai — self-hosted SMS gateway & reverse OTP
+featured: false
+order: 28
+ecosystem: domovina
+period: { start: "2026", end: null }
+role: { en: Author, hr: Autor }
+links:
+  - { label: Live, url: "https://sms.domovina.ai" }
+  - { label: GitHub, url: "https://github.com/domovinatv/sms.domovina.ai" }
+tech: [Go, Kotlin, Bun, Hono, Docker, Coolify, Cloudflare Tunnel, Oracle Cloud ARM]
+summary:
+  en: >-
+    An SMS gateway that uses an ordinary Android phone as the sender — the
+    upstream httpsms project pulled in as a git subtree, rebuilt for ARM and
+    deployed on Coolify behind a Cloudflare Tunnel. Adds a Reverse OTP service:
+    instead of receiving a code, the user sends an SMS to the gateway, which
+    verifies the number from the inbound message via a JWT-signed webhook.
+  hr: >-
+    SMS gateway koji kao pošiljatelja koristi obični Android telefon — upstream
+    projekt httpsms povučen kao git subtree, prebildan za ARM i deployan na
+    Coolify iza Cloudflare Tunnela. Dodan je Reverse OTP servis: umjesto da
+    primi kod, korisnik pošalje SMS gatewayu, koji broj verificira iz dolazne
+    poruke kroz JWT-potpisani webhook.
+tags: [opensource, selfhosted, infra, telecom, golang]

@@ -78,6 +78,8 @@ export interface Project {
   order: number;
   period: { start: string; end: string | null };
   role: Bilingual;
+  /** Groups sub-projects of a larger platform (e.g. "domovina") on the site. */
+  ecosystem?: string;
   links: ProjectLink[];
   tech: string[];
   summary: Bilingual;
@@ -224,6 +226,40 @@ export interface ClaudeHistory {
   policy: { noPercentileClaims: boolean };
 }
 
+/** One public repository in the auto-generated open-source index. */
+export interface RepoEntry {
+  owner: string;
+  name: string;
+  full_name: string;
+  description: string | null;
+  url: string;
+  homepage: string | null;
+  language: string | null;
+  stars: number;
+  forks: number;
+  created: string; // YYYY-MM-DD
+  pushed: string; // YYYY-MM-DD
+  archived: boolean;
+  license: string | null;
+  topics: string[];
+}
+
+/** data/generated/repos.json — written by scripts/update-repos.mjs. */
+export interface RepoIndex {
+  updated: string;
+  policy: { note: string; allowOwners: string[]; excludesForks: boolean };
+  totals: {
+    repos: number;
+    owners: number;
+    stars: number;
+    languages: number;
+    activeLast90Days: number;
+  };
+  byOwner: Record<string, number>;
+  byLanguage: Record<string, number>;
+  repos: RepoEntry[];
+}
+
 export interface CvData {
   profile: Profile;
   experience: ExperienceItem[];
@@ -233,4 +269,5 @@ export interface CvData {
   projects: Project[];
   github: GithubStats;
   claude: ClaudeCodeStats;
+  repos: RepoIndex;
 }

@@ -1,0 +1,33 @@
+id: certilia-esign
+name: certilia-esign — qualified PDF signing (eIDAS)
+featured: false
+order: 26
+ecosystem: domovina
+period: { start: "2026", end: null }
+role: { en: Author, hr: Autor }
+links:
+  - { label: GitHub, url: "https://github.com/domovinatv/certilia-esign" }
+tech: [TypeScript, Node.js, PAdES, XML-DSIG, eIDAS, AKD Certilia]
+summary:
+  en: >-
+    Server and CLI for qualified digital signing of PDFs through the Croatian
+    AKD Certilia eSign API, implemented against the official v4.0.13
+    specification. Supports smart-card and remote certificates, batch signing
+    of many documents under a single mobile confirmation, and PAdES levels
+    b/t/lt/lta.
+  hr: >-
+    Server i CLI za kvalificirano digitalno potpisivanje PDF-ova kroz API
+    hrvatskog AKD Certilia eSigna, implementirano prema službenoj specifikaciji
+    v4.0.13. Podržava pametne kartice i udaljene certifikate, batch
+    potpisivanje više dokumenata jednom mobilnom potvrdom te PAdES razine
+    b/t/lt/lta.
+highlights:
+  - en: >-
+      The README states plainly what cannot be done: eIDAS requires sole
+      control of the signer, so no qualified signature can be fully
+      automated — the honest ceiling is one tap in the mobile app for a batch
+    hr: >-
+      README otvoreno kaže što nije moguće: eIDAS traži isključivu kontrolu
+      potpisnika, pa se kvalificirani potpis ne može potpuno automatizirati —
+      pošteni maksimum je jedan tap u mobilnoj aplikaciji za cijeli batch
+tags: [opensource, croatia, identity, security, compliance]

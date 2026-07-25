@@ -17,10 +17,17 @@
 // All projects, featured first then by `order`.
 #let projects = {
   let files = (
-    "domovina", "pinka-finance", "flutter-certilia", "firepixy", "scanshop",
-    "ff-blinkid", "microblink", "ff-toolkit", "pediludium", "modric-lottery-verify",
-    "flutterflow-socket", "mobile-phone-proxy", "fire-flame-studio",
-    "cravat-shopify-theme", "dotclaude-sync", "croatian-tools",
+    "domovina", "domovina-rag", "pinka-finance", "flutter-certilia", "firepixy",
+    "scanshop", "ff-blinkid", "microblink", "ff-toolkit", "pediludium",
+    "modric-lottery-verify", "flutterflow-socket", "mobile-phone-proxy",
+    "fire-flame-studio", "cravat-shopify-theme", "dotclaude-sync", "croatian-tools",
+    // DOMOVINA ecosystem — standalone open-source projects
+    "domovina-pipeline", "klubovi-domovina", "stranke-domovina", "zakoni-domovina",
+    "izbori-domovina", "karta-hrvatske", "pay-domovina", "domovina-fiskal",
+    "certilia-esign", "domovina-api", "sms-domovina", "producer-domovina",
+    "company-details-api",
+    // Personal devtools
+    "launchd-menubar",
   )
   files.map(f => yaml("../data/projects/" + f + ".yaml")).sorted(key: p => p.order)
 }

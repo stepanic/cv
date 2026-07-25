@@ -1,0 +1,34 @@
+id: zakoni-domovina
+name: zakoni.domovina.ai — Croatian legislation catalogue
+featured: false
+order: 21
+ecosystem: domovina
+period: { start: "2026", end: null }
+role: { en: Author, hr: Autor }
+links:
+  - { label: Live, url: "https://zakoni.domovina.ai" }
+  - { label: GitHub, url: "https://github.com/domovinatv/zakoni.domovina.ai" }
+tech: [Python, SQLite, FTS5, ELI/RDF, Cloudflare Pages]
+summary:
+  en: >-
+    Open catalogue of the official section of the Croatian government gazette
+    — laws, regulations, ordinances and decisions. A full index of 97,561 acts
+    across 5,077 issues (1990–2026) was reconstructed from the official register
+    in 37 requests; full-text ingest is complete for 2024–2026 with per-year
+    QA. Ships as SQLite with FTS5 search plus JSON/CSV open-data exports.
+  hr: >-
+    Otvoreni katalog službenog dijela Narodnih novina — zakoni, uredbe,
+    pravilnici i odluke. Puni indeks od 97.561 propisa u 5.077 izdanja
+    (1990.–2026.) rekonstruiran je iz službenog Kazala u 37 zahtjeva;
+    cjeloviti tekstovi ingestirani su za 2024.–2026. uz QA po godini.
+    Isporučuje se kao SQLite s FTS5 pretragom i JSON/CSV otvorenim podacima.
+highlights:
+  - en: >-
+      Known gaps are documented rather than hidden — ELI/RDF metadata only
+      exists from 2015, international treaties are out of scope, and ~5 % of
+      acts are PDF-only; each is written up with its workaround
+    hr: >-
+      Poznate rupe su dokumentirane, a ne skrivene — ELI/RDF metapodaci
+      postoje tek od 2015., međunarodni ugovori su izvan opsega, a ~5 % akata
+      objavljeno je samo kao PDF; za svaku je zapisan zaobilazni put
+tags: [opensource, opendata, croatia, civic, python, legal]
