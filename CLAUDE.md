@@ -94,3 +94,8 @@ When the user drops a job proposal/posting into a session:
   `data/generated/claude-code-stats.json` — don't hardcode them in prose
   except in `profile.summary` (update that when the order of magnitude
   changes).
+- **Externally-sourced numbers go stale silently and CI cannot catch it.**
+  The DOMOVINA corpus size, Docker Hub pulls and open-data catalogue counts
+  all live outside this repo. `docs/data-sources.md` records where each one
+  comes from and how to re-check it — **re-verify before sending any CV or
+  application**, and record the reading with its date.
