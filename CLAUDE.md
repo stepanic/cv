@@ -98,6 +98,11 @@ When the user drops a job proposal/posting into a session:
   Plain text, blank lines between paragraphs as the only structure, and
   shorter beats polished. This does not apply to repo docs, commit messages,
   `data/` YAML or the Typst CV, where formatting is structural.
+  **A hyphen is not a dash:** compound modifiers still need them
+  (`two-day sprint`, `read-only tier`, `per-client rate limiting`). Dropping
+  em-dashes must not turn into dropping required hyphens, or into comma
+  splices and fragments in pursuit of a casual tone — he runs this text
+  through Grammarly, and those are real errors rather than style.
 - Croatian text: ijekavica, proper diacritics. English: concise, quantified.
 - New project files in `data/projects/` need a unique `id` and `order`;
   `featured: true` puts them on the PDF and the top grid of the site.
