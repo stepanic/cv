@@ -13,17 +13,19 @@ tech: [TypeScript, Python, ClickHouse, PostgreSQL, bge-m3, MCP, Cloudflare R2, C
 summary:
   en: >-
     Self-hosted semantic-search backend over a Croatian podcast corpus:
-    ~92,000 RAG chunks from 1,843 episodes, embedded with bge-m3 and stored
-    in ClickHouse (HNSW vector index, ~10–50 ms queries) alongside
-    PostgreSQL as the transactional source of truth. Exposed worldwide
-    through a production MCP server, so Claude Desktop, Claude.ai, ChatGPT
-    and Cursor can query the corpus as a native tool.
+    137,451 RAG chunks from 3,034 episodes across 46 channels (~2,870 hours
+    of audio, 2,573 distinct speakers), embedded with bge-m3 and stored in
+    ClickHouse (HNSW vector index, ~10–50 ms queries) alongside PostgreSQL
+    as the transactional source of truth. Exposed worldwide through a
+    production MCP server, so Claude Desktop, Claude.ai, ChatGPT and Cursor
+    can query the corpus as a native tool.
   hr: >-
     Self-hosted backend za semantičku pretragu hrvatskog podcast korpusa:
-    ~92.000 RAG chunkova iz 1.843 epizode, embeddani s bge-m3 i spremljeni
-    u ClickHouse (HNSW vektorski indeks, upiti ~10–50 ms) uz PostgreSQL kao
-    transakcijsku istinu. Izložen svijetu kroz produkcijski MCP server, pa
-    ga Claude Desktop, Claude.ai, ChatGPT i Cursor koriste kao nativni alat.
+    137.451 RAG chunk iz 3.034 epizode u 46 kanala (~2.870 sati zvuka,
+    2.573 različita govornika), embeddani s bge-m3 i spremljeni u ClickHouse
+    (HNSW vektorski indeks, upiti ~10–50 ms) uz PostgreSQL kao transakcijsku
+    istinu. Izložen svijetu kroz produkcijski MCP server, pa ga Claude
+    Desktop, Claude.ai, ChatGPT i Cursor koriste kao nativni alat.
 highlights:
   - en: >-
       Split-brain deployment: embeddings computed on Apple Silicon (MPS GPU)
