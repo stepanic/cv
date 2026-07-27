@@ -68,6 +68,21 @@ experience:
         priority: 1
       - text:
           en: >-
+            Made RevenueCat the single billing system of record for the app
+            across iOS, macOS, Android, Android TV and the web (RevenueCat Web
+            Billing): one entitlement, a webhook mirroring entitlement state
+            into Supabase Postgres behind RLS as the cross-platform source of
+            truth, and optimistic unlock on mobile.
+          hr: >-
+            Postavio RevenueCat kao jedinstveni sustav naplate za aplikaciju na
+            iOS-u, macOS-u, Androidu, Android TV-u i webu (RevenueCat Web
+            Billing): jedan entitlement, webhook koji stanje zrcali u Supabase
+            Postgres iza RLS-a kao cross-platform izvor istine i optimistično
+            otključavanje na mobitelu.
+        tags: [revenuecat, payments, subscriptions, flutter]
+        priority: 2
+      - text:
+          en: >-
             Built pay.domovina.ai — SEPA EPC QR, Croatian HUB3 PDF417 and
             EIP-681 barcodes from a single form, with Safe 2/3 multisig
             routing of Monerium EURe on Gnosis Chain — plus a self-hosted SMS

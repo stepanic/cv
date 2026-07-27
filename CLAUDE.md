@@ -30,6 +30,14 @@ When client work is technically interesting, describe the **architecture
 generically** with no identifying detail, or leave it out. A white-label
 product deployed under a client's account is client-owned by default.
 
+**Standing exception — the RevenueCat blog post.** `web/content/blog.ts`
+names three client apps (smpltsk, The Birth Deck, Perfect Training) and
+`docs/claude-usage-history.md` names Perfect Training. Matija published that
+himself, deliberately, before this rule existed, and confirmed on 2026-07-27
+that it stays. Do not flag it again and do not quietly rewrite it. The rule
+still binds everything new: name a publicly-listed **app** if you must, never
+the consulting **company** behind it.
+
 ## Layout
 
 - `data/` — **the only place CV content is edited.** Bilingual fields are

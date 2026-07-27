@@ -11,7 +11,7 @@ links:
   - { label: MCP server, url: "https://mcp.domovina.ai/health" }
   - { label: pay.domovina.ai, url: "https://pay.domovina.ai" }
   - { label: klubovi.domovina.ai, url: "https://klubovi.domovina.ai" }
-tech: [Flutter, Dart, Python, Node.js, TypeScript, Supabase, PostgreSQL, ClickHouse, Whisper, Gemini, Cloudflare Workers, D1, Coolify, RAG, MCP, Safe]
+tech: [Flutter, Dart, Python, Node.js, TypeScript, Supabase, PostgreSQL, ClickHouse, Whisper, Gemini, Cloudflare Workers, D1, Coolify, RAG, MCP, RevenueCat, Safe]
 summary:
   en: >-
     AI-native Croatian media platform of 30+ public repositories, built
@@ -53,6 +53,16 @@ highlights:
       klubovi.domovina.ai — otvoreni katalog 901 hrvatskog nogometnog kluba,
       100% geokodiran, prikupljen iz 6+ izvora (uklj. scraping svjestan TLS
       fingerprinta) s AI-auditiranom točnošću 89–93/100
+  - en: >-
+      Subscriptions with RevenueCat as the single billing system of record
+      across iOS, macOS, Android, Android TV and the web (Web Billing) — one
+      entitlement, a webhook mirroring state into Supabase Postgres behind RLS
+      as the cross-platform source of truth, optimistic unlock on mobile
+    hr: >-
+      Pretplate s RevenueCatom kao jedinstvenim sustavom naplate na iOS-u,
+      macOS-u, Androidu, Android TV-u i webu (Web Billing) — jedan entitlement,
+      webhook koji stanje zrcali u Supabase Postgres iza RLS-a kao
+      cross-platform izvor istine, optimistično otključavanje na mobitelu
   - en: >-
       Self-hosted Supabase SSO (passkeys + Croatian eID via flutter_certilia)
       behind Cloudflare Tunnel on Coolify; self-hosted SMS gateway with an
