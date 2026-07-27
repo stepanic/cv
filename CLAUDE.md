@@ -78,6 +78,12 @@ When the user drops a job proposal/posting into a session:
 5. Write `cover-letter.md` (language of the posting; concrete, references
    real projects from `data/`, no fluff) and `email-draft.md` (short,
    links to stepanic.domovina.ai and the tailored PDF).
+   When creating the draft through the Gmail connector: put **no bare URLs
+   in the plaintext `body`** — it rewrites them into `google.com/url?q=…`
+   redirects that are stored, not just displayed. Refer to destinations by
+   name in the plaintext and put real links in `htmlBody` anchors, then
+   check the result with `list_drafts`. The connector also cannot attach
+   files, so the PDF goes on by hand.
 6. Everything stays inside the application folder (gitignored). Sync to the
    private repo with `scripts/sync-private.sh`.
 7. Never invent experience. Every claim must trace back to `data/`.
