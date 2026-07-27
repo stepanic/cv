@@ -90,6 +90,14 @@ When the user drops a job proposal/posting into a session:
 
 ## Conventions
 
+- **Anything written in Matija's own voice** (emails, messages, cover
+  letters, application answers) must read as hand-written, not generated.
+  No em-dashes or en-dashes, ever — ordinary commas, full stops or a plain
+  hyphen. No bold, italics or inline links used as "helpful" formatting;
+  the bold-lead-in / italic-product-name combination is a machine tell.
+  Plain text, blank lines between paragraphs as the only structure, and
+  shorter beats polished. This does not apply to repo docs, commit messages,
+  `data/` YAML or the Typst CV, where formatting is structural.
 - Croatian text: ijekavica, proper diacritics. English: concise, quantified.
 - New project files in `data/projects/` need a unique `id` and `order`;
   `featured: true` puts them on the PDF and the top grid of the site.
