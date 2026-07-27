@@ -103,6 +103,10 @@ When the user drops a job proposal/posting into a session:
   em-dashes must not turn into dropping required hyphens, or into comma
   splices and fragments in pursuit of a casual tone — he runs this text
   through Grammarly, and those are real errors rather than style.
+  His Grammarly is set to **American English**: use serial (Oxford) commas
+  and American spelling in his outgoing English. Red flags there are usually
+  the missing serial comma rather than a grammar error, so read the
+  suggestion before rewriting; blue ones are optional wordiness hints.
 - Croatian text: ijekavica, proper diacritics. English: concise, quantified.
 - New project files in `data/projects/` need a unique `id` and `order`;
   `featured: true` puts them on the PDF and the top grid of the site.
