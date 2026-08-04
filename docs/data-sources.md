@@ -107,6 +107,13 @@ for u in klubovi.domovina.ai zakoni.domovina.ai gis.domovina.ai; do
 done
 ```
 
+## Vezani dokumenti
+
+- `docs/2026-08-04-markdown-u-pdf-s-mermaidom.md` — kako se dugački markdown
+  dokumenti s mermaid dijagramima pretvaraju u PDF (`scripts/md-to-pdf.sh`), i
+  kako se razrješavaju konflikti na `dist/` kad CI i lokalni build oboje
+  pregrade PDF-ove.
+
 ## Rule
 
 Every number in `data/` traces to one of the sources above. If a claim cannot
