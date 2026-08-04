@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-04T09:03:33.584Z",
+  "updated": "2026-08-04T09:33:18.843Z",
   "note": "Aggregate telemetry mined from local Claude Code transcripts, daily git snapshots (dotclaude-sync) and Claude Code's own stats cache. Best-effort reconstruction — real usage is higher (see knownGap). No conversation content is published.",
   "usingSince": "2025-04",
   "usingSinceStatus": "estimated",
@@ -80,12 +80,12 @@
   "totals": {
     "sessions": 3636,
     "projects": 139,
-    "messages": 407116,
-    "toolCalls": 132629,
-    "transcriptEvents": 395153,
-    "tokens": 18946081767,
-    "outputTokens": 93009947,
-    "apiEquivalentUSD": 18572
+    "messages": 407179,
+    "toolCalls": 132650,
+    "transcriptEvents": 395216,
+    "tokens": 18949649235,
+    "outputTokens": 93034010,
+    "apiEquivalentUSD": 18574.77
   },
   "byModel": [
     {
@@ -108,12 +108,12 @@
     },
     {
       "model": "claude-opus-5",
-      "inputTokens": 369570,
-      "outputTokens": 16849274,
-      "cacheReadTokens": 2989285858,
-      "cacheWriteTokens": 75004530,
-      "totalTokens": 3081509232,
-      "apiEquivalentUSD": 2658.46
+      "inputTokens": 369607,
+      "outputTokens": 16873337,
+      "cacheReadTokens": 2992788225,
+      "cacheWriteTokens": 75045531,
+      "totalTokens": 3085076700,
+      "apiEquivalentUSD": 2661.23
     },
     {
       "model": "claude-fable-5",
@@ -239,10 +239,10 @@
     {
       "month": "2026-08",
       "sessions": 50,
-      "messages": 9109,
-      "toolCalls": 3353,
-      "tokens": 632350006,
-      "apiEquivalentUSD": 492.05
+      "messages": 9172,
+      "toolCalls": 3374,
+      "tokens": 635917474,
+      "apiEquivalentUSD": 494.81
     }
   ],
   "daily": [
@@ -823,15 +823,15 @@
     },
     {
       "day": "2026-08-04",
-      "tokens": 6061939,
-      "usd": 7.61
+      "tokens": 9629407,
+      "usd": 10.38
     }
   ],
   "recovered": {
     "window": 90,
     "retentionDays": 30,
-    "localUSD": 8056.59,
-    "fullUSD": 17675.72,
+    "localUSD": 8059.35,
+    "fullUSD": 17678.48,
     "deltaUSD": 9619.13
   },
   "hourHistogram": [
@@ -846,7 +846,7 @@
     15595,
     25352,
     21493,
-    27011,
+    27074,
     23609,
     24539,
     27610,
