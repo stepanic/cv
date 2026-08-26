@@ -146,6 +146,8 @@ done
 
 ## Vezani dokumenti
 
+- `docs/2026-08-26-linkedin-pozicioniranje.md` — nacrti LinkedIn headlinea i
+  Abouta za AI/LLM konzalting; brojke u njima vuku na ovaj dokument.
 - `docs/2026-08-04-markdown-u-pdf-s-mermaidom.md` — kako se dugački markdown
   dokumenti s mermaid dijagramima pretvaraju u PDF (`scripts/md-to-pdf.sh`), i
   kako se razrješavaju konflikti na `dist/` kad CI i lokalni build oboje
