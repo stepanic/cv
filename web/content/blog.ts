@@ -101,7 +101,7 @@ The method transfers to any prompt you keep retyping. Count the occurrences, ded
 
 Two caveats, both of which bit me:
 
-- **Claude Code prunes \`~/.claude\` after 30 days.** Older sessions are gone unless you back them up. Mine survive because [dotclaude-sync](https://github.com/stepanic/dotclaude-sync) takes a daily git snapshot — the same archive that powers the [usage stats](/#claude-code) on this site.
+- **The 30-day pruning is a default, not a law.** Claude Code deletes local transcripts after 30 days, but \`cleanupPeriodDays\` in \`~/.claude/settings.json\` sets that window — I run \`365\`. Raise it *before* you need the history, because the setting cannot bring back what has already gone. And for a durable copy, back the directory up too: [dotclaude-sync](https://github.com/stepanic/dotclaude-sync) mirrors all of \`~/.claude\` — transcripts, settings **and the memory files** — into a daily git snapshot and pushes it to a private remote (Google Drive, in my case). That archive is the same one that powers the [usage stats](/#claude-code) on this site.
 - **The skill contaminates its own evidence.** Once \`description:\` contains your trigger phrases, every session that loads the skill list contains them too, and a naive grep balloons. Re-running that first count today returns 562 sessions; filtered to messages a human actually typed it is 193. Filter to \`type == "user"\`.
 
 The skill, in English and in the Croatian original, plus the mining script: [github.com/stepanic/cv/tree/main/skills/wrap-up](https://github.com/stepanic/cv/tree/main/skills/wrap-up). MIT. The part worth copying is the method, not my five steps.`,
@@ -178,7 +178,7 @@ Metoda se prenosi na bilo koji prompt koji stalno pretipkavaš. Prebroji pojavlj
 
 Dvije zamke, obje su me ugrizle:
 
-- **Claude Code briše \`~/.claude\` nakon 30 dana.** Starije sesije su nestale ako ih ne backupiraš. Moje preživljavaju jer [dotclaude-sync](https://github.com/stepanic/dotclaude-sync) radi dnevni git snapshot — isti arhiv koji pokreće [statistiku korištenja](/#claude-code) na ovoj stranici.
+- **30-dnevno brisanje je zadano, nije zakon.** Claude Code briše lokalne transkripte nakon 30 dana, ali taj prozor postavlja \`cleanupPeriodDays\` u \`~/.claude/settings.json\` — kod mene stoji \`365\`. Podigni ga *prije* nego što ti povijest zatreba, jer postavka ne vraća ono što je već otišlo. I napravi trajnu kopiju: [dotclaude-sync](https://github.com/stepanic/dotclaude-sync) zrcali cijeli \`~/.claude\` — transkripte, postavke **i memory fajlove** — u dnevni git snapshot i gura ga na privatni remote (kod mene Google Drive). Isti taj arhiv pokreće [statistiku korištenja](/#claude-code) na ovoj stranici.
 - **Skill kontaminira vlastite dokaze.** Čim \`description:\` sadrži tvoje okidačke fraze, sadrži ih i svaka sesija koja učita popis skillova, pa naivni grep nabuja. Isto brojanje danas vraća 562 sesije; filtrirano na poruke koje je čovjek doista utipkao, 193. Filtriraj na \`type == "user"\`.
 
 Skill, na engleskom i u hrvatskom originalu, plus skripta za rudarenje: [github.com/stepanic/cv/tree/main/skills/wrap-up](https://github.com/stepanic/cv/tree/main/skills/wrap-up). MIT. Vrijedi kopirati metodu, ne mojih pet koraka.`,
@@ -193,7 +193,7 @@ Skill, na engleskom i u hrvatskom originalu, plus skripta za rudarenje: [github.
         url: "https://docs.claude.com/en/docs/claude-code/skills",
       },
       {
-        title: "dotclaude-sync — daily git snapshots of ~/.claude, past the 30-day pruning",
+        title: "dotclaude-sync — daily git snapshots of ~/.claude (transcripts, settings, memory) to a private remote",
         url: "https://github.com/stepanic/dotclaude-sync",
       },
     ],

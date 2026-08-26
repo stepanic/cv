@@ -165,10 +165,14 @@ the near-misses as hard rules.
 
 Two caveats on the archaeology, both of which bit me:
 
-- **Claude Code prunes `~/.claude` after 30 days.** Anything older than that is
-  gone unless you back it up. Mine survives because
-  [dotclaude-sync](https://github.com/stepanic/dotclaude-sync) takes a daily git
-  snapshot.
+- **The 30-day pruning is a default, not a law.** Claude Code deletes local
+  transcripts after 30 days, but `cleanupPeriodDays` in `~/.claude/settings.json`
+  sets that window — I run `365`. Raise it *before* you need the history; the
+  setting cannot bring back what has already gone. For a durable copy, back the
+  directory up as well: [dotclaude-sync](https://github.com/stepanic/dotclaude-sync)
+  mirrors all of `~/.claude` — transcripts, settings **and the memory files** —
+  into a daily git snapshot and pushes it to a private remote (Google Drive, in my
+  case). That archive is what my published usage stats are built from.
 - **The skill contaminates its own evidence.** Once `description:` contains your
   trigger phrases, every session that loads the skill list contains them too, so a
   naive `grep` count balloons. Filter to `type == "user"` messages that a human

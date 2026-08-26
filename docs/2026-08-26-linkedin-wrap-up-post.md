@@ -94,7 +94,8 @@ Zamka koju vrijedi staviti u komentar, ne u tijelo objave, da tekst ostane krata
 ```
 Two traps if you try this on your own transcripts.
 
-Claude Code prunes ~/.claude after 30 days, so anything older is gone unless you back it up. Mine survives on a daily git snapshot.
+The 30-day pruning is a default, not a law. cleanupPeriodDays in ~/.claude/settings.json sets that window and I run 365. Raise it before you need the history, because the setting cannot bring back what is already gone. For a durable copy I also built dotclaude-sync, which mirrors all of ~/.claude, transcripts, settings, and the memory files, into a daily git snapshot and pushes it to a private Google Drive:
+github.com/stepanic/dotclaude-sync
 
 And the skill contaminates its own evidence. Once the description field holds your trigger phrases, every session that loads the skill list contains them too, so a naive grep balloons. Mine went from 147 to 562. Filter to messages a human actually typed and it is 193.
 ```
@@ -102,7 +103,8 @@ And the skill contaminates its own evidence. Once the description field holds yo
 ```
 Dvije zamke ako ovo probaš nad svojim transkriptima.
 
-Claude Code briše ~/.claude nakon 30 dana, pa je sve starije nestalo ako nemaš backup. Moje preživljava na dnevnom git snapshotu.
+30-dnevno brisanje je zadano, nije zakon. Taj prozor postavlja cleanupPeriodDays u ~/.claude/settings.json i kod mene stoji 365. Podigni ga prije nego što ti povijest zatreba, jer postavka ne vraća ono što je već otišlo. Za trajnu kopiju sam napravio i dotclaude-sync, koji zrcali cijeli ~/.claude, transkripte, postavke, i memory fajlove, u dnevni git snapshot i gura ga na privatni Google Drive:
+github.com/stepanic/dotclaude-sync
 
 I skill kontaminira vlastite dokaze. Čim polje description sadrži tvoje okidačke fraze, sadrži ih i svaka sesija koja učita popis skillova, pa naivni grep nabuja. Moj je otišao sa 147 na 562. Filtriraj na poruke koje je čovjek doista utipkao i ostane 193.
 ```
