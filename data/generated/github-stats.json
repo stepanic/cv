@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-26T09:25:06Z",
+  "updated": "2026-08-26T09:37:00Z",
   "profile": {
     "created_at": "2010-06-26T16:20:43Z",
     "followers": 43,
@@ -8,15 +8,20 @@
     "public_repos": 110
   },
   "lastYear": {
-    "totalContributions": 37095,
-    "commits": 35416,
+    "totalContributions": 37098,
+    "commits": 35419,
     "pullRequests": 78,
     "issues": 12,
+    "privateContributions": 1563,
+    "datasetArchive": {
+      "repo": "domovinatv/dataset.domovina.tv",
+      "commits": 32633
+    },
     "topRepositories": [
       {
         "repo": "domovinatv/fetch.domovina.tv",
         "url": "https://github.com/domovinatv/fetch.domovina.tv",
-        "commits": 614
+        "commits": 615
       },
       {
         "repo": "domovinatv/ai.domovina.tv",
@@ -82,8 +87,317 @@
         "repo": "edemokracija/novcanik-prototip",
         "url": "https://github.com/edemokracija/novcanik-prototip",
         "commits": 40
+      },
+      {
+        "repo": "stepanic/cv",
+        "url": "https://github.com/stepanic/cv",
+        "commits": 37
+      },
+      {
+        "repo": "domovinatv/domovina-fiskal",
+        "url": "https://github.com/domovinatv/domovina-fiskal",
+        "commits": 35
+      },
+      {
+        "repo": "domovinatv/izbori.domovina.ai",
+        "url": "https://github.com/domovinatv/izbori.domovina.ai",
+        "commits": 35
+      },
+      {
+        "repo": "domovinatv/research.domovina.tv",
+        "url": "https://github.com/domovinatv/research.domovina.tv",
+        "commits": 34
+      },
+      {
+        "repo": "stepanic/fira-forms-connector",
+        "url": "https://github.com/stepanic/fira-forms-connector",
+        "commits": 31
+      },
+      {
+        "repo": "domovinatv/sms.domovina.ai",
+        "url": "https://github.com/domovinatv/sms.domovina.ai",
+        "commits": 28
+      },
+      {
+        "repo": "spremni/domovina-wallet",
+        "url": "https://github.com/spremni/domovina-wallet",
+        "commits": 28
+      },
+      {
+        "repo": "domovinatv/mediakit.domovina.tv",
+        "url": "https://github.com/domovinatv/mediakit.domovina.tv",
+        "commits": 27
+      },
+      {
+        "repo": "javni-novci/svima-a-ne-samo-njima",
+        "url": "https://github.com/javni-novci/svima-a-ne-samo-njima",
+        "commits": 24
+      },
+      {
+        "repo": "domovinatv/wallet-wasp",
+        "url": "https://github.com/domovinatv/wallet-wasp",
+        "commits": 22
+      },
+      {
+        "repo": "domovinatv/domovina-stats",
+        "url": "https://github.com/domovinatv/domovina-stats",
+        "commits": 20
+      },
+      {
+        "repo": "spremni/za.stablecoin.spremni.hr",
+        "url": "https://github.com/spremni/za.stablecoin.spremni.hr",
+        "commits": 19
+      },
+      {
+        "repo": "domovinatv/zakoni.domovina.ai",
+        "url": "https://github.com/domovinatv/zakoni.domovina.ai",
+        "commits": 18
+      },
+      {
+        "repo": "stepanic/flutter-firebase-starter",
+        "url": "https://github.com/stepanic/flutter-firebase-starter",
+        "commits": 18
+      },
+      {
+        "repo": "domovinatv/mpt-landing",
+        "url": "https://github.com/domovinatv/mpt-landing",
+        "commits": 18
+      },
+      {
+        "repo": "croai/cc-001",
+        "url": "https://github.com/croai/cc-001",
+        "commits": 18
+      },
+      {
+        "repo": "dbhzhr/dbhz-novcanik-prototip",
+        "url": "https://github.com/dbhzhr/dbhz-novcanik-prototip",
+        "commits": 16
+      },
+      {
+        "repo": "domovinatv/certilia-esign",
+        "url": "https://github.com/domovinatv/certilia-esign",
+        "commits": 16
+      },
+      {
+        "repo": "stepanic/modric-lottery-verify",
+        "url": "https://github.com/stepanic/modric-lottery-verify",
+        "commits": 15
+      },
+      {
+        "repo": "stepanic/flutter_reusable_youtube_player",
+        "url": "https://github.com/stepanic/flutter_reusable_youtube_player",
+        "commits": 13
+      },
+      {
+        "repo": "stepanic/adhd-provjera",
+        "url": "https://github.com/stepanic/adhd-provjera",
+        "commits": 12
+      },
+      {
+        "repo": "domovinatv/provjera.domovina.ai",
+        "url": "https://github.com/domovinatv/provjera.domovina.ai",
+        "commits": 12
+      },
+      {
+        "repo": "domovinatv/domovina-ulaznice",
+        "url": "https://github.com/domovinatv/domovina-ulaznice",
+        "commits": 11
+      },
+      {
+        "repo": "stepanic/stadion-maksimir-natjecaj-2026",
+        "url": "https://github.com/stepanic/stadion-maksimir-natjecaj-2026",
+        "commits": 11
+      },
+      {
+        "repo": "stepanic/mobile-phone-proxy",
+        "url": "https://github.com/stepanic/mobile-phone-proxy",
+        "commits": 10
+      },
+      {
+        "repo": "domovinatv/crkve.domovina.ai",
+        "url": "https://github.com/domovinatv/crkve.domovina.ai",
+        "commits": 10
+      },
+      {
+        "repo": "domovinatv/cal.domovina.ai",
+        "url": "https://github.com/domovinatv/cal.domovina.ai",
+        "commits": 10
+      },
+      {
+        "repo": "dbhzhr/dbhz-3d-modeli",
+        "url": "https://github.com/dbhzhr/dbhz-3d-modeli",
+        "commits": 10
+      },
+      {
+        "repo": "tehnoetika/tehnoetika-app",
+        "url": "https://github.com/tehnoetika/tehnoetika-app",
+        "commits": 9
+      },
+      {
+        "repo": "pinka-finance/mcp-automation",
+        "url": "https://github.com/pinka-finance/mcp-automation",
+        "commits": 8
+      },
+      {
+        "repo": "stepanic/fire-flame-studio",
+        "url": "https://github.com/stepanic/fire-flame-studio",
+        "commits": 8
+      },
+      {
+        "repo": "domovinatv/domovina-cutter",
+        "url": "https://github.com/domovinatv/domovina-cutter",
+        "commits": 8
+      },
+      {
+        "repo": "domovinatv/stranke.domovina.ai",
+        "url": "https://github.com/domovinatv/stranke.domovina.ai",
+        "commits": 8
+      },
+      {
+        "repo": "pinkainc/pitch-deck",
+        "url": "https://github.com/pinkainc/pitch-deck",
+        "commits": 7
+      },
+      {
+        "repo": "stepanic/launchd-menubar",
+        "url": "https://github.com/stepanic/launchd-menubar",
+        "commits": 7
+      },
+      {
+        "repo": "spremni/za-brak",
+        "url": "https://github.com/spremni/za-brak",
+        "commits": 7
+      },
+      {
+        "repo": "stepanic/domovina-browser",
+        "url": "https://github.com/stepanic/domovina-browser",
+        "commits": 6
+      },
+      {
+        "repo": "pinka-finance/landing",
+        "url": "https://github.com/pinka-finance/landing",
+        "commits": 6
+      },
+      {
+        "repo": "spremni/za-screenshot",
+        "url": "https://github.com/spremni/za-screenshot",
+        "commits": 6
+      },
+      {
+        "repo": "domovinatv/company-details-api",
+        "url": "https://github.com/domovinatv/company-details-api",
+        "commits": 6
+      },
+      {
+        "repo": "domovinatv/domovinatv.github.io",
+        "url": "https://github.com/domovinatv/domovinatv.github.io",
+        "commits": 5
+      },
+      {
+        "repo": "domovinatv/donate.domovina.ai",
+        "url": "https://github.com/domovinatv/donate.domovina.ai",
+        "commits": 5
+      },
+      {
+        "repo": "stepanic/flutter-certilia-docs",
+        "url": "https://github.com/stepanic/flutter-certilia-docs",
+        "commits": 4
+      },
+      {
+        "repo": "spremni/spremni.github.io",
+        "url": "https://github.com/spremni/spremni.github.io",
+        "commits": 4
+      },
+      {
+        "repo": "domovinatv/producer.domovina.tv",
+        "url": "https://github.com/domovinatv/producer.domovina.tv",
+        "commits": 4
+      },
+      {
+        "repo": "domovinatv/app.domovina.link",
+        "url": "https://github.com/domovinatv/app.domovina.link",
+        "commits": 3
+      },
+      {
+        "repo": "airkuna/mediakit",
+        "url": "https://github.com/airkuna/mediakit",
+        "commits": 3
+      },
+      {
+        "repo": "domovinatv/pkk.domovina.ai",
+        "url": "https://github.com/domovinatv/pkk.domovina.ai",
+        "commits": 3
+      },
+      {
+        "repo": "domovinatv/domovina-fiskal-app",
+        "url": "https://github.com/domovinatv/domovina-fiskal-app",
+        "commits": 3
+      },
+      {
+        "repo": "italkco/javna-nabava",
+        "url": "https://github.com/italkco/javna-nabava",
+        "commits": 3
+      },
+      {
+        "repo": "tehnoetika/chatcontrol-timeline",
+        "url": "https://github.com/tehnoetika/chatcontrol-timeline",
+        "commits": 2
+      },
+      {
+        "repo": "stepanic/satnica-time-tracker",
+        "url": "https://github.com/stepanic/satnica-time-tracker",
+        "commits": 2
+      },
+      {
+        "repo": "stepanic/cravat-shopify-theme",
+        "url": "https://github.com/stepanic/cravat-shopify-theme",
+        "commits": 2
+      },
+      {
+        "repo": "domovinatv/domovina-wsrv",
+        "url": "https://github.com/domovinatv/domovina-wsrv",
+        "commits": 2
+      },
+      {
+        "repo": "pinka-finance/pitch-deck",
+        "url": "https://github.com/pinka-finance/pitch-deck",
+        "commits": 1
+      },
+      {
+        "repo": "perfect-training-app/public-legal",
+        "url": "https://github.com/perfect-training-app/public-legal",
+        "commits": 1
+      },
+      {
+        "repo": "pinka-finance/pinka-finance-mvp",
+        "url": "https://github.com/pinka-finance/pinka-finance-mvp",
+        "commits": 1
+      },
+      {
+        "repo": "stepanic/dotclaude-sync",
+        "url": "https://github.com/stepanic/dotclaude-sync",
+        "commits": 1
+      },
+      {
+        "repo": "domovinatv/domovina-blockchain",
+        "url": "https://github.com/domovinatv/domovina-blockchain",
+        "commits": 1
+      },
+      {
+        "repo": "stepanic/stepanic",
+        "url": "https://github.com/stepanic/stepanic",
+        "commits": 1
+      },
+      {
+        "repo": "spremni/za.domene.spremni.hr",
+        "url": "https://github.com/spremni/za.domene.spremni.hr",
+        "commits": 1
       }
     ],
+    "excludingArchive": {
+      "totalContributions": 4465,
+      "commits": 2786
+    },
     "weekly": [
       {
         "weekStart": "2025-08-24",
@@ -295,7 +609,7 @@
       },
       {
         "weekStart": "2026-08-23",
-        "count": 1148
+        "count": 1151
       }
     ]
   },

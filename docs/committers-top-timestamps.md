@@ -29,6 +29,13 @@ The point of timestamping both: prove the #1 screenshot existed *before* the
 dataset repo gets excluded from the public board, so the anomaly is on record
 rather than a deniable claim.
 
+The same split is now generated on every build rather than only screenshotted.
+`data/generated/github-stats.json` carries `lastYear.datasetArchive.commits`
+next to `lastYear.excludingArchive.totalContributions`, and the CV, the PDFs and
+the site all quote the corrected figure with the raw one in the small print. As
+of **2026-08-26**: 37,098 raw, 32,633 of them dataset-archive commits, **4,465
+corrected**. See `docs/data-sources.md` for how to re-derive it.
+
 ## Verify it yourself
 
 ```sh

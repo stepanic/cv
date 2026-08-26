@@ -20,6 +20,39 @@ sent anywhere.
 
 `npm run stats` runs all three.
 
+### GitHub contributions are two different numbers
+
+GitHub's raw counter is dominated by one repository. `domovinatv/dataset.domovina.tv`
+publishes the open transcript corpus, one commit per episode artefact, written by
+the pipeline rather than by hand. That is data, not code, and it is roughly seven
+eighths of the yearly total. Quoting the raw figure anywhere would be technically
+true and materially misleading, so `update-github-stats.sh` emits both:
+
+| Field in `github-stats.json` | Meaning |
+|---|---|
+| `lastYear.totalContributions` | GitHub's own number, archive included |
+| `lastYear.datasetArchive.commits` | the archive's automated commits |
+| `lastYear.excludingArchive.totalContributions` | **the figure the CV quotes** |
+| `lastYear.privateContributions` | private-repo contributions inside that remainder |
+
+The split is regenerated on every `npm run stats:github`, so it cannot go stale.
+To read it by hand:
+
+```bash
+gh api graphql -f query='query { user(login: "stepanic") {
+  contributionsCollection {
+    totalCommitContributions restrictedContributionsCount
+    commitContributionsByRepository(maxRepositories: 100) {
+      repository { nameWithOwner } contributions { totalCount } } } } }'
+```
+
+**Reading, 2026-08-26:** 37,098 raw · 32,633 dataset-archive commits ·
+**4,465 corrected** (of which 1,563 private-repo contributions, 78 PRs,
+12 issues). The same exclusion, applied to the public ranking board, is
+documented in `docs/committers-top-timestamps.md` — it moves the Croatia
+ranking from #1 to a genuine mid-table place, with both screenshots anchored
+in Bitcoin.
+
 ## Manual — verify before sending anything
 
 ### DOMOVINA corpus (episodes, chunks, channels, hours, speakers)

@@ -47,6 +47,13 @@ const en = {
     commits: "Commits",
     pullRequests: "Pull requests",
     publicRepos: "Public repos",
+    // The headline cards show the corrected figures; these notes carry the raw ones.
+    rawNote: "{rawFmt} raw, minus {archiveFmt} dataset-archive commits",
+    rawCommitsNote: "{rawFmt} raw, archive commits removed",
+    archiveCaveatPre:
+      "GitHub's own profile shows a much larger number, and it is not wrong: the transcript corpus is published to ",
+    archiveCaveatPost:
+      ", one commit per episode artefact, written by the pipeline rather than by hand. That is data, not code, so the counters above subtract it. Both figures are generated on every build, and the same exclusion is what the Croatia ranking below is about.",
     topRepos: "Most active repositories",
     // `count` selects the plural form; `countFmt` is the locale-formatted number.
     commitsShort: {
@@ -273,6 +280,13 @@ const hr: Messages = {
     github: "GitHub — zadnjih 12 mjeseci",
     contributions: "Contributiona",
     commits: "Commitova",
+    // Naslovne kartice pokazuju ispravljene brojke; ovdje stoje sirove.
+    rawNote: "{rawFmt} sirovo, minus {archiveFmt} commitova dataset arhive",
+    rawCommitsNote: "{rawFmt} sirovo, bez commitova arhive",
+    archiveCaveatPre:
+      "GitHub profil pokazuje znatno veći broj i nije u krivu: korpus transkripata objavljuje se u ",
+    archiveCaveatPost:
+      ", jedan commit po artefaktu epizode, a piše ih pipeline, ne ruka. To su podaci, a ne kod, pa ih brojači iznad oduzimaju. Obje brojke generiraju se pri svakom buildu, a isto isključivanje tema je poretka u Hrvatskoj ispod.",
     pullRequests: "Pull requestova",
     publicRepos: "Javnih repozitorija",
     topRepos: "Najaktivniji repozitoriji",

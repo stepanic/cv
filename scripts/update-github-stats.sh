@@ -18,7 +18,8 @@ contrib=$(gh api graphql -f query='query {
         totalContributions
         weeks { contributionDays { date contributionCount } }
       }
-      commitContributionsByRepository(maxRepositories: 15) {
+      restrictedContributionsCount
+      commitContributionsByRepository(maxRepositories: 100) {
         repository { nameWithOwner isPrivate url }
         contributions { totalCount }
       }
@@ -52,14 +53,31 @@ jq -n \
       commits: $contrib.totalCommitContributions,
       pullRequests: $contrib.totalPullRequestContributions,
       issues: $contrib.totalIssueContributions,
-      # dataset.domovina.tv is an automated dataset backup — its bot-like
-      # commit volume would drown out the real work, so it is excluded.
+      privateContributions: $contrib.restrictedContributionsCount,
+      # dataset.domovina.tv publishes the open transcript corpus: one commit per
+      # episode artefact, written by the pipeline, not by hand. It is data, not
+      # code, and it dwarfs everything else — so the honest figure is the
+      # remainder. Both numbers are published; neither is hidden.
+      datasetArchive: {
+        repo: "domovinatv/dataset.domovina.tv",
+        commits: ([$contrib.commitContributionsByRepository[]
+          | select(.repository.nameWithOwner == "domovinatv/dataset.domovina.tv")
+          | .contributions.totalCount] | add // 0)
+      },
       topRepositories: [
         $contrib.commitContributionsByRepository[]
         | select(.repository.isPrivate | not)
         | select(.repository.nameWithOwner != "domovinatv/dataset.domovina.tv")
         | {repo: .repository.nameWithOwner, url: .repository.url, commits: .contributions.totalCount}
       ],
+      excludingArchive: {
+        totalContributions: ($contrib.contributionCalendar.totalContributions - ([$contrib.commitContributionsByRepository[]
+          | select(.repository.nameWithOwner == "domovinatv/dataset.domovina.tv")
+          | .contributions.totalCount] | add // 0)),
+        commits: ($contrib.totalCommitContributions - ([$contrib.commitContributionsByRepository[]
+          | select(.repository.nameWithOwner == "domovinatv/dataset.domovina.tv")
+          | .contributions.totalCount] | add // 0))
+      },
       # Weekly series for the activity chart (sum of daily counts per week).
       weekly: [
         $contrib.contributionCalendar.weeks[]
@@ -70,4 +88,7 @@ jq -n \
   }' > "$OUT"
 
 echo "Wrote $OUT:"
-jq '{updated, totalContributions: .lastYear.totalContributions, repos: .profile.public_repos}' "$OUT"
+jq '{updated, totalContributions: .lastYear.totalContributions,
+     datasetArchiveCommits: .lastYear.datasetArchive.commits,
+     excludingArchive: .lastYear.excludingArchive.totalContributions,
+     repos: .profile.public_repos}' "$OUT"

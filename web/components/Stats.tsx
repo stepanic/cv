@@ -200,10 +200,13 @@ function CommittersRank() {
 function StatCard({
   value,
   label,
+  note,
   accent = false,
 }: {
   value: string;
   label: string;
+  /** Small print under the label — used to show the raw figure behind a corrected one. */
+  note?: string;
   accent?: boolean;
 }) {
   return (
@@ -218,6 +221,7 @@ function StatCard({
         {value}
       </p>
       <p className="mt-1 text-sm text-inkMuted">{label}</p>
+      {note ? <p className="mt-1 text-xs leading-snug text-inkMuted opacity-80">{note}</p> : null}
     </div>
   );
 }
@@ -286,11 +290,40 @@ export function Stats({ github }: { github: GithubStats }) {
         {t("stats.github")}
       </h3>
       <div className="mt-4 grid grid-cols-2 gap-4 lg:grid-cols-4">
-        <StatCard accent value={n(ly.totalContributions)} label={t("stats.contributions")} />
-        <StatCard value={n(ly.commits)} label={t("stats.commits")} />
+        {/* The headline numbers are the corrected ones: the dataset archive commits
+            are data published by the pipeline, not code written here. The raw
+            figure is kept in the note so nothing is quietly dropped. */}
+        <StatCard
+          accent
+          value={n(ly.excludingArchive.totalContributions)}
+          label={t("stats.contributions")}
+          note={t("stats.rawNote", {
+            rawFmt: n(ly.totalContributions),
+            archiveFmt: n(ly.datasetArchive.commits),
+          })}
+        />
+        <StatCard
+          value={n(ly.excludingArchive.commits)}
+          label={t("stats.commits")}
+          note={t("stats.rawCommitsNote", { rawFmt: n(ly.commits) })}
+        />
         <StatCard value={n(ly.pullRequests)} label={t("stats.pullRequests")} />
         <StatCard value={n(github.profile.public_repos)} label={t("stats.publicRepos")} />
       </div>
+
+      {/* Why the headline numbers differ from what GitHub's profile page shows. */}
+      <p className="mt-4 rounded-md border border-line bg-surface p-4 text-sm leading-relaxed text-inkSoft">
+        {t("stats.archiveCaveatPre")}
+        <a
+          href={DATASET_REPO_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-mono text-xs text-accent-bright underline-offset-2 hover:underline"
+        >
+          domovinatv/dataset.domovina.tv
+        </a>
+        {t("stats.archiveCaveatPost")}
+      </p>
 
       <WeeklyChart weekly={ly.weekly} />
 

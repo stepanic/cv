@@ -101,6 +101,11 @@ export interface GithubStats {
     commits: number;
     pullRequests: number;
     issues: number;
+    privateContributions: number;
+    /** Automated publishing commits from the open transcript corpus — data, not code. */
+    datasetArchive: { repo: string; commits: number };
+    /** The honest figure: everything above minus the dataset archive. */
+    excludingArchive: { totalContributions: number; commits: number };
     topRepositories: { repo: string; url: string; commits: number }[];
     weekly: { weekStart: string; count: number }[];
   };

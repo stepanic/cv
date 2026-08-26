@@ -39,10 +39,16 @@
   #grid(
     columns: (1fr, 1fr, 1fr),
     align: center,
-    [#text(weight: "bold", size: 12pt, fill: accent, fmt-num(gh.lastYear.totalContributions)) \ #L.contributions],
+    [#text(weight: "bold", size: 12pt, fill: accent, fmt-num(gh.lastYear.excludingArchive.totalContributions)) \ #L.contributions],
     [#text(weight: "bold", size: 12pt, fill: accent, str(gh.profile.public_repos)) \ #L.publicRepos],
     [#text(weight: "bold", size: 12pt, fill: accent, fmt-billions(cc.totals.tokens)) \ #L.aiNative],
   )
+  // The contribution counter is corrected, not raw: the dataset archive is data
+  // published by the pipeline, not code written here. Both numbers stay visible.
+  #v(4pt)
+  #text(size: 7pt, fill: luma(110), L.contributionsNote
+    .replace("{archive}", fmt-num(gh.lastYear.datasetArchive.commits))
+    .replace("{raw}", fmt-num(gh.lastYear.totalContributions)))
 ]
 
 // ── Experience ───────────────────────────────────────────────────────────────

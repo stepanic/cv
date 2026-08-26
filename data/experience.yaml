@@ -26,12 +26,16 @@ experience:
             Designed and built the full platform solo using agentic AI
             development: Flutter app (web, iOS, Android, TV), self-hosted
             Supabase backend behind Kong on Coolify, and a Cloudflare edge
-            layer — 29,000+ GitHub contributions across the ecosystem in one year.
+            layer — 4,465 GitHub contributions in a year across the ecosystem's
+            code, separate from the 32,633 automated commits that publish the
+            open transcript corpus.
           hr: >-
             Dizajnirao i samostalno izgradio cijelu platformu agentnim AI
             razvojem: Flutter aplikacija (web, iOS, Android, TV), self-hosted
             Supabase backend iza Konga na Coolifyju i Cloudflare edge sloj —
-            29.000+ GitHub contributiona kroz ekosustav u godinu dana.
+            4.465 GitHub contributiona kroz kod ekosustava u godinu
+            dana, odvojeno od 32.633 automatska commita kojima se objavljuje
+            otvoreni korpus transkripata.
         tags: [flutter, supabase, cloudflare, ai, architecture]
         priority: 1
       - text:

@@ -19,10 +19,12 @@ summary:
     Expert since 2022 with 50+ FlutterFlow consulting projects. Currently building
     AI-native products end-to-end: the DOMOVINA media-AI platform (RAG in
     ClickHouse, a public MCP server, Flutter, self-hosted Supabase) and PINKA
-    on-chain crowdfunding. 37,000+ GitHub contributions in the last year across
+    on-chain crowdfunding. 4,465 GitHub contributions in the last year across
     110 public repositories, working open-source-first with agentic AI tooling —
     21B+ tokens processed with Claude Code, fully documented in a sourced public
-    usage record.
+    usage record. GitHub's raw counter reads 37,098, but 32,633 of those are
+    automated commits publishing an open transcript corpus, so the corrected
+    figure is the one quoted here.
   hr: >-
     Softverski inženjer s 20 godina profesionalnog iskustva (od 2006.) i 200+
     isporučenih projekata. Magistar računarstva (FER, Sveučilište u Zagrebu).
@@ -30,10 +32,13 @@ summary:
     FlutterFlow Expert od 2022. s 50+ FlutterFlow konzultantskih projekata.
     Trenutno gradim AI-native proizvode od početka do kraja: DOMOVINA medijsku
     AI platformu (RAG u ClickHouseu, javni MCP server, Flutter, self-hosted
-    Supabase) i PINKA on-chain crowdfunding. 37.000+ GitHub contributiona u
+    Supabase) i PINKA on-chain crowdfunding. 4.465 GitHub contributiona u
     zadnjih godinu dana kroz 110 javnih repozitorija, radim open-source-first
     uz agentni AI tooling — 21+ milijardi tokena obrađeno Claude Codeom, u
-    cijelosti dokumentirano u javnom zapisu s izvorima.
+    cijelosti dokumentirano u javnom zapisu s izvorima. GitHubov sirovi brojač
+    pokazuje 37.098, ali 32.633 od toga su automatski commitovi kojima se
+    objavljuje otvoreni korpus transkripata, pa je ovdje naveden ispravljeni
+    broj.
 links:
   - label: GitHub
     url: https://github.com/stepanic

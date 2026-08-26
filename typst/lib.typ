@@ -46,6 +46,7 @@
     highlights: "Highlights",
     stats: "By the Numbers",
     contributions: "GitHub contributions (last 12 months)",
+    contributionsNote: "excludes {archive} automated commits publishing the open transcript corpus to dataset.domovina.tv ({raw} total on GitHub's own counter)",
     publicRepos: "public repositories",
     aiNative: "tokens processed with Claude Code since 2025",
     years: "yrs",
@@ -62,6 +63,7 @@
     highlights: "Istaknuto",
     stats: "U brojkama",
     contributions: "GitHub contributiona (zadnjih 12 mjeseci)",
+    contributionsNote: "bez {archive} automatskih commitova kojima pipeline objavljuje otvoreni korpus transkripata na dataset.domovina.tv (GitHub na svom brojaču pokazuje {raw})",
     publicRepos: "javnih repozitorija",
     aiNative: "tokena obrađeno s Claude Codeom od 2025.",
     years: "god",
@@ -83,11 +85,14 @@
 
 // Thousands separator for big numbers.
 #let fmt-num(n) = {
+  // Thousands separator follows the document language: "37,098" in English,
+  // "37.098" in Croatian.
+  let sep = if lang == "hr" { "." } else { "," }
   let s = str(n)
   let out = ""
   let i = 0
   for c in s.rev() {
-    if i != 0 and calc.rem(i, 3) == 0 { out = "," + out }
+    if i != 0 and calc.rem(i, 3) == 0 { out = sep + out }
     out = c + out
     i += 1
   }
