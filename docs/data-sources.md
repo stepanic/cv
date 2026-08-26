@@ -144,10 +144,53 @@ for u in klubovi.domovina.ai zakoni.domovina.ai gis.domovina.ai; do
 done
 ```
 
+## Transcript retention: 30 days is a default, not a fact about this machine
+
+Added 2026-08-26 after the claim shipped twice in published text.
+
+Claude Code prunes `~/.claude` after 30 days **by default**. That window is a
+setting, `cleanupPeriodDays` in `~/.claude/settings.json`, and on this machine it
+is **`365`**:
+
+```bash
+python3 -c "import json;print(json.load(open('$HOME/.claude/settings.json')).get('cleanupPeriodDays'))"
+# 365
+```
+
+On top of that, [dotclaude-sync](https://github.com/stepanic/dotclaude-sync)
+rsyncs the whole of `~/.claude` into a local git repo daily (launchd), commits the
+diff, and `rclone sync`s the result to a private remote (Google Drive). It archives
+**the memory files too**, not only transcripts.
+
+So two things follow, and both matter for anything published:
+
+1. **Never write "Claude Code deletes your sessions after 30 days" as a statement
+   about this setup.** The useful phrasing is: 30 days is the default, raise
+   `cleanupPeriodDays` *before* you need the history (it cannot restore what is
+   already pruned), and keep a backup for anything durable.
+2. **The "30-day blind spot" framing on the stats page is now partly stale.**
+   `web/lib/i18n/messages.ts` (`blindSpotTitle` and the sentence under it),
+   `web/lib/types.ts` and `scripts/mine-claude-history.mjs` still describe the
+   30-day retention as live. The script's own comment at
+   `scripts/mine-claude-history.mjs:245` already acknowledges this — the metric was
+   built to "stay meaningful when, as now, it is not pruned to 30 days" — but the
+   user-facing copy was never rewritten.
+
+**Open item.** Decide what the blind-spot tile should say now. The `localUSD` vs
+full-record gap is still a real and interesting number (it shows what a
+`~/.claude`-only monitor such as CodexBar would miss), but calling it a *30-day*
+blind spot describes the default rather than this machine. Rewriting it is a
+content decision, not a bug fix, so it was left alone rather than changed quietly.
+
 ## Vezani dokumenti
 
 - `docs/2026-08-26-linkedin-pozicioniranje.md` — nacrti LinkedIn headlinea i
   Abouta za AI/LLM konzalting; brojke u njima vuku na ovaj dokument.
+- `docs/2026-08-26-linkedin-wrap-up-post.md` — nacrt objave o open-sourcanom
+  `/wrap-up` skillu; brojke u njemu (147 sesija, 47 pokretanja) vuku na
+  `skills/wrap-up/README.md`.
+- `skills/wrap-up/README.md` — metoda rudarenja vlastitih transkripata, i zamke
+  koje idu uz nju (retencija gore, kontaminacija dokaza).
 - `docs/2026-08-04-markdown-u-pdf-s-mermaidom.md` — kako se dugački markdown
   dokumenti s mermaid dijagramima pretvaraju u PDF (`scripts/md-to-pdf.sh`), i
   kako se razrješavaju konflikti na `dist/` kad CI i lokalni build oboje
