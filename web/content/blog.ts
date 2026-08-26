@@ -14,6 +14,191 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "wrap-up-skill-mined-from-my-own-transcripts",
+    date: "2026-08-26",
+    tags: ["Claude Code", "Skills", "AI-native", "Developer tooling", "Open source"],
+    title: {
+      en: "I mined a Claude Code skill out of 147 of my own sessions — and the data corrected me twice",
+      hr: "Izmajnirao sam Claude Code skill iz 147 vlastitih sesija — i podaci su me ispravili dvaput",
+    },
+    lead: {
+      en: "I kept retyping the same end-of-session paragraph. Instead of writing the shortcut from memory, I counted what I actually asked for across 145 projects of local transcripts. The counts disagreed with my self-image in two useful places.",
+      hr: "Stalno sam pretipkavao isti odlomak na kraju sesije. Umjesto da prečac napišem po sjećanju, prebrojao sam što doista tražim kroz 145 projekata lokalnih transkripata. Brojke se na dva korisna mjesta nisu složile s mojom slikom o sebi.",
+    },
+    body: {
+      en: `At the end of almost every Claude Code session I was typing a variation of the same paragraph:
+
+> super, daj sve commitaj i pushaj, update memory fajlova i ako u ovom chatu postoji neko znanje koje nije trajno u codebaseu trajno ga spremi u markdown dokument ako i treba s mermaidjs vizualizacijama i nakon toga pripremi chat za clear
+
+Roughly: *commit and push everything, update the memory files, and if this chat produced knowledge that is not permanently in the codebase, write it into a markdown document, with mermaid diagrams if it needs them, then prepare the chat for \`/clear\`.*
+
+So on 4 August 2026 I asked for a shortcut. The interesting part is what happened next: the skill was not written from my description of my habit. It was **mined out of my own transcripts**, and the counts corrected me twice.
+
+## The evidence was already on disk
+
+Claude Code stores every session as JSONL under \`~/.claude/projects/\`. At that moment: 145 project directories, 2.5 GB. So the first step was not writing a file, it was counting one:
+
+\`\`\`bash
+cd ~/.claude/projects
+grep -rliE "pripremi.{0,30}chat za clear" --include=*.jsonl . | wc -l
+# 147
+\`\`\`
+
+**147 sessions** contained the phrase. Deduplicating the messages I had actually typed gave **119 distinct phrasings** of the same request — "sve commitaj i pushaj i preimremi chat za clear", "ok, updejtaj memory fajlove i pripremi chat za clear", typos and all. That is the honest shape of a habit: not one prompt, a cloud of near-identical ones.
+
+Then the part that actually shaped the skill — counting which steps show up in the fullest variants:
+
+| step I asked for | share of variants |
+|---|---|
+| "prepare the chat for clear" | **100%** |
+| commit + push | 88% |
+| update memory files | 70% |
+| write a markdown document | 41% |
+| mermaid diagram | 12% |
+| touch \`docs/\` or \`CLAUDE.md\` explicitly | 0% |
+
+## The two things I had wrong about myself
+
+**Mermaid is not a default.** I *feel* like I ask for diagrams constantly. I ask for them 12% of the time. Had I written the skill from memory it would have drawn a diagram on every run — faithful to my self-image, wrong about my behaviour. What went into the file instead: *use mermaid when a relationship or a flow is not obvious from prose; do not draw a diagram for something that is one sentence.*
+
+**The most valuable step was missing from my own prompt.** The longest variants ask for a handoff prompt in the clipboard, ready to paste into a fresh session after \`/clear\`. It was even recorded in a memory file. But it had dropped out of the sentence I type, because I had started assuming it. Mining surfaced a step my habit had gone silent about, and it became step 4.
+
+## The rule in red
+
+One line in the skill is marked with a red dot: **never \`git add -A\`.**
+
+That is not a style preference, it is a near-miss written down. During the very session that produced the skill, a neighbouring repo's working copy held an unfinished \`.gitignore\` and a set of half-written shell scripts, untracked, while unrelated work was being committed. \`git add -A\` would have pushed somebody's half-done afternoon to \`main\`.
+
+So the skill stages **by name**, and for any modified file the agent does not remember touching, it runs \`git diff\` and leaves it alone if it is not its own. Same paragraph forbids committing cron-written snapshots and \`.env\`, and forbids reporting "pushed" without checking the output of the push.
+
+I think that is the general shape of a rule worth putting in a skill: not a preference, a thing that almost went wrong once.
+
+## What it actually does
+
+Five steps, in order, autonomously to the end:
+
+1. **Commit + push across every repo touched in the session.** Work crosses repo boundaries constantly — a backend change, the dashboard that reads it, the fetcher that feeds it — and the last one is the one you forget. Staged by name, semantic commit messages whose body explains *why*, push verified from its output.
+2. **Memory files.** One fact per file, update the existing file rather than creating a duplicate, only what still holds for future sessions.
+3. **Knowledge that is not in the codebase**, into \`docs/YYYY-MM-DD-topic.md\`. The framing that makes this step work: not "what did we do" — git already knows that — but **"what would the next pass have to rediscover"**. Rejected alternatives and why. The measurement that decided a threshold. The silent failure that cost an afternoon.
+4. **A handoff prompt into the clipboard** *and* printed in the reply, because the clipboard has a habit of getting lost before \`/clear\`.
+5. **A summary whose most important section is what is still open or unverified.**
+
+It cannot run \`/clear\` itself. That is a built-in CLI command, so the last line tells me to type it.
+
+## Two entry points, on purpose
+
+You can invoke it as \`/wrap-up\`. You can also just keep typing your usual sentence: the \`description:\` field contains the real phrases from those 119 variants, so the skill triggers on its own. A shortcut you have to remember is a shortcut you will forget — the whole point was to automate a habit, not to replace it with a new one to maintain.
+
+## Does it hold up
+
+Between 4 and 26 August 2026 it fired **47 times across 11 working days**, in every repo I touched, not just the one it was born in.
+
+The failure mode it removes is not typing effort. It is the session that ends with a good measurement, a rejected approach and the reason for it, all of it alive only in a context window that is about to be cleared.
+
+## Mine your own
+
+The method transfers to any prompt you keep retyping. Count the occurrences, dedupe the variants, count which steps appear, then write the skill against the counts instead of your recollection, and put the real phrasings into \`description:\`.
+
+Two caveats, both of which bit me:
+
+- **Claude Code prunes \`~/.claude\` after 30 days.** Older sessions are gone unless you back them up. Mine survive because [dotclaude-sync](https://github.com/stepanic/dotclaude-sync) takes a daily git snapshot — the same archive that powers the [usage stats](/#claude-code) on this site.
+- **The skill contaminates its own evidence.** Once \`description:\` contains your trigger phrases, every session that loads the skill list contains them too, and a naive grep balloons. Re-running that first count today returns 562 sessions; filtered to messages a human actually typed it is 193. Filter to \`type == "user"\`.
+
+The skill, in English and in the Croatian original, plus the mining script: [github.com/stepanic/cv/tree/main/skills/wrap-up](https://github.com/stepanic/cv/tree/main/skills/wrap-up). MIT. The part worth copying is the method, not my five steps.`,
+      hr: `Na kraju gotovo svakog Claude Code razgovora tipkao sam varijaciju istog odlomka:
+
+> super, daj sve commitaj i pushaj, update memory fajlova i ako u ovom chatu postoji neko znanje koje nije trajno u codebaseu trajno ga spremi u markdown dokument ako i treba s mermaidjs vizualizacijama i nakon toga pripremi chat za clear
+
+Pa sam 4. kolovoza 2026. zatražio prečac. Zanimljiv je dio ono što se dogodilo poslije: skill nije napisan prema mom opisu vlastite navike. **Izmajniran je iz mojih transkripata**, a brojke su me ispravile dvaput.
+
+## Dokazi su već bili na disku
+
+Claude Code sprema svaku sesiju kao JSONL u \`~/.claude/projects/\`. U tom trenutku: 145 mapa projekata, 2,5 GB. Prvi korak zato nije bio pisanje datoteke nego brojanje:
+
+\`\`\`bash
+cd ~/.claude/projects
+grep -rliE "pripremi.{0,30}chat za clear" --include=*.jsonl . | wc -l
+# 147
+\`\`\`
+
+**147 sesija** sadržavalo je tu frazu. Nakon dedupliciranja poruka koje sam doista utipkao ostalo je **119 jedinstvenih formulacija** istog zahtjeva: "sve commitaj i pushaj i preimremi chat za clear", "ok, updejtaj memory fajlove i pripremi chat za clear", tipfeleri uključeni. To je pošten oblik navike: ne jedan prompt, nego oblak gotovo istih.
+
+Onda dio koji je stvarno oblikovao skill — brojanje koji se koraci pojavljuju u najpotpunijim varijantama:
+
+| korak koji sam tražio | udio varijanti |
+|---|---|
+| "pripremi chat za clear" | **100%** |
+| commit + push | 88% |
+| update memory fajlova | 70% |
+| markdown dokument | 41% |
+| mermaid dijagram | 12% |
+| izrijekom \`docs/\` ili \`CLAUDE.md\` | 0% |
+
+## Dvije stvari koje sam o sebi krivo mislio
+
+**Mermaid nije zadano.** *Osjećam* da dijagrame tražim stalno. Tražim ih u 12% slučajeva. Da sam skill pisao po sjećanju, crtao bi dijagram u svakom prolazu — vjeran mojoj slici o sebi, netočan o mom ponašanju. U datoteku je umjesto toga otišlo: *mermaid kad odnos ili tijek nisu očiti iz teksta; ne crtaj dijagram za ono što je rečenica.*
+
+**Najvrjedniji korak nedostajao je u mom vlastitom promptu.** Najduže varijante traže handoff prompt u clipboardu, spreman za lijepljenje u svježu sesiju nakon \`/clear\`. Bio je čak zapisan i u memory fajlu. Ali je ispao iz rečenice koju tipkam, jer sam ga počeo podrazumijevati. Rudarenje je izvuklo korak o kojem je moja navika zašutjela, i postao je korak 4.
+
+## Pravilo crvenom
+
+Jedna linija u skillu označena je crvenom točkom: **nikad \`git add -A\`.**
+
+To nije stilska preferencija nego zapisan promašaj za dlaku. Baš tijekom sesije koja je proizvela skill, radna kopija susjednog repoa držala je nedovršen \`.gitignore\` i hrpu napola napisanih shell skripti, netrackanih, dok se commitao nepovezan rad. \`git add -A\` odnio bi tuđe napola gotovo poslijepodne na \`main\`.
+
+Zato skill stageira **poimence**, a za svaki izmijenjen fajl kojeg se agent ne sjeća dirati pokreće \`git diff\` i ostavlja ga na miru ako nije njegov. Isti odlomak zabranjuje commitanje snapshota koje piše cron i \`.env\`, i zabranjuje javljanje "pushano" bez provjere izlaza pusha.
+
+Mislim da je to opći oblik pravila koje vrijedi staviti u skill: ne preferencija, nego ono što je jednom umalo pošlo po zlu.
+
+## Što zapravo radi
+
+Pet koraka, redom, autonomno do kraja:
+
+1. **Commit + push kroz svaki repo dirnut u sesiji.** Rad stalno prelazi granice repoa — promjena na backendu, dashboard koji je čita, fetcher koji je hrani — a zadnji je onaj koji zaboraviš. Stageano poimence, semantičke commit poruke čije tijelo objašnjava *zašto*, push provjeren iz izlaza.
+2. **Memory fajlovi.** Jedan fakt po fajlu, ažuriraj postojeći umjesto duplikata, samo ono što vrijedi i za buduće sesije.
+3. **Znanje koje nije u codebaseu**, u \`docs/YYYY-MM-DD-tema.md\`. Okvir koji taj korak čini upotrebljivim: ne "što smo radili" — to git već zna — nego **"što bi sljedeći prolaz morao ponovno otkriti"**. Odbačene alternative i zašto. Mjerenje koje je odredilo prag. Tihi kvar koji je pojeo poslijepodne.
+4. **Handoff prompt u clipboard** *i* ispisan u odgovoru, jer se clipboard do \`/clear\` zna izgubiti.
+5. **Sažetak čiji je najvažniji dio ono što je ostalo otvoreno ili neprovjereno.**
+
+\`/clear\` ne može pokrenuti sam. To je ugrađena CLI komanda, pa mi zadnja linija kaže da je utipkam.
+
+## Dva ulaza, namjerno
+
+Možeš ga pozvati kao \`/wrap-up\`. A možeš i dalje tipkati svoju uobičajenu rečenicu: polje \`description:\` sadrži stvarne fraze iz tih 119 varijanti, pa se skill okida sam. Prečac kojeg se moraš sjetiti je prečac koji ćeš zaboraviti — poanta je bila automatizirati naviku, a ne zamijeniti je novom koju treba održavati.
+
+## Drži li vodu
+
+Između 4. i 26. kolovoza 2026. okinuo se **47 puta kroz 11 radnih dana**, u svakom repou koji sam dirao, ne samo u onom u kojem je nastao.
+
+Ono što uklanja nije trud tipkanja. Nego sesija koja završi s dobrim mjerenjem, odbačenim pristupom i razlogom za to, a sve to živi jedino u kontekstu koji se sprema obrisati.
+
+## Izmajniraj svoj
+
+Metoda se prenosi na bilo koji prompt koji stalno pretipkavaš. Prebroji pojavljivanja, dedupliciraj varijante, prebroji koji se koraci javljaju, pa piši skill prema brojkama umjesto prema sjećanju, i stavi stvarne formulacije u \`description:\`.
+
+Dvije zamke, obje su me ugrizle:
+
+- **Claude Code briše \`~/.claude\` nakon 30 dana.** Starije sesije su nestale ako ih ne backupiraš. Moje preživljavaju jer [dotclaude-sync](https://github.com/stepanic/dotclaude-sync) radi dnevni git snapshot — isti arhiv koji pokreće [statistiku korištenja](/#claude-code) na ovoj stranici.
+- **Skill kontaminira vlastite dokaze.** Čim \`description:\` sadrži tvoje okidačke fraze, sadrži ih i svaka sesija koja učita popis skillova, pa naivni grep nabuja. Isto brojanje danas vraća 562 sesije; filtrirano na poruke koje je čovjek doista utipkao, 193. Filtriraj na \`type == "user"\`.
+
+Skill, na engleskom i u hrvatskom originalu, plus skripta za rudarenje: [github.com/stepanic/cv/tree/main/skills/wrap-up](https://github.com/stepanic/cv/tree/main/skills/wrap-up). MIT. Vrijedi kopirati metodu, ne mojih pet koraka.`,
+    },
+    sources: [
+      {
+        title: "The skill itself — SKILL.md, the Croatian original and the mining script",
+        url: "https://github.com/stepanic/cv/tree/main/skills/wrap-up",
+      },
+      {
+        title: "Claude Code — Agent Skills documentation",
+        url: "https://docs.claude.com/en/docs/claude-code/skills",
+      },
+      {
+        title: "dotclaude-sync — daily git snapshots of ~/.claude, past the 30-day pruning",
+        url: "https://github.com/stepanic/dotclaude-sync",
+      },
+    ],
+  },
+  {
     slug: "three-years-of-revenuecat-manual-to-agentic",
     date: "2026-06-28",
     tags: ["RevenueCat", "In-App Purchases", "Flutter", "Claude Code", "AI-native"],

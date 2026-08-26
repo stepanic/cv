@@ -28,6 +28,11 @@ data/*.yaml  ──┬──>  typst/   ──>  dist/*.pdf      (full · one-pa
 - **Job-application pipeline.** Drop a job posting in, get back a fit
   analysis, a tag-tailored CV PDF, a cover letter and an outreach email
   draft (real applications stay in a private repo).
+- **Skills I actually use, published.** [`skills/`](skills/) holds the Claude
+  Code skills that run in my daily work, MIT-licensed — starting with
+  [`/wrap-up`](skills/wrap-up/), which was **mined out of 147 of my own
+  sessions** rather than written from memory
+  ([the story](https://stepanic.domovina.ai/blog/wrap-up-skill-mined-from-my-own-transcripts)).
 
 ## Hrvatski
 
@@ -37,6 +42,14 @@ uređuje samo u [`data/`](data/), a iz njega se automatski grade web stranica
 ([stepanic.domovina.ai](https://stepanic.domovina.ai)), PDF varijante (puna,
 jedna stranica, ATS — na hrvatskom i engleskom) i prilagođeni paketi za
 prijave na poslove.
+
+## Skills (`skills/`)
+
+Claude Code skills, one markdown file each, free to copy:
+
+| Skill | What it does |
+|---|---|
+| [`wrap-up`](skills/wrap-up/) | Closes a session before `/clear`: commit and push every repo touched, refresh memory files, write down what is not yet in the codebase, put a handoff prompt in the clipboard, and report what is still open. Designed from a count of 119 real phrasings of the request across my transcripts, not from recollection. |
 
 ## Stack
 
