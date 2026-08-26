@@ -125,6 +125,12 @@ When the user drops a job proposal/posting into a session:
   `data/generated/claude-code-stats.json` — don't hardcode them in prose
   except in `profile.summary` (update that when the order of magnitude
   changes).
+- **Never quote `lastYear.totalContributions`.** Roughly seven eighths of it is
+  `domovinatv/dataset.domovina.tv` publishing the open transcript corpus, one
+  automated commit per episode artefact. The CV, the PDFs and the site quote
+  `lastYear.excludingArchive.totalContributions` and name the raw figure and the
+  archive beside it. `docs/data-sources.md` explains the split; the same
+  exclusion is what the committers.top fork fix does.
 - **Externally-sourced numbers go stale silently and CI cannot catch it.**
   The DOMOVINA corpus size, Docker Hub pulls and open-data catalogue counts
   all live outside this repo. `docs/data-sources.md` records where each one
