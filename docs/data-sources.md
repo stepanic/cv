@@ -41,8 +41,11 @@ for hours and speakers, and say "~" on the snapshot-derived figures.
 Appears in: `data/profile.yaml`, `data/experience.yaml`,
 `data/projects/domovina.yaml`, `domovina-rag.yaml`, `domovina-pipeline.yaml`.
 
-**Reading, 2026-07-27:** 3,034 episodes · 46 channels · 137,451 chunks ·
-~2,870 hours · 2,573 distinct speakers · corpus spans 2016-02-18 → 2026-07-10.
+**Reading, 2026-08-26:** 3,157 episodes · 48 channels · 144,294 chunks ·
+~2,990 hours · 2,698 distinct speakers · corpus spans 2016-02-18 → 2026-07-30.
+The stats snapshot lagged the MCP by 680 chunks on the day (143,614 vs 144,294),
+which is the expected daily-cron lag. Previous reading, 2026-07-27: 3,034 · 46 ·
+137,451 · ~2,870 · 2,573.
 
 ### Docker Hub — `microblink/api`
 
@@ -53,12 +56,13 @@ for Microblink; still maintained. Pull count is public and needs no auth:
 curl -s https://hub.docker.com/v2/repositories/microblink/api/ | jq '{pull_count, last_updated}'
 ```
 
-**Reading, 2026-07-27:** 4,157,518 pulls, registered 2017-10-30, last updated
+**Reading, 2026-08-26:** 4,160,365 pulls, registered 2017-10-30, last updated
 2026-05-08.
 
 ### Croatian open-data catalogues
 
 Counts live in each project's README and change as backfills progress —
+re-read on 2026-08-26, all four unchanged since the previous check —
 `klubovi` (901 clubs), `stranke` (434 parties), `zakoni` (97,561 acts across
 5,077 issues), `izbori` (~70,000 result files). Re-read the README in
 `~/git/domovinatv/<repo>` rather than trusting the CV entry.

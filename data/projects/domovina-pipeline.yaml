@@ -16,14 +16,14 @@ summary:
     illustrated article: yt-dlp fetch, ASR on Metal (Whisper.cpp) and Colab
     GPUs (NVIDIA Canary), pyannote speaker diarization, Gemini summarization
     via multi-region Vertex AI, screenshots, RAG chunking and CDN publish.
-    3,034 episodes across 46 channels — ~2,870 hours of audio — are released
+    3,157 episodes across 48 channels — ~2,990 hours of audio — are released
     as an open text dataset.
   hr: >-
     Medijski pipeline od 12 koraka koji YouTube URL pretvara u pretraživ,
     ilustriran članak: yt-dlp dohvat, ASR na Metalu (Whisper.cpp) i Colab
     GPU-ima (NVIDIA Canary), pyannote dijarizacija govornika, Gemini
     sažimanje kroz multi-region Vertex AI, screenshotovi, RAG chunkanje i
-    objava na CDN. 3.034 epizode u 46 kanala — ~2.870 sati zvuka —
+    objava na CDN. 3.157 epizoda u 48 kanala — ~2.990 sati zvuka —
     objavljeno je kao otvoreni tekstualni dataset.
 highlights:
   - en: >-

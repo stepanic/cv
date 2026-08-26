@@ -1,27 +1,27 @@
 {
-  "updated": "2026-08-04T09:33:08Z",
+  "updated": "2026-08-26T09:25:06Z",
   "profile": {
     "created_at": "2010-06-26T16:20:43Z",
-    "followers": 41,
+    "followers": 43,
     "login": "stepanic",
     "name": "Matija Stepanic",
-    "public_repos": 109
+    "public_repos": 110
   },
   "lastYear": {
-    "totalContributions": 34683,
-    "commits": 33160,
-    "pullRequests": 75,
+    "totalContributions": 37095,
+    "commits": 35416,
+    "pullRequests": 78,
     "issues": 12,
     "topRepositories": [
       {
         "repo": "domovinatv/fetch.domovina.tv",
         "url": "https://github.com/domovinatv/fetch.domovina.tv",
-        "commits": 532
+        "commits": 614
       },
       {
         "repo": "domovinatv/ai.domovina.tv",
         "url": "https://github.com/domovinatv/ai.domovina.tv",
-        "commits": 429
+        "commits": 497
       },
       {
         "repo": "domovinatv/pay.domovina.ai",
@@ -31,7 +31,7 @@
       {
         "repo": "domovinatv/domovina-api",
         "url": "https://github.com/domovinatv/domovina-api",
-        "commits": 99
+        "commits": 106
       },
       {
         "repo": "DeoOptimoMaximo/Pediludium",
@@ -39,14 +39,14 @@
         "commits": 94
       },
       {
+        "repo": "domovinatv/domovina-rag",
+        "url": "https://github.com/domovinatv/domovina-rag",
+        "commits": 89
+      },
+      {
         "repo": "domovinatv/klubovi.domovina.ai",
         "url": "https://github.com/domovinatv/klubovi.domovina.ai",
         "commits": 86
-      },
-      {
-        "repo": "domovinatv/domovina-rag",
-        "url": "https://github.com/domovinatv/domovina-rag",
-        "commits": 78
       },
       {
         "repo": "pinka-finance/pinka-app",
@@ -59,6 +59,11 @@
         "commits": 51
       },
       {
+        "repo": "domovinatv/karta-hrvatske",
+        "url": "https://github.com/domovinatv/karta-hrvatske",
+        "commits": 50
+      },
+      {
         "repo": "stepanic/flutter_certilia",
         "url": "https://github.com/stepanic/flutter_certilia",
         "commits": 50
@@ -69,34 +74,17 @@
         "commits": 49
       },
       {
-        "repo": "domovinatv/karta-hrvatske",
-        "url": "https://github.com/domovinatv/karta-hrvatske",
-        "commits": 45
+        "repo": "domovinatv/pipeline.domovina.ai",
+        "url": "https://github.com/domovinatv/pipeline.domovina.ai",
+        "commits": 42
       },
       {
         "repo": "edemokracija/novcanik-prototip",
         "url": "https://github.com/edemokracija/novcanik-prototip",
         "commits": 40
-      },
-      {
-        "repo": "domovinatv/pipeline.domovina.ai",
-        "url": "https://github.com/domovinatv/pipeline.domovina.ai",
-        "commits": 39
       }
     ],
     "weekly": [
-      {
-        "weekStart": "2025-08-03",
-        "count": 8
-      },
-      {
-        "weekStart": "2025-08-10",
-        "count": 23
-      },
-      {
-        "weekStart": "2025-08-17",
-        "count": 0
-      },
       {
         "weekStart": "2025-08-24",
         "count": 23
@@ -175,11 +163,11 @@
       },
       {
         "weekStart": "2026-01-04",
-        "count": 19
+        "count": 48
       },
       {
         "weekStart": "2026-01-11",
-        "count": 9
+        "count": 10
       },
       {
         "weekStart": "2026-01-18",
@@ -255,7 +243,7 @@
       },
       {
         "weekStart": "2026-05-24",
-        "count": 318
+        "count": 327
       },
       {
         "weekStart": "2026-05-31",
@@ -279,7 +267,7 @@
       },
       {
         "weekStart": "2026-07-05",
-        "count": 249
+        "count": 251
       },
       {
         "weekStart": "2026-07-12",
@@ -287,15 +275,27 @@
       },
       {
         "weekStart": "2026-07-19",
-        "count": 1359
+        "count": 1364
       },
       {
         "weekStart": "2026-07-26",
-        "count": 200
+        "count": 211
       },
       {
         "weekStart": "2026-08-02",
-        "count": 24
+        "count": 111
+      },
+      {
+        "weekStart": "2026-08-09",
+        "count": 1088
+      },
+      {
+        "weekStart": "2026-08-16",
+        "count": 63
+      },
+      {
+        "weekStart": "2026-08-23",
+        "count": 1148
       }
     ]
   },
@@ -306,11 +306,11 @@
     },
     {
       "name": "TypeScript",
-      "size": 4531444
+      "size": 4555504
     },
     {
       "name": "JavaScript",
-      "size": 2092389
+      "size": 2104156
     },
     {
       "name": "Liquid",
@@ -318,15 +318,15 @@
     },
     {
       "name": "CSS",
-      "size": 770702
+      "size": 783647
     },
     {
       "name": "HTML",
-      "size": 651122
+      "size": 654365
     },
     {
       "name": "Shell",
-      "size": 158586
+      "size": 164591
     },
     {
       "name": "MATLAB",
@@ -338,7 +338,7 @@
     },
     {
       "name": "Swift",
-      "size": 102230
+      "size": 113626
     }
   ]
 }

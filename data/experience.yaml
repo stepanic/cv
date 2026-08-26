@@ -37,16 +37,16 @@ experience:
       - text:
           en: >-
             Built a 12-step media-ingestion pipeline (fetch.domovina.tv) that
-            has processed 3,034 Croatian podcast episodes across 46 channels
-            — ~2,870 hours of audio, 2,573 distinct speakers — into 137,451
+            has processed 3,157 Croatian podcast episodes across 48 channels
+            — ~2,990 hours of audio, 2,698 distinct speakers — into 144,294
             semantic RAG chunks: Whisper.cpp on Metal and NVIDIA Canary on
             Colab GPUs for ASR, pyannote diarization, Gemini summarisation via
             multi-region Vertex AI rotation.
           hr: >-
             Izgradio 12-koračni pipeline za obradu medija (fetch.domovina.tv)
-            koji je obradio 3.034 epizode hrvatskih podcasta u 46 kanala
-            — ~2.870 sati zvuka, 2.573 različita govornika — u 137.451
-            semantički RAG chunk: Whisper.cpp na Metalu i NVIDIA Canary na
+            koji je obradio 3.157 epizoda hrvatskih podcasta u 48 kanala
+            — ~2.990 sati zvuka, 2.698 različita govornika — u 144.294
+            semantička RAG chunka: Whisper.cpp na Metalu i NVIDIA Canary na
             Colab GPU-ima za ASR, pyannote dijarizacija, Gemini sažimanje kroz
             multi-region Vertex AI rotaciju.
         tags: [data, automation, pipelines, ai]

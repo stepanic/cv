@@ -17,15 +17,15 @@ summary:
     AI-native Croatian media platform of 30+ public repositories, built
     end-to-end by one engineer. An automated pipeline (Whisper.cpp on Metal,
     NVIDIA Canary on Colab GPUs, pyannote diarization, Gemini via multi-region
-    Vertex AI) has processed 3,034 podcast episodes across 46 channels into
-    137,451 semantic RAG chunks, searchable through a public MCP server and a
+    Vertex AI) has processed 3,157 podcast episodes across 48 channels into
+    144,294 semantic RAG chunks, searchable through a public MCP server and a
     Flutter app that ships to web (WASM), iOS, Android and Android TV.
   hr: >-
     AI-native hrvatska medijska platforma od 30+ javnih repozitorija,
     izgrađena end-to-end od jednog inženjera. Automatizirani pipeline
     (Whisper.cpp na Metalu, NVIDIA Canary na Colab GPU-ima, pyannote
-    dijarizacija, Gemini kroz multi-region Vertex AI) obradio je 3.034
-    epizode podcasta u 46 kanala u 137.451 semantički RAG chunk, pretraživih
+    dijarizacija, Gemini kroz multi-region Vertex AI) obradio je 3.157
+    epizoda podcasta u 48 kanala u 144.294 semantička RAG chunka, pretraživa
     kroz javni MCP server i Flutter aplikaciju za web (WASM), iOS, Android i
     Android TV.
 highlights:
