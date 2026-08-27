@@ -1,16 +1,19 @@
 # Colossus hipoteza — dvije verzije istog članka
 
-Isti sadržaj, ista mjerenja, dva registra. Verzija B je ona koja ide na blog.
+Isti sadržaj, ista mjerenja, dva registra. Obje su objavljene na blogu; B je
+glavni članak, A stoji uz njega kao izložak. Vidi poglavlje "Obje su na kraju
+objavljene" niže.
 
 Mjerenja su napravljena 27. kolovoza 2026. nad `data/generated/claude-code-stats.json`
 i lokalnim transkriptima u `~/.claude/projects/`. Reproducibilne naredbe su na dnu.
 
 ---
 
-## Verzija A — dramaturški registar (odbačena)
+## Verzija A — dramaturški registar (objavljena kao izložak)
 
-> Registar koji LLM-ovi zadano pišu: uvod, zaplet, obrat, pouka. Ovdje je zapisan
-> zato da se vidi razlika, ne zato da se objavi.
+> Registar koji LLM-ovi zadano pišu: uvod, zaplet, obrat, pouka. Zapisan je ovdje
+> zato da se vidi razlika. Naknadno je objavljen i kao blog post, verbatim, pa se
+> ovaj tekst ne smije mijenjati bez ponovnog mjerenja.
 
 ### EN
 
