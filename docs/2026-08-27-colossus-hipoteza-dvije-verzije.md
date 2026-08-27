@@ -109,6 +109,59 @@ Ugovor je stvaran. Osjećaj je bio stvaran. Uzročnu crtu među njima povukao sa
 
 Tekst je u `web/content/blog.ts`, slug `colossus-lease-in-my-own-usage-data`.
 
+## Obje su na kraju objavljene
+
+Prvotna je odluka bila da se objavi samo verzija B, a A ostane ovdje kao zapis.
+Promijenjeno istoga dana: bez objavljene verzije A, tvrdnja iz posta s usporedbom
+(`two-registers-and-the-limitations-one-dropped`) da teatralna verzija navodi 0 od 3
+ograničenja nije provjerljiva bez otvaranja ovog markdowna.
+
+Verzija A objavljena je kao slug `colossus-lease-theatrical-version`, **verbatim**,
+uz dvije uokvirujuće napomene izvan mjerenog teksta: na vrhu da je riječ o izlošku, na
+dnu poimence sva tri izostavljena ograničenja. Napomene se ne broje u mjerenjima.
+
+**Verziju A ne ispravljati.** Svaka izmjena teksta obesmišljava brojke u postu s
+usporedbom. Ako se ikad mijenja, moraju se ponovno izmjeriti i oba mjesta ažurirati.
+
+## Strukturna mjerenja obiju verzija
+
+Mjereno 27. kolovoza 2026. nad engleskim tekstovima, bez tablica, popisa i
+uokvirujućih napomena:
+
+| | teatralna (A) | inženjerska (B) |
+|---|---|---|
+| riječi | 498 | 789 |
+| rečenica | 43 | 34 |
+| prosječna rečenica | 12 riječi | 23 riječi |
+| međunaslova | 0 | 9 |
+| navedenih ograničenja | 0 od 3 | 3 od 3 |
+
+Dva nalaza vrijedi zapamtiti jer su protivni očekivanju:
+
+1. **Teatralna verzija je kraća, ne duža**, i rečenice su joj upola kratke. Sažetost
+   je sredstvo dramaturškog luka, a ne njegov višak. Dio razlike u broju riječi ipak
+   je strukturan, jer B nosi tablice i dva odjeljka koje A sažima u tekst.
+2. **A ne sadrži nijedno od tri ograničenja iz B**, ni odjeljak u koji bi stali.
+   Ništa nije iskrivljeno; činjenice koje slabe nalaz nisu imale gdje sjesti. To je
+   izravan razlog za pravilo u `skills/register/SKILL.md` da napetost smije doći samo
+   iz redoslijeda, nikad iz izostavljanja.
+
+### Odbačena mjera
+
+Brojanje jednorečeničnih odlomaka, uz očekivanje da će ih A biti puna. Rezultat je
+obrnut i beskoristan: A ih ima 0, B ih ima 5 (29 % odlomaka). Pravilo zabranjuje
+jednorečenični odlomak u ulozi udarca u bubanj, a brojanje to ne razlikuje od kratke
+činjenične tvrdnje pod naslovom. Mjera ne mjeri pravilo i nije ušla u tablicu.
+
+### Kako ponoviti mjerenje
+
+Skripta nije spremljena jer je jednokratna. Postupak: izvući engleski tekst verzije A
+iz ovog dokumenta (između `### EN` i `### HR`) i verzije B iz `web/content/blog.ts`
+(polje `body.en` posta `colossus-lease-in-my-own-usage-data`), pa brojati riječi,
+rečenice po granici `(?<=[.!?])\s+` i odlomke, uz izbacivanje redaka koji počinju s
+`#`, `|`, `>` ili `-`. Brojke su osjetljive na to isključivanje, pa je stabilan odnos
+među njima, a ne apsolutna vrijednost.
+
 ---
 
 ## Reproducibilnost
