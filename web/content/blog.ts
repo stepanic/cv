@@ -34,7 +34,7 @@ Setup, complication, reveal, lesson. Model-written prose falls into that shape b
 
 ## The comparison
 
-Both versions describe the [Colossus hypothesis](/blog/colossus-lease-in-my-own-usage-data) — whether Anthropic's lease of xAI's Colossus 1 shows up in my own Claude Code telemetry. Same data, same tables, same conclusion. English versions, measured on 27 August 2026:
+Both versions describe the same investigation: whether Anthropic's lease of xAI's Colossus 1 shows up in my own Claude Code telemetry. Same data, same tables, same conclusion. Both are published, so the comparison can be read rather than taken on trust — the [engineering version](/blog/colossus-lease-in-my-own-usage-data) and the [theatrical one](/blog/colossus-lease-theatrical-version), the latter unedited apart from a framing note that is excluded from the counts below. English versions, measured on 27 August 2026:
 
 | | theatrical | engineering |
 |---|---|---|
@@ -95,7 +95,7 @@ Uvod, zaplet, obrat, pouka. Tekst iz jezičnog modela zadano poprima taj oblik i
 
 ## Usporedba
 
-Obje verzije opisuju [Colossus hipotezu](/blog/colossus-lease-in-my-own-usage-data), dakle pitanje vidi li se Anthropicov zakup xAI-jeva Colossusa 1 u mojoj telemetriji Claude Codea. Isti podaci, iste tablice, isti zaključak. Mjereno nad engleskim verzijama 27. kolovoza 2026.:
+Obje verzije opisuju isto istraživanje, dakle pitanje vidi li se Anthropicov zakup xAI-jeva Colossusa 1 u mojoj telemetriji Claude Codea. Isti podaci, iste tablice, isti zaključak. Obje su objavljene, pa se usporedba može pročitati umjesto da se uzme na riječ: [inženjerska](/blog/colossus-lease-in-my-own-usage-data) i [teatralna](/blog/colossus-lease-theatrical-version), pri čemu je druga neizmijenjena osim uokvirujuće napomene koja se ne broji u donjim brojkama. Mjereno nad engleskim verzijama 27. kolovoza 2026.:
 
 | | teatralna | inženjerska |
 |---|---|---|
@@ -362,6 +362,85 @@ Mjerenja, naredbe kojima se ponavljaju i potpun popis ograničenja stoje u [docs
       {
         title: "dotclaude-sync — daily git snapshots of ~/.claude, the reason this history exists at all",
         url: "https://github.com/stepanic/dotclaude-sync",
+      },
+    ],
+  },
+  {
+    slug: "colossus-lease-theatrical-version",
+    date: "2026-08-27",
+    tags: ["Writing", "Specimen", "Claude Code", "Telemetry"],
+    title: {
+      en: "I was certain I had felt a $15 billion datacenter deal. My own telemetry says I felt my backup script.",
+      hr: "Bio sam siguran da sam osjetio ugovor od 15 milijardi dolara. Vlastita telemetrija kaže da sam osjetio svoju skriptu za sigurnosnu kopiju.",
+    },
+    lead: {
+      en: "A specimen, published unedited. This is the same investigation as the engineering-register version, written in the register a language model reaches for by default. It states three fewer limitations than the version next to it, and that is the point of publishing it.",
+      hr: "Primjerak, objavljen neizmijenjen. Ovo je isto istraživanje kao i verzija u inženjerskom registru, napisano u registru za kojim jezični model poseže po zadanom. Navodi tri ograničenja manje od verzije pokraj sebe, i upravo je zato objavljen.",
+    },
+    body: {
+      en: `> **Read this as an exhibit, not as the finished article.** It is the theatrical rendering of the same investigation as [Four checks on whether a datacenter lease shows up in my own usage data](/blog/colossus-lease-in-my-own-usage-data), written from the same measurements. The facts and figures below are accurate. What is missing is the limitations section: this version states **none** of the three caveats the engineering version carries, which is the finding reported in [the comparison post](/blog/two-registers-and-the-limitations-one-dropped). The text is unedited so that the word and sentence counts quoted there still describe it.
+
+---
+
+On 6 May 2026, xAI handed Anthropic the entire Colossus 1 facility outside Memphis: over 220,000 Nvidia GPUs, 300 megawatts, $1.25 billion a month through May 2029. I did not learn this from a press release. I learned it the way I learn most things now, by asking Claude, and the number stopped me: fifteen billion dollars a year, for one cluster, so that a terminal window can answer me.
+
+And I was sure I had felt it. Somewhere around the start of May something changed in how Claude Code behaved for me. Sessions got longer. Work that used to stall stopped stalling. I had the receipts, too, or thought I did: 21.3 billion tokens across 4,157 sessions, all of it mined out of my own transcripts. April, one billion tokens. May, four. June, six.
+
+So I went looking for the moment. What I found instead was my own instrument.
+
+The first crack was the date. The jump is not at the start of May at all. The first eleven days of May average 51 million tokens a day, *below* the second half of April at 94 million. The break is 12 May, and everything after it lives in a different regime: 182 million a day for the rest of the month, 218 in June.
+
+The second crack was the model. Through all of May I ran exactly one model, \`opus-4-7\`. Opus 4.8 does not appear in my transcripts until 29 May. Fable 5 until 9 June. And Opus 5, the model I had named as the cause, until **24 July**. Whatever I felt in May, it was not the thing I thought I felt it from.
+
+The third crack was fatal. \`dotclaude-backup\`, the tool that snapshots \`~/.claude\` into a daily git commit, has its first commit on **12 May 2026**. The same day as the break. Before it, 45 of 72 days are missing from my own history, lost to the 30-day transcript retention. After it, 2 of 81. The step I had been reading as a change in the world was, in large part, the day I started recording the world properly.
+
+The fourth check was the one that should have settled it in my favour, and did the opposite. Overload and limit errors, per thousand assistant messages: 0.33 in May, 1.85 in June, 1.36 in July. If Colossus 1 had loosened anything for me, that line should fall. It rises.
+
+Here is what I actually learned, and it is worth more than the story I wanted to tell. My token counts measure *my demand*. They say nothing about anyone's supply. To claim that a lease in Tennessee reached my terminal I would need serving-side numbers — latency per token, time to first token, the rate of 529s, normalized by model and hour — and a baseline collected before I went looking. I had none of that. I had a curve that bent on the day I bought a better ruler.
+
+The deal is real. The feeling was real. The causal line between them was something I drew myself.
+
+---
+
+> **What this version left out.** Three limitations, all of them in the [engineering version](/blog/colossus-lease-in-my-own-usage-data): coverage before 12 May 2026 is reconstructed, so the April baseline is unreliable in *both* directions and April may well have been busier than recorded; session counts are not comparable across the series, since May shows 170 and June 2,016; and overload errors rise with my own concurrency, not only with service load, so their increase is an absence of evidence rather than evidence of the opposite. None of these contradict the conclusion. Each one weakens it, and each one had nowhere to sit in a structure built to land an ending.`,
+      hr: `> **Čitajte ovo kao izložak, ne kao gotov članak.** Ovo je teatralna izvedba istog istraživanja kao i [Četiri provjere: vidi li se najam podatkovnog centra u mojim podacima o korištenju](/blog/colossus-lease-in-my-own-usage-data), pisana iz istih mjerenja. Činjenice i brojke koje slijede točne su. Nedostaje odjeljak s ograničenjima: ova verzija ne navodi **nijedno** od tri koja inženjerska nosi, što je nalaz iznesen u [postu s usporedbom](/blog/two-registers-and-the-limitations-one-dropped). Tekst je neizmijenjen da bi brojke o riječima i rečenicama iz toga posta i dalje opisivale upravo njega.
+
+---
+
+Šestoga svibnja 2026. xAI je Anthropicu ustupio cijeli Colossus 1 kraj Memphisa: više od 220.000 Nvidijinih grafičkih procesora, 300 megavata, 1,25 milijardi dolara mjesečno do svibnja 2029. Za to nisam saznao iz priopćenja za javnost nego onako kako danas saznajem gotovo sve, pitao sam Claudea, i brojka me zaustavila. Petnaest milijardi godišnje, za jedan klaster, da bi mi prozor terminala odgovorio.
+
+I bio sam siguran da sam to osjetio. Negdje na početku svibnja nešto se promijenilo u tome kako se Claude Code kod mene ponaša. Sesije su se produljile. Poslovi koji bi prije zapeli prestali su zapinjati. Imao sam i dokaze, mislio sam: 21,3 milijarde tokena kroz 4157 sesija, sve izrudareno iz vlastitih transkripata. Travanj, milijarda tokena. Svibanj, četiri. Lipanj, šest.
+
+Krenuo sam tražiti trenutak. Umjesto njega našao sam vlastiti mjerni instrument.
+
+Prva je pukotina bio datum. Skoka na početku svibnja naprosto nema. Prvih jedanaest svibanjskih dana prosječno daju 51 milijun tokena dnevno, dakle *manje* od druge polovice travnja s 94 milijuna. Prijelom je 12. svibnja, a sve poslije njega živi u drugom režimu: 182 milijuna dnevno do kraja mjeseca, 218 u lipnju.
+
+Druga je pukotina bio model. Kroz cijeli svibanj vozio sam točno jedan model, \`opus-4-7\`. Opus 4.8 u mojim se transkriptima ne pojavljuje prije 29. svibnja. Fable 5 prije 9. lipnja. A Opus 5, model koji sam prozvao uzrokom, tek **24. srpnja**. Što god da sam u svibnju osjetio, nije došlo odande odakle sam mislio.
+
+Treća je pukotina bila kobna. \`dotclaude-backup\`, alat koji \`~/.claude\` svakodnevno sprema u git, ima prvi commit **12. svibnja 2026.** Istoga dana kad i prijelom. Prije njega u mojoj povijesti nedostaje 45 od 72 dana, progutala ih je tridesetodnevna retencija transkripata. Poslije njega nedostaju dva od 81. Stepenicu koju sam čitao kao promjenu u svijetu dobrim je dijelom bio dan kad sam svijet počeo uredno bilježiti.
+
+Četvrta je provjera trebala presuditi u moju korist, a presudila je obrnuto. Greške preopterećenja i ograničenja, na tisuću asistentskih poruka: 0,33 u svibnju, 1,85 u lipnju, 1,36 u srpnju. Da mi je Colossus 1 išta olabavio, ta bi krivulja padala. Ona raste.
+
+Evo što sam zapravo naučio, i to vrijedi više od priče koju sam htio ispričati. Moje brojke o tokenima mjere *moju potražnju*. O tuđim kapacitetima ne govore ništa. Da bih tvrdio kako je najam u Tennesseeju stigao do mog terminala, trebale bi mi brojke sa strane posluživanja, kašnjenje po tokenu, vrijeme do prvoga tokena, udio grešaka 529, sve to razvrstano po modelu i satu, i mjereno prije nego što sam počeo tražiti. Ništa od toga nisam imao. Imao sam krivulju koja se prelomila onoga dana kad sam kupio bolje ravnalo.
+
+Ugovor je stvaran. Osjećaj je bio stvaran. Uzročnu crtu među njima povukao sam sâm.
+
+---
+
+> **Što je ova verzija izostavila.** Tri ograničenja, sva iz [inženjerske verzije](/blog/colossus-lease-in-my-own-usage-data): pokrivenost prije 12. svibnja 2026. je rekonstruirana, pa travanjska osnovica nije pouzdana ni u jednom smjeru i travanj je mogao biti i prometniji nego što je zabilježeno; broj sesija nije usporediv kroz niz, jer svibanj pokazuje 170, a lipanj 2016; i greške preopterećenja rastu i s mojom vlastitom paralelizacijom, ne samo s opterećenjem usluge, pa je njihov porast izostanak dokaza, a ne dokaz suprotnoga. Nijedno od toga ne pobija zaključak. Svako ga slabi, i nijedno nije imalo gdje sjesti u građi složenoj da dovede do završetka.`,
+    },
+    sources: [
+      {
+        title: "The engineering-register version of the same investigation",
+        url: "https://stepanic.domovina.ai/blog/colossus-lease-in-my-own-usage-data",
+      },
+      {
+        title: "The comparison, with the structural measurements of both versions",
+        url: "https://stepanic.domovina.ai/blog/two-registers-and-the-limitations-one-dropped",
+      },
+      {
+        title: "Both versions and the underlying measurements in the repo",
+        url: "https://github.com/stepanic/cv/blob/main/docs/2026-08-27-colossus-hipoteza-dvije-verzije.md",
       },
     ],
   },
