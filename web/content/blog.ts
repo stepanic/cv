@@ -14,6 +14,157 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "two-registers-and-the-limitations-one-dropped",
+    date: "2026-08-27",
+    tags: ["Claude Code", "Skills", "Writing", "AI-native", "Open source"],
+    title: {
+      en: "I had the same post written in two registers. The theatrical one dropped all three limitations.",
+      hr: "Dao sam isti tekst napisati u dva registra. Teatralni je ispustio sva tri ograničenja.",
+    },
+    lead: {
+      en: "LLM prose defaults to a three-act arc: setup, complication, reveal, lesson. I wanted the option turned off by default, so I built a skill for it. The measurement that justified the default came from writing one technical article twice.",
+      hr: "Tekst iz jezičnog modela zadano pada u dramaturški luk: uvod, zaplet, obrat, pouka. Htio sam to isključiti kao zadano, pa sam napravio skill. Mjerenje koje opravdava tu zadanu postavku došlo je iz jednog članka napisanog dvaput.",
+    },
+    body: {
+      en: `I published a Claude Code skill that makes the engineering register the default for anything written for a human audience, and puts the theatrical register behind an explicit request. The evidence for making that the default, rather than a preference I state each time: the same technical article written twice, once in each register, from one set of measurements. The theatrical version dropped all three limitations the engineering version carried, and I did not notice until I counted.
+
+## The tell
+
+Setup, complication, reveal, lesson. Model-written prose falls into that shape by default, and it is recognisable at a glance, which is reason enough to avoid it when publishing under my own name. But the specific cost in a technical write-up is structural rather than stylistic: an arc puts the conclusion at the bottom, because a conclusion stated early ruins the build. A reader who scans the headings of an arc gets narrative positions, not findings.
+
+## The comparison
+
+Both versions describe the [Colossus hypothesis](/blog/colossus-lease-in-my-own-usage-data) — whether Anthropic's lease of xAI's Colossus 1 shows up in my own Claude Code telemetry. Same data, same tables, same conclusion. English versions, measured on 27 August 2026:
+
+| | theatrical | engineering |
+|---|---|---|
+| words | 498 | 789 |
+| sentences | 43 | 34 |
+| average sentence | 12 words | 23 words |
+| headings | 0 | 9 |
+| limitations stated | 0 of 3 | 3 of 3 |
+
+Two of these surprised me.
+
+The theatrical version is **shorter**, not longer, and its sentences are half the length. Punchiness is the mechanism of the arc, not padding. Some of the word gap is structural rather than rhetorical — the engineering version carries tables and two sections the theatrical one folds into prose — but the sentence length difference is the register itself.
+
+The limitations row is the one that settled it. The engineering version lists three: that coverage before 12 May 2026 is reconstructed and the April baseline is therefore unreliable in both directions; that session counts are not comparable across the series (May shows 170, June 2,016); and that overload errors rise with my own concurrency, not only with service load. The theatrical version contains none of them, and has no section where they would go. Nothing was falsified. The facts that made the finding weaker simply had nowhere to sit in a structure built to land an ending.
+
+## What the skill says
+
+Engineering register, the default: conclusion in the first paragraph; headings that name content rather than narrative position; declarative sentences; every number with a unit, a date and a way to re-derive it; a mandatory limitations section wherever measurements are reported; the ending is open questions, never a moral. It also bans a short list of openers — *it turns out*, *here's the thing*, *and that's when I realised* — because each exists only to manufacture a beat.
+
+Theatrical register, on request: arc, ordered reveals, metaphor, a closing line built to land. One rule makes it safe to use at all: **tension may come only from the order in which true things are told, never from what is left out.** The limitations section survives into it intact, even where it deflates the ending. Had that rule existed when the theatrical version above was written, the row that reads 0 of 3 would read 3 of 3.
+
+## A skill cannot hold a default
+
+This is the part worth copying regardless of what you think about registers. A skill loads when it is triggered. A default that only exists inside a skill is not a default, because the situation where it matters most is the one where nothing triggered it.
+
+So the enforcing line lives in \`CLAUDE.md\`, which is read every session, and the skill holds the detail:
+
+> **Prose register.** Anything written for a human audience uses the engineering register by default: conclusion first, headings that name content, no narrative arc, no withheld facts, limitations stated outright. The theatrical register is used only when asked for in that session.
+
+The same split applies to any behaviour you want on by default: the trigger phrases and the long form go in the skill, the one-line invariant goes where it is always loaded.
+
+## Bilingual texts are written twice, not translated
+
+Every post here ships in English and Croatian. The rule in the skill is that each language is written natively from the same facts, matching in numbers, claims and section order, and differing freely in sentence construction. A near-literal translation is detectable in exactly the way a narrative arc is, and fails the same test: it reads as generated rather than written.
+
+## Limitations
+
+- **n = 1.** One article, one author, one pair of versions. Nothing here shows that readers prefer the engineering register, only that one theatrical rendering lost information that the engineering one kept.
+- **The author of both versions later wrote the rule.** The theatrical version was not produced by someone trying to obey a limitations requirement and failing; the requirement did not exist yet. That is weaker evidence than a controlled comparison, and it is the honest description of what happened.
+- **One metric was rejected.** I counted single-sentence paragraphs expecting the theatrical version to be full of them. It has none, and the engineering version has five. The rule bans a single-sentence paragraph used as a drum beat, and the count cannot tell that apart from a short factual statement under a heading, so it measures nothing useful.
+- Word and sentence counts come from a script over the two texts and are sensitive to how tables and lists are excluded. The relative difference is robust; the absolute figures are not precise.
+
+## Source
+
+The skill, in English and in the Croatian original, plus the README: [github.com/stepanic/cv/tree/main/skills/register](https://github.com/stepanic/cv/tree/main/skills/register). MIT. Install it user-level and it applies in every project:
+
+\`\`\`bash
+mkdir -p ~/.claude/skills/register
+cp skills/register/SKILL.md ~/.claude/skills/register/SKILL.md
+\`\`\`
+
+Both versions of the article, in both languages, with the measurements and the commands that reproduce them: [docs/2026-08-27-colossus-hipoteza-dvije-verzije.md](https://github.com/stepanic/cv/blob/main/docs/2026-08-27-colossus-hipoteza-dvije-verzije.md).`,
+      hr: `Objavio sam Claude Code skill koji za sve što se piše za ljudsku publiku propisuje inženjerski registar kao zadani, a teatralni stavlja iza izričitog zahtjeva. Dokaz da to treba biti zadana postavka, a ne želja koju izgovaram svaki put: isti tehnički članak napisan dvaput, po jednom u svakom registru, iz istog skupa mjerenja. Teatralna je verzija ispustila sva tri ograničenja koja inženjerska nosi, a primijetio sam tek kad sam ih prebrojao.
+
+## Prepoznatljiv obrazac
+
+Uvod, zaplet, obrat, pouka. Tekst iz jezičnog modela zadano poprima taj oblik i prepoznaje se na prvi pogled, što je samo po sebi dovoljan razlog da ga izbjegavam u onome što objavljujem pod svojim imenom. Ali u tehničkom tekstu šteta nije stilska nego strukturna: luk gura zaključak na dno, jer rano izrečen zaključak kvari gradnju. Tko preleti međunaslove takva teksta, dobije mjesta u priči, a ne nalaze.
+
+## Usporedba
+
+Obje verzije opisuju [Colossus hipotezu](/blog/colossus-lease-in-my-own-usage-data), dakle pitanje vidi li se Anthropicov zakup xAI-jeva Colossusa 1 u mojoj telemetriji Claude Codea. Isti podaci, iste tablice, isti zaključak. Mjereno nad engleskim verzijama 27. kolovoza 2026.:
+
+| | teatralna | inženjerska |
+|---|---|---|
+| riječi | 498 | 789 |
+| rečenica | 43 | 34 |
+| prosječna rečenica | 12 riječi | 23 riječi |
+| međunaslova | 0 | 9 |
+| navedenih ograničenja | 0 od 3 | 3 od 3 |
+
+Dvoje me iznenadilo.
+
+Teatralna je verzija **kraća**, ne duža, a rečenice su joj upola kratke. Sažetost je sredstvo dramaturškog luka, a ne njegov višak. Dio razlike u broju riječi je strukturan, ne retorički, jer inženjerska verzija nosi tablice i dva odjeljka koje teatralna sažima u tekst, ali razlika u duljini rečenice dolazi iz samog registra.
+
+Presudio je redak s ograničenjima. Inženjerska verzija navodi tri: da je pokrivenost prije 12. svibnja 2026. rekonstruirana, pa travanjska osnovica nije pouzdana ni u jednom smjeru; da broj sesija nije usporediv kroz niz, jer svibanj pokazuje 170, a lipanj 2016; i da greške preopterećenja rastu i s mojom vlastitom paralelizacijom, ne samo s opterećenjem usluge. U teatralnoj verziji nema nijednog, ni odjeljka u koji bi stali. Ništa nije iskrivljeno. Činjenice koje nalaz slabe naprosto nisu imale gdje sjesti u građi složenoj da dovede do završetka.
+
+## Što skill propisuje
+
+Inženjerski registar, zadani: zaključak u prvom odlomku; naslovi koji imenuju sadržaj, a ne mjesto u priči; izjavne rečenice; svaka brojka s jedinicom, datumom i načinom na koji se ponovno dobiva; obavezan odjeljak s ograničenjima svugdje gdje se donose mjerenja; na kraju otvorena pitanja, nikad pouka. Zabranjuje i kratak popis uvodnih fraza, poput *ispostavilo se*, *evo u čemu je stvar* i *i tada sam shvatio*, jer svaka od njih postoji samo da proizvede napetost.
+
+Teatralni registar, na zahtjev: luk, odgođeni obrat, metafora, završna rečenica složena da sjedne. Jedno ga pravilo čini upotrebljivim: **napetost smije doći isključivo iz redoslijeda kojim se iznose istinite stvari, nikad iz onoga što je prešućeno.** Odjeljak s ograničenjima ulazi i u njega, u cijelosti, i onda kad kvari završetak. Da je to pravilo postojalo dok je gornja teatralna verzija nastajala, redak koji sada glasi 0 od 3 glasio bi 3 od 3.
+
+## Zadana postavka ne može živjeti u skillu
+
+Ovo vrijedi prenijeti bez obzira na to što mislite o registrima. Skill se učitava tek kad se okine. Zadana postavka koja postoji samo unutar skilla nije zadana postavka, jer je slučaj u kojem najviše znači upravo onaj u kojem ništa nije okinulo skill.
+
+Zato redak koji je provodi stoji u \`CLAUDE.md\`, koji se čita u svakoj sesiji, a skill drži razradu:
+
+> **Registar teksta.** Sve što se piše za ljudsku publiku ide u inženjerskom registru: zaključak prvi, naslovi koji imenuju sadržaj, bez dramaturškog luka, bez prešućenih činjenica, ograničenja izrečena izravno. Teatralni registar samo na izričit zahtjev u toj sesiji.
+
+Ista podjela vrijedi za svako ponašanje koje želite uključeno po zadanom: okidači i razrada idu u skill, a jednoredno pravilo ondje gdje se uvijek učitava.
+
+## Dvojezični tekstovi pišu se dvaput, ne prevode
+
+Svaki tekst ovdje izlazi na engleskom i hrvatskom. Pravilo u skillu kaže da se svaki jezik piše izvorno iz istih činjenica, da se verzije poklapaju u brojkama, tvrdnjama i redoslijedu odjeljaka, a slobodno razlikuju u građi rečenice. Gotovo doslovan prijevod prepoznaje se točno onako kako se prepoznaje i dramaturški luk, i pada na istom ispitu: čita se kao generiran, a ne kao napisan.
+
+## Ograničenja
+
+- **n = 1.** Jedan članak, jedan autor, jedan par verzija. Ništa ovdje ne pokazuje da čitatelji više vole inženjerski registar, nego samo da je jedna teatralna izvedba izgubila podatke koje je inženjerska zadržala.
+- **Pravilo je napisano nakon primjera.** Teatralna verzija nije nastala tako da je netko pokušao poštovati zahtjev za ograničenjima i u tome podbacio; zahtjev tada još nije postojao. To je slabiji dokaz od kontrolirane usporedbe i tako ga treba čitati.
+- **Jednu sam mjeru odbacio.** Brojio sam jednorečenične odlomke očekujući da će ih teatralna verzija biti puna. Nema ih nijedan, a inženjerska ih ima pet. Pravilo zabranjuje jednorečenični odlomak u ulozi udarca u bubanj, a brojanje to ne razlikuje od kratke činjenične tvrdnje pod naslovom, pa ne mjeri ništa korisno.
+- Broj riječi i rečenica dolazi iz skripte nad dvama tekstovima i ovisi o tome kako se isključuju tablice i popisi. Odnos među brojkama je stabilan, same brojke nisu precizne.
+
+## Izvor
+
+Skill, na engleskom i u hrvatskom izvorniku, zajedno s uputama: [github.com/stepanic/cv/tree/main/skills/register](https://github.com/stepanic/cv/tree/main/skills/register). MIT. Instalira se na razini korisnika i onda vrijedi u svakom projektu:
+
+\`\`\`bash
+mkdir -p ~/.claude/skills/register
+cp skills/register/SKILL.md ~/.claude/skills/register/SKILL.md
+\`\`\`
+
+Obje verzije članka, na oba jezika, s mjerenjima i naredbama za njihovo ponavljanje: [docs/2026-08-27-colossus-hipoteza-dvije-verzije.md](https://github.com/stepanic/cv/blob/main/docs/2026-08-27-colossus-hipoteza-dvije-verzije.md).`,
+    },
+    sources: [
+      {
+        title: "The skill itself — SKILL.md, the Croatian original and the README",
+        url: "https://github.com/stepanic/cv/tree/main/skills/register",
+      },
+      {
+        title: "Both versions of the article, with the measurements and reproduction commands",
+        url: "https://github.com/stepanic/cv/blob/main/docs/2026-08-27-colossus-hipoteza-dvije-verzije.md",
+      },
+      {
+        title: "Claude Code — Agent Skills documentation",
+        url: "https://docs.claude.com/en/docs/claude-code/skills",
+      },
+    ],
+  },
+  {
     slug: "colossus-lease-in-my-own-usage-data",
     date: "2026-08-27",
     tags: ["Claude Code", "Telemetry", "Measurement", "Anthropic", "Data analysis"],

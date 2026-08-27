@@ -9,6 +9,25 @@
 - [`SKILL.md`](SKILL.md) — the skill, English, generic. This is the one to install.
 - [`SKILL.hr.md`](SKILL.hr.md) — the Croatian original as it runs on my machine.
 
+Blog post with the measurement behind it: **[stepanic.domovina.ai/blog/two-registers-and-the-limitations-one-dropped](https://stepanic.domovina.ai/blog/two-registers-and-the-limitations-one-dropped)**
+
+## The measurement
+
+One technical article written twice from the same data, English versions, 27 August 2026:
+
+| | theatrical | engineering |
+|---|---|---|
+| words | 498 | 789 |
+| sentences | 43 | 34 |
+| average sentence | 12 words | 23 words |
+| headings | 0 | 9 |
+| limitations stated | 0 of 3 | 3 of 3 |
+
+The theatrical version is shorter and punchier, and it carried none of the three
+limitations the engineering version stated. Nothing was falsified; the facts that
+weakened the finding had nowhere to sit in a structure built to land an ending. That
+is what the rule about tension coming only from ordering exists to prevent.
+
 ## What it changes
 
 | | engineering (default) | theatrical (on request) |
