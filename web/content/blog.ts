@@ -14,6 +14,207 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "colossus-lease-in-my-own-usage-data",
+    date: "2026-08-27",
+    tags: ["Claude Code", "Telemetry", "Measurement", "Anthropic", "Data analysis"],
+    title: {
+      en: "Four checks on whether a datacenter lease shows up in my own usage data",
+      hr: "Četiri provjere: vidi li se najam podatkovnog centra u mojim podacima o korištenju",
+    },
+    lead: {
+      en: "In May 2026 Anthropic leased the whole of xAI's Colossus 1 for $1.25 billion a month. I assumed the effect was visible in my own Claude Code telemetry. It is not. Three checks contradict the assumption and a fourth explains where the apparent jump came from.",
+      hr: "Anthropic je u svibnju 2026. unajmio cijeli xAI-jev Colossus 1 za 1,25 milijardi dolara mjesečno. Pretpostavio sam da se to vidi u mojoj telemetriji Claude Codea. Ne vidi se. Tri provjere govore protiv pretpostavke, a četvrta objašnjava odakle prividni skok.",
+    },
+    body: {
+      en: `I assumed a compute deal signed in Tennessee was measurable in my own Claude Code usage. Below are the four checks I ran against my own telemetry, and the result: the assumption does not survive any of them.
+
+## The claim being tested
+
+On 6 May 2026 xAI granted Anthropic exclusive access to all of Colossus 1 near Memphis — more than 220,000 Nvidia GPUs (H100, H200, GB200) and 300 MW. The price became public on 20 May in SpaceX's S-1 filing: $1.25 billion a month through May 2029, terminable by either side on 90 days' notice. Separately, Google leases roughly 110,000 GPUs at Memphis and Southaven for $920 million a month from October 2026.
+
+My claim was narrower than the deal: that the added capacity was visible in how Claude Code behaved for me, and specifically that my usage stepped up at the start of May because of it.
+
+## The data
+
+Claude Code writes every session to \`~/.claude/projects/**/*.jsonl\`. The script \`scripts/mine-claude-history.mjs\` in this repo aggregates those transcripts together with daily git snapshots from [dotclaude-sync](https://github.com/stepanic/dotclaude-sync) and Claude Code's own stats cache. Token counts are deduplicated by \`message.id:requestId\` and priced from public per-model API rates. Totals as of 26 August 2026: 4,157 sessions, 195 projects, 444,234 messages, 21.27 billion tokens.
+
+## Check 1 — when the step actually occurs
+
+Daily token averages over the days that have data:
+
+| period | average | days with data |
+|---|---|---|
+| 15–30 April | 94M/day | 10 |
+| 1–11 May | 51M/day | 9 |
+| 12–31 May | 182M/day | 19 |
+| June | 218M/day | 29 |
+
+The first eleven days of May are the quietest stretch in the window, below the second half of April. The step is at 12 May, six days after the contract date and eight days before it was public. The strongest single day in May is 26 May at 483M tokens.
+
+## Check 2 — which model was running
+
+First appearance of each model in my transcripts, taken as the earliest \`timestamp\` on an assistant event carrying \`message.usage\`:
+
+| model | first seen |
+|---|---|
+| opus-4-6 | 10 Feb 2026 |
+| opus-4-7 | 17 Apr 2026 |
+| sonnet-4-6 | 28 May 2026 |
+| opus-4-8 | 29 May 2026 |
+| fable-5 | 9 Jun 2026 |
+| sonnet-5 | 30 Jun 2026 |
+| opus-5 | 24 Jul 2026 |
+
+Every session in May ran \`opus-4-7\`. The model did not change at any point during the month, so a model swap cannot account for the step. Opus 5 — the model I had named as the cause — does not appear until 24 July, eleven weeks later.
+
+## Check 3 — when the measuring instrument changed
+
+Claude Code prunes local transcripts after 30 days by default. My history survives that only because dotclaude-backup commits a daily snapshot of \`~/.claude\`. Its first commit is **12 May 2026**, the same date as the step.
+
+Coverage on either side of that date:
+
+| window | days missing from the daily series |
+|---|---|
+| 1 Mar – 11 May | 45 of 72 |
+| 12 May – 31 Jul | 2 of 81 |
+
+Before the backup existed, 63% of days are absent; after it, 2%. The apparent tripling in daily tokens sits exactly on the boundary where the record stopped being lossy. That is sufficient to explain a large part of the step without any change in the world.
+
+## Check 4 — a metric that measures supply rather than demand
+
+Token counts measure how much I asked for. They say nothing about how much capacity was available. The nearest supply-side signal in the transcripts is the rate of overload and limit errors, normalized by assistant messages:
+
+| month | errors per 1,000 assistant messages |
+|---|---|
+| May | 0.33 |
+| June | 1.85 |
+| July | 1.36 |
+| August | 1.22 |
+
+The rate rises after May. If the lease had relieved capacity pressure on my sessions, this is the series that should fall.
+
+## Result
+
+Checks 1, 2 and 4 contradict the hypothesis. Check 3 offers a sufficient alternative explanation for the observation that produced it. The correct statement is that my usage data cannot detect the lease, not that the lease had no effect.
+
+The general error is worth naming precisely, because it is easy to repeat: a consumption metric collected by the consumer measures demand. Attributing a change in it to a supplier-side event requires either a supplier-side metric or a controlled comparison, and I had neither.
+
+## Limitations
+
+- Coverage before 12 May 2026 is reconstructed from the union of older snapshots and \`stats-cache.json\`. The April baseline is therefore unreliable in both directions; actual April usage may well have been higher than recorded.
+- Session counts are not comparable across the whole series — May shows 170 and June 2,016, a difference too large to be real. Something changed in what counts as a session, so this analysis uses tokens throughout.
+- Overload errors also rise with my own concurrency, not only with service load. Their increase is not evidence that capacity got worse, only an absence of evidence that it got better.
+
+## What would actually test the claim
+
+Serving-side measurements, collected before the question is asked: time to first token, tokens per second, and the share of 5xx responses, each segmented by model and hour of day, with a baseline predating the event. Claude Code transcripts contain some of this, but I had defined no baseline, and a baseline chosen after you know what you are looking for is not a baseline.
+
+The measurements, the reproducible commands and the full limitations are in [docs/2026-08-27-colossus-hipoteza-dvije-verzije.md](https://github.com/stepanic/cv/blob/main/docs/2026-08-27-colossus-hipoteza-dvije-verzije.md).`,
+      hr: `Pretpostavio sam da se ugovor o zakupu računalnih kapaciteta, potpisan u Tennesseeju, dade izmjeriti u mom korištenju Claude Codea. Slijede četiri provjere nad vlastitom telemetrijom i njihov ishod: pretpostavka ne preživljava nijednu.
+
+## Tvrdnja koja se provjerava
+
+xAI je 6. svibnja 2026. Anthropicu dao isključiv pristup cijelom Colossusu 1 kraj Memphisa, dakle više od 220.000 Nvidijinih grafičkih procesora (H100, H200, GB200) i 300 megavata. Cijena je objavljena 20. svibnja u SpaceX-ovu prospektu S-1: 1,25 milijardi dolara mjesečno do svibnja 2029., uz otkazni rok od 90 dana za obje strane. Google zasebno zakupljuje oko 110.000 procesora u Memphisu i Southavenu za 920 milijuna dolara mjesečno, od listopada 2026.
+
+Moja je tvrdnja bila uža od samog ugovora: da se dodani kapacitet vidi u tome kako se Claude Code kod mene ponaša, i to tako da mi je potrošnja porasla početkom svibnja upravo zbog njega.
+
+## Podaci
+
+Claude Code svaku sesiju zapisuje u \`~/.claude/projects/**/*.jsonl\`. Skripta \`scripts/mine-claude-history.mjs\` u ovom repozitoriju te transkripte spaja s dnevnim git snimkama alata [dotclaude-sync](https://github.com/stepanic/dotclaude-sync) i s međuspremnikom statistike samoga Claude Codea. Tokeni se razdvajaju po ključu \`message.id:requestId\` i vrednuju po javnom cjeniku sučelja za svaki model. Stanje na 26. kolovoza 2026.: 4157 sesija, 195 projekata, 444.234 poruke, 21,27 milijardi tokena.
+
+## Prva provjera: kad se stepenica doista događa
+
+Dnevni prosjeci tokena, računati nad danima za koje podaci postoje:
+
+| razdoblje | prosjek | dana s podacima |
+|---|---|---|
+| 15. – 30. travnja | 94 mln/dan | 10 |
+| 1. – 11. svibnja | 51 mln/dan | 9 |
+| 12. – 31. svibnja | 182 mln/dan | 19 |
+| lipanj | 218 mln/dan | 29 |
+
+Prvih jedanaest dana svibnja najmirniji su dio promatranog razdoblja i slabiji od druge polovice travnja. Stepenica je 12. svibnja, dakle šest dana nakon potpisa i osam dana prije nego što je ugovor postao javan. Najjači pojedinačni dan u svibnju jest 26. svibnja s 483 milijuna tokena.
+
+## Druga provjera: koji je model radio
+
+Prva pojava svakog modela u transkriptima, uzeta kao najraniji \`timestamp\` na asistentskom događaju koji nosi \`message.usage\`:
+
+| model | prvi put |
+|---|---|
+| opus-4-6 | 10. veljače 2026. |
+| opus-4-7 | 17. travnja 2026. |
+| sonnet-4-6 | 28. svibnja 2026. |
+| opus-4-8 | 29. svibnja 2026. |
+| fable-5 | 9. lipnja 2026. |
+| sonnet-5 | 30. lipnja 2026. |
+| opus-5 | 24. srpnja 2026. |
+
+Sve svibanjske sesije vrtjele su \`opus-4-7\`. Model se tijekom mjeseca nije mijenjao ni jednom, pa promjena modela ne može objasniti stepenicu. Opus 5, koji sam prozvao uzrokom, javlja se tek 24. srpnja, jedanaest tjedana poslije.
+
+## Treća provjera: kad se promijenio mjerni instrument
+
+Claude Code zadano briše lokalne transkripte nakon 30 dana. Moja povijest to preživljava samo zato što dotclaude-backup svakodnevno commita snimku direktorija \`~/.claude\`. Njegov je prvi commit **12. svibnja 2026.**, dakle istoga dana kad i stepenica.
+
+Pokrivenost s obje strane toga datuma:
+
+| razdoblje | dana koji nedostaju u dnevnom nizu |
+|---|---|
+| 1. 3. – 11. 5. | 45 od 72 |
+| 12. 5. – 31. 7. | 2 od 81 |
+
+Prije nego što je sigurnosna kopija postojala nedostaje 63 posto dana, poslije nje dva posto. Utrostručenje dnevne potrošnje leži točno na granici na kojoj zapis prestaje gubiti podatke. To je dovoljno da objasni velik dio stepenice bez ijedne promjene u vanjskom svijetu.
+
+## Četvrta provjera: mjera koja opisuje ponudu, a ne potražnju
+
+Broj tokena mjeri koliko sam tražio. O raspoloživom kapacitetu ne govori ništa. Najbliži pokazatelj sa strane posluživanja koji u transkriptima postoji jest učestalost grešaka preopterećenja i ograničenja, svedena na broj asistentskih poruka:
+
+| mjesec | grešaka na 1000 asistentskih poruka |
+|---|---|
+| svibanj | 0,33 |
+| lipanj | 1,85 |
+| srpanj | 1,36 |
+| kolovoz | 1,22 |
+
+Nakon svibnja učestalost raste. Da je zakup olakšao pristup kapacitetu u mojim sesijama, upravo bi taj niz morao padati.
+
+## Ishod
+
+Prva, druga i četvrta provjera govore protiv hipoteze. Treća nudi dovoljno objašnjenje za samo opažanje koje ju je izazvalo. Ispravno je reći da moji podaci o korištenju ne mogu otkriti taj zakup, a ne da zakup nije imao učinka.
+
+Pogrešku vrijedi imenovati točno, jer se lako ponavlja: mjera potrošnje koju prikuplja sam potrošač opisuje potražnju. Da bi se promjena u njoj pripisala događaju na strani dobavljača, treba ili mjera sa strane dobavljača ili kontrolirana usporedba. Nisam imao ni jedno ni drugo.
+
+## Ograničenja
+
+- Pokrivenost prije 12. svibnja 2026. rekonstruirana je iz unije starijih snimaka i datoteke \`stats-cache.json\`. Travanjska osnovica zato nije pouzdana ni u jednom smjeru; stvarna je potrošnja mogla biti i viša od zabilježene.
+- Broj sesija nije usporediv kroz cijeli niz. Svibanj pokazuje 170, a lipanj 2016, što je prevelika razlika da bi bila stvarna. Nešto se promijenilo u tome što se broji kao sesija, pa se u ovoj analizi svugdje koriste tokeni.
+- Greške preopterećenja rastu i s mojom vlastitom paralelizacijom, ne samo s opterećenjem usluge. Njihov porast nije dokaz da je kapacitet lošiji, nego samo izostanak dokaza da je bolji.
+
+## Čime bi se tvrdnja doista provjerila
+
+Mjerenjima sa strane posluživanja, i to prikupljenima prije nego što se pitanje postavi: vrijeme do prvoga tokena, broj tokena u sekundi i udio odgovora s greškom 5xx, sve razvrstano po modelu i satu u danu, uz osnovicu koja prethodi događaju. Transkripti Claude Codea dio toga sadrže, ali osnovicu nisam bio definirao, a osnovica odabrana nakon što već znaš što tražiš nije osnovica.
+
+Mjerenja, naredbe kojima se ponavljaju i potpun popis ograničenja stoje u [docs/2026-08-27-colossus-hipoteza-dvije-verzije.md](https://github.com/stepanic/cv/blob/main/docs/2026-08-27-colossus-hipoteza-dvije-verzije.md).`,
+    },
+    sources: [
+      {
+        title: "Anthropic will pay xAI $1.25B per month for compute — TechCrunch, 20 May 2026",
+        url: "https://techcrunch.com/2026/05/20/anthropic-will-pay-xai-1-25-billion-per-month-for-compute/",
+      },
+      {
+        title: "SpaceX IPO filing reveals the Colossus 1 lease terms — Data Center Dynamics",
+        url: "https://www.datacenterdynamics.com/en/news/spacex-ipo-filing-reveals-anthropic-set-to-pay-musks-firm-125bn-a-month-to-rent-xai-data-center-space/",
+      },
+      {
+        title: "Google to pay $920 million monthly for Memphis and Southaven capacity — Data Center Dynamics",
+        url: "https://www.datacenterdynamics.com/en/news/google-to-pay-920-million-to-spacex-monthly-for-ai-capacity/",
+      },
+      {
+        title: "dotclaude-sync — daily git snapshots of ~/.claude, the reason this history exists at all",
+        url: "https://github.com/stepanic/dotclaude-sync",
+      },
+    ],
+  },
+  {
     slug: "wrap-up-skill-mined-from-my-own-transcripts",
     date: "2026-08-26",
     tags: ["Claude Code", "Skills", "AI-native", "Developer tooling", "Open source"],
