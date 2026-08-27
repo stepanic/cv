@@ -115,6 +115,15 @@ When the user drops a job proposal/posting into a session:
   and American spelling in his outgoing English. Red flags there are usually
   the missing serial comma rather than a grammar error, so read the
   suggestion before rewriting; blue ones are optional wordiness hints.
+- **Prose register.** Anything written for a human audience — blog posts, docs,
+  READMEs, LinkedIn drafts, reports — uses the **engineering register by
+  default**: conclusion in the first paragraph, headings that name content rather
+  than narrative position, no three-act arc, no fact withheld to make a later
+  sentence land, limitations stated outright in their own section. The theatrical
+  register is used **only when asked for in that session**, never on your own
+  initiative. Bilingual texts are written natively in each language, never
+  translated from one into the other. Full rules and a worked A/B example:
+  `skills/register/SKILL.md`.
 - Croatian text: ijekavica, proper diacritics. English: concise, quantified.
 - New project files in `data/projects/` need a unique `id` and `order`;
   `featured: true` puts them on the PDF and the top grid of the site.

@@ -6,6 +6,7 @@ change the steps.
 | Skill | What it does | Install |
 |---|---|---|
 | [`wrap-up`](wrap-up/) | Closes a session before `/clear`: commit and push every repo touched, refresh memory files, write down what is not yet in the codebase, put a handoff prompt in the clipboard, report what is still open. | `~/.claude/skills/wrap-up/SKILL.md` |
+| [`register`](register/) | Picks the prose register for anything written for a human audience. Engineering by default — conclusion first, no narrative arc, limitations stated outright. Theatrical only when asked for. Bilingual texts written natively, never translated. | `~/.claude/skills/register/SKILL.md` |
 
 ## Installing any of them
 
