@@ -14,8 +14,27 @@ steps. The exception is irreversible moves that are not part of the routine
 
 ## Order
 
-Steps 1–4 run in order. Skip a step only when this session genuinely has nothing
-to do there — and say so in the summary rather than skipping silently.
+Step 0 gates everything. Steps 1–4 then run in order. Skip a step only when this
+session genuinely has nothing to do there — and say so in the summary rather than
+skipping silently.
+
+---
+
+## 0. Whose repo is this
+
+Before touching git, classify every repo you are about to write to. When a repo
+carries its own `CLAUDE.md` or `AGENTS.md` that defines how it is committed to —
+branch policy, commit language, where documents belong — **those rules win over
+everything below**, and the autonomy granted above does not extend to overriding
+them.
+
+Default for a repo that is not yours: never commit to its default branch, never
+leave your own notes in its tree, open a pull request instead. Absence of branch
+protection is not permission; check the repo's stated policy, not what the remote
+happens to allow.
+
+If the classification is unclear for a repo, stop on that one, finish the others,
+and say which one you left and why.
 
 ---
 
