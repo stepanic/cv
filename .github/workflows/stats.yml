@@ -12,17 +12,29 @@ jobs:
   refresh:
     runs-on: ubuntu-latest
     steps:
+      # fetch-depth: 0 is required — build-pdf.sh derives SOURCE_DATE_EPOCH from
+      # `git log -1 -- data typst`, which returns nothing on a shallow clone and
+      # would make CI stamp a different date than a local build, reintroducing
+      # the weekly PDF churn this is meant to stop.
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       # Needs a classic PAT (repo, read:user) in the STATS_TOKEN secret —
       # the default actions token has no `viewer` identity for the
       # contributions GraphQL query.
+      # A missing secret used to `exit 0` here, so the job reported success
+      # every Monday while refreshing nothing and the numbers on the site
+      # silently froze (unnoticed from 2026-08-17 to 2026-09-15). Fail loudly
+      # instead: a red weekly run is the only signal that reaches anyone.
       - name: Refresh GitHub stats
         env:
           GH_TOKEN: ${{ secrets.STATS_TOKEN }}
         run: |
           if [ -z "$GH_TOKEN" ]; then
-            echo "STATS_TOKEN secret not set — skipping refresh." && exit 0
+            echo "::error::STATS_TOKEN secret is not set — GitHub stats were NOT refreshed."
+            echo "Add a classic PAT with scopes repo + read:user as the STATS_TOKEN secret." >> "$GITHUB_STEP_SUMMARY"
+            exit 1
           fi
           bash scripts/update-github-stats.sh
 
@@ -30,6 +42,8 @@ jobs:
         uses: typst-community/setup-typst@v4
       - run: bash scripts/build-pdf.sh
 
+      # PDFs are reproducible (build-pdf.sh pins SOURCE_DATE_EPOCH), so an
+      # unchanged CV produces identical bytes and this commits nothing.
       - name: Commit & push if changed
         run: |
           git config user.name "github-actions[bot]"
