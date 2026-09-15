@@ -25,9 +25,9 @@
     "domovina-pipeline", "klubovi-domovina", "stranke-domovina", "zakoni-domovina",
     "izbori-domovina", "karta-hrvatske", "pay-domovina", "domovina-fiskal",
     "certilia-esign", "domovina-api", "sms-domovina", "producer-domovina",
-    "company-details-api",
+    "company-details-api", "udruge-domovina", "oou-domovina",
     // Personal devtools
-    "launchd-menubar",
+    "launchd-menubar", "linkedin-poster", "claude-tmux-teams",
   )
   files.map(f => yaml("../data/projects/" + f + ".yaml")).sorted(key: p => p.order)
 }

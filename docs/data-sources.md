@@ -46,9 +46,17 @@ gh api graphql -f query='query { user(login: "stepanic") {
       repository { nameWithOwner } contributions { totalCount } } } } }'
 ```
 
-**Reading, 2026-08-26:** 37,098 raw · 32,633 dataset-archive commits ·
-**4,465 corrected** (of which 1,563 private-repo contributions, 78 PRs,
-12 issues). The same exclusion, applied to the public ranking board, is
+**Reading, 2026-09-15:** 37,659 raw · 32,710 dataset-archive commits ·
+**4,949 corrected** (of which 1,830 private-repo contributions, 79 PRs,
+12 issues). Previous reading, 2026-08-26: 37,098 · 32,633 · **4,465**.
+
+> **The weekly CI refresh was not refreshing anything.** `stats.yml` skips the
+> GitHub step when the `STATS_TOKEN` secret is unset, and it has been unset —
+> every run since 2026-08-24 logged "STATS_TOKEN secret not set — skipping
+> refresh", exited 0, and committed nothing but rebuilt PDFs. The job reports
+> success, so nothing surfaced. Until a classic PAT (`repo`, `read:user`) is
+> put in that secret, **every GitHub figure on the site is only as fresh as the
+> last local `npm run stats:github`**. The same exclusion, applied to the public ranking board, is
 documented in `docs/committers-top-timestamps.md` — it moves the Croatia
 ranking from #1 to a genuine mid-table place, with both screenshots anchored
 in Bitcoin.
@@ -74,11 +82,19 @@ for hours and speakers, and say "~" on the snapshot-derived figures.
 Appears in: `data/profile.yaml`, `data/experience.yaml`,
 `data/projects/domovina.yaml`, `domovina-rag.yaml`, `domovina-pipeline.yaml`.
 
-**Reading, 2026-08-26:** 3,157 episodes · 48 channels · 144,294 chunks ·
+**Reading, 2026-09-15:** 3,157 episodes · 48 channels · 144,294 chunks ·
 ~2,990 hours · 2,698 distinct speakers · corpus spans 2016-02-18 → 2026-07-30.
-The stats snapshot lagged the MCP by 680 chunks on the day (143,614 vs 144,294),
-which is the expected daily-cron lag. Previous reading, 2026-07-27: 3,034 · 46 ·
-137,451 · ~2,870 · 2,573.
+**Byte-identical to the 2026-08-26 reading on both sources**, and the latest
+upload is still 2026-07-30, so the ingest pipeline has published nothing for
+about six weeks. The CV figures are therefore still correct, but they are
+correct because the corpus stopped growing, not because it was just measured —
+check `domovinatv/fetch.domovina.tv` before quoting growth anywhere.
+
+Previous readings — 2026-08-26: 3,157 · 48 · 144,294 · ~2,990 · 2,698 (the
+stats snapshot lagged the MCP by 680 chunks that day, 143,614 vs 144,294, the
+expected daily-cron lag; on 2026-09-15 the same 680-chunk gap persists, which
+is consistent with both sources being frozen rather than lagging).
+2026-07-27: 3,034 · 46 · 137,451 · ~2,870 · 2,573.
 
 ### Docker Hub — `microblink/api`
 
@@ -89,16 +105,22 @@ for Microblink; still maintained. Pull count is public and needs no auth:
 curl -s https://hub.docker.com/v2/repositories/microblink/api/ | jq '{pull_count, last_updated}'
 ```
 
-**Reading, 2026-08-26:** 4,160,365 pulls, registered 2017-10-30, last updated
-2026-05-08.
+**Reading, 2026-09-15:** 4,161,521 pulls, registered 2017-10-30, last updated
+2026-05-08. Previous reading, 2026-08-26: 4,160,365 pulls — +1,156 in twenty
+days, so "4.1M" holds and will for a long time.
 
 ### Croatian open-data catalogues
 
 Counts live in each project's README and change as backfills progress —
-re-read on 2026-08-26, all four unchanged since the previous check —
-`klubovi` (901 clubs), `stranke` (434 parties), `zakoni` (97,561 acts across
-5,077 issues), `izbori` (~70,000 result files). Re-read the README in
-`~/git/domovinatv/<repo>` rather than trusting the CV entry.
+re-read on 2026-09-15, all four still unchanged (the `zakoni` backfill remains
+paused after 2024) — `klubovi` (901 clubs), `stranke` (434 parties), `zakoni`
+(97,561 acts across 5,077 issues), `izbori` (~70,000 result files). Re-read the
+README in `~/git/domovinatv/<repo>` rather than trusting the CV entry.
+
+Two catalogues joined the family after the last sweep and are now in `data/`:
+`udruge` (864 Catholic associations, README dated 2026-09-10) and `oou` (2,241
+educational institutions across 4,529 locations, `make stats` on 2026-08-27).
+Both are measured by a command in their own repo, so they go stale the same way.
 
 ### FlutterFlow marketplace adoption
 

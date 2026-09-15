@@ -1,0 +1,38 @@
+id: linkedin-poster
+name: linkedin-poster — MCP server for your own LinkedIn feed
+featured: false
+order: 32
+period: { start: "2026", end: null }
+role: { en: Author, hr: Autor }
+links:
+  - { label: GitHub, url: "https://github.com/stepanic/linkedin-poster" }
+tech: [TypeScript, Cloudflare Workers, Cloudflare KV, MCP, OAuth 2.0]
+summary:
+  en: >-
+    A single Cloudflare Worker that publishes to one member's own LinkedIn
+    feed through three surfaces: an MCP server so Claude Code can post
+    directly, an HTTP API for scripts and cron jobs, and a voice linter that
+    refuses text carrying the tells of machine-written prose. No dependencies,
+    single-tenant by design, no partner program involved.
+  hr: >-
+    Jedan Cloudflare Worker koji objavljuje na vlastiti LinkedIn feed kroz
+    tri sučelja: MCP server da Claude Code objavljuje izravno, HTTP API za
+    skripte i cron, te linter glasa koji odbija tekst s tragovima strojnog
+    pisanja. Bez ijedne ovisnosti, namjerno jednokorisnički, bez partnerskog
+    programa.
+highlights:
+  - en: >-
+      LinkedIn issues no refresh tokens outside its approved partner program,
+      so the design accepts a 60-day token in KV and reduces renewal to one
+      click, with a daily cron and Telegram alerts before the window closes
+    hr: >-
+      LinkedIn ne izdaje refresh tokene izvan odobrenog partnerskog programa,
+      pa dizajn prihvaća 60-dnevni token u KV-u i svodi obnovu na jedan klik,
+      uz dnevni cron i Telegram upozorenja prije isteka prozora
+  - en: >-
+      The linter encodes the house style as a build gate — em-dashes and the
+      bold-lead-in pattern fail the publish rather than getting reviewed
+    hr: >-
+      Linter kodira stilska pravila kao branu pri objavi — crtice i uzorak
+      podebljanog uvoda ruše objavu umjesto da idu na pregled
+tags: [opensource, devtools, ai, mcp, cloudflare, automation]

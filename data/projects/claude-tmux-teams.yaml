@@ -1,0 +1,34 @@
+id: claude-tmux-teams
+name: claude-tmux-teams — agent teams behind a cheap oracle
+featured: false
+order: 33
+period: { start: "2026", end: null }
+role: { en: Author, hr: Autor }
+links:
+  - { label: GitHub, url: "https://github.com/stepanic/claude-tmux-teams" }
+tech: [Bash, tmux, Claude Code, Multi-agent orchestration]
+summary:
+  en: >-
+    Five Claude Code panes in one tmux window — planner, orchestrator,
+    reviewer and two developers — where the human prompts only one of them
+    and the rest coordinate through tmux send-keys. The repo's argument is
+    that the topology is the cheap part: a dev team works because
+    flutter analyze exists, an objective oracle that ends every iteration in
+    a checkable state.
+  hr: >-
+    Pet panela Claude Codea u jednom tmux prozoru — planer, orkestrator,
+    recenzent i dva razvojna agenta — gdje čovjek promptira samo jedan, a
+    ostali se dogovaraju preko tmux send-keysa. Teza repoa je da je
+    topologija jeftin dio: razvojni tim radi zato što postoji
+    flutter analyze, objektivan orakl koji svaku iteraciju završava u
+    provjerljivom stanju.
+highlights:
+  - en: >-
+      Copying the topology to a vertical with no oracle produces five Claudes
+      agreeing with each other, which is correlated error rather than review —
+      same model, same training, same blind spot
+    hr: >-
+      Preslikaš li topologiju na vertikalu bez orakla, dobiješ pet Claudeova
+      koji se međusobno slažu, a to je korelirana greška, ne provjera — isti
+      model, isti trening, ista sljepoća
+tags: [opensource, ai, claude-code, multi-agent, devtools]

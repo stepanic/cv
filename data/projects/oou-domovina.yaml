@@ -1,0 +1,45 @@
+id: oou-domovina
+name: oou.domovina.ai — Croatian schools and kindergartens
+featured: false
+order: 35
+ecosystem: domovina
+period: { start: "2026", end: null }
+role: { en: Author, hr: Autor }
+links:
+  - { label: Live, url: "https://gis.domovina.ai" }
+  - { label: GitHub, url: "https://github.com/domovinatv/oou.domovina.ai" }
+tech: [Python, SQLite, GeoJSON, OpenStreetMap, Cloudflare Pages]
+summary:
+  en: >-
+    Catalogue of every educational institution in Croatia — 2,241 legal
+    entities (899 primary schools, 681 kindergartens, 390 secondary, plus
+    music, art and special-education institutions) across 4,529 physical
+    locations, including the 1,812 satellite schools the ministry lists do
+    not carry. Geolocated, open, reproducible from public sources with no
+    API key.
+  hr: >-
+    Katalog svih odgojno-obrazovnih ustanova u Hrvatskoj — 2.241 pravna
+    osoba (899 osnovnih škola, 681 dječji vrtić, 390 srednjih, uz glazbene,
+    umjetničke i centre za odgoj i obrazovanje) na 4.529 lokacija, uključujući
+    1.812 područnih škola kojih nema na ministarskim popisima. Geolocirano,
+    otvoreno, ponovljivo iz javnih izvora bez ijednog API ključa.
+highlights:
+  - en: >-
+      Croatia has three public lists and none of them answers "where is the
+      nearest school" — the ministry data has no coordinates and only parent
+      institutions, OpenStreetMap is inconsistently tagged, and the CARNET
+      directory is HTML with no identifiers; this merges all three
+    hr: >-
+      Hrvatska ima tri javna popisa i nijedan ne odgovara na pitanje gdje je
+      najbliža škola — ministarski podaci nemaju koordinate i imaju samo
+      matične ustanove, OpenStreetMap je nekonzistentno tagiran, a CARNET-ov
+      adresar je HTML bez identifikatora; ovo ih spaja u jedno
+  - en: >-
+      94.4% of institutions are placed at building or house-number precision,
+      and every point records how its coordinate was derived rather than
+      inventing precision the source does not have
+    hr: >-
+      94,4 % ustanova smješteno je na razini zgrade ili kućnog broja, a uz
+      svaku točku stoji kako je koordinata dobivena, umjesto da se izmišlja
+      preciznost koju izvor nema
+tags: [opensource, opendata, croatia, geodata, education, python]

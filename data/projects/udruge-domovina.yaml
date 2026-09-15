@@ -1,0 +1,43 @@
+id: udruge-domovina
+name: udruge.domovina.ai — Catholic associations in Croatia
+featured: false
+order: 34
+ecosystem: domovina
+period: { start: "2026", end: null }
+role: { en: Author, hr: Autor }
+links:
+  - { label: Live, url: "https://gis.domovina.ai" }
+  - { label: GitHub, url: "https://github.com/domovinatv/udruge.domovina.ai" }
+tech: [TypeScript, SQLite, GeoJSON, Cloudflare Pages]
+summary:
+  en: >-
+    Open catalogue of Catholic associations in Croatia — 864 records across
+    the national Associations Registry, the registry of foreign associations
+    and Church-registered lay societies, each with OIB, registry status,
+    authorised representative, geocoded seat, diocese and contacts.
+    Reproducible end to end from data.gov.hr without an API key.
+    MIT code, CC-BY 4.0 data.
+  hr: >-
+    Otvoreni katalog katoličkih udruga u Hrvatskoj — 864 zapisa iz Registra
+    udruga RH, Registra stranih udruga i Evidencije pravnih osoba Katoličke
+    Crkve, svaki s OIB-om, statusom, osobom ovlaštenom za zastupanje,
+    geokodiranim sjedištem, biskupijom i kontaktima. Potpuno ponovljivo iz
+    data.gov.hr bez ijednog API ključa. Kod MIT, podaci CC-BY 4.0.
+highlights:
+  - en: >-
+      No Croatian registry has a religion field, so membership is a scored
+      classifier over names, goals and activity codes — every record exports
+      the signals that fired, which makes the judgement auditable rather than
+      asserted, and 333 low-confidence candidates are held back for review
+    hr: >-
+      Nijedan hrvatski registar nema polje vjere, pa je pripadnost bodovani
+      klasifikator nad nazivima, ciljevima i djelatnostima — svaki zapis
+      izvozi signale koji su okinuli, čime je prosudba provjerljiva umjesto
+      tvrdnje, a 333 kandidata niske pouzdanosti čekaju ručni pregled
+  - en: >-
+      861 of 864 seats are geocoded (99.7%), 733 of them down to the official
+      DGU house-number address point rather than a settlement centroid
+    hr: >-
+      861 od 864 sjedišta je geokodirano (99,7 %), od toga 733 na razini
+      službene DGU adresne točke s kućnim brojem, ne na težištu naselja
+tags: [opensource, opendata, croatia, geodata, catholic]
