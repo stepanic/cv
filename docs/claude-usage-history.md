@@ -57,7 +57,7 @@ private personal/health information, and project financials.
 | # | Source | Captured | What it provides | Status |
 |---|--------|----------|------------------|--------|
 | S1 | Claude.ai "Chats" screen | Jan 2026 | Total conversation count (1,290) | `[VERIFIED]` |
-| S2 | Anthropic Billing → Invoices | Jun 2026 | Full invoice ledger (38 invoices) | `[VERIFIED]` |
+| S2 | Anthropic Billing → Invoices | Jun 2026, extended Sep 2026 | Full invoice ledger (42 invoices) | `[VERIFIED]` |
 | S3 | Claude Code `/stats` dashboard | ~Jan 2026 | Tokens, sessions, streaks, model | `[VERIFIED]` |
 | S4 | Claude Code model breakdown | ~Dec 2025 | Per-model token in/out split | `[VERIFIED]` |
 | S5 | Personal log reconstruction | 2026 | Pre-Nov 2025 prompts/projects | `[ESTIMATED]` |
@@ -81,7 +81,7 @@ private personal/health information, and project financials.
 | **2025-12** | Claude Code session files begin (complete data from here) | S5 `[ESTIMATED]` |
 | **2025-12-10** | Most active Claude Code day | S3 `[VERIFIED]` |
 | **2026-01** | Claude.ai reaches 1,290 conversations | S1 `[VERIFIED]` |
-| **2026-05-27** | Most recent invoice in this ledger (€90.00) | S2 `[VERIFIED]` |
+| **2026-08-25** | Most recent invoice in this ledger (€78.92) | S2 `[VERIFIED]` |
 | **2026-06** | Primary model upgraded to Opus 4.8 | self-reported |
 
 ---
@@ -95,23 +95,23 @@ private personal/health information, and project financials.
 
 | Metric | Value |
 |--------|-------|
-| Total invoices | 38 |
-| Paid | 37 |
+| Total invoices | 42 |
+| Paid | 41 |
 | Partially refunded | 1 (2025-04-20, €22.50) |
 | Zero-value (€0.00) invoices | 4 |
-| **Total billed (gross)** | **€1,662.58** |
-| Billing span | 2025-02-20 → 2026-05-27 (16 months) |
-| Average per calendar month | €103.91 |
+| **Total billed (gross)** | **€1,974.97** |
+| Billing span | 2025-02-20 → 2026-08-25 (19 months) |
+| Average per calendar month | €103.95 |
 | Largest single invoice | €180.00 |
-| Average billable invoice (>€0) | €48.90 |
+| Average billable invoice (>€0) | €51.97 |
 
 ### 4.2 Spend by year
 
 | Year | Amount | Share |
 |------|--------|-------|
-| 2025 (Feb–Dec) | €1,267.92 | 76.3% |
-| 2026 (Jan–May) | €394.66 | 23.7% |
-| **Total** | **€1,662.58** | 100% |
+| 2025 (Feb–Dec) | €1,267.92 | 64.2% |
+| 2026 (Jan–Aug) | €707.05 | 35.8% |
+| **Total** | **€1,974.97** | 100% |
 
 ### 4.3 Observed spending phases
 
@@ -123,52 +123,62 @@ private personal/health information, and project financials.
 | Ramp-up | Feb–Jun 2025 | €18 → €105, variable |
 | Peak plan | Jul–Nov 2025 | €180/mo × 5 (€900 total) |
 | Micro top-ups | Dec 2025 – Feb 2026 | many small €5–€18 charges |
-| Stabilized | Mar–May 2026 | ~€88–€90/mo |
+| Stabilized | Mar–Jun 2026 | ~€88–€90/mo |
+| Heavier use | Jul–Aug 2026 | €125.47, then €96.92 across two invoices |
 
 ### 4.4 Full invoice ledger
 
 | # | Date | Due | Total (€) | Status |
 |---|------|-----|-----------|--------|
-| 1 | 2026-05-27 | — | 90.00 | Paid |
-| 2 | 2026-04-27 | — | 90.00 | Paid |
-| 3 | 2026-03-27 | — | 88.66 | Paid |
-| 4 | 2026-03-11 | — | 5.00 | Paid |
-| 5 | 2026-03-02 | 2026-03-16 | 0.00 | Paid |
-| 6 | 2026-02-28 | — | 18.00 | Paid |
-| 7 | 2026-02-25 | — | 15.00 | Paid |
-| 8 | 2026-02-25 | — | 10.00 | Paid |
-| 9 | 2026-02-25 | — | 10.00 | Paid |
-| 10 | 2026-02-20 | — | 5.00 | Paid |
-| 11 | 2026-02-20 | — | 5.00 | Paid |
-| 12 | 2026-02-17 | — | 5.00 | Paid |
-| 13 | 2026-02-17 | — | 5.00 | Paid |
-| 14 | 2026-02-17 | — | 5.00 | Paid |
-| 15 | 2026-02-02 | 2026-02-16 | 0.00 | Paid |
-| 16 | 2026-01-30 | — | 5.00 | Paid |
-| 17 | 2026-01-29 | — | 18.00 | Paid |
-| 18 | 2026-01-19 | — | 5.00 | Paid |
-| 19 | 2026-01-15 | — | 5.00 | Paid |
-| 20 | 2026-01-08 | — | 5.00 | Paid |
-| 21 | 2026-01-07 | — | 5.00 | Paid |
-| 22 | 2025-12-29 | — | 18.00 | Paid |
-| 23 | 2025-12-01 | 2025-12-15 | 0.00 | Paid |
-| 24 | 2025-11-13 | — | 5.00 | Paid |
-| 25 | 2025-11-13 | — | 5.00 | Paid |
-| 26 | 2025-11-11 | — | 180.00 | Paid |
-| 27 | 2025-11-01 | 2025-11-15 | 0.00 | Paid |
-| 28 | 2025-10-21 | — | 5.00 | Paid |
-| 29 | 2025-10-11 | — | 180.00 | Paid |
-| 30 | 2025-09-11 | — | 180.00 | Paid |
-| 31 | 2025-08-11 | — | 180.00 | Paid |
-| 32 | 2025-07-11 | — | 180.00 | Paid |
-| 33 | 2025-06-11 | — | 104.97 | Paid |
-| 34 | 2025-06-06 | — | 90.00 | Paid |
-| 35 | 2025-05-06 | — | 81.45 | Paid |
-| 36 | 2025-04-20 | — | 22.50 | Partially Refunded |
-| 37 | 2025-03-20 | — | 18.00 | Paid |
-| 38 | 2025-02-20 | — | 18.00 | Paid |
+| 1 | 2026-08-25 | — | 78.92 | Paid |
+| 2 | 2026-08-13 | — | 18.00 | Paid |
+| 3 | 2026-07-09 | — | 125.47 | Paid |
+| 4 | 2026-06-27 | — | 90.00 | Paid |
+| 5 | 2026-05-27 | — | 90.00 | Paid |
+| 6 | 2026-04-27 | — | 90.00 | Paid |
+| 7 | 2026-03-27 | — | 88.66 | Paid |
+| 8 | 2026-03-11 | — | 5.00 | Paid |
+| 9 | 2026-03-02 | 2026-03-16 | 0.00 | Paid |
+| 10 | 2026-02-28 | — | 18.00 | Paid |
+| 11 | 2026-02-25 | — | 15.00 | Paid |
+| 12 | 2026-02-25 | — | 10.00 | Paid |
+| 13 | 2026-02-25 | — | 10.00 | Paid |
+| 14 | 2026-02-20 | — | 5.00 | Paid |
+| 15 | 2026-02-20 | — | 5.00 | Paid |
+| 16 | 2026-02-17 | — | 5.00 | Paid |
+| 17 | 2026-02-17 | — | 5.00 | Paid |
+| 18 | 2026-02-17 | — | 5.00 | Paid |
+| 19 | 2026-02-02 | 2026-02-16 | 0.00 | Paid |
+| 20 | 2026-01-30 | — | 5.00 | Paid |
+| 21 | 2026-01-29 | — | 18.00 | Paid |
+| 22 | 2026-01-19 | — | 5.00 | Paid |
+| 23 | 2026-01-15 | — | 5.00 | Paid |
+| 24 | 2026-01-08 | — | 5.00 | Paid |
+| 25 | 2026-01-07 | — | 5.00 | Paid |
+| 26 | 2025-12-29 | — | 18.00 | Paid |
+| 27 | 2025-12-01 | 2025-12-15 | 0.00 | Paid |
+| 28 | 2025-11-13 | — | 5.00 | Paid |
+| 29 | 2025-11-13 | — | 5.00 | Paid |
+| 30 | 2025-11-11 | — | 180.00 | Paid |
+| 31 | 2025-11-01 | 2025-11-15 | 0.00 | Paid |
+| 32 | 2025-10-21 | — | 5.00 | Paid |
+| 33 | 2025-10-11 | — | 180.00 | Paid |
+| 34 | 2025-09-11 | — | 180.00 | Paid |
+| 35 | 2025-08-11 | — | 180.00 | Paid |
+| 36 | 2025-07-11 | — | 180.00 | Paid |
+| 37 | 2025-06-11 | — | 104.97 | Paid |
+| 38 | 2025-06-06 | — | 90.00 | Paid |
+| 39 | 2025-05-06 | — | 81.45 | Paid |
+| 40 | 2025-04-20 | — | 22.50 | Partially Refunded |
+| 41 | 2025-03-20 | — | 18.00 | Paid |
+| 42 | 2025-02-20 | — | 18.00 | Paid |
 
-**Ledger total: €1,662.58** (sum verified programmatically).
+**Ledger total: €1,974.97** (sum verified programmatically).
+
+> Rows 1–4 were added on 2026-09-15 from the Anthropic billing screen. The
+> overlap with the previous capture (2026-05-27, 2026-04-27, 2026-03-27) matched
+> the existing ledger exactly, which is what makes the four new rows additions
+> rather than a re-read.
 
 ---
 
@@ -271,7 +281,7 @@ From the recoverable data I extracted:
 |---------|------|-------|--------|
 | Claude.ai | conversations | 1,290 | `[VERIFIED]` |
 | Claude Code | messages | ~27,900+ | `[ESTIMATED]` |
-| Anthropic spend | EUR | €1,662.58 | `[VERIFIED]` |
+| Anthropic spend | EUR | €1,974.97 | `[VERIFIED]` |
 
 ```
 ┌──────────────────────────────────────────────────────────┐
@@ -280,9 +290,9 @@ From the recoverable data I extracted:
 │  Claude.ai conversations ......... 1,290      [VERIFIED]  │
 │  Claude Code messages ............ ~27,900+   [ESTIMATED] │
 │  Claude Code tokens .............. 4.3M       [VERIFIED]  │
-│  Total Anthropic spend ........... €1,662.58  [VERIFIED]  │
-│  Billing span .................... 16 months  [VERIFIED]  │
-│  Avg spend / month ............... €103.91    [VERIFIED]  │
+│  Total Anthropic spend ........... €1,974.97  [VERIFIED]  │
+│  Billing span .................... 19 months  [VERIFIED]  │
+│  Avg spend / month ............... €103.95    [VERIFIED]  │
 │  Primary model (Jun 2026) ........ Opus 4.8   self-report │
 └──────────────────────────────────────────────────────────┘
 ```
@@ -319,12 +329,22 @@ Specifics of each are intentionally omitted from this public record.
 
 | Metric | Value | Basis |
 |--------|-------|-------|
-| Avg spend / month | €103.91 | €1,662.58 ÷ 16 mo `[VERIFIED]` |
-| Spend ÷ Claude.ai conversation | ≈ €1.29 | gross ÷ 1,290 `[CONTEXT]`† |
+| Avg spend / month | €103.95 | €1,974.97 ÷ 19 mo `[VERIFIED]` |
+| Spend ÷ Claude.ai conversation | ≈ €1.53 | gross ÷ 1,290 `[CONTEXT]`† |
 | Peak single-day tokens (Claude Code) | ~396K | S4 `[VERIFIED]` |
 | Opus : Sonnet token ratio (Claude Code) | ~2 : 1 | S4 `[VERIFIED]` |
+| Subscription leverage | ≈ 10–12× | API list prices ÷ actual spend `[CONTEXT]`‡ |
 
-> †This is **not** a true per-conversation cost: the €1,662.58 covers *all*
+> ‡Mined Claude Code usage priced at public per-model API rates comes to
+> **$24,460.85** (`data/generated/claude-code-stats.json`, 2026-09-15) against
+> **€1,974.97** actually invoiced. The ratio lands between 10.3× and 11.8×
+> across any recent EUR/USD rate, so "roughly an order of magnitude" is the
+> honest phrasing. Two caveats keep this indicative rather than exact: the
+> invoiced total covers *all* Anthropic products, while the API-equivalent
+> covers Claude Code transcripts only; and ~97% of those tokens are cache
+> reads, which no one would pay list price for in a real API workload.
+
+> †This is **not** a true per-conversation cost: the €1,974.97 covers *all*
 > Anthropic products (Claude.ai subscription, Claude Code, any API usage), so it
 > cannot be cleanly attributed to Claude.ai conversations alone. Shown for rough
 > scale only.
@@ -345,7 +365,7 @@ This record is honest about what it cannot show:
 - **No percentile / "top X%" claims** are made — Anthropic publishes no user-base
   distribution against which such a claim could be verified, so any earlier
   informal ranking has been deliberately removed.
-- **The €1,662.58 total is gross**; one invoice (2025-04-20) was partially
+- **The €1,974.97 total is gross**; one invoice (2025-04-20) was partially
   refunded, so net spend is marginally lower by an unspecified refund amount.
 - **Snapshots age.** The 1,290 conversations and the `/stats` figures were true at
   capture and have grown since.
@@ -357,6 +377,7 @@ This record is honest about what it cannot show:
 | Date | Change |
 |------|--------|
 | 2026-06-12 | Initial public version. Full billing ledger through 2026-05-27 added; figures re-verified; unsourced percentile/comparison claims removed; verification tags introduced. |
+| 2026-09-15 | Billing ledger extended with four invoices (2026-06-27, 2026-07-09, 2026-08-13, 2026-08-25, €312.39). Total €1,662.58 → €1,974.97 across 42 invoices, span to 2026-08-25 (19 months). The three overlapping rows matched the previous capture exactly. Derived spend figures in §7 and §9 recomputed; subscription-leverage metric added. |
 
 ---
 

@@ -6,7 +6,7 @@
 #   estimated = reconstruction with stated method
 # NEVER add figures here that are not in (or added to) the source document.
 source: docs/claude-usage-history.md
-documentDate: "2026-06-12"
+documentDate: "2026-09-15"
 
 claudeCode:
   # Self-reported start of daily use (document §3); predates the current
@@ -40,10 +40,10 @@ claudeAi:
 
 billing:
   currency: EUR
-  totalGross: { value: 1662.58, status: verified }
-  invoices: 38
-  span: { from: "2025-02-20", to: "2026-05-27", months: 16 }
-  averagePerMonth: 103.91
+  totalGross: { value: 1974.97, status: verified }
+  invoices: 42
+  span: { from: "2025-02-20", to: "2026-08-25", months: 19 }
+  averagePerMonth: 103.95
   peakPlan: { period: "2025-07 → 2025-11", monthly: 180, total: 900 }
   note: >-
     Gross total across all Anthropic products (Claude.ai subscription, Claude
