@@ -16,6 +16,7 @@ sent anywhere.
 |---|---|---|
 | GitHub contributions, languages, top repos | `data/generated/github-stats.json` | `npm run stats:github` — also weekly in CI |
 | Claude Code sessions, tokens, spend | `data/generated/claude-code-stats.json` | `npm run stats:claude` — **local only**, needs `~/.claude` + the dotclaude-backup git history |
+| Anthropic invoices (billing ledger) | `docs/claude-usage-history.md` §4.4 → `data/claude-history.yaml` | manual, login-only — see below |
 | Public repository index | `data/generated/repos.json` | `npm run stats:repos` |
 
 `npm run stats` runs all three.
@@ -60,6 +61,10 @@ gh api graphql -f query='query { user(login: "stepanic") {
 documented in `docs/committers-top-timestamps.md` — it moves the Croatia
 ranking from #1 to a genuine mid-table place, with both screenshots anchored
 in Bitcoin.
+
+> **Diagnosis of how all this went stale:**
+> `docs/2026-09-15-statistika-tiho-stala.md` — the silent CI failure, the PDF
+> non-determinism behind the weekly churn, and the frozen corpus.
 
 ## Manual — verify before sending anything
 
@@ -121,6 +126,36 @@ Two catalogues joined the family after the last sweep and are now in `data/`:
 `udruge` (864 Catholic associations, README dated 2026-09-10) and `oou` (2,241
 educational institutions across 4,529 locations, `make stats` on 2026-08-27).
 Both are measured by a command in their own repo, so they go stale the same way.
+
+### Anthropic invoices (billing ledger)
+
+Behind a login at the Anthropic console, billing → invoices. No API, so it is
+a copy-paste job. The ledger lives in `docs/claude-usage-history.md` §4.4 and
+`data/claude-history.yaml` reads the totals from it — **add new rows to the
+document first**, that file's own header forbids figures that are not in the
+source document.
+
+After editing, re-verify the sum rather than trusting the arithmetic:
+
+```bash
+python3 - <<'EOF'
+import re
+rows=[(int(m[1]),m[2],float(m[3])) for l in open('docs/claude-usage-history.md')
+      if (m:=re.match(r'^\| (\d+) \| (\d{4}-\d{2}-\d{2}) \| [^|]*\| ([\d.]+) \|', l))]
+print(len(rows), round(sum(r[2] for r in rows),2),
+      [r[0] for r in rows]==list(range(1,len(rows)+1)))
+EOF
+```
+
+Then `npm run stats:claude` to push the totals into
+`data/generated/claude-code-stats.json`, which is what the site renders.
+
+**Reading, 2026-09-15:** 42 invoices · **€1,974.97** gross · span 2025-02-20 →
+2026-08-25 (19 months) · €103.95/month. Four invoices added that day
+(2026-06-27 €90.00, 2026-07-09 €125.47, 2026-08-13 €18.00, 2026-08-25 €78.92 =
+€312.39). The three rows overlapping the previous capture matched exactly,
+which is what made them additions rather than a re-read. Previous reading,
+2026-06-12: 38 invoices · €1,662.58 · to 2026-05-27.
 
 ### FlutterFlow marketplace adoption
 
