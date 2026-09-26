@@ -1,10 +1,10 @@
 {
-  "updated": "2026-09-16T07:16:23.180Z",
+  "updated": "2026-09-26T09:01:53.388Z",
   "note": "Aggregate telemetry mined from local Claude Code transcripts, daily git snapshots (dotclaude-sync) and Claude Code's own stats cache. Best-effort reconstruction — real usage is higher (see knownGap). No conversation content is published.",
   "usingSince": "2025-04",
   "usingSinceStatus": "estimated",
   "installFirstStart": "2025-05-14T08:56:17.111Z",
-  "numStartups": 1428,
+  "numStartups": 1545,
   "knownGap": {
     "from": "2025-04",
     "to": "2025-12",
@@ -78,24 +78,24 @@
     }
   },
   "totals": {
-    "sessions": 4837,
-    "projects": 217,
-    "messages": 514868,
-    "toolCalls": 168401,
-    "transcriptEvents": 502905,
-    "tokens": 25760656330,
-    "outputTokens": 125848545,
-    "apiEquivalentUSD": 24460.85
+    "sessions": 5180,
+    "projects": 232,
+    "messages": 571938,
+    "toolCalls": 186704,
+    "transcriptEvents": 560548,
+    "tokens": 28608405495,
+    "outputTokens": 137610219,
+    "apiEquivalentUSD": 26815.5
   },
   "byModel": [
     {
       "model": "claude-opus-5",
-      "inputTokens": 535328,
-      "outputTokens": 47030315,
-      "cacheReadTokens": 9283738941,
-      "cacheWriteTokens": 214876806,
-      "totalTokens": 9546181390,
-      "apiEquivalentUSD": 7950.38
+      "inputTokens": 547625,
+      "outputTokens": 52311822,
+      "cacheReadTokens": 10443694150,
+      "cacheWriteTokens": 242691241,
+      "totalTokens": 10739244838,
+      "apiEquivalentUSD": 8933.09
     },
     {
       "model": "claude-opus-4-8",
@@ -125,13 +125,22 @@
       "apiEquivalentUSD": 5022.16
     },
     {
+      "model": "claude-opus-5-5",
+      "inputTokens": 14766,
+      "outputTokens": 5594691,
+      "cacheReadTokens": 1527879665,
+      "cacheWriteTokens": 33840518,
+      "totalTokens": 1567329640,
+      "apiEquivalentUSD": 1212.94
+    },
+    {
       "model": "claude-fable-5-1",
-      "inputTokens": 52066,
-      "outputTokens": 1615430,
-      "cacheReadTokens": 192081295,
-      "cacheWriteTokens": 7305367,
-      "totalTokens": 201054158,
-      "apiEquivalentUSD": 419.48
+      "inputTokens": 62064,
+      "outputTokens": 1994099,
+      "cacheReadTokens": 250467825,
+      "cacheWriteTokens": 9614641,
+      "totalTokens": 262138629,
+      "apiEquivalentUSD": 538.8
     },
     {
       "model": "claude-haiku-4-5-20251001",
@@ -144,12 +153,12 @@
     },
     {
       "model": "claude-sonnet-5",
-      "inputTokens": 2146266,
-      "outputTokens": 1781318,
-      "cacheReadTokens": 139031973,
-      "cacheWriteTokens": 21338828,
-      "totalTokens": 164298385,
-      "apiEquivalentUSD": 197.76
+      "inputTokens": 2147280,
+      "outputTokens": 2288125,
+      "cacheReadTokens": 160099414,
+      "cacheWriteTokens": 26035172,
+      "totalTokens": 190569991,
+      "apiEquivalentUSD": 237.44
     },
     {
       "model": "claude-opus-4-6",
@@ -193,7 +202,7 @@
       "month": "2026-01",
       "sessions": 11,
       "messages": 2575,
-      "toolCalls": 78,
+      "toolCalls": 136,
       "tokens": 2197988,
       "apiEquivalentUSD": 0.81
     },
@@ -201,7 +210,7 @@
       "month": "2026-02",
       "sessions": 14,
       "messages": 5457,
-      "toolCalls": 239,
+      "toolCalls": 325,
       "tokens": 5496986,
       "apiEquivalentUSD": 2.8
     },
@@ -209,7 +218,7 @@
       "month": "2026-03",
       "sessions": 7,
       "messages": 4539,
-      "toolCalls": 417,
+      "toolCalls": 472,
       "tokens": 31350583,
       "apiEquivalentUSD": 30.83
     },
@@ -224,24 +233,24 @@
     {
       "month": "2026-05",
       "sessions": 170,
-      "messages": 75992,
-      "toolCalls": 26923,
+      "messages": 76115,
+      "toolCalls": 26941,
       "tokens": 3907820070,
       "apiEquivalentUSD": 3235.94
     },
     {
       "month": "2026-06",
       "sessions": 2016,
-      "messages": 144103,
-      "toolCalls": 46920,
+      "messages": 150217,
+      "toolCalls": 48727,
       "tokens": 6320265326,
       "apiEquivalentUSD": 5728.68
     },
     {
       "month": "2026-07",
       "sessions": 1369,
-      "messages": 149953,
-      "toolCalls": 50075,
+      "messages": 154421,
+      "toolCalls": 51461,
       "tokens": 7023741687,
       "apiEquivalentUSD": 8314.12
     },
@@ -255,11 +264,11 @@
     },
     {
       "month": "2026-09",
-      "sessions": 391,
-      "messages": 49677,
-      "toolCalls": 16460,
-      "tokens": 3145193486,
-      "apiEquivalentUSD": 2723.52
+      "sessions": 734,
+      "messages": 96042,
+      "toolCalls": 31353,
+      "tokens": 5992942651,
+      "apiEquivalentUSD": 5078.17
     }
   ],
   "daily": [
@@ -1005,42 +1014,92 @@
     },
     {
       "day": "2026-09-16",
-      "tokens": 28563718,
-      "usd": 29.38
+      "tokens": 86049341,
+      "usd": 79.63
+    },
+    {
+      "day": "2026-09-17",
+      "tokens": 237416580,
+      "usd": 199.24
+    },
+    {
+      "day": "2026-09-18",
+      "tokens": 331197044,
+      "usd": 318.54
+    },
+    {
+      "day": "2026-09-19",
+      "tokens": 223752287,
+      "usd": 171.41
+    },
+    {
+      "day": "2026-09-20",
+      "tokens": 55992836,
+      "usd": 48.14
+    },
+    {
+      "day": "2026-09-21",
+      "tokens": 272689026,
+      "usd": 222.77
+    },
+    {
+      "day": "2026-09-22",
+      "tokens": 90454539,
+      "usd": 87.28
+    },
+    {
+      "day": "2026-09-23",
+      "tokens": 399124428,
+      "usd": 318.4
+    },
+    {
+      "day": "2026-09-24",
+      "tokens": 374988233,
+      "usd": 291.11
+    },
+    {
+      "day": "2026-09-25",
+      "tokens": 606308210,
+      "usd": 518.27
+    },
+    {
+      "day": "2026-09-26",
+      "tokens": 198340359,
+      "usd": 129.23
     }
   ],
   "recovered": {
     "window": 90,
     "retentionDays": 30,
-    "localUSD": 4747.12,
-    "fullUSD": 16285.34,
-    "deltaUSD": 11538.22
+    "localUSD": 6016.97,
+    "fullUSD": 17412.46,
+    "deltaUSD": 11395.49
   },
   "hourHistogram": [
-    20267,
-    17056,
-    11557,
-    8112,
-    5150,
+    23034,
+    19079,
+    12545,
+    9121,
+    5251,
     4404,
     4962,
-    9210,
-    23935,
-    35253,
-    29461,
-    34984,
-    30331,
-    34922,
-    36145,
-    40656,
-    33774,
-    32363,
-    18074,
-    13233,
-    10082,
-    9799,
-    18580,
-    20595
+    9396,
+    27326,
+    38142,
+    32792,
+    38043,
+    33206,
+    38429,
+    39410,
+    44016,
+    37035,
+    34703,
+    22419,
+    14131,
+    11535,
+    12385,
+    22925,
+    26259
   ],
   "longestSession": {
     "messages": 19834,
