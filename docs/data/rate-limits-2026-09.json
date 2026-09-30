@@ -1,0 +1,1340 @@
+{
+  "generated_at": "2026-09-30T10:03:45.512662+00:00",
+  "description": "Multi-week token consumption and rate-limit threshold analysis from ~/.claude/projects",
+  "weekly_trends": {
+    "2026-W31": {
+      "turns": 2697,
+      "input": 176329,
+      "output": 2646106,
+      "cache_write": 9400377,
+      "cache_read": 450151597,
+      "est_cost_usd": 1052.59,
+      "rate_limits": 0,
+      "models": {
+        "claude-opus-5": 2362,
+        "claude-fable-5": 283,
+        "claude-sonnet-5": 52
+      }
+    },
+    "2026-W32": {
+      "turns": 10073,
+      "input": 391328,
+      "output": 9717237,
+      "cache_write": 58367671,
+      "cache_read": 1915916187,
+      "est_cost_usd": 4702.93,
+      "rate_limits": 0,
+      "models": {
+        "claude-opus-5": 9138,
+        "claude-sonnet-5": 477,
+        "claude-fable-5": 455
+      }
+    },
+    "2026-W33": {
+      "turns": 5664,
+      "input": 44616,
+      "output": 5758457,
+      "cache_write": 39498500,
+      "cache_read": 1174631294,
+      "est_cost_usd": 2935.1,
+      "rate_limits": 42,
+      "models": {
+        "claude-opus-5": 5430,
+        "claude-sonnet-5": 79
+      }
+    },
+    "2026-W34": {
+      "turns": 2607,
+      "input": 13535,
+      "output": 2149278,
+      "cache_write": 13400468,
+      "cache_read": 323594705,
+      "est_cost_usd": 898.05,
+      "rate_limits": 85,
+      "models": {
+        "claude-opus-5": 2446,
+        "claude-sonnet-5": 73
+      }
+    },
+    "2026-W35": {
+      "turns": 20084,
+      "input": 40112,
+      "output": 22704506,
+      "cache_write": 110992160,
+      "cache_read": 3528076419,
+      "est_cost_usd": 9076.66,
+      "rate_limits": 124,
+      "models": {
+        "claude-opus-5": 19017,
+        "claude-sonnet-5": 665,
+        "claude-fable-5": 278
+      }
+    },
+    "2026-W36": {
+      "turns": 12021,
+      "input": 93278,
+      "output": 12373133,
+      "cache_write": 59530801,
+      "cache_read": 2221833327,
+      "est_cost_usd": 5378.34,
+      "rate_limits": 0,
+      "models": {
+        "claude-opus-5": 10638,
+        "claude-sonnet-5": 979,
+        "claude-fable-5-1": 401
+      }
+    },
+    "2026-W37": {
+      "turns": 11584,
+      "input": 74509,
+      "output": 12602095,
+      "cache_write": 50314709,
+      "cache_read": 2069374235,
+      "est_cost_usd": 4993.74,
+      "rate_limits": 29,
+      "models": {
+        "claude-fable-5-1": 2050,
+        "claude-opus-5": 9155,
+        "claude-sonnet-5": 348
+      }
+    },
+    "2026-W38": {
+      "turns": 19112,
+      "input": 56810,
+      "output": 19783522,
+      "cache_write": 95954801,
+      "cache_read": 3546603641,
+      "est_cost_usd": 8603.67,
+      "rate_limits": 42,
+      "models": {
+        "claude-sonnet-5": 1065,
+        "claude-opus-5": 17352,
+        "claude-fable-5-1": 653
+      }
+    },
+    "2026-W39": {
+      "turns": 22153,
+      "input": 48624,
+      "output": 21914167,
+      "cache_write": 112716265,
+      "cache_read": 4517540168,
+      "est_cost_usd": 10534.03,
+      "rate_limits": 6,
+      "models": {
+        "claude-opus-5-5": 18145,
+        "claude-sonnet-5": 394,
+        "claude-opus-5": 3443,
+        "claude-fable-5-1": 160
+      }
+    },
+    "2026-W40": {
+      "turns": 9490,
+      "input": 18954,
+      "output": 7018430,
+      "cache_write": 40834867,
+      "cache_read": 1898758552,
+      "est_cost_usd": 4140.46,
+      "rate_limits": 10,
+      "models": {
+        "claude-opus-5-5": 9406,
+        "claude-sonnet-5-5": 41,
+        "claude-sonnet-5": 28
+      }
+    }
+  },
+  "daily_trends": {
+    "2026-08-01": {
+      "turns": 2697,
+      "input": 176329,
+      "output": 2646106,
+      "cache_write": 9400377,
+      "cache_read": 450151597,
+      "est_cost_usd": 1052.59,
+      "models": {
+        "claude-opus-5": 2362,
+        "claude-fable-5": 283,
+        "claude-sonnet-5": 52
+      }
+    },
+    "2026-08-03": {
+      "turns": 2720,
+      "input": 54857,
+      "output": 2592449,
+      "cache_write": 14968516,
+      "cache_read": 570861966,
+      "est_cost_usd": 1332.21,
+      "models": {
+        "claude-opus-5": 2712,
+        "claude-sonnet-5": 6
+      }
+    },
+    "2026-08-04": {
+      "turns": 893,
+      "input": 32516,
+      "output": 799974,
+      "cache_write": 6083399,
+      "cache_read": 156375313,
+      "est_cost_usd": 409.11,
+      "models": {
+        "claude-opus-5": 813,
+        "claude-sonnet-5": 79
+      }
+    },
+    "2026-08-05": {
+      "turns": 1139,
+      "input": 43899,
+      "output": 919290,
+      "cache_write": 7782606,
+      "cache_read": 191141674,
+      "est_cost_usd": 502.24,
+      "models": {
+        "claude-opus-5": 1014,
+        "claude-sonnet-5": 125
+      }
+    },
+    "2026-08-06": {
+      "turns": 1371,
+      "input": 7158,
+      "output": 1109535,
+      "cache_write": 5168014,
+      "cache_read": 269417333,
+      "est_cost_usd": 584.35,
+      "models": {
+        "claude-sonnet-5": 69,
+        "claude-opus-5": 1302
+      }
+    },
+    "2026-08-07": {
+      "turns": 260,
+      "input": 5392,
+      "output": 242919,
+      "cache_write": 4132407,
+      "cache_read": 29520424,
+      "est_cost_usd": 140.06,
+      "models": {
+        "claude-opus-5": 139,
+        "claude-sonnet-5": 121
+      }
+    },
+    "2026-08-08": {
+      "turns": 3690,
+      "input": 247506,
+      "output": 4053070,
+      "cache_write": 20232729,
+      "cache_read": 698599477,
+      "est_cost_usd": 1734.96,
+      "models": {
+        "claude-opus-5": 3158,
+        "claude-sonnet-5": 77,
+        "claude-fable-5": 455
+      }
+    },
+    "2026-08-11": {
+      "turns": 6,
+      "input": 0,
+      "output": 0,
+      "cache_write": 0,
+      "cache_read": 0,
+      "est_cost_usd": 0.0,
+      "models": {}
+    },
+    "2026-08-12": {
+      "turns": 69,
+      "input": 0,
+      "output": 0,
+      "cache_write": 0,
+      "cache_read": 0,
+      "est_cost_usd": 0.0,
+      "models": {}
+    },
+    "2026-08-13": {
+      "turns": 1597,
+      "input": 31264,
+      "output": 1445552,
+      "cache_write": 5949827,
+      "cache_read": 335855369,
+      "est_cost_usd": 724.23,
+      "models": {
+        "claude-opus-5": 1557
+      }
+    },
+    "2026-08-14": {
+      "turns": 1775,
+      "input": 3445,
+      "output": 2003673,
+      "cache_write": 10905838,
+      "cache_read": 403117309,
+      "est_cost_usd": 959.49,
+      "models": {
+        "claude-opus-5": 1741,
+        "claude-sonnet-5": 3
+      }
+    },
+    "2026-08-15": {
+      "turns": 813,
+      "input": 7123,
+      "output": 805826,
+      "cache_write": 11282527,
+      "cache_read": 193034871,
+      "est_cost_usd": 561.64,
+      "models": {
+        "claude-opus-5": 744,
+        "claude-sonnet-5": 69
+      }
+    },
+    "2026-08-16": {
+      "turns": 1404,
+      "input": 2784,
+      "output": 1503406,
+      "cache_write": 11360308,
+      "cache_read": 242623745,
+      "est_cost_usd": 689.74,
+      "models": {
+        "claude-opus-5": 1388,
+        "claude-sonnet-5": 7
+      }
+    },
+    "2026-08-17": {
+      "turns": 1711,
+      "input": 11897,
+      "output": 1442401,
+      "cache_write": 8927073,
+      "cache_read": 233949844,
+      "est_cost_usd": 626.67,
+      "models": {
+        "claude-opus-5": 1693,
+        "claude-sonnet-5": 7
+      }
+    },
+    "2026-08-18": {
+      "turns": 822,
+      "input": 1638,
+      "output": 706877,
+      "cache_write": 4473395,
+      "cache_read": 89644861,
+      "est_cost_usd": 271.38,
+      "models": {
+        "claude-opus-5": 753,
+        "claude-sonnet-5": 66
+      }
+    },
+    "2026-08-19": {
+      "turns": 24,
+      "input": 0,
+      "output": 0,
+      "cache_write": 0,
+      "cache_read": 0,
+      "est_cost_usd": 0.0,
+      "models": {}
+    },
+    "2026-08-20": {
+      "turns": 27,
+      "input": 0,
+      "output": 0,
+      "cache_write": 0,
+      "cache_read": 0,
+      "est_cost_usd": 0.0,
+      "models": {}
+    },
+    "2026-08-21": {
+      "turns": 23,
+      "input": 0,
+      "output": 0,
+      "cache_write": 0,
+      "cache_read": 0,
+      "est_cost_usd": 0.0,
+      "models": {}
+    },
+    "2026-08-24": {
+      "turns": 752,
+      "input": 1500,
+      "output": 637738,
+      "cache_write": 1905205,
+      "cache_read": 109708123,
+      "est_cost_usd": 248.14,
+      "models": {
+        "claude-opus-5": 750
+      }
+    },
+    "2026-08-25": {
+      "turns": 5858,
+      "input": 11802,
+      "output": 5854635,
+      "cache_write": 24772854,
+      "cache_read": 1014634286,
+      "est_cost_usd": 2425.72,
+      "models": {
+        "claude-opus-5": 5708,
+        "claude-sonnet-5": 114
+      }
+    },
+    "2026-08-26": {
+      "turns": 4537,
+      "input": 8992,
+      "output": 5641958,
+      "cache_write": 29992166,
+      "cache_read": 752181241,
+      "est_cost_usd": 2113.91,
+      "models": {
+        "claude-sonnet-5": 400,
+        "claude-opus-5": 4000,
+        "claude-fable-5": 79
+      }
+    },
+    "2026-08-27": {
+      "turns": 5378,
+      "input": 10700,
+      "output": 6698134,
+      "cache_write": 34029593,
+      "cache_read": 1067198012,
+      "est_cost_usd": 2741.37,
+      "models": {
+        "claude-opus-5": 5039,
+        "claude-sonnet-5": 112,
+        "claude-fable-5": 199
+      }
+    },
+    "2026-08-28": {
+      "turns": 2739,
+      "input": 5478,
+      "output": 2952707,
+      "cache_write": 13583578,
+      "cache_read": 437877464,
+      "est_cost_usd": 1133.04,
+      "models": {
+        "claude-sonnet-5": 38,
+        "claude-opus-5": 2701
+      }
+    },
+    "2026-08-29": {
+      "turns": 734,
+      "input": 1468,
+      "output": 810620,
+      "cache_write": 6314655,
+      "cache_read": 130245212,
+      "est_cost_usd": 374.59,
+      "models": {
+        "claude-sonnet-5": 1,
+        "claude-opus-5": 733
+      }
+    },
+    "2026-08-30": {
+      "turns": 86,
+      "input": 172,
+      "output": 108714,
+      "cache_write": 394109,
+      "cache_read": 16232081,
+      "est_cost_usd": 39.89,
+      "models": {
+        "claude-opus-5": 86
+      }
+    },
+    "2026-08-31": {
+      "turns": 1167,
+      "input": 2334,
+      "output": 1536830,
+      "cache_write": 4904283,
+      "cache_read": 277775089,
+      "est_cost_usd": 623.92,
+      "models": {
+        "claude-sonnet-5": 41,
+        "claude-opus-5": 1126
+      }
+    },
+    "2026-09-01": {
+      "turns": 2115,
+      "input": 4230,
+      "output": 2133237,
+      "cache_write": 7738532,
+      "cache_read": 397411269,
+      "est_cost_usd": 901.27,
+      "models": {
+        "claude-opus-5": 1971,
+        "claude-sonnet-5": 144
+      }
+    },
+    "2026-09-02": {
+      "turns": 1435,
+      "input": 70844,
+      "output": 1632233,
+      "cache_write": 5385649,
+      "cache_read": 228300912,
+      "est_cost_usd": 566.91,
+      "models": {
+        "claude-fable-5-1": 341,
+        "claude-opus-5": 1094
+      }
+    },
+    "2026-09-03": {
+      "turns": 3081,
+      "input": 6156,
+      "output": 2982280,
+      "cache_write": 17465030,
+      "cache_read": 506624350,
+      "est_cost_usd": 1311.17,
+      "models": {
+        "claude-sonnet-5": 485,
+        "claude-opus-5": 2593
+      }
+    },
+    "2026-09-04": {
+      "turns": 3146,
+      "input": 7560,
+      "output": 2956867,
+      "cache_write": 15889018,
+      "cache_read": 555214776,
+      "est_cost_usd": 1352.62,
+      "models": {
+        "claude-opus-5": 2782,
+        "claude-sonnet-5": 304,
+        "claude-fable-5-1": 60
+      }
+    },
+    "2026-09-06": {
+      "turns": 1077,
+      "input": 2154,
+      "output": 1131686,
+      "cache_write": 8148289,
+      "cache_read": 256506931,
+      "est_cost_usd": 622.45,
+      "models": {
+        "claude-sonnet-5": 5,
+        "claude-opus-5": 1072
+      }
+    },
+    "2026-09-07": {
+      "turns": 1914,
+      "input": 3828,
+      "output": 2204111,
+      "cache_write": 7676681,
+      "cache_read": 367069391,
+      "est_cost_usd": 859.91,
+      "models": {
+        "claude-opus-5": 1871,
+        "claude-sonnet-5": 43
+      }
+    },
+    "2026-09-08": {
+      "turns": 1281,
+      "input": 2562,
+      "output": 1299614,
+      "cache_write": 5944154,
+      "cache_read": 235103363,
+      "est_cost_usd": 561.62,
+      "models": {
+        "claude-opus-5": 1236,
+        "claude-sonnet-5": 45
+      }
+    },
+    "2026-09-09": {
+      "turns": 2070,
+      "input": 4140,
+      "output": 1651263,
+      "cache_write": 6102672,
+      "cache_read": 370147598,
+      "est_cost_usd": 793.55,
+      "models": {
+        "claude-opus-5": 1994,
+        "claude-sonnet-5": 76
+      }
+    },
+    "2026-09-10": {
+      "turns": 3580,
+      "input": 26069,
+      "output": 3644168,
+      "cache_write": 15993131,
+      "cache_read": 634652075,
+      "est_cost_usd": 1525.55,
+      "models": {
+        "claude-fable-5-1": 723,
+        "claude-sonnet-5": 171,
+        "claude-opus-5": 2686
+      }
+    },
+    "2026-09-11": {
+      "turns": 2007,
+      "input": 34616,
+      "output": 3242570,
+      "cache_write": 11979774,
+      "cache_read": 353851038,
+      "est_cost_usd": 999.11,
+      "models": {
+        "claude-fable-5-1": 1232,
+        "claude-opus-5": 735,
+        "claude-sonnet-5": 9
+      }
+    },
+    "2026-09-12": {
+      "turns": 97,
+      "input": 2024,
+      "output": 94161,
+      "cache_write": 1092559,
+      "cache_read": 20636179,
+      "est_cost_usd": 58.53,
+      "models": {
+        "claude-sonnet-5": 2,
+        "claude-fable-5-1": 95
+      }
+    },
+    "2026-09-13": {
+      "turns": 635,
+      "input": 1270,
+      "output": 466208,
+      "cache_write": 1525738,
+      "cache_read": 87914591,
+      "est_cost_usd": 195.46,
+      "models": {
+        "claude-sonnet-5": 2,
+        "claude-opus-5": 633
+      }
+    },
+    "2026-09-14": {
+      "turns": 3102,
+      "input": 6204,
+      "output": 2805755,
+      "cache_write": 9495360,
+      "cache_read": 595005321,
+      "est_cost_usd": 1281.07,
+      "models": {
+        "claude-opus-5": 3050,
+        "claude-sonnet-5": 52
+      }
+    },
+    "2026-09-15": {
+      "turns": 5757,
+      "input": 11827,
+      "output": 6755925,
+      "cache_write": 29624673,
+      "cache_read": 1145732604,
+      "est_cost_usd": 2780.93,
+      "models": {
+        "claude-opus-5": 5682,
+        "claude-sonnet-5": 71
+      }
+    },
+    "2026-09-16": {
+      "turns": 1005,
+      "input": 2010,
+      "output": 794474,
+      "cache_write": 7850659,
+      "cache_read": 157147768,
+      "est_cost_usd": 442.54,
+      "models": {
+        "claude-sonnet-5": 96,
+        "claude-opus-5": 909
+      }
+    },
+    "2026-09-17": {
+      "turns": 2813,
+      "input": 5626,
+      "output": 2781824,
+      "cache_write": 11957841,
+      "cache_read": 450057311,
+      "est_cost_usd": 1108.02,
+      "models": {
+        "claude-opus-5": 2722,
+        "claude-sonnet-5": 91
+      }
+    },
+    "2026-09-18": {
+      "turns": 4021,
+      "input": 26094,
+      "output": 4176853,
+      "cache_write": 22863967,
+      "cache_read": 677392545,
+      "est_cost_usd": 1758.44,
+      "models": {
+        "claude-opus-5": 2694,
+        "claude-fable-5-1": 653,
+        "claude-sonnet-5": 636
+      }
+    },
+    "2026-09-19": {
+      "turns": 1797,
+      "input": 3727,
+      "output": 1851849,
+      "cache_write": 10249214,
+      "cache_read": 421592511,
+      "est_cost_usd": 963.51,
+      "models": {
+        "claude-sonnet-5": 119,
+        "claude-opus-5": 1678
+      }
+    },
+    "2026-09-20": {
+      "turns": 617,
+      "input": 1322,
+      "output": 616842,
+      "cache_write": 3913087,
+      "cache_read": 99675581,
+      "est_cost_usd": 269.17,
+      "models": {
+        "claude-opus-5": 617
+      }
+    },
+    "2026-09-21": {
+      "turns": 2430,
+      "input": 5032,
+      "output": 2407421,
+      "cache_write": 16124110,
+      "cache_read": 559046173,
+      "est_cost_usd": 1321.53,
+      "models": {
+        "claude-opus-5": 2424
+      }
+    },
+    "2026-09-22": {
+      "turns": 1309,
+      "input": 2616,
+      "output": 1074099,
+      "cache_write": 7457550,
+      "cache_read": 159608835,
+      "est_cost_usd": 459.84,
+      "models": {
+        "claude-opus-5": 975,
+        "claude-sonnet-5": 159,
+        "claude-opus-5-5": 173
+      }
+    },
+    "2026-09-23": {
+      "turns": 4610,
+      "input": 9226,
+      "output": 4236431,
+      "cache_write": 18766840,
+      "cache_read": 830978267,
+      "est_cost_usd": 1916.22,
+      "models": {
+        "claude-sonnet-5": 64,
+        "claude-opus-5-5": 4501,
+        "claude-opus-5": 44
+      }
+    },
+    "2026-09-24": {
+      "turns": 4003,
+      "input": 8006,
+      "output": 3606710,
+      "cache_write": 20031678,
+      "cache_read": 783116374,
+      "est_cost_usd": 1820.89,
+      "models": {
+        "claude-opus-5-5": 3934,
+        "claude-sonnet-5": 69
+      }
+    },
+    "2026-09-25": {
+      "turns": 6189,
+      "input": 16514,
+      "output": 6660335,
+      "cache_write": 32696824,
+      "cache_read": 1364111243,
+      "est_cost_usd": 3159.01,
+      "models": {
+        "claude-opus-5-5": 5935,
+        "claude-sonnet-5": 92,
+        "claude-fable-5-1": 160
+      }
+    },
+    "2026-09-26": {
+      "turns": 3357,
+      "input": 6720,
+      "output": 3026662,
+      "cache_write": 12210633,
+      "cache_read": 798695112,
+      "est_cost_usd": 1654.09,
+      "models": {
+        "claude-opus-5-5": 3350,
+        "claude-sonnet-5": 7
+      }
+    },
+    "2026-09-27": {
+      "turns": 255,
+      "input": 510,
+      "output": 902509,
+      "cache_write": 5428630,
+      "cache_read": 21984164,
+      "est_cost_usd": 202.46,
+      "models": {
+        "claude-sonnet-5": 3,
+        "claude-opus-5-5": 252
+      }
+    },
+    "2026-09-28": {
+      "turns": 4602,
+      "input": 9204,
+      "output": 3542710,
+      "cache_write": 22675224,
+      "cache_read": 838112776,
+      "est_cost_usd": 1948.17,
+      "models": {
+        "claude-opus-5-5": 4557,
+        "claude-sonnet-5-5": 17,
+        "claude-sonnet-5": 28
+      }
+    },
+    "2026-09-29": {
+      "turns": 3990,
+      "input": 7974,
+      "output": 2670921,
+      "cache_write": 14483715,
+      "cache_read": 884907069,
+      "est_cost_usd": 1799.37,
+      "models": {
+        "claude-opus-5-5": 3961,
+        "claude-sonnet-5-5": 24
+      }
+    },
+    "2026-09-30": {
+      "turns": 898,
+      "input": 1776,
+      "output": 804799,
+      "cache_write": 3675928,
+      "cache_read": 175738707,
+      "est_cost_usd": 392.92,
+      "models": {
+        "claude-opus-5-5": 888
+      }
+    }
+  },
+  "distinct_rate_limit_incidents": [
+    {
+      "timestamp": "2026-08-13T11:36:49.190Z",
+      "type": "five_hour",
+      "resetsAt": null,
+      "project": "-Users-ms-git-domovinatv-domovina-ai",
+      "file": "acdd11b0-c010-48cb-a845-99bc9693f809.jsonl",
+      "window_5h_turns": 819,
+      "window_5h_input_tokens": 18769,
+      "window_5h_output_tokens": 732447,
+      "window_5h_cache_create_tokens": 1982150,
+      "window_5h_cache_read_tokens": 129172491,
+      "window_5h_est_cost_usd": 286.14,
+      "dominant_models": {
+        "<synthetic>": 27,
+        "claude-opus-5": 792
+      }
+    },
+    {
+      "timestamp": "2026-08-14T06:14:51.209Z",
+      "type": "five_hour",
+      "resetsAt": null,
+      "project": "-Users-ms-git-stepanic-ms-toptal-projects-tools-yc-watch",
+      "file": "e0f4008c-1fe9-4448-a223-bf3e8c0b519a.jsonl",
+      "window_5h_turns": 256,
+      "window_5h_input_tokens": 478,
+      "window_5h_output_tokens": 360071,
+      "window_5h_cache_create_tokens": 3931036,
+      "window_5h_cache_read_tokens": 70698959,
+      "window_5h_est_cost_usd": 206.77,
+      "dominant_models": {
+        "claude-opus-5": 252,
+        "claude-sonnet-5": 3,
+        "<synthetic>": 1
+      }
+    },
+    {
+      "timestamp": "2026-08-14T22:27:34.058Z",
+      "type": "five_hour",
+      "resetsAt": null,
+      "project": "-Users-ms-git-domovinatv-crkve-domovina-ai",
+      "file": "21d58c6f-80c0-45f6-9652-b5035eebb519.jsonl",
+      "window_5h_turns": 510,
+      "window_5h_input_tokens": 1009,
+      "window_5h_output_tokens": 607768,
+      "window_5h_cache_create_tokens": 4502943,
+      "window_5h_cache_read_tokens": 130314745,
+      "window_5h_est_cost_usd": 325.5,
+      "dominant_models": {
+        "claude-opus-5": 509,
+        "<synthetic>": 1
+      }
+    },
+    {
+      "timestamp": "2026-08-16T01:52:18.356Z",
+      "type": "five_hour",
+      "resetsAt": null,
+      "project": "-private-var-folders-s3-qzy72mt97b5c6r9t16mpnkq40000gn-T-domovina-claude-cli",
+      "file": "f3f70ef6-4380-4553-afdf-64652399598a.jsonl",
+      "window_5h_turns": 29,
+      "window_5h_input_tokens": 56,
+      "window_5h_output_tokens": 261450,
+      "window_5h_cache_create_tokens": 1211838,
+      "window_5h_cache_read_tokens": 35896,
+      "window_5h_est_cost_usd": 42.39,
+      "dominant_models": {
+        "claude-opus-5": 28,
+        "<synthetic>": 1
+      }
+    },
+    {
+      "timestamp": "2026-08-16T12:39:48.131Z",
+      "type": "five_hour",
+      "resetsAt": null,
+      "project": "-Users-ms-git-muzevnibudite-projekt-41",
+      "file": "ed8aa985-5a39-4e10-b82f-3842a58969ce.jsonl",
+      "window_5h_turns": 714,
+      "window_5h_input_tokens": 1426,
+      "window_5h_output_tokens": 673517,
+      "window_5h_cache_create_tokens": 4891543,
+      "window_5h_cache_read_tokens": 118435373,
+      "window_5h_est_cost_usd": 319.9,
+      "dominant_models": {
+        "claude-opus-5": 713,
+        "<synthetic>": 1
+      }
+    },
+    {
+      "timestamp": "2026-08-16T22:12:04.969Z",
+      "type": "five_hour",
+      "resetsAt": null,
+      "project": "-Volumes-DOMOVINA2TB-git-designhouse-WorkUte",
+      "file": "0fbbe529-ab52-4fe7-aacb-bf51eab69255.jsonl",
+      "window_5h_turns": 397,
+      "window_5h_input_tokens": 786,
+      "window_5h_output_tokens": 399993,
+      "window_5h_cache_create_tokens": 4404604,
+      "window_5h_cache_read_tokens": 94741693,
+      "window_5h_est_cost_usd": 254.71,
+      "dominant_models": {
+        "claude-opus-5": 396,
+        "<synthetic>": 1
+      }
+    },
+    {
+      "timestamp": "2026-08-17T07:27:21.367Z",
+      "type": "five_hour",
+      "resetsAt": null,
+      "project": "-Users-ms-git-stepanic-ms-toptal-projects-tools-job-watch",
+      "file": "c0596dfb-a6b3-4960-be0a-cdd41a16e374.jsonl",
+      "window_5h_turns": 428,
+      "window_5h_input_tokens": 853,
+      "window_5h_output_tokens": 294043,
+      "window_5h_cache_create_tokens": 3863534,
+      "window_5h_cache_read_tokens": 43484232,
+      "window_5h_est_cost_usd": 159.73,
+      "dominant_models": {
+        "claude-opus-5": 420,
+        "claude-sonnet-5": 7,
+        "<synthetic>": 1
+      }
+    },
+    {
+      "timestamp": "2026-08-17T13:14:17.492Z",
+      "type": "five_hour",
+      "resetsAt": null,
+      "project": "-Users-ms-git-domovinatv-karta-hrvatske",
+      "file": "c80c4246-fa05-4fd2-a033-832553a235de.jsonl",
+      "window_5h_turns": 732,
+      "window_5h_input_tokens": 1462,
+      "window_5h_output_tokens": 576770,
+      "window_5h_cache_create_tokens": 1770398,
+      "window_5h_cache_read_tokens": 126349640,
+      "window_5h_est_cost_usd": 266.0,
+      "dominant_models": {
+        "claude-opus-5": 731,
+        "<synthetic>": 1
+      }
+    },
+    {
+      "timestamp": "2026-08-17T20:32:59.538Z",
+      "type": "five_hour",
+      "resetsAt": null,
+      "project": "-Users-ms-git-domovinatv-fetch-domovina-tv",
+      "file": "cd67130f-13f2-45c7-9d69-e2ff46ff0395.jsonl",
+      "window_5h_turns": 543,
+      "window_5h_input_tokens": 9582,
+      "window_5h_output_tokens": 571588,
+      "window_5h_cache_create_tokens": 3293141,
+      "window_5h_cache_read_tokens": 64115972,
+      "window_5h_est_cost_usd": 200.93,
+      "dominant_models": {
+        "claude-opus-5": 542,
+        "<synthetic>": 1
+      }
+    },
+    {
+      "timestamp": "2026-08-18T14:44:59.129Z",
+      "type": "seven_day",
+      "resetsAt": 1787356800,
+      "project": "-Users-ms-git-muzevnibudite-projekt-41",
+      "file": "335b3111-0d33-4861-aa38-9bbb4e1719de.jsonl",
+      "window_5h_turns": 678,
+      "window_5h_input_tokens": 1354,
+      "window_5h_output_tokens": 622867,
+      "window_5h_cache_create_tokens": 3664835,
+      "window_5h_cache_read_tokens": 80915199,
+      "window_5h_est_cost_usd": 236.82,
+      "dominant_models": {
+        "claude-opus-5": 677,
+        "<synthetic>": 1
+      }
+    },
+    {
+      "timestamp": "2026-08-19T01:07:06.731Z",
+      "type": "seven_day",
+      "resetsAt": 1787356800,
+      "project": "-private-var-folders-s3-qzy72mt97b5c6r9t16mpnkq40000gn-T-domovina-claude-cli",
+      "file": "dc47bbda-1fa1-4ac1-aace-341457b3810c.jsonl",
+      "window_5h_turns": 1,
+      "window_5h_input_tokens": 0,
+      "window_5h_output_tokens": 0,
+      "window_5h_cache_create_tokens": 0,
+      "window_5h_cache_read_tokens": 0,
+      "window_5h_est_cost_usd": 0.0,
+      "dominant_models": {
+        "<synthetic>": 1
+      }
+    },
+    {
+      "timestamp": "2026-08-19T07:25:27.777Z",
+      "type": "seven_day",
+      "resetsAt": 1787356800,
+      "project": "-Users-ms-git-stepanic-ms-toptal-projects-tools-job-watch",
+      "file": "603d29cc-ce3c-4eef-8e01-23c04692a8d1.jsonl",
+      "window_5h_turns": 1,
+      "window_5h_input_tokens": 0,
+      "window_5h_output_tokens": 0,
+      "window_5h_cache_create_tokens": 0,
+      "window_5h_cache_read_tokens": 0,
+      "window_5h_est_cost_usd": 0.0,
+      "dominant_models": {
+        "<synthetic>": 1
+      }
+    },
+    {
+      "timestamp": "2026-08-20T07:25:31.666Z",
+      "type": "seven_day",
+      "resetsAt": 1787356800,
+      "project": "-Users-ms-git-stepanic-ms-toptal-projects-tools-job-watch",
+      "file": "f0377fda-a253-4ac2-9fbd-d8769a6cbb09.jsonl",
+      "window_5h_turns": 1,
+      "window_5h_input_tokens": 0,
+      "window_5h_output_tokens": 0,
+      "window_5h_cache_create_tokens": 0,
+      "window_5h_cache_read_tokens": 0,
+      "window_5h_est_cost_usd": 0.0,
+      "dominant_models": {
+        "<synthetic>": 1
+      }
+    },
+    {
+      "timestamp": "2026-08-21T01:04:42.218Z",
+      "type": "seven_day",
+      "resetsAt": 1787356800,
+      "project": "-private-var-folders-s3-qzy72mt97b5c6r9t16mpnkq40000gn-T-domovina-claude-cli",
+      "file": "a7821d5f-42f1-4338-bdb9-a1ed3e3f04f2.jsonl",
+      "window_5h_turns": 1,
+      "window_5h_input_tokens": 0,
+      "window_5h_output_tokens": 0,
+      "window_5h_cache_create_tokens": 0,
+      "window_5h_cache_read_tokens": 0,
+      "window_5h_est_cost_usd": 0.0,
+      "dominant_models": {
+        "<synthetic>": 1
+      }
+    },
+    {
+      "timestamp": "2026-08-21T06:21:37.029Z",
+      "type": "seven_day",
+      "resetsAt": 1787356800,
+      "project": "-Users-ms-git-stepanic-ms-toptal-projects-tools-yc-watch",
+      "file": "a9382905-cc2c-42ca-8f72-aeaf5d7a9907.jsonl",
+      "window_5h_turns": 1,
+      "window_5h_input_tokens": 0,
+      "window_5h_output_tokens": 0,
+      "window_5h_cache_create_tokens": 0,
+      "window_5h_cache_read_tokens": 0,
+      "window_5h_est_cost_usd": 0.0,
+      "dominant_models": {
+        "<synthetic>": 1
+      }
+    },
+    {
+      "timestamp": "2026-08-24T20:07:37.532Z",
+      "type": "five_hour",
+      "resetsAt": 1787616600,
+      "project": "-Users-ms-git-domovinatv-fetch-domovina-tv",
+      "file": "59661227-8b0b-4e4e-ab44-578a742fb876.jsonl",
+      "window_5h_turns": 751,
+      "window_5h_input_tokens": 1500,
+      "window_5h_output_tokens": 637738,
+      "window_5h_cache_create_tokens": 1905205,
+      "window_5h_cache_read_tokens": 109708123,
+      "window_5h_est_cost_usd": 248.14,
+      "dominant_models": {
+        "claude-opus-5": 750,
+        "<synthetic>": 1
+      }
+    },
+    {
+      "timestamp": "2026-08-25T07:38:01.225Z",
+      "type": "five_hour",
+      "resetsAt": 1787656200,
+      "project": "-Users-ms-git-stepanic-ms-toptal-projects-tools-job-watch",
+      "file": "fb654cb1-895d-4bec-8ee9-87de5c51751b.jsonl",
+      "window_5h_turns": 510,
+      "window_5h_input_tokens": 1018,
+      "window_5h_output_tokens": 480876,
+      "window_5h_cache_create_tokens": 3460179,
+      "window_5h_cache_read_tokens": 71778312,
+      "window_5h_est_cost_usd": 208.63,
+      "dominant_models": {
+        "claude-opus-5": 398,
+        "claude-sonnet-5": 111,
+        "<synthetic>": 1
+      }
+    },
+    {
+      "timestamp": "2026-08-25T11:59:07.212Z",
+      "type": "five_hour",
+      "resetsAt": 1787661600,
+      "project": "-Users-ms-git-domovinatv-domovina-ai",
+      "file": "2f0f6f80-2d53-4667-b752-bc80025977af.jsonl",
+      "window_5h_turns": 3849,
+      "window_5h_input_tokens": 7672,
+      "window_5h_output_tokens": 3235216,
+      "window_5h_cache_create_tokens": 12117655,
+      "window_5h_cache_read_tokens": 671357750,
+      "window_5h_est_cost_usd": 1477.0,
+      "dominant_models": {
+        "claude-opus-5": 3730,
+        "claude-sonnet-5": 106,
+        "<synthetic>": 13
+      }
+    },
+    {
+      "timestamp": "2026-08-26T10:19:47.440Z",
+      "type": "five_hour",
+      "resetsAt": 1787743200,
+      "project": "-private-var-folders-s3-qzy72mt97b5c6r9t16mpnkq40000gn-T-domovina-claude-cli",
+      "file": "30e6d633-eacf-4c75-8d7a-a8a98416a3a5.jsonl",
+      "window_5h_turns": 2191,
+      "window_5h_input_tokens": 4414,
+      "window_5h_output_tokens": 2260842,
+      "window_5h_cache_create_tokens": 12766203,
+      "window_5h_cache_read_tokens": 368814633,
+      "window_5h_est_cost_usd": 962.22,
+      "dominant_models": {
+        "claude-opus-5": 1936,
+        "claude-sonnet-5": 254,
+        "<synthetic>": 1
+      }
+    },
+    {
+      "timestamp": "2026-08-26T13:33:29.660Z",
+      "type": "five_hour",
+      "resetsAt": 1787761200,
+      "project": "-Users-ms-git-domovinatv-domovina-ai",
+      "file": "ab7ad23a-606d-449f-babf-a6583e7b1058.jsonl",
+      "window_5h_turns": 2322,
+      "window_5h_input_tokens": 4552,
+      "window_5h_output_tokens": 3238869,
+      "window_5h_cache_create_tokens": 12968900,
+      "window_5h_cache_read_tokens": 386440279,
+      "window_5h_est_cost_usd": 1065.81,
+      "dominant_models": {
+        "claude-opus-5": 2117,
+        "claude-sonnet-5": 159,
+        "<synthetic>": 46
+      }
+    },
+    {
+      "timestamp": "2026-08-27T10:18:12.366Z",
+      "type": "five_hour",
+      "resetsAt": 1787828400,
+      "project": "-Users-ms-git-domovinatv-fetch-domovina-tv",
+      "file": "3d0f6119-7e95-4293-bcfa-11a7fa302cd2.jsonl",
+      "window_5h_turns": 2219,
+      "window_5h_input_tokens": 4436,
+      "window_5h_output_tokens": 2446018,
+      "window_5h_cache_create_tokens": 10889342,
+      "window_5h_cache_read_tokens": 488481293,
+      "window_5h_est_cost_usd": 1120.41,
+      "dominant_models": {
+        "claude-opus-5": 2036,
+        "claude-fable-5": 136,
+        "claude-sonnet-5": 46,
+        "<synthetic>": 1
+      }
+    },
+    {
+      "timestamp": "2026-08-27T14:18:57.124Z",
+      "type": "five_hour",
+      "resetsAt": 1787846400,
+      "project": "-private-var-folders-s3-qzy72mt97b5c6r9t16mpnkq40000gn-T-domovina-claude-cli",
+      "file": "ba69db15-d4b7-4f05-a3fc-dc7a6cae131c.jsonl",
+      "window_5h_turns": 2369,
+      "window_5h_input_tokens": 4724,
+      "window_5h_output_tokens": 2783972,
+      "window_5h_cache_create_tokens": 11058605,
+      "window_5h_cache_read_tokens": 436334833,
+      "window_5h_est_cost_usd": 1070.72,
+      "dominant_models": {
+        "claude-opus-5": 2246,
+        "claude-fable-5": 103,
+        "claude-sonnet-5": 13,
+        "<synthetic>": 7
+      }
+    },
+    {
+      "timestamp": "2026-08-27T19:39:23.232Z",
+      "type": "five_hour",
+      "resetsAt": 1787864400,
+      "project": "-private-var-folders-s3-qzy72mt97b5c6r9t16mpnkq40000gn-T-domovina-claude-cli",
+      "file": "751fb1e2-ab86-42e9-9225-7ace380fd672.jsonl",
+      "window_5h_turns": 1261,
+      "window_5h_input_tokens": 2506,
+      "window_5h_output_tokens": 1831539,
+      "window_5h_cache_create_tokens": 11027930,
+      "window_5h_cache_read_tokens": 276221846,
+      "window_5h_est_cost_usd": 758.51,
+      "dominant_models": {
+        "<synthetic>": 8,
+        "claude-opus-5": 1228,
+        "claude-fable-5": 25
+      }
+    },
+    {
+      "timestamp": "2026-09-11T10:09:13.021Z",
+      "type": "five_hour",
+      "resetsAt": 1789126200,
+      "project": "-Users-ms-git-adria-analytics-adria-brainstormer",
+      "file": "8dc4cb9e-8f88-4843-9128-5d06c9b249ef.jsonl",
+      "window_5h_turns": 616,
+      "window_5h_input_tokens": 13620,
+      "window_5h_output_tokens": 1168363,
+      "window_5h_cache_create_tokens": 6570356,
+      "window_5h_cache_read_tokens": 121802135,
+      "window_5h_est_cost_usd": 393.73,
+      "dominant_models": {
+        "claude-fable-5-1": 509,
+        "claude-opus-5": 106,
+        "<synthetic>": 1
+      }
+    },
+    {
+      "timestamp": "2026-09-11T22:28:17.048Z",
+      "type": "five_hour",
+      "resetsAt": 1789172400,
+      "project": "-Users-ms-git-domovinatv-domovina-ulaznice",
+      "file": "93e84476-f1af-4741-98ec-dcb675db004a.jsonl",
+      "window_5h_turns": 902,
+      "window_5h_input_tokens": 13198,
+      "window_5h_output_tokens": 1495317,
+      "window_5h_cache_create_tokens": 3441926,
+      "window_5h_cache_read_tokens": 131292013,
+      "window_5h_est_cost_usd": 373.82,
+      "dominant_models": {
+        "claude-opus-5": 431,
+        "claude-fable-5-1": 459,
+        "<synthetic>": 3,
+        "claude-sonnet-5": 9
+      }
+    },
+    {
+      "timestamp": "2026-09-15T14:15:25.261Z",
+      "type": "five_hour",
+      "resetsAt": 1789482000,
+      "project": "-Users-ms-git-domovinatv-energy-domovina-ai",
+      "file": "53fdaf2c-332b-44ee-a57e-55fffe111d20.jsonl",
+      "window_5h_turns": 3012,
+      "window_5h_input_tokens": 6168,
+      "window_5h_output_tokens": 2852304,
+      "window_5h_cache_create_tokens": 12589293,
+      "window_5h_cache_read_tokens": 652733040,
+      "window_5h_est_cost_usd": 1429.16,
+      "dominant_models": {
+        "claude-opus-5": 3011,
+        "<synthetic>": 1
+      }
+    },
+    {
+      "timestamp": "2026-09-18T11:09:24.589Z",
+      "type": "five_hour",
+      "resetsAt": 1789731000,
+      "project": "-Users-ms-git-stepanic-ai-prijevodi",
+      "file": "4745c536-fa54-40b6-9467-ce1cb1654210.jsonl",
+      "window_5h_turns": 1607,
+      "window_5h_input_tokens": 3781,
+      "window_5h_output_tokens": 1723221,
+      "window_5h_cache_create_tokens": 5694656,
+      "window_5h_cache_read_tokens": 369838417,
+      "window_5h_est_cost_usd": 790.83,
+      "dominant_models": {
+        "claude-opus-5": 1606,
+        "<synthetic>": 1
+      }
+    },
+    {
+      "timestamp": "2026-09-18T16:59:22.797Z",
+      "type": "five_hour",
+      "resetsAt": 1789767000,
+      "project": "-Users-ms-git-zef-zef-new-website",
+      "file": "1a6f500a-7607-473f-beb8-e38be6529623.jsonl",
+      "window_5h_turns": 1653,
+      "window_5h_input_tokens": 17501,
+      "window_5h_output_tokens": 1437530,
+      "window_5h_cache_create_tokens": 9338895,
+      "window_5h_cache_read_tokens": 209806258,
+      "window_5h_est_cost_usd": 597.89,
+      "dominant_models": {
+        "claude-opus-5": 808,
+        "claude-fable-5-1": 529,
+        "claude-sonnet-5": 315,
+        "<synthetic>": 1
+      }
+    },
+    {
+      "timestamp": "2026-09-18T22:00:40.204Z",
+      "type": "seven_day",
+      "resetsAt": 1789776000,
+      "project": "-Users-ms-git-infotext-njoy-hr",
+      "file": "abf497de-deaf-48e6-bda7-7c5c48b1865b.jsonl",
+      "window_5h_turns": 528,
+      "window_5h_input_tokens": 4345,
+      "window_5h_output_tokens": 387945,
+      "window_5h_cache_create_tokens": 5414419,
+      "window_5h_cache_read_tokens": 75328854,
+      "window_5h_est_cost_usd": 243.67,
+      "dominant_models": {
+        "<synthetic>": 4,
+        "claude-fable-5-1": 122,
+        "claude-opus-5": 118,
+        "claude-sonnet-5": 284
+      }
+    },
+    {
+      "timestamp": "2026-09-21T21:40:51.351Z",
+      "type": "five_hour",
+      "resetsAt": 1790031600,
+      "project": "subagents",
+      "file": "agent-ab83c7ced0618ee7d.jsonl",
+      "window_5h_turns": 1248,
+      "window_5h_input_tokens": 2617,
+      "window_5h_output_tokens": 1198873,
+      "window_5h_cache_create_tokens": 7651714,
+      "window_5h_cache_read_tokens": 318910848,
+      "window_5h_est_cost_usd": 711.79,
+      "dominant_models": {
+        "claude-opus-5": 1247,
+        "<synthetic>": 1
+      }
+    },
+    {
+      "timestamp": "2026-09-30T07:45:50.809Z",
+      "type": "five_hour",
+      "resetsAt": 1790766000,
+      "project": "-Users-ms-git-infotext-njoy-hr",
+      "file": "66019f45-21f6-4bdf-917c-391590ff65b9.jsonl",
+      "window_5h_turns": 852,
+      "window_5h_input_tokens": 1702,
+      "window_5h_output_tokens": 722802,
+      "window_5h_cache_create_tokens": 3353306,
+      "window_5h_cache_read_tokens": 168174238,
+      "window_5h_est_cost_usd": 369.37,
+      "dominant_models": {
+        "claude-opus-5-5": 851,
+        "<synthetic>": 1
+      }
+    }
+  ]
+}
