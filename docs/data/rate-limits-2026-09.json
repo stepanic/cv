@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-30T10:03:45.512662+00:00",
+  "generated_at": "2026-10-01T12:16:55.389153+00:00",
   "description": "Multi-week token consumption and rate-limit threshold analysis from ~/.claude/projects",
   "weekly_trends": {
     "2026-W31": {
@@ -128,16 +128,16 @@
       }
     },
     "2026-W40": {
-      "turns": 9490,
-      "input": 18954,
-      "output": 7018430,
-      "cache_write": 40834867,
-      "cache_read": 1898758552,
-      "est_cost_usd": 4140.46,
+      "turns": 11501,
+      "input": 22976,
+      "output": 8467544,
+      "cache_write": 53107468,
+      "cache_read": 2258889874,
+      "est_cost_usd": 5019.51,
       "rate_limits": 10,
       "models": {
-        "claude-opus-5-5": 9406,
-        "claude-sonnet-5-5": 41,
+        "claude-opus-5-5": 11394,
+        "claude-sonnet-5-5": 64,
         "claude-sonnet-5": 28
       }
     }
@@ -784,14 +784,27 @@
       }
     },
     "2026-09-30": {
-      "turns": 898,
-      "input": 1776,
-      "output": 804799,
-      "cache_write": 3675928,
-      "cache_read": 175738707,
-      "est_cost_usd": 392.92,
+      "turns": 2117,
+      "input": 4214,
+      "output": 1580721,
+      "cache_write": 12630047,
+      "cache_read": 387863963,
+      "est_cost_usd": 937.23,
       "models": {
-        "claude-opus-5-5": 888
+        "claude-opus-5-5": 2101,
+        "claude-sonnet-5-5": 6
+      }
+    },
+    "2026-10-01": {
+      "turns": 792,
+      "input": 1584,
+      "output": 673192,
+      "cache_write": 3318482,
+      "cache_read": 148006066,
+      "est_cost_usd": 334.74,
+      "models": {
+        "claude-opus-5-5": 775,
+        "claude-sonnet-5-5": 17
       }
     }
   },

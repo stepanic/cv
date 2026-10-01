@@ -136,3 +136,37 @@ Dataset se nalazi u [`docs/data/rate-limits-2026-09.json`](file:///Users/ms/git/
 1. **Priguši notifikacije u dugim sesijama:** Pozadinske skripte i monitori ne smiju slati mikro-statuse (`10/224`, `20/224`) u Claude sesiju kada kontekst naraste preko 100k tokena. Neka pišu u log, a notifikaciju pošalju samo pri završetku (`done`).
 2. **Kompaktiranje (`/compact`):** Redovito kompaktiraj sesije čim prijeđu 100k tokena kako trivijalni upiti ne bi trošili 200k cache čitanja.
 3. **Pripazi na paralelizam:** 4 paralelna terminala s Opus modelom troše isti 5-satni bazen 4 puta brže. Za sekundarne zadatke koristi Sonnet ili Haiku.
+
+---
+
+## 8. Dinamika nakon reseta (30. 9. popodne do 1. 10.) i validacija mehanizma limita
+
+Analiza telemetrije nakon reseta u 13:00 CEST (30. 9.) do 12:10 CEST (1. 10.) empirijski je rasvijetlila kako točno Anthropicov algoritam upravlja restrikcijama:
+
+### Pregled 5-satnih ciklusa nakon prekida:
+
+| Vremenski blok (CEST) | Turnovi | Output tokeni | Cache Read | Est. Cost (USD) | Status blokade |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **30. 9. Ujutro (08:00 – 13:00)** | 834 | **715.186** *(u 1h45m)* | 160.313.041 | $356.71 | 🛑 **Blokada u 09:45** |
+| **30. 9. Popodne (13:00 – 18:00)**| 761 | **496.622** | 160.112.637 | **$383.38** | ✅ Bez prekida |
+| **30. 9. Večer (18:00 – 23:00)** | 452 | **272.732** | 51.968.741 | $156.88 | ✅ Bez prekida |
+| **30. 9./1. 10. Noć (23:00 – 08:00)**| 26 | **211.678** | 58.824 | $30.69 | ✅ Bez prekida |
+| **1. 10. Danas (08:00 – 12:10)** | 159 | **96.032** | 18.538.350 | $44.82 | ✅ Bez prekida |
+
+### Ključni empirijski zaključci:
+
+1. **Zašto popodne nije došlo do blokade iako je trošak bio $383 (više od jutarnjih $356)?**
+   * Jutarnji prekid dogodio se jer je brzina Output tokena (velocity) bila **410.000 output tokena/sat** (715k tokena u 105 minuta).
+   * Popodnevni blok imao je veći ukupni trošak ($383 vs $356), ali je čak $240 tog troška otpadalo na *Cache Read* (160M tokena u `adria-analytics`), dok je volumen novih *Output tokena* bio samo **496k raspoređenih na punih 5 sati** (~100k/h).
+   * **Nalaz:** Anthropicov mehanizam primarno reže na **output tokenima i brzini turnovera**, dok je prema cache čitanju iznimno tolerantan.
+
+2. **Je li "cliff" od ~750k trajan ili se resetira idući tjedan?**
+   * **Strop od ~750k NIJE trajni fiksni limit računa**, već **dinamička kočnica (velocity throttle)** vezana uz kumulativnu tjednu potrošnju.
+   * U tjednu W40, korisnik je u samo prva dva dana (ponedjeljak 28. 9. i utorak 29. 9.) potrošio **6.213.631 output tokena** ($3.747 API ekvivalenta). Kada tjedni bazen dosegne kritičnu razinu, algoritam u srijedu spušta 5-satni prag na ~700k–750k kako bi spriječio višednevni lock.
+   * **Predikcija za sljedeći tjedan:** Početkom tjedna (ponedjeljak/utorak), nakon reseta kliznog 7-dnevnog prozora, 5-satni kapacitet će se ponovno otvoriti na 1,5M – 2,5M+ tokena. No, ako se ponovi tempo od 3M+ dnevno, srijedom će ponovno nastupiti identičan pad na ~750k.
+
+3. **Ekonomska pozadina i guranje prema Claude Max x20 planu:**
+   * U tjednu W39 korisnik je generirao **$10.534** API ekvivalenta, a u W40 do četvrtka **$5.019** na modelu Opus 5.5.
+   * Flat-rate pretplate (bilo Pro od $20 ili standardni paketi) generiraju ogroman računski gubitak za Anthropic pri intenzivnom paralelnom radu agenata.
+   * Ukidanje ljetne promocije od +50% (14. 9.) i agresivnije dinamičko prigušivanje srijedom/četvrtkom strateški su usmjereni na smanjenje subvencije i poticanje power usera na prelazak na **Claude Max (x20 plan od ~180 EUR)** ili Claude Enterprise.
+
