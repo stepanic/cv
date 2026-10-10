@@ -10,6 +10,10 @@
 - [`SKILL.hr.md`](SKILL.hr.md) — the Croatian original, verbatim as it runs on my
   machine (repo names and all). Kept because it is the artefact that was actually
   measured into existence.
+- [`SKILL.antigravity.md`](SKILL.antigravity.md) — the same Croatian skill ported to
+  Antigravity CLI: Gemini co-author trailer, no `/clear`, and it reads and writes the
+  same `~/.claude/handoffs/` and `~/.claude/projects/*/memory/` as Claude Code, so a
+  session started in one tool can be continued in the other.
 
 Blog post with the full story: **[stepanic.domovina.ai/blog/wrap-up-skill-mined-from-my-own-transcripts](https://stepanic.domovina.ai/blog/wrap-up-skill-mined-from-my-own-transcripts)**
 
@@ -27,6 +31,15 @@ Or project-level, checked into a repo so a team shares it:
 
 ```bash
 mkdir -p .claude/skills/wrap-up && cp SKILL.md .claude/skills/wrap-up/SKILL.md
+```
+
+For Antigravity CLI, which on my machine reads user skills from
+`~/.gemini/config/skills/`:
+
+```bash
+mkdir -p ~/.gemini/config/skills/wrap-up
+curl -sSL https://raw.githubusercontent.com/stepanic/cv/main/skills/wrap-up/SKILL.antigravity.md \
+  -o ~/.gemini/config/skills/wrap-up/SKILL.md
 ```
 
 Then invoke it as `/wrap-up` — or just keep typing your usual end-of-session
