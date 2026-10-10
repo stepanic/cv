@@ -38,7 +38,8 @@ point is the point: a shortcut you have to remember is a shortcut you will forge
 
 ```mermaid
 flowchart TD
-    A["end of session<br/>/wrap-up or the usual sentence"] --> B
+    A["end of session<br/>/wrap-up or the usual sentence"] --> Z
+    Z["0 · whose repo is this?<br/>its CLAUDE.md / AGENTS.md wins<br/>not yours → branch + PR"] --> B
 
     subgraph B ["1 · commit + push"]
         B1["list EVERY repo touched<br/>this session"] --> B2["stage by name<br/>never git add -A"]
@@ -47,7 +48,7 @@ flowchart TD
 
     B --> C["2 · memory files<br/>~/.claude/projects/&lt;p&gt;/memory/<br/>update, don't duplicate"]
     C --> D["3 · docs/YYYY-MM-DD-topic.md<br/>what the NEXT pass would<br/>have to rediscover"]
-    D --> E["4 · handoff prompt → clipboard<br/>AND printed in the reply"]
+    D --> E["4 · handoff prompt → clipboard<br/>+ ~/.claude/handoffs/&lt;repo&gt;/<br/>AND printed in the reply"]
     E --> F["5 · summary<br/>open items stated explicitly"]
     F --> G["human types /clear"]
 
@@ -177,6 +178,21 @@ Two caveats on the archaeology, both of which bit me:
   trigger phrases, every session that loads the skill list contains them too, so a
   naive `grep` count balloons. Filter to `type == "user"` messages that a human
   actually typed, as the script above does.
+
+## Changes since the blog post
+
+The blog post describes the version of 2026-08-26. Two things were added since,
+both from real sessions:
+
+- **Step 0, "whose repo is this".** Before any commit the skill classifies every
+  repo it is about to write to. A repo's own `CLAUDE.md` / `AGENTS.md` overrides the
+  skill, and a repo that is not yours gets a branch and a pull request, never a
+  commit on its default branch and never your notes in its tree. Branch protection
+  rejects the push, not the commit, so the branch is chosen before the first commit.
+- **The handoff prompt is also written to a file**, `~/.claude/handoffs/<repo>/YYYY-MM-DD-HHMM-<topic>.md`,
+  outside any repo. The clipboard is gone the moment you copy something else; the
+  file is not, and a fresh session can pick up the newest one on "continue the last
+  handoff".
 
 ## Licence
 

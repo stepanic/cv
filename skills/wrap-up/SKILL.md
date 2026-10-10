@@ -1,6 +1,6 @@
 ---
 name: wrap-up
-description: Close a Claude Code session before /clear — commit and push everything from this conversation, refresh the memory files, write down knowledge that is not yet in the codebase (markdown, mermaid where a diagram earns its place), put a handoff prompt in the clipboard, and report what is still open. Run it when the user says any variant of "commit and push / update memory / save what we learned / prepare the chat for clear", or /wrap-up.
+description: Close a Claude Code session before /clear — commit and push everything from this conversation, refresh the memory files, write down knowledge that is not yet in the codebase (markdown, mermaid where a diagram earns its place), put a handoff prompt in the clipboard and in ~/.claude/handoffs/<repo>/, and report what is still open. Run it when the user says any variant of "commit and push / update memory / save what we learned / prepare the chat for clear", or /wrap-up.
 ---
 
 # Wrap-up — closing a session
@@ -80,9 +80,21 @@ Co-Authored-By: Claude <noreply@anthropic.com>
 
 ### Push
 
-Push every repo and **check the output**. If a push fails (branch protection,
-conflict, no remote), say so in the summary — never report "pushed" on an
+**Step 0 decided the target branch and how the work is delivered**, not this
+section. For your own solo projects that is straight to `main`. For a repo that is
+not yours, **never its default branch** — a branch and then a pull request, by that
+repo's rules.
+
+Push every repo and **check the output**. If a push fails (branch protection or a
+ruleset, conflict, no remote), say so in the summary — never report "pushed" on an
 assumption.
+
+> Protection stops the **push**, not the **commit**. A commit to someone else's
+> default branch succeeds locally and leaves the clone diverged; the rejected push
+> only reveals it too late. So pick the branch **before the first commit**, not
+> before the push. And do not conclude from a successful push that the branch was
+> allowed: protection is per repo, not per org, so two repos with the same owner
+> can be protected differently.
 
 ---
 
@@ -130,6 +142,11 @@ section** rather than starting a second one.
 The repo boundary applies to documents too: a measurement of the database belongs
 in the repo that has the database.
 
+**Unless the repo is not yours.** Then the document goes neither into its tree nor
+into its `docs/`, but into your own notes space, as established in step 0. The one
+exception is a document that repo actually asks for and that is part of a pull
+request to it.
+
 Use mermaid when a relationship or a flow is not obvious from prose (architecture,
 failure order, data moving through steps). Do not draw a diagram for something
 that is one sentence.
@@ -138,21 +155,47 @@ Link the new document from existing ones ("Related documents") so it can be foun
 
 ---
 
-## 4. Handoff prompt in the clipboard
+## 4. Handoff prompt in the clipboard + a file
 
 Write a prompt for an **empty** Claude Code session — the reader has nothing from
 this conversation. It must contain: the repos and absolute paths, what was just
 done, what is still open, and a concrete next task. Point at the documents from
 step 3 instead of retelling them.
 
+The same prompt goes to **two places**:
+
+- **clipboard**: where the user reviews and pastes it;
+- **a file** in `~/.claude/handoffs/<repo>/`: the clipboard is overwritten the
+  moment the user copies anything else, the file stays. A new session finds it on
+  its own.
+
+`<repo>` is the directory name of the repo where the work **continues** (if the
+session touched several, the one the next task is about). `<topic>` is 2–4 words,
+kebab-case. The file lives outside the repo on purpose: a handoff may contain
+local paths and internal context, and it belongs in nobody's tree.
+
 ```bash
-cat <<'EOF' | pbcopy   # Linux: xclip -selection clipboard / wl-copy
+dir="$HOME/.claude/handoffs/<repo>"; mkdir -p "$dir"
+f="$dir/$(date +%Y-%m-%d-%H%M)-<topic>.md"
+cat <<'EOF' | tee "$f" | pbcopy   # Linux: xclip -selection clipboard / wl-copy
 <handoff prompt>
 EOF
+echo "$f"
 ```
 
-Confirm it is in the clipboard (`pbpaste | head -3`) and **print it in the reply as
-well** — the clipboard has a habit of getting lost before `/clear`.
+Confirm both (`pbpaste | head -3`, `head -3 "$f"`), **print the prompt in the reply
+as well**, and give the path to the file.
+
+### Resuming from the file
+
+When the user says "continue the last handoff" in a new session (or the handoff is
+no longer in the clipboard), take the newest one for the current repo:
+
+```bash
+ls -t "$HOME/.claude/handoffs/$(basename "$(git rev-parse --show-toplevel)")"/*.md | head -5
+```
+
+Read the newest; if the name or date looks off, show the user the list.
 
 ---
 
@@ -175,5 +218,6 @@ to type it.
       and you said so
 - [ ] every push actually went through (output checked, not assumed)
 - [ ] no generated snapshot and no secret was committed
-- [ ] handoff prompt in the clipboard **and** in the reply
+- [ ] handoff prompt in the clipboard, in a file under `~/.claude/handoffs/<repo>/`
+      **and** in the reply
 - [ ] open items stated explicitly
