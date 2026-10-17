@@ -111,6 +111,33 @@ Pet agenata u prosjeku je trebalo oko 6–14 $ po repou za koji su stigli dovrš
 5. **U promptu za čitački posao ograničiti kontekst:** grep i ciljani `sed -n` umjesto `cat -n` cijelih datoteka, nikad isto čitati dvaput, nalaze odmah zapisivati u datoteku umjesto da se drže u kontekstu, a pri oko 250k konteksta zapisati i završiti.
 6. **Dokument commitati čim je napisan**, ne na kraju, da ga 429 ne ostavi u `/private/tmp`.
 
+## Bi li pomogle sesije s granicom od 200k?
+
+Prijedlog nakon incidenta: svaki audit u zasebnoj sesiji, granica ~200k konteksta, pa `/wrap-up` i nastavak u novoj sesiji. Simulirao sam to na stvarnim pozivima iz transkripata: isti novi tokeni i isti output po pozivu, ali kad kontekst prijeđe granicu, nova sesija ponovno upisuje bazu (system prompt, CLAUDE.md, zadatak) i handoff od ~8k.
+
+| Agent | Jedna sesija | Granica 300k | Granica 200k | Granica 150k |
+|---|---|---|---|---|
+| pay | 13,95 $ (1) | 13,88 $ (3) | 14,76 $ (5) | 15,71 $ (7) |
+| pipeline | 7,02 $ (1) | 7,02 $ (1) | 7,38 $ (2) | 7,72 $ (3) |
+| omm | 5,90 $ (1) | 5,90 $ (1) | 6,35 $ (2) | 6,85 $ (3) |
+
+(Fable 5.1 cjenik; u zagradi broj sesija.)
+
+Po API cijeni podjela ne štedi, nego je 5–10 % skuplja. Na Fableu je čitanje iz cachea jeftino ($0,25/M, 16 % troška), a upis skup ($12,50/M, 55 %). Kraći kontekst štedi jeftini dio, a svaka nova sesija ponovno plaća skupi. Ograda: ako pretplata broji čitanje iz cachea teže od API cijene, podjela bi nešto uštedjela. To se iz ovih podataka ne vidi.
+
+Granica konteksta ipak vrijedi, ali iz drugih razloga:
+
+- **Točka zaustavljanja.** Između sesija se provjeri `/usage`. To bi 16.10. zaustavilo rad prije tjednog limita.
+- **Posao preživi 429.** Napredak se commita na granici, pa ništa ne ostane u `/private/tmp`.
+- **Kvaliteta.** Model u 150k kontekstu bolje prati detalje nego u 600k.
+
+Stvarna ušteda dolazi od manje koda u kontekstu (grep i ciljano čitanje, bez ponovnog čitanja) i od jeftinijeg modela za prvi prolaz. Gruba procjena: Sonnet mapa (~2–4 $) plus Fable provjera samo sumnjivih mjesta (~3–6 $) daje **oko 8 $ umjesto 14 $** za repo veličine pay.domovina.ai.
+
+Provedeno 2026-10-17:
+
+- `~/.claude/hooks/context-guard.py`, globalni PostToolUse hook. Kad kontekst sesije ili subagenta prijeđe 180k (pa svakih +50k), modelu ubacuje uputu da zapiše napredak, commita i završi ili predloži `/wrap-up`. Granica se mijenja s `CONTEXT_GUARD_TOKENS`, a isključuje s `CONTEXT_GUARD_OFF=1`. Uživo provjereno u glavnoj sesiji; za subagente provjereno samo na snimljenom transkriptu.
+- `~/.claude/skills/security-audit/SKILL.md`: postupak u dva prolaza (Sonnet mapa → Fable provjera), s procjenom troška i potvrdom prije pokretanja, jednim repoom u isto vrijeme i commitom nakon svakog koraka.
+
 ## Kako je izračunato
 
 ```bash
