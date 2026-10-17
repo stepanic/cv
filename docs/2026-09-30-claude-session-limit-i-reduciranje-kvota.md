@@ -170,3 +170,6 @@ Analiza telemetrije nakon reseta u 13:00 CEST (30. 9.) do 12:10 CEST (1. 10.) em
    * Flat-rate pretplate (bilo Pro od $20 ili standardni paketi) generiraju ogroman računski gubitak za Anthropic pri intenzivnom paralelnom radu agenata.
    * Ukidanje ljetne promocije od +50% (14. 9.) i agresivnije dinamičko prigušivanje srijedom/četvrtkom strateški su usmjereni na smanjenje subvencije i poticanje power usera na prelazak na **Claude Max (x20 plan od ~180 EUR)** ili Claude Enterprise.
 
+## Vezani dokumenti
+
+- [2026-10-17: Fable 5.1 subagenti potrošili zadnjih 7 % tjednog limita](2026-10-17-postmortem-fable-subagenti-tjedni-limit.md): drugi incident iste vrste (model i paralelizam umjesto monitora), sa simulacijom granice konteksta.
