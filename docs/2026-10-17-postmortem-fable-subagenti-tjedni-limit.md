@@ -97,10 +97,8 @@ Pet agenata u prosjeku je trebalo oko 6–14 $ po repou za koji su stigli dovrš
 
 ## Što je ostalo nedovršeno
 
-- **pay.domovina.ai:** dokument (33 KB) postoji samo u privremenom worktreeu
-  `/private/tmp/claude-501/-Users-ms-git/8d40f90b-ad45-4198-9101-d5b7a1f28f58/scratchpad/audit-pay.domovina.ai/docs/security/2026-10-16-security-audit-fable.md`.
-  Nije commitan. Na restart Maca `/private/tmp` se briše.
-- **energy.domovina.ai i repo X:** pali na početku, bez dokumenta. Prazni worktreeji su ostali.
+- **pay.domovina.ai:** dokument (33 KB) agent je napisao, ali nije stigao commitati, pa je ostao samo u `/private/tmp` worktreeu. Spašen je i pushan na main 2026-10-17 (`4ca716f`).
+- **energy.domovina.ai i repo X:** pali na početku, bez dokumenta. Prazni worktreeji obrisani su 2026-10-17.
 - **omm.domovina.ai** (`afd49d5`) i **pipeline.domovina.ai** (`cbce659`) su na mainu.
 - Preostalih 6 repoa nije ni pokrenuto.
 
