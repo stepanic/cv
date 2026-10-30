@@ -14,6 +14,245 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "gis-domovina-pages-to-workers",
+    date: "2026-10-30",
+    tags: ["Cloudflare", "Workers", "Pages", "React", "SEO"],
+    title: {
+      en: "Moving gis.domovina.ai from Cloudflare Pages to Workers without moving the domain",
+      hr: "Prijelaz gis.domovina.ai s Cloudflare Pagesa na Workers bez premještanja domene",
+    },
+    lead: {
+      en: "The map now runs on a Worker with static assets. A Worker route in front of the Pages custom domain made the switch without downtime, the same worker file runs on both platforms, and three behavioural differences were handled in it. Crawler-readable content went into the same worker instead of an Astro rewrite.",
+      hr: "Karta sada radi na Workeru sa static assets. Worker route ispred Pages custom domene omogućio je prijelaz bez prekida, ista datoteka workera radi na obje platforme, a u njoj su riješene tri razlike u ponašanju. Sadržaj čitljiv crawlerima otišao je u isti worker umjesto prepisivanja u Astro.",
+    },
+    body: {
+      en: `On 30 October 2026 gis.domovina.ai moved from Cloudflare Pages to a Worker with static assets. The domain was not moved: a Worker route on the zone takes the traffic before it reaches the Pages custom domain, so the switch had no downtime and rollback is one deleted line and a redeploy. The worker file is the same on both platforms. Three behavioural differences between Pages and Workers showed up, all handled in that file. In the same change the worker started writing readable content into the page for crawlers that do not run JavaScript, which was the only real argument for rewriting the site in Astro.
+
+## The site
+
+[gis.domovina.ai](https://gis.domovina.ai) is an interactive map of Croatia: counties, 556 cities and municipalities, 6,759 settlements, football clubs and open-data layers.
+
+| part | what it is |
+|---|---|
+| frontend | React 18, Vite 5, MapLibre GL 4, Tailwind; about 11,300 lines of TS/TSX |
+| build | 969 static files, 81 MB; the largest is \`naselja.geojson\` at 21.9 MB |
+| edge code | one \`_worker.js\`, 199 lines before this change, 326 after |
+| data | GeoJSON produced by a Python pipeline in the same monorepo |
+
+On Pages the worker ran in Advanced Mode and handled every request: SPA fallback, Open Graph tags per entity route via \`HTMLRewriter\`, and Cache-Control headers, because \`_headers\` is not applied while a worker handles the request.
+
+## Why the stack stayed React, not Astro
+
+| | React SPA (kept) | Astro |
+|---|---|---|
+| the map | the whole app | one \`client:only\` React island; no gain |
+| navigation between routes | map stays mounted | full page load unless View Transitions with \`transition:persist\` |
+| Open Graph tags | already injected by the worker | built in |
+| readable HTML for crawlers without JS | missing | built in |
+| PWA, URL state, Playwright suite | working | to be rebuilt |
+
+The only row where Astro wins outright is readable HTML. The worker already parses the same lookup files it needs for that, so the content was added there instead of rewriting about 11,300 lines.
+
+## Content in #root for crawlers
+
+On \`/\`, \`/klub/:slug\`, \`/jls/:slug\`, \`/zupanija/:slug\` and \`/poster/:slug\` the worker writes a heading, a description and links into the empty \`<div id="root">\`:
+
+\`\`\`js
+new HTMLRewriter()
+  .on("head", new OgInjector(meta, canonical))
+  .on("div#root", { element: (el) => el.setInnerContent(bodyHtml, { html: true }) })
+  .transform(indexRes);
+\`\`\`
+
+React 18 \`createRoot\` clears the container on its first commit, so a browser shows the map and a crawler gets text. The links form a graph: a county lists all of its cities and municipalities (54 for Split-Dalmatia), a municipality links to its county, a club to its stadium and its municipality, and the home page to all 21 counties and 18 posters. A club gets the municipality link only when its \`city\` field is itself a municipality, which holds for 437 of 1,014 clubs; the rest are in settlements.
+
+A Playwright script checked four routes on the local worker, on workers.dev and on production: the injected \`<main>\` is gone after load, the map canvas is present and the console has no errors.
+
+## One worker file, two runtimes
+
+\`\`\`toml
+name = "gis-domovina"
+main = "public/_worker.js"
+compatibility_date = "2025-10-01"
+routes = [{ pattern = "gis.domovina.ai/*", zone_name = "domovina.ai" }]
+
+[assets]
+directory = "./dist"
+binding = "ASSETS"
+run_worker_first = true
+not_found_handling = "single-page-application"
+\`\`\`
+
+Vite copies \`public/_worker.js\` into \`dist/\`, where Pages runs it. Wrangler bundles the same file as \`main\`. \`public/.assetsignore\` keeps it out of the public assets on Workers; without it the worker source would be downloadable. \`run_worker_first\` reproduces Advanced Mode, where the worker sees every request. \`wrangler pages deploy\` ran without error with this Workers config in place, so both targets deploy from the same directory, selected by \`DEPLOY_TARGET\` in \`scripts/deploy.sh\`.
+
+## Cutover with a route instead of a domain move
+
+Moving the custom domain from Pages to the Worker means removing it from Pages and attaching it to the Worker, which leaves a gap and needs DNS write access. The OAuth token from \`wrangler login\` has \`zone (read)\` only. A Worker route on a proxied hostname runs before the request reaches the Pages origin behind it, so the route was added and the Pages domain left in place.
+
+The worker sets \`X-Runtime: worker\` from a \`[vars]\` entry that exists only in \`wrangler.toml\`, which shows which platform answered:
+
+\`\`\`bash
+curl -sI https://gis.domovina.ai/ | grep -i x-runtime   # x-runtime: worker
+\`\`\`
+
+Rollback: remove \`routes\` and run \`npx wrangler deploy\`. Pages serves the domain again with its last deployment.
+
+## Differences between Pages and Workers
+
+| | Pages | Workers static assets | handled by |
+|---|---|---|---|
+| \`GET /index.html\` | 308 to \`/\` (measured) | 307 to \`/\` (per \`html_handling\` docs) | worker returns the bare shell with 200 |
+| \`Access-Control-Allow-Origin: *\` on assets | added by the platform | not added | worker sets it |
+| \`_worker.js\` in the asset directory | executed, never served | would be a public file | \`.assetsignore\` |
+| \`/sw.js\` Cache-Control on the domain | \`max-age=14400\`, noted in August 2026 | \`no-cache, must-revalidate\`, as the worker sets it | nothing; the override is gone |
+
+The \`/index.html\` row was wrong on Pages as well. vite-plugin-pwa precaches \`/index.html\` as the \`navigateFallback\` shell, and the request returned a redirect instead of the document. The worker now answers that path with the bare shell, without the home-page content, so the service worker does not show home-page text on other routes.
+
+The CORS header has no known consumer. A search of the sibling repositories found nothing that fetches \`gis.domovina.ai/data\` from another origin. It is set to keep behaviour identical.
+
+## Limitations
+
+- No latency or time-to-first-byte measurement was taken before or after the move.
+- The crawler content is unmeasured. There is no data yet on whether search or AI crawlers index the entity pages differently.
+- On a slow connection the injected text can be visible before the JavaScript bundle runs. The duration was not measured.
+- The Pages custom domain is still attached. If the route is removed by mistake, Pages serves the domain silently, and a \`DEPLOY_TARGET=pages\` deploy is not visible while the route exists.
+- Whether Workbox stored the old redirect response correctly was not tested before the change.
+- The cause of the 14,400 s override on Pages was not identified. It disappeared with the move.
+- Pricing and request quotas of the two products were not compared for this traffic.
+
+## Next steps
+
+After a week or two without problems: detach the domain from Pages, replace the route with \`{ pattern = "gis.domovina.ai", custom_domain = true }\`, and remove \`X-Runtime\` and the \`RUNTIME\` variable.`,
+      hr: `gis.domovina.ai je 30. listopada 2026. prešao s Cloudflare Pagesa na Worker sa static assets. Domena se pritom nije premještala. Worker route na zoni preuzima promet prije nego što stigne do Pages custom domene, pa prijelaz nije imao prekida, a povratak je jedan obrisani redak i ponovni deploy. Datoteka workera ista je na obje platforme. Pokazale su se tri razlike u ponašanju između Pagesa i Workersa i sve su riješene u toj datoteci. U istoj promjeni worker je počeo upisivati čitljiv sadržaj u stranicu za crawlere koji ne izvršavaju JavaScript. To je bio jedini stvarni argument za prepisivanje stranice u Astro.
+
+## Stranica
+
+[gis.domovina.ai](https://gis.domovina.ai) je interaktivna karta Hrvatske: županije, 556 gradova i općina, 6759 naselja, nogometni klubovi i slojevi otvorenih podataka.
+
+| dio | što je |
+|---|---|
+| frontend | React 18, Vite 5, MapLibre GL 4, Tailwind; oko 11 300 redaka TS/TSX-a |
+| build | 969 statičkih datoteka, 81 MB; najveća je \`naselja.geojson\` s 21,9 MB |
+| kod na rubu mreže | jedan \`_worker.js\`, 199 redaka prije promjene, 326 poslije |
+| podaci | GeoJSON iz Python pipelinea u istom monorepou |
+
+Na Pagesu je worker radio u Advanced Modeu i obrađivao svaki zahtjev: SPA fallback, Open Graph tagove po ruti entiteta preko \`HTMLRewriter\`a i Cache-Control headere, jer se \`_headers\` ne primjenjuje dok zahtjev obrađuje worker.
+
+## Zašto je ostao React, a ne Astro
+
+| | React SPA (zadržan) | Astro |
+|---|---|---|
+| karta | cijela aplikacija | jedan \`client:only\` React otok, bez dobitka |
+| navigacija između ruta | karta ostaje montirana | puno učitavanje stranice, osim uz View Transitions i \`transition:persist\` |
+| Open Graph tagovi | worker ih već ubacuje | ugrađeno |
+| čitljiv HTML za crawlere bez JS-a | nema ga | ugrađeno |
+| PWA, stanje u URL-u, Playwright testovi | rade | treba ih složiti ponovno |
+
+Astro jasno pobjeđuje samo u retku s čitljivim HTML-om. Worker već čita iste lookup datoteke koje za to trebaju, pa je sadržaj dodan ondje, umjesto da se prepiše oko 11 300 redaka.
+
+## Sadržaj u #root za crawlere
+
+Na \`/\`, \`/klub/:slug\`, \`/jls/:slug\`, \`/zupanija/:slug\` i \`/poster/:slug\` worker u prazni \`<div id="root">\` upisuje naslov, opis i poveznice:
+
+\`\`\`js
+new HTMLRewriter()
+  .on("head", new OgInjector(meta, canonical))
+  .on("div#root", { element: (el) => el.setInnerContent(bodyHtml, { html: true }) })
+  .transform(indexRes);
+\`\`\`
+
+React 18 \`createRoot\` prazni kontejner pri prvom commitu, pa preglednik prikaže kartu, a crawler dobije tekst. Poveznice čine graf: županija navodi sve svoje gradove i općine (Splitsko-dalmatinska ih ima 54), JLS vodi na svoju županiju, klub na stadion i svoj JLS, a početna na svih 21 županiju i 18 plakata. Klub dobiva poveznicu na JLS samo kad je njegovo polje \`city\` ujedno JLS. To vrijedi za 437 od 1014 klubova; ostali su u naseljima.
+
+Playwright skripta provjerila je četiri rute na lokalnom workeru, na workers.dev i na produkciji: ubačeni \`<main>\` nakon učitavanja nestane, canvas karte postoji, a u konzoli nema grešaka.
+
+## Jedna datoteka workera, dva runtimea
+
+\`\`\`toml
+name = "gis-domovina"
+main = "public/_worker.js"
+compatibility_date = "2025-10-01"
+routes = [{ pattern = "gis.domovina.ai/*", zone_name = "domovina.ai" }]
+
+[assets]
+directory = "./dist"
+binding = "ASSETS"
+run_worker_first = true
+not_found_handling = "single-page-application"
+\`\`\`
+
+Vite kopira \`public/_worker.js\` u \`dist/\`, gdje ga pokreće Pages. Wrangler istu datoteku bundla kao \`main\`. \`public/.assetsignore\` je na Workersu drži izvan javnih asseta; bez njega bi se izvorni kod workera mogao preuzeti. \`run_worker_first\` reproducira Advanced Mode, u kojem worker vidi svaki zahtjev. \`wrangler pages deploy\` prošao je bez greške uz ovaj Workers config, pa oba cilja deployaju iz istog direktorija, a bira se varijablom \`DEPLOY_TARGET\` u \`scripts/deploy.sh\`.
+
+## Prijelaz routeom umjesto premještanja domene
+
+Premještanje custom domene s Pagesa na Worker znači maknuti je s Pagesa i spojiti na Worker. Između toga stranica ne radi, a za sam korak treba pravo pisanja u DNS. OAuth token iz \`wrangler login\` ima samo \`zone (read)\`. Worker route na proxiranom hostnameu izvršava se prije nego što zahtjev stigne do Pages origina iza njega, pa je dodan route, a Pages domena je ostala gdje jest.
+
+Worker postavlja \`X-Runtime: worker\` iz unosa u \`[vars]\` koji postoji samo u \`wrangler.toml\`. Po tome se vidi koja je platforma odgovorila:
+
+\`\`\`bash
+curl -sI https://gis.domovina.ai/ | grep -i x-runtime   # x-runtime: worker
+\`\`\`
+
+Povratak: maknuti \`routes\` i pokrenuti \`npx wrangler deploy\`. Pages tada opet poslužuje domenu sa svojim zadnjim deployem.
+
+## Razlike između Pagesa i Workersa
+
+| | Pages | Workers static assets | rješava |
+|---|---|---|---|
+| \`GET /index.html\` | 308 na \`/\` (izmjereno) | 307 na \`/\` (prema dokumentaciji za \`html_handling\`) | worker vraća čisti shell s 200 |
+| \`Access-Control-Allow-Origin: *\` na assetima | dodaje platforma | ne dodaje | postavlja worker |
+| \`_worker.js\` u direktoriju asseta | izvršava se, nikad se ne poslužuje | bio bi javna datoteka | \`.assetsignore\` |
+| Cache-Control za \`/sw.js\` na domeni | \`max-age=14400\`, zabilježeno u kolovozu 2026. | \`no-cache, must-revalidate\`, kako ga worker postavlja | ništa; prepisivanja više nema |
+
+Redak za \`/index.html\` bio je pogrešan i na Pagesu. vite-plugin-pwa precachira \`/index.html\` kao shell za \`navigateFallback\`, a zahtjev je vraćao redirect umjesto dokumenta. Worker sada na tu putanju vraća čisti shell, bez sadržaja početne stranice, pa service worker na drugim rutama ne prikazuje tekst početne.
+
+CORS header nema poznatog korisnika. Pretraga sestrinskih repozitorija nije našla ništa što dohvaća \`gis.domovina.ai/data\` s drugog origina. Postavljen je da ponašanje ostane jednako.
+
+## Ograničenja
+
+- Latencija i vrijeme do prvog bajta nisu mjereni ni prije ni poslije prijelaza.
+- Učinak sadržaja za crawlere nije izmjeren. Još nema podataka indeksiraju li tražilice i AI crawleri stranice entiteta drukčije.
+- Na sporoj vezi ubačeni tekst može biti vidljiv prije nego što se izvrši JavaScript bundle. Koliko dugo, nije mjereno.
+- Pages custom domena i dalje je spojena. Ako se route greškom makne, Pages bez upozorenja preuzima domenu, a deploy s \`DEPLOY_TARGET=pages\` ne vidi se dok route postoji.
+- Prije promjene nije provjereno je li Workbox stari redirect spremio ispravno.
+- Uzrok prepisivanja na 14 400 s na Pagesu nije utvrđen. Nestao je s prijelazom.
+- Cijene i kvote zahtjeva dvaju proizvoda nisu uspoređene za ovaj promet.
+
+## Sljedeći koraci
+
+Nakon tjedan-dva bez problema: odspojiti domenu s Pagesa, zamijeniti route s \`{ pattern = "gis.domovina.ai", custom_domain = true }\` te maknuti \`X-Runtime\` i varijablu \`RUNTIME\`.`,
+    },
+    sources: [
+      {
+        title: "Migration notes in the repo — differences, rollback, open items",
+        url: "https://github.com/domovinatv/karta-hrvatske/blob/main/apps/karta-web/docs/2026-10-30-pages-u-workers.md",
+      },
+      {
+        title: "The worker — public/_worker.js",
+        url: "https://github.com/domovinatv/karta-hrvatske/blob/main/apps/karta-web/public/_worker.js",
+      },
+      {
+        title: "Commit 1839035 — crawler content in #root and the Workers config",
+        url: "https://github.com/domovinatv/karta-hrvatske/commit/1839035",
+      },
+      {
+        title: "Commit 22ca824 — route in front of Pages",
+        url: "https://github.com/domovinatv/karta-hrvatske/commit/22ca824",
+      },
+      {
+        title: "Cloudflare — Migrate from Pages to Workers",
+        url: "https://developers.cloudflare.com/workers/static-assets/migration-guides/migrate-from-pages/",
+      },
+      {
+        title: "Cloudflare — Static assets HTML handling (index.html redirects)",
+        url: "https://developers.cloudflare.com/workers/static-assets/routing/advanced/html-handling/",
+      },
+      {
+        title: "Cloudflare — Workers routes",
+        url: "https://developers.cloudflare.com/workers/configuration/routing/routes/",
+      },
+    ],
+  },
+  {
     slug: "two-registers-and-the-limitations-one-dropped",
     date: "2026-08-27",
     tags: ["Claude Code", "Skills", "Writing", "AI-native", "Open source"],
