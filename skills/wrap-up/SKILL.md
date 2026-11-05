@@ -162,6 +162,13 @@ this conversation. It must contain: the repos and absolute paths, what was just
 done, what is still open, and a concrete next task. Point at the documents from
 step 3 instead of retelling them.
 
+**Session chain** (`todo-plan`): if this session worked on package `SN` from
+`docs/handoffs/` (or `<app>/docs/handoffs/`) with a "Chain status" table, do NOT
+write the handoff prompt yourself. First follow that README's rules: mark `SN`,
+update the TODO and `S(N+1).md` (starting commit, numbers, what was learned,
+unfinished work at the top), commit, and then the handoff prompt **is the content
+of `S(N+1).md`**, with `<topic>` set to `<project>-S<N+1>`.
+
 The same prompt goes to **two places**:
 
 - **clipboard**: where the user reviews and pastes it;

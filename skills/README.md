@@ -7,6 +7,7 @@ change the steps.
 |---|---|---|
 | [`wrap-up`](wrap-up/) | Closes a session before `/clear`: commit and push every repo touched, refresh memory files, write down what is not yet in the codebase, put a handoff prompt in the clipboard, report what is still open. | `~/.claude/skills/wrap-up/SKILL.md` |
 | [`register`](register/) | Picks the prose register for anything written for a human audience. Engineering by default — conclusion first, no narrative arc, limitations stated outright. Theatrical only when asked for. Bilingual texts written natively, never translated. | `~/.claude/skills/register/SKILL.md` |
+| [`todo-plan`](todo-plan/) | Plans a larger implementation as a chain of sessions written into the repo: `TODO.md` by phase, a session table with a "done when" checkable by a command, numbered decisions, and one handoff file per session that is the next empty session's prompt. Works with `wrap-up`. | `~/.claude/skills/todo-plan/SKILL.md` |
 
 ## Installing any of them
 

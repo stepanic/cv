@@ -149,6 +149,12 @@ razgovora. Mora sadržavati: repoe i apsolutne putove, što je upravo napravljen
 što je otvoreno, i konkretan sljedeći zadatak. Uputi na dokumente iz koraka 3
 umjesto da prepričavaš.
 
+**Lanac sesija** (`todo-plan`): ako je ova sesija radila paket `SN` iz
+`docs/handoffs/` (ili `<app>/docs/handoffs/`) s tablicom „Stanje lanca”, handoff
+prompt NE pišeš sam. Prvo po pravilima tog README-a označi `SN`, ažuriraj TODO i
+`S(N+1).md` (polazni commit, brojke, naučeno, nedovršeno na vrh), commitaj, pa je
+handoff prompt **sadržaj `S(N+1).md`**, a `<tema>` je `<projekt>-S<N+1>`.
+
 Isti prompt ide na **dva mjesta**:
 
 - **clipboard**: korisnik ga tu pregledava i lijepi;

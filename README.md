@@ -50,6 +50,7 @@ Claude Code skills, one markdown file each, free to copy:
 | Skill | What it does |
 |---|---|
 | [`wrap-up`](skills/wrap-up/) | Closes a session before `/clear`: commit and push every repo touched, refresh memory files, write down what is not yet in the codebase, put a handoff prompt in the clipboard, and report what is still open. Designed from a count of 119 real phrasings of the request across my transcripts, not from recollection. |
+| [`todo-plan`](skills/todo-plan/) | Plans a larger implementation as a linear chain of sessions written into the repo: `TODO.md` by phase, a session table with a "done when" checkable by a command, numbered decisions, and one handoff file per session that is the next empty session's prompt. `wrap-up` hands over that file instead of writing a new handoff. |
 
 ## Stack
 
