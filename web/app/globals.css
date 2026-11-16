@@ -93,39 +93,182 @@ body {
   }
 }
 
-/* Long-form blog prose rendered from markdown (components/BlogArticle.tsx). */
+/* Long-form blog prose rendered from markdown (components/BlogArticle.tsx).
+   Reading layout modelled on Medium: one ~680px column, serif body at 18-20px
+   with 1.6 line height, sans-serif headings, generous paragraph spacing.
+   Charter ships with macOS/iOS; the rest of the stack covers Windows/Linux. */
 @layer components {
   .prose-cv {
-    @apply text-[15px] leading-relaxed text-inkSoft;
+    font-family: Charter, "Bitstream Charter", "Sitka Text", Cambria, Georgia, serif;
+    font-size: 18px;
+    line-height: 1.65;
+    letter-spacing: -0.003em;
+    @apply text-ink/90;
+    overflow-wrap: break-word;
   }
-  .prose-cv h2 {
-    @apply mt-9 mb-3 text-lg font-bold text-ink;
+  @media (min-width: 640px) {
+    .prose-cv {
+      font-size: 20px;
+      line-height: 1.6;
+    }
   }
-  .prose-cv h3 {
-    @apply mt-7 mb-2 text-base font-semibold text-ink;
+  .prose-cv > :first-child {
+    @apply mt-0;
   }
   .prose-cv p {
-    @apply my-4;
+    margin: 1.6em 0 0;
+  }
+  .prose-cv h2,
+  .prose-cv h3,
+  .prose-cv h4 {
+    @apply font-sans font-bold text-ink;
+    letter-spacing: -0.016em;
+  }
+  .prose-cv h2 {
+    font-size: 1.5em;
+    line-height: 1.25;
+    margin: 2.2em 0 0;
+  }
+  .prose-cv h3 {
+    font-size: 1.2em;
+    line-height: 1.3;
+    margin: 1.9em 0 0;
+  }
+  .prose-cv h4 {
+    font-size: 1em;
+    margin: 1.6em 0 0;
+  }
+  .prose-cv h2 + p,
+  .prose-cv h3 + p,
+  .prose-cv h4 + p {
+    margin-top: 0.6em;
+  }
+  .prose-cv ul,
+  .prose-cv ol {
+    margin: 1.2em 0 0;
+    padding-left: 1.6em;
   }
   .prose-cv ul {
-    @apply my-4 list-disc space-y-1.5 pl-5;
+    @apply list-disc;
   }
   .prose-cv ol {
-    @apply my-4 list-decimal space-y-1.5 pl-5;
+    @apply list-decimal;
   }
   .prose-cv li {
-    @apply pl-1;
+    margin-top: 0.6em;
+    padding-left: 0.3em;
+  }
+  .prose-cv li::marker {
+    @apply text-inkMuted;
+  }
+  .prose-cv li > p {
+    margin-top: 0.6em;
   }
   .prose-cv strong {
-    @apply font-semibold text-ink;
-  }
-  .prose-cv a {
-    @apply text-accent-bright underline decoration-accent-border underline-offset-4 transition-colors hover:text-ink;
-  }
-  .prose-cv code {
-    @apply rounded bg-surface px-1.5 py-0.5 font-mono text-[13px] text-ink;
+    @apply font-bold text-ink;
   }
   .prose-cv em {
     @apply italic;
+  }
+  .prose-cv a {
+    @apply text-ink underline decoration-accent-border decoration-1 underline-offset-[3px] transition-colors hover:decoration-accent-bright;
+  }
+  .prose-cv blockquote {
+    margin: 1.6em 0 0;
+    padding-left: 1.2em;
+    @apply border-l-[3px] border-ink/80 italic text-ink/80;
+  }
+  .prose-cv blockquote > p:first-child {
+    margin-top: 0;
+  }
+  .prose-cv hr {
+    @apply my-12 border-0 text-center;
+  }
+  .prose-cv hr::before {
+    content: "\2022\2002\2022\2002\2022";
+    @apply text-inkMuted tracking-[0.6em];
+  }
+
+  /* Inline code: small, quiet chip. Code blocks: full-width panel that scrolls. */
+  .prose-cv code {
+    @apply rounded bg-surface px-1.5 py-0.5 font-mono text-ink;
+    font-size: 0.8em;
+    overflow-wrap: anywhere;
+  }
+  .prose-cv pre {
+    @apply mt-8 overflow-x-auto rounded-md border border-line bg-surface px-5 py-4;
+    font-size: 15px;
+    line-height: 1.55;
+  }
+  .prose-cv pre code {
+    @apply bg-transparent p-0 text-inkSoft;
+    font-size: inherit;
+    overflow-wrap: normal;
+    white-space: pre;
+  }
+
+  /* Tables: sans, smaller than body, header rule, row rules, horizontal scroll
+     inside .table-wrap (lib/blog.ts) instead of overflowing the column. */
+  .prose-cv .table-wrap {
+    @apply mt-8 overflow-x-auto rounded-md border border-line;
+  }
+  .prose-cv table {
+    @apply w-full border-collapse font-sans;
+    font-size: 15px;
+    line-height: 1.45;
+  }
+  .prose-cv thead th {
+    @apply whitespace-nowrap bg-surface text-left text-xs font-semibold uppercase tracking-wider text-inkMuted;
+  }
+  .prose-cv th,
+  .prose-cv td {
+    @apply border-b border-line px-4 py-2.5 align-top;
+  }
+  .prose-cv tbody tr:last-child td {
+    @apply border-b-0;
+  }
+  .prose-cv tbody tr:hover {
+    @apply bg-surface/60;
+  }
+  .prose-cv td {
+    @apply text-inkSoft;
+  }
+  .prose-cv td:first-child {
+    @apply font-medium text-ink;
+  }
+  .prose-cv th[align="right"],
+  .prose-cv td[align="right"] {
+    @apply text-right;
+    font-variant-numeric: tabular-nums;
+  }
+  .prose-cv th[align="center"],
+  .prose-cv td[align="center"] {
+    @apply text-center;
+  }
+  .prose-cv td code {
+    font-size: 0.85em;
+    overflow-wrap: normal;
+    white-space: nowrap;
+  }
+
+  .prose-cv img {
+    @apply mt-8 rounded-md;
+  }
+
+  /* Severity dots that replace the 🔴/🟡/🟢 emoji (lib/blog.ts). */
+  .prose-cv .sev {
+    display: inline-block;
+    width: 0.62em;
+    height: 0.62em;
+    vertical-align: 0.02em;
+  }
+  .prose-cv .sev-red {
+    fill: #e5484d;
+  }
+  .prose-cv .sev-yellow {
+    fill: #f5b400;
+  }
+  .prose-cv .sev-green {
+    fill: #30a46c;
   }
 }

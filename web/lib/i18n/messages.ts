@@ -88,7 +88,7 @@ const en = {
         okBlock: "Block {height} · {date} UTC.",
         okDetail:
           "Image SHA-256 matches the proof, and the proof's merkle root matches the on-chain block header. No trust in this site or the calendar servers required.",
-        viewBlock: "view block ↗",
+        viewBlock: "view block",
         failHash: "Image does not match the proof — the file changed.",
         failNoBtc: "No Bitcoin attestation in the proof yet (still pending).",
         failNet: "Could not reach a Bitcoin block explorer — try again.",
@@ -324,7 +324,7 @@ const hr: Messages = {
         okBlock: "Blok {height} · {date} UTC.",
         okDetail:
           "SHA-256 slike odgovara proofu, a merkle root proofa odgovara block headeru na lancu. Bez povjerenja u ovaj site ili kalendar servere.",
-        viewBlock: "vidi blok ↗",
+        viewBlock: "vidi blok",
         failHash: "Slika ne odgovara proofu — datoteka je promijenjena.",
         failNoBtc: "Proof još nema Bitcoin atestaciju (još je pending).",
         failNet: "Bitcoin block explorer nedostupan — pokušaj ponovno.",

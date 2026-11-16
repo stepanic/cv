@@ -4,7 +4,7 @@
 // local transcripts + daily git snapshots (see scripts/mine-claude-history.mjs
 // in the repo). All charts are hand-rolled inline SVG — no chart library.
 
-import { EyeOff, Repeat2 } from "lucide-react";
+import { ArrowRight, EyeOff, Repeat2 } from "lucide-react";
 import type { ClaudeCodeStats } from "@/lib/types";
 import { useI18n, formatYearMonth } from "@/lib/i18n";
 import { compactNumber } from "@/lib/format";
@@ -155,7 +155,8 @@ function HistoryBlock({ history }: { history: NonNullable<ClaudeCodeStats["histo
           rel="noopener noreferrer"
           className="text-inkMuted underline decoration-line underline-offset-2 hover:text-inkSoft"
         >
-          {t("claude.historyDocLink")} →
+          {t("claude.historyDocLink")}
+          <ArrowRight className="ml-1 inline h-3 w-3 align-[-1px]" aria-hidden />
         </a>
         <a
           href={DAILY_RECON_URL}
@@ -163,7 +164,8 @@ function HistoryBlock({ history }: { history: NonNullable<ClaudeCodeStats["histo
           rel="noopener noreferrer"
           className="text-inkMuted underline decoration-line underline-offset-2 hover:text-inkSoft"
         >
-          {t("claude.dailyDocLink")} →
+          {t("claude.dailyDocLink")}
+          <ArrowRight className="ml-1 inline h-3 w-3 align-[-1px]" aria-hidden />
         </a>
       </p>
     </div>
@@ -464,7 +466,8 @@ function DailyChart({
           rel="noopener noreferrer"
           className="underline decoration-line underline-offset-2 hover:text-inkSoft"
         >
-          {t("claude.dailyDocLink")} →
+          {t("claude.dailyDocLink")}
+          <ArrowRight className="ml-1 inline h-3 w-3 align-[-1px]" aria-hidden />
         </a>
       </figcaption>
     </figure>
@@ -722,7 +725,8 @@ export function ClaudeCode({ claude }: { claude: ClaudeCodeStats }) {
           rel="noopener noreferrer"
           className="underline decoration-line underline-offset-2 hover:text-inkSoft"
         >
-          {t("claude.methodologyLink")} →
+          {t("claude.methodologyLink")}
+          <ArrowRight className="ml-1 inline h-3 w-3 align-[-1px]" aria-hidden />
         </a>
       </p>
       <p className="mt-2 text-xs text-inkMuted">{t("claude.updated", { date: updatedDate })}</p>

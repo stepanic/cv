@@ -48,6 +48,7 @@ const config: Config = {
           "Arial",
           "sans-serif",
         ],
+        serif: ["Charter", "Bitstream Charter", "Sitka Text", "Cambria", "Georgia", "serif"],
         mono: [
           "ui-monospace",
           "SFMono-Regular",

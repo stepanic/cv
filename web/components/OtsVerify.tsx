@@ -10,7 +10,7 @@
 // block explorer (mempool.space, with blockstream.info as fallback).
 
 import { useState } from "react";
-import { BadgeCheck, Loader2, ShieldAlert } from "lucide-react";
+import { ArrowUpRight, BadgeCheck, Loader2, ShieldAlert } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 
 // \x00OpenTimestamps\x00\x00Proof\x00\xbf\x89\xe2\xe8\x84\xe8\x92\x94
@@ -197,6 +197,7 @@ export function OtsVerify({ pngUrl, otsUrl }: { pngUrl: string; otsUrl: string }
             className="text-accent-bright underline-offset-2 hover:underline"
           >
             {t("stats.ranking.verify.viewBlock")}
+            <ArrowUpRight className="ml-0.5 inline h-3.5 w-3.5 align-[-2px]" aria-hidden />
           </a>
         </p>
         <p className="mt-1 text-inkMuted">{t("stats.ranking.verify.okDetail")}</p>

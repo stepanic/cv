@@ -24,8 +24,21 @@ function readYaml<T>(rel: string): T {
   return yaml.load(fs.readFileSync(path.join(DATA_DIR, rel), "utf8")) as T;
 }
 
+// Generated JSON carries third-party text (GitHub repo descriptions and names)
+// that may contain emoji. The site uses icons only, so emoji and their
+// modifiers (flags, skin tones, ZWJ, VS16) are dropped at load time.
+// scripts/check-no-emoji.mjs fails the build if any still reach out/.
+const EMOJI =
+  /\p{Emoji_Presentation}|\p{Emoji_Modifier}|\p{Regional_Indicator}|\uFE0F|\u200D|\u20E3/gu;
+const stripEmoji = (s: string) => {
+  const out = s.replace(EMOJI, "");
+  return out === s ? s : out.replace(/\s{2,}/g, " ").trim();
+};
+
 function readJson<T>(rel: string): T {
-  return JSON.parse(fs.readFileSync(path.join(DATA_DIR, rel), "utf8")) as T;
+  return JSON.parse(fs.readFileSync(path.join(DATA_DIR, rel), "utf8"), (_k, v) =>
+    typeof v === "string" ? stripEmoji(v) : v,
+  ) as T;
 }
 
 export function loadCvData(): CvData {

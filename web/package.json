@@ -5,9 +5,9 @@
   "description": "Bilingual CV/portfolio website for stepanic.domovina.ai — rendered at build time from ../data",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && node scripts/check-no-emoji.mjs",
     "typecheck": "tsc --noEmit",
-    "deploy": "next build && wrangler deploy"
+    "deploy": "npm run build && wrangler deploy"
   },
   "dependencies": {
     "lucide-react": "^0.460.0",
