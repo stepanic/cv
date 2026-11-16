@@ -29,8 +29,8 @@ Collect `REVIEW(fable)` and `TODO` markers from preflight.
 
 ## 3. Map by mode
 
-- `diff`: `git log --oneline <base>..HEAD` and `git diff --stat <base>..HEAD`, where base is the last `audit-*` tag
-  or, for LOCAL-ONLY, the SHA in the header of the previous local report. Read the previous review document. For each
+- `diff`: `git log --oneline <base>..HEAD` and `git diff --stat <base>..HEAD`, where base is the `--base` ref if the user gave one, else the last
+  `audit-*` tag or, for LOCAL-ONLY, the SHA in the header of the previous local report. Read the previous review document. For each
   changed file give line ranges and its callers.
 - `refactor`: module structure, the 10 largest files by lines, duplicated implementations, untested areas, dead code.
 - `security`: every entry point (routes, webhooks, cron, admin, auth middleware, secrets handling, money and ledger

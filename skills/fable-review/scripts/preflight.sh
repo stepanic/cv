@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Deterministic pre-flight for /fable-review. Read-only: never writes to the repo.
-# Usage: preflight.sh [repo_path] [--mode diff|refactor|security|full|forensic]
+# Usage: preflight.sh [repo_path] [--mode diff|refactor|security|full|forensic] [--base <ref>]
 #
 # Own-owner list (repos whose reviews may be committed and pushed):
 #   $FABLE_REVIEW_OWN_OWNERS (space/comma separated) or ~/.config/fable-review/own-owners (one per line).
@@ -10,10 +10,13 @@ set -uo pipefail
 
 REPO=""
 MODE=""
+DIFF_BASE=""
 while [ $# -gt 0 ]; do
   case "$1" in
     --mode) MODE="${2:-}"; shift 2 ;;
     --mode=*) MODE="${1#--mode=}"; shift ;;
+    --base) DIFF_BASE="${2:-}"; shift 2 ;;
+    --base=*) DIFF_BASE="${1#--base=}"; shift ;;
     -*) shift ;;
     *) [ -z "$REPO" ] && REPO="$1"; shift ;;
   esac
@@ -150,6 +153,18 @@ DOCS="$(find "$ROOT" -maxdepth 4 -type f -name '*.md' \( -path '*/docs/review*' 
 [ -n "$DOCS" ] && { echo "  Review documents in repo:"; echo "$DOCS" | sed 's/^/    - /'; } || echo "  Review documents in repo: none"
 if [ -d "$LOCAL_OUT" ]; then
   echo "  Local (uncommitted) reports:"; ls -1 "$LOCAL_OUT" | sed 's/^/    - /'
+fi
+
+if [ -n "$DIFF_BASE" ]; then
+  echo ""
+  echo "--- DIFF BASE (--base) ---"
+  if git -C "$ROOT" rev-parse -q --verify "$DIFF_BASE^{commit}" >/dev/null; then
+    echo "  $DIFF_BASE..$BASE_REF: $(git -C "$ROOT" rev-list --count "$DIFF_BASE..$BASE_REF") commits,$(git -C "$ROOT" diff --shortstat "$DIFF_BASE" "$BASE_REF")"
+    TOTAL_LINES="$(git -C "$ROOT" diff --numstat "$DIFF_BASE" "$BASE_REF" | awk '{s+=$1+$2} END {print s+0}')"
+    echo "  Cost estimate below uses the diff size ($TOTAL_LINES changed lines), not the repo size."
+  else
+    echo "  ERROR: '$DIFF_BASE' is not a commit in this repo."
+  fi
 fi
 
 echo ""

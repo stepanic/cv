@@ -1,7 +1,8 @@
 ---
 name: fable-review
-description: Pregled jednog git repoa u dva prolaza, samo za čitanje. Prolaz A (Sonnet) pokreće provjere i mapira ulazne točke na datoteka:linija; Prolaz B (Fable) ih provjerava u kodu i piše Markdown pregled s planom izvedbe za Opus. Modovi - diff, refactor, security, full, forensic. Pokreni na "napravi Fable analizu", "sigurnosni audit", "neka Fable pregleda repo", "plan refactora s Fableom" ili /fable-review.
+description: Pregled jednog git repoa u dva prolaza, samo za čitanje. Prolaz A (Sonnet) pokreće provjere i mapira ulazne točke na datoteka:linija; Prolaz B (Fable) ih provjerava u kodu i piše Markdown pregled s planom izvedbe za Opus. Modovi - diff, refactor, security, full, forensic. Pokreće se samo kad korisnik utipka /fable-review, nikad automatski.
 argument-hint: "[putanja-repoa] [--mode diff|refactor|security|full|forensic]"
+disable-model-invocation: true
 ---
 
 # Fable pregled: Fable pregledava, Opus izvodi
@@ -12,7 +13,8 @@ Opus brzo piše kod. Fable samo čita zamrznuti commit i piše Markdown nalaze i
 idućoj sesiji. Dva prolaza postoje jer je jedan Fable prolaz nad cijelim repoom narastao na 636k konteksta i stajao
 6 do 14 $ po repou (postmortem `docs/2026-10-17-postmortem-fable-subagenti-tjedni-limit.md` u `stepanic/cv`).
 
-Argumenti: `$ARGUMENTS` (prvi je putanja repoa, inače trenutni direktorij; `--mode <mod>`).
+Argumenti: `$ARGUMENTS` (prvi je putanja repoa, inače trenutni direktorij; `--mode <mod>`; `--base <ref>` izričito
+zadaje bazu za `diff`, inače je to zadnji `audit-*` tag ili SHA prethodnog lokalnog izvještaja).
 
 Uz skill stoje (subagentima se daju apsolutne putanje, jer oni ovu datoteku ne vide):
 - `${CLAUDE_SKILL_DIR}/scripts/preflight.sh`: deterministička provjera opsega i odredišta, samo čita
@@ -21,6 +23,15 @@ Uz skill stoje (subagentima se daju apsolutne putanje, jer oni ovu datoteku ne v
 
 ## Tvrda pravila
 
+- **Fable se pokreće samo na izričit zahtjev.** Skill ima `disable-model-invocation: true` i kreće tek kad korisnik
+  utipka `/fable-review`. Agent s `model: "fable"` nikad se ne pokreće iz drugog skilla, plana, handoffa ni na vlastitu
+  inicijativu. Ako bi Fable pomogao, reci to i pusti korisnika da sam utipka naredbu.
+- **Svaki Fable poziv završava u datoteci, bez iznimke.** Odmah nakon što se Fable agent vrati (gotov, pao, limit ili
+  prekinut), prije ičega drugog: `python3 -I "${CLAUDE_SKILL_DIR}/scripts/salvage.py" --session "${CLAUDE_SESSION_ID}"
+  --agent <agentId> --out ~/.claude/fable-review/transcripts/<repo>/ --label pass-b`. Skripta u jednu Markdown datoteku
+  zapisuje završni izvještaj, sav tekst i svaki ulaz alata (cijeli sadržaj Write i Edit) te potrošnju po pozivu.
+  Thinking Claude Code sprema prazan pa se ne može spasiti; skripta ispisuje koliko je tokena to bilo. Transkripti
+  ostaju lokalno. Fable agent bez salvage datoteke je nedovršen posao: javi to korisniku, ne nastavljaj.
 - Jedan repo po pozivu. Više repoa ide jedan za drugim, svaki tek na korisnikovo „može”.
 - Najviše jedan Fable agent istodobno, uvijek s eksplicitnim `effort: "medium"`.
 - Kod, testovi i konfiguracija se ne diraju. Jedini izlaz je Markdown.
@@ -30,7 +41,7 @@ Uz skill stoje (subagentima se daju apsolutne putanje, jer oni ovu datoteku ne v
 
 ## 0. Preflight i potvrda
 
-1. `bash "${CLAUDE_SKILL_DIR}/scripts/preflight.sh" <repo> --mode <mod>` (bez `--mode` ako ga korisnik nije naveo).
+1. `bash "${CLAUDE_SKILL_DIR}/scripts/preflight.sh" <repo> --mode <mod> [--base <ref>]` (samo zastavice koje je korisnik dao).
 2. Ako mod nije zadan: `diff` kad postoji raniji pregled i pitanje je što se promijenilo, `security` za auth, novac,
    tajne i napadnu površinu, `refactor` za strukturu i čišćenje, `full` za prvi dubinski prolaz kroz veći repo,
    `forensic` za atribuciju git povijesti po modelima.
@@ -62,7 +73,7 @@ git -C "$REPO" worktree add --detach "$WT" "$BASE"
 Ako handoff kaže da je Prolaz A gotov (npr. pripremljen u Antigravityju), provjeri da mapa, worktree i SHA postoje
 pa idi na korak 3.
 
-Repo manji od ~5.000 linija mapiraj sam. Inače jedan subagent `model: "sonnet"`, `effort: "medium"`, s promptom koji
+Repo (ili u `diff` modu sam diff) manji od ~5.000 linija mapiraj sam. Inače jedan subagent `model: "sonnet"`, `effort: "medium"`, s promptom koji
 daje `$WT`, `$OUT`, mod, zamrznuti SHA i uputu da pročita i slijedi `${CLAUDE_SKILL_DIR}/templates/pass-a.md`
 (apsolutna putanja). Rezultat je `$OUT/<datum>-00-map.md`.
 
@@ -70,7 +81,8 @@ daje `$WT`, `$OUT`, mod, zamrznuti SHA i uputu da pročita i slijedi `${CLAUDE_S
 
 Jedan subagent `model: "fable"`, `effort: "medium"`. Prompt daje `$WT`, `$OUT`, mod, SHA, odredište i mapu, te uputu
 da prije ijedne linije koda pročita `templates/pass-b.md` i `templates/<mod>.md`. U `full` modu nad velikim repoom
-ide jedan Fable agent po podsustavu, redom. Nakon kraja usporedi stvarni trošak s procjenom i javi u jednom retku.
+ide jedan Fable agent po podsustavu, redom. Kad se vrati, prvo `salvage.py` (tvrdo pravilo gore), pa stvarni trošak iz salvage datoteke usporedi s procjenom i
+javi u jednom retku. Zatim provjeri da svaki dokument koji je Fable prijavio stvarno postoji na disku.
 
 ## 4. Završetak
 
@@ -87,5 +99,5 @@ clipboard: putanja repoa i dokumenta (i SHA ako je commitan), „pročitaj cijel
 prvih 3 do 5 stavki s ID-em i datoteka:linija, „prvo test koji pada, pa popravak, pa status u istom dokumentu”, i
 „stavke za odluku vlasnika ne pogađaj”. Za LOCAL-ONLY handoff ponavlja da se dokument ne commita u repo.
 
-Završni izvještaj: gdje su dokumenti (SHA i tag, ili lokalna putanja), broj nalaza po prioritetu, 3 do 5 najvažnijih
+Završni izvještaj: gdje su dokumenti (SHA i tag, ili lokalna putanja), putanja salvage datoteke, broj nalaza po prioritetu, 3 do 5 najvažnijih
 nalaza, stvarni i procijenjeni trošak, putanja handoffa.

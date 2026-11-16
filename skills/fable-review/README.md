@@ -11,6 +11,7 @@
 - [`SKILL.hr.md`](SKILL.hr.md) — the same skill written in Croatian, for reading.
 - [`templates/`](templates/) — what the subagents read: `pass-a.md`, `pass-b.md`, and one output structure per mode.
   A subagent sees only its prompt, never the parent's SKILL.md, so these are passed to it by absolute path.
+- [`scripts/salvage.py`](scripts/salvage.py) — runs after every Fable agent and writes all recoverable output (final report, text, full Write/Edit contents, usage per call) to one local Markdown file, even when the agent crashed or hit a rate limit. Thinking is stored empty by Claude Code and cannot be recovered; its token count is reported.
 - [`scripts/preflight.sh`](scripts/preflight.sh) — deterministic, read-only pre-flight: review base, owner and
   visibility, **destination** (`COMMIT` / `LOCAL-ONLY` / `ASK`), lines of code, stack and ground-check candidates,
   previous `audit-*` tags and local reports, `Co-Authored-By` statistics, and a cost estimate.
@@ -73,6 +74,7 @@ Requires Claude Code (the skill uses `${CLAUDE_SKILL_DIR}`, `$ARGUMENTS` and the
 parameters). Other agents that read the same `SKILL.md` format can run `preflight.sh` and Pass A, but cannot spawn a
 Fable subagent.
 
-Then run `/fable-review`, `/fable-review --mode diff`, `/fable-review --mode refactor`, or ask in plain text ("have Fable review this repo and write a refactor plan for Opus").
+Then type `/fable-review`, `/fable-review <repo> --mode diff` or `/fable-review <repo> --mode refactor`. The skill sets
+`disable-model-invocation: true`: Claude never starts it, or a Fable agent, on its own. Fable quota is spent only when you type the command.
 
 MIT.
