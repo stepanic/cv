@@ -38,8 +38,10 @@ povijest.
 
 ## Zajednička pravila (vrijede u svakoj sesiji)
 
-- **Polazak:** `npm --prefix site run check` i potvrda u jednoj rečenici da je zeleno (od
-  S2 nadalje; S1 ga tek stvara). Ako nije zeleno, prvo to popravi. Repo `stepanic/cv` je
+- **Polazak:** naredba provjere je `npm --prefix site run check`, i potvrda u jednoj
+  rečenici da je zeleno. Ako nije zeleno, prvo to popravi. **Iznimka S1:** check još ne
+  postoji (S1 ga stvara), pa je polazak za S1 samo čist `git status --porcelain`;
+  orkestrator (`todo-plan-exec`) prije S1 ne pokreće check. Repo `stepanic/cv` je
   **javan**, grana `main`, wrap-up pusha `main`.
 - **Push je deploy:** svaki push na `main` pokreće CI koji deploya `web/` u produkciju. Do
   S6 nijedan commit ne smije mijenjati `web/`, `web/wrangler.jsonc` ni deploy korak u
