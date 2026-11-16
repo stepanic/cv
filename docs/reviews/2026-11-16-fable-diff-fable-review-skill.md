@@ -1,7 +1,8 @@
 # Fable diff review: `skills/fable-review` (229618f..fb269d4)
 
 - Date: 2026-11-16
-- Reviewer: Fable 5.2 (`claude-fable-5-2`), Pass B. Pass A map by Opus 5.5.
+- Reviewer: Fable 5.2 (`claude-fable-5-2`), Pass B at effort **low** (user's choice). Pass A map by Opus 5.5.
+- Measured cost of Pass B: 7 API calls, max context 102k, output 22,358 (thinking 9,145, not recoverable), cache write 102,423, cache read 434,637 → **$2.51** at $10 / $12.50 / $0.25 / $50 per MTok. Preflight estimate: $1.5-3.5, 10-18 calls.
 - Code authors: both commits in the diff are Opus 5.5 (whole history: Opus 5 (1M) 23+10, Opus 4.8 18, Opus 5.5 15,
   Fable 5 6, Antigravity 2).
 - Reviewed state: frozen SHA `fb269d4` (origin/main), branch `fable-review/2026-11-16-diff`, map committed on top as
@@ -263,3 +264,13 @@ Counts: 🔴 1, 🟡 6, 🟢 8.
   hotspot 8): wrong only if a newer tag sits on an unmerged branch; no such tag exists in this repo today.
 - Fallback push of the review branch with `--follow-tags` (SKILL.md:104) leaves the audit tag on a commit that is not
   on the default branch; whether later `diff` runs handle a squash-merged review branch was not tested.
+
+## Orchestrator note (Opus 5.5, after Pass B)
+
+- **F-04 is partly wrong.** Claude Code does write `"finished": true` into `.meta.json` once a subagent completes: this
+  review's own agent meta has it, and `salvage.py` printed `finished=True`. The sampled meta in the map lacked the key
+  because that agent never completed. So `finished=unknown` actually means "not finished" (stopped, killed, rate-limited).
+  The fix is smaller: print `finished` / `not finished (no meta flag)`, and use `stop_reason` only to label the last text
+  ("Final report" vs "Last text before the agent stopped"). The "Final report" mislabel part of F-04 stands.
+- F-07's measured figure for this run is in the header; it was computed by the orchestrator from the transcript, which
+  is exactly the gap F-07 describes.
