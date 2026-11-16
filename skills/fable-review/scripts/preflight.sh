@@ -230,7 +230,7 @@ git -C "$ROOT" log --format='%(trailers:key=Co-Authored-By,valueonly)' "$BASE_RE
 
 echo ""
 echo "--- REVIEW MARKERS IN CODE ($BASE_REF, excluding docs and Markdown) ---"
-MARKERS="$(git -C "$ROOT" grep -nI -E 'REVIEW\(fable\)|TODO\(fable\)' "$BASE_REF" -- . ':!docs/' ':!*.md' ':!skills/' 2>/dev/null | sed "s|^$BASE_REF:||" | head -n 20)"
+MARKERS="$(git -C "$ROOT" grep -nI -E '(//|#|/\*|\*|--|<!--)[[:space:]]*(REVIEW|TODO)\(fable\)' "$BASE_REF" -- . ':!docs/' ':!*.md' ':!skills/' 2>/dev/null | sed "s|^$BASE_REF:||" | head -n 20)"
 [ -n "$MARKERS" ] && echo "$MARKERS" | sed 's/^/    /' || echo "  none"
 
 echo ""
