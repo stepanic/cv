@@ -145,3 +145,11 @@ When the user drops a job proposal/posting into a session:
   all live outside this repo. `docs/data-sources.md` records where each one
   comes from and how to re-check it — **re-verify before sending any CV or
   application**, and record the reading with its date.
+
+## Astro migration chain (in progress)
+
+`web/` is being migrated to Astro in `site/` as a chain of sessions S1–S6. Plan
+in `site/docs/plan.md`, decisions in `site/docs/decisions.md`, handoffs and
+chain status in `site/docs/handoffs/README.md`. "Nastavi astro" means the first
+row in "Stanje lanca" that is not done. Until S6, never change `web/`,
+`web/wrangler.jsonc` or the CI deploy step: every push to `main` deploys `web/`.
