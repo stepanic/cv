@@ -46,6 +46,7 @@ povijest.
 - **Push je deploy:** svaki push na `main` pokreće CI koji deploya `web/` u produkciju. Do
   S6 nijedan commit ne smije mijenjati `web/`, `web/wrangler.jsonc` ni deploy korak u
   `.github/workflows/ci.yml` (odluka 7).
+- **`web/` se može mijenjati izvan lanca** (druge sesije, npr. blog postovi). Na polasku svake sesije `git log <commit iz S1 baselinea>..HEAD -- web/`: ako ima commitova, ponovno snimi baseline (`site/scripts/baseline.mjs`) i portaj razliku u `site/` prije novog posla. Novi blog postovi nakon S4 idu u oba mjesta dok se `web/` ne obriše.
 - **Opseg:** mijenja se `site/` i dokumenti lanca. `data/` je jedini izvor sadržaja i ne
   mijenja se radi migracije; ako je podatak u `data/` pogrešan, zapiši to u TODO kao
   zasebnu stavku.
