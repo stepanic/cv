@@ -27,7 +27,9 @@ Workeru.
 
 - Repo je **javan**. Nikad tajne ni klijentska imena (pravilo allow-liste iz `CLAUDE.md`).
 - **Svaki push na `main` deploya `web/` u produkciju** (`.github/workflows/ci.yml`, ako je
-  postavljen `CLOUDFLARE_API_TOKEN`). Do S6 push smije mijenjati samo `site/` i dokumente,
+  postavljen `CLOUDFLARE_API_TOKEN`). Stanje 2026-11-17: token **nije** postavljen, CI ispisuje
+  „CLOUDFLARE_API_TOKEN not set — skipping deploy.” (run 43978711376), pa produkcija ide samo
+  ručnim `npm --prefix web run deploy`. S6 to mora riješiti ili zapisati kao odluku. Do S6 push smije mijenjati samo `site/` i dokumente,
   nikad `web/`, `wrangler.jsonc` ni CI deploy korak.
 - `data/` je jedini izvor sadržaja. Tekst se ne prepisuje ručno u komponente.
 - Paritet sadržaja mjeri se skriptom prema baselineu iz S1, ne okom.
