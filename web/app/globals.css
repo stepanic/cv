@@ -251,6 +251,22 @@ body {
     white-space: nowrap;
   }
 
+  /* Breakout: on wide screens a table or code block that needs more than the
+     680px column grows to its natural width (up to 1200px or the viewport
+     minus a gutter) and stays centred on the column. Anything that fits keeps
+     the column width; below lg it scrolls inside its own box. */
+  @media (min-width: 1024px) {
+    .prose-cv .table-wrap,
+    .prose-cv pre {
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+      width: max-content;
+      min-width: 100%;
+      max-width: min(1200px, calc(100vw - 4rem));
+    }
+  }
+
   .prose-cv img {
     @apply mt-8 rounded-md;
   }

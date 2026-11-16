@@ -49,7 +49,7 @@ export function ThemeToggle() {
       aria-pressed={domovina}
       aria-label={label}
       title={label}
-      className="flex h-7 w-9 items-center justify-center rounded-md border border-line text-base leading-none transition-colors hover:border-accent-border hover:bg-surface"
+      className="flex h-7 w-10 items-center justify-center rounded-md border border-line text-base leading-none transition-colors hover:border-accent-border hover:bg-surface"
     >
       {domovina ? (
         <Terminal className="h-4 w-4" aria-hidden />
@@ -60,27 +60,45 @@ export function ThemeToggle() {
   );
 }
 
-/** Croatian tricolor (red, white, blue) as a 16px icon; matches the DOMOVINA brand stripe. */
+/**
+ * Croatian flag as a 24x16 icon: red, white and blue stripes with the
+ * checkerboard shield (šahovnica). Without the shield the stripes read as the
+ * Dutch flag.
+ */
 function TricolorIcon() {
   return (
-    <svg viewBox="0 0 16 16" className="h-4 w-4" aria-hidden>
-      <rect x="1" y="2.5" width="14" height="11" rx="2" fill="#002f6c" />
-      <path
-        d="M3 2.5h10a2 2 0 0 1 2 2v1.17H1V4.5a2 2 0 0 1 2-2z"
-        fill="#ff0000"
-      />
-      <rect x="1" y="5.67" width="14" height="3.67" fill="#ffffff" />
-      <rect
-        x="1.25"
-        y="2.75"
-        width="13.5"
-        height="10.5"
-        rx="1.75"
-        fill="none"
-        stroke="currentColor"
-        strokeOpacity="0.25"
-        strokeWidth="0.5"
-      />
+    <svg viewBox="0 0 24 16" className="h-4 w-6" aria-hidden>
+      <defs>
+        <clipPath id="hr-flag">
+          <rect width="24" height="16" rx="2" />
+        </clipPath>
+        <clipPath id="hr-shield">
+          <path d="M9.5 4h6v4.6a3 3 0 0 1-3 3.4 3 3 0 0 1-3-3.4z" />
+        </clipPath>
+      </defs>
+      <g clipPath="url(#hr-flag)">
+        <rect width="24" height="5.34" fill="#ff0000" />
+        <rect y="5.33" width="24" height="5.34" fill="#ffffff" />
+        <rect y="10.66" width="24" height="5.34" fill="#171796" />
+      </g>
+      <path d="M9.5 4h6v4.6a3 3 0 0 1-3 3.4 3 3 0 0 1-3-3.4z" fill="#ffffff" />
+      <g clipPath="url(#hr-shield)" fill="#ff0000">
+        <rect x="9.5" y="4.0" width="1.2" height="1.2" />
+        <rect x="11.9" y="4.0" width="1.2" height="1.2" />
+        <rect x="14.3" y="4.0" width="1.2" height="1.2" />
+        <rect x="10.7" y="5.2" width="1.2" height="1.2" />
+        <rect x="13.1" y="5.2" width="1.2" height="1.2" />
+        <rect x="9.5" y="6.4" width="1.2" height="1.2" />
+        <rect x="11.9" y="6.4" width="1.2" height="1.2" />
+        <rect x="14.3" y="6.4" width="1.2" height="1.2" />
+        <rect x="10.7" y="7.6" width="1.2" height="1.2" />
+        <rect x="13.1" y="7.6" width="1.2" height="1.2" />
+        <rect x="9.5" y="8.8" width="1.2" height="1.2" />
+        <rect x="11.9" y="8.8" width="1.2" height="1.2" />
+        <rect x="14.3" y="8.8" width="1.2" height="1.2" />
+      </g>
+      <path d="M9.5 4h6v4.6a3 3 0 0 1-3 3.4 3 3 0 0 1-3-3.4z" fill="none" stroke="#ff0000" strokeWidth="0.4" />
+      <rect x="0.25" y="0.25" width="23.5" height="15.5" rx="1.75" fill="none" stroke="currentColor" strokeOpacity="0.25" strokeWidth="0.5" />
     </svg>
   );
 }
