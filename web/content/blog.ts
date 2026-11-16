@@ -14,6 +14,265 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "fable-review-skill-two-model-code-audits",
+    date: "2026-11-16",
+    tags: ["Claude Code", "Skills", "Security", "Architecture", "Open source"],
+    title: {
+      en: "Two-model code reviews across 28 sessions: why Fable 5.1 audits and Opus 5.5 executes",
+      hr: "Dvmodelni pregledi koda kroz 28 sesija: zašto Fable 5.1 analizira, a Opus 5.5 izvodi",
+    },
+    lead: {
+      en: "Across 28 Claude Code sessions between June and October 2026, I used Claude Fable (5 and 5.1) as a read-only reviewer over code written by Claude Opus (4.8, 5, and 5.5). After five parallel Fable subagents burned the last 7% of a weekly Max 5x limit ($30.46 API-equivalent) in 14 minutes by reading whole repositories into 636k-token contexts, I mined the transcripts into /fable-review: a two-pass skill (Sonnet 5.5 map first, targeted Fable 5.1 verification second) across five modes.",
+      hr: "Kroz 28 Claude Code sesija između lipnja i listopada 2026. koristio sam Claude Fable (5 i 5.1) kao recenzenta koji samo čita kod koji je napisao Claude Opus (4.8, 5 i 5.5). Nakon što je pet paralelnih Fable subagenata za 14 minuta potrošilo zadnjih 7 % tjednog Max 5x limita (30,46 $ po API cjeniku) čitajući cijele repozitorije u kontekst od 636k tokena, iz transkripata sam izvukao /fable-review: dvofazni skill (Sonnet 5.5 mapa, pa ciljana Fable 5.1 provjera) u pet modova.",
+    },
+    body: {
+      en: `Between 10 June and 16 October 2026, 28 Claude Code sessions on my machine ran the same division of labour: Claude Opus (4.8, 5, and 5.5) wrote the implementation, and Claude Fable (5 and 5.1) reviewed a frozen commit without modifying any source file, writing structured Markdown findings and phased refactor plans into the repository for Opus to execute in subsequent sessions. On 16 October 2026, launching five Fable 5.1 subagents to run single-pass security audits exhausted the remaining 7% of a Claude Max 5x weekly quota ($30.46 API-equivalent across 113 API calls) in 14 minutes, because each agent read whole files into a single context that grew to 636k tokens. Mining those 28 sessions and the 16 October token telemetry produced [\`/fable-review\`](https://github.com/stepanic/cv/tree/main/skills/fable-review): a two-pass skill that runs a deterministic pre-flight script and a Sonnet 5.5 mapping pass before handing 15 to 30 targeted \`file:line\` ranges to a single Fable 5.1 agent, cutting per-repository Fable cost from $6–14 to $3–6 while keeping context under 150k tokens.
+
+## Why the implementing model's own audit is not enough
+
+A model auditing its own implementation checks the invariants it thought of while writing the code. Two public repositories in my GitHub history measure the difference when a second model reviews a frozen commit read-only:
+
+1. **Public voting on Gnosis Chain and Semaphore ZK proofs ([\`stepanic/stadion-maksimir-natjecaj-2026\`](https://github.com/stepanic/stadion-maksimir-natjecaj-2026)).** On 26 September 2026, Opus 5.5 built the off-chain and on-chain voting pipeline and wrote its own security audit under \`docs/blockchain/audit/\`. Reviewing frozen commit \`faaaa5f\` read-only ([tag \`audit-fable-2026-09-26\`](https://github.com/stepanic/stadion-maksimir-natjecaj-2026/blob/main/docs/review/2026-09-26-neovisni-review-glasanje.md)), Fable 5.1 found zero errors in the Poseidon hashes or SNARK proof verification that Opus had audited, and five vulnerabilities in the surrounding system that lay outside Opus's threat model:
+   - \`F-01\`: registering an identity and casting the first ballot in one flow linked the voter's identity to the ballot via the Merkle root timestamp, contradicting the NatSpec privacy claim.
+   - \`F-02\`: the \`maksimir_zk_share\` edge function accepted unauthenticated writes without verifying the SNARK proof, allowing arbitrary database growth and forged Open Graph share cards.
+   - \`F-04\`: zero-knowledge circuit artifacts were fetched from an external CDN without SHA-256 verification.
+   - \`F-05\`: the hourly GitHub Actions checkpoint cron skipped runs under load (verified via \`gh run list --workflow maksimir-checkpoint.yml --json event,createdAt\`).
+   - \`F-06\`: WebAuthn \`user.id\` was derived from the public commitment.
+2. **Non-custodial EURe payment rail and passkey Safe wallet ([\`domovinatv/pay.domovina.ai\`](https://github.com/domovinatv/pay.domovina.ai)).** On 10–11 June 2026, both models worked on the same files with commit attribution recorded via \`Co-Authored-By\` trailers. Two forensic reports were generated over that git history: a [Fable 5 self-evaluation (\`557dfc9\`)](https://github.com/domovinatv/pay.domovina.ai/blob/main/docs/research/fable5-vs-opus48-side-by-side.md) and a [blind Opus 4.8 counter-audit (\`8addcbf\`)](https://github.com/domovinatv/pay.domovina.ai/blob/main/docs/research/opus48-independent-forensic-fable5-vs-opus48.md). In \`wallet/src/pages/Embed.tsx\`, a \`parentOrigin\` spoof vulnerability introduced in commit \`f3399ed\` survived two separate Opus 4.8 security passes on that file and was caught on Fable 5's first pass (\`cdda3bc\`). In \`wallet/functions/api/relay.ts\`, Opus 4.8 validated 2 of 10 fields on the money-moving endpoint (\`getCode\` pre-flight and \`to === safe\` on the cold path), whereas Fable 5 added 8 checks (\`operation === 0\` blocking \`delegatecall\`, selector whitelist, recipient address format, positive amount bound, and gas caps). Conversely, the blind Opus 4.8 pass proved that Fable's 86 vs 67 self-score used weights that assigned only 12% to blast-radius discipline, the one dimension where Opus scored higher (82 vs 68) after Fable shipped an unverified WebAuthn Signal API call in \`fceab4d\` that had to be reverted in \`6c83f51\`. Under equal weights across all nine dimensions, the scores were 77 (Fable 5) and 75 (Opus 4.8).
+
+## Chronology of Fable reviews on public repositories
+
+Of the 28 Fable review sessions mined from \`~/.claude/projects/**/*.jsonl\`, 18 ran on public repositories under \`domovinatv\` and \`stepanic\` (the remaining 10 ran on private or client repositories and are excluded under this repository's publication policy):
+
+| Date (CEST) | Public repository | Model | Mode | Deliverable committed to repository |
+|---|---|---|---|---|
+| 2026-06-10 00:22 | [\`domovinatv/pay.domovina.ai\`](https://github.com/domovinatv/pay.domovina.ai) | Fable 5 | \`security\` + \`refactor\` | \`wallet/docs/{security-custody-model,relayer-architecture,relayer-threat-model,user-flows,passkey-onboarding-industry-standards,safe-client-compatibility}.md\` |
+| 2026-06-10 08:07 | [\`domovinatv/domovina.ai\`](https://github.com/domovinatv/domovina.ai) | Fable 5 | \`refactor\` | \`docs/backend-prompts/10-account-management.md\` |
+| 2026-06-10 23:35 | [\`domovinatv/pay.domovina.ai\`](https://github.com/domovinatv/pay.domovina.ai) | Fable 5 | \`forensic\` | [\`docs/research/fable5-vs-opus48-side-by-side.md\`](https://github.com/domovinatv/pay.domovina.ai/blob/main/docs/research/fable5-vs-opus48-side-by-side.md) |
+| 2026-06-11 10:26 | [\`domovinatv/pay.domovina.ai\`](https://github.com/domovinatv/pay.domovina.ai) | Opus 4.8 (blind check) | \`forensic\` | [\`docs/research/opus48-independent-forensic-fable5-vs-opus48.md\`](https://github.com/domovinatv/pay.domovina.ai/blob/main/docs/research/opus48-independent-forensic-fable5-vs-opus48.md) |
+| 2026-07-07 20:05 | [\`domovinatv/pay.domovina.ai\`](https://github.com/domovinatv/pay.domovina.ai) | Fable 5 + Opus 4.8 | \`full\` | [\`docs/reviews/2026-07-fable5/\`](https://github.com/domovinatv/pay.domovina.ai/tree/main/docs/reviews/2026-07-fable5) (9 files, 46 consolidated findings, F0–F3 plan) |
+| 2026-07-10 21:58 | [\`domovinatv/domovina-api\`](https://github.com/domovinatv/domovina-api) | Fable 5 | \`full\` | \`docs/review-2026-07/{README,01-fixes-security-correctness,02-ops-hardening,03-consistency-refactor,04-docs-hygiene,05-roadmap-features}.md\` |
+| 2026-07-19 22:31 | [\`domovinatv/izbori.domovina.ai\`](https://github.com/domovinatv/izbori.domovina.ai) | Fable 5 | \`refactor\` | \`PLAN_POBOLJSANJA.md\`, \`PLAN_UI.md\`, \`docs/STANJE_I_NASTAVAK.md\` |
+| 2026-09-26 00:47 | [\`stepanic/stadion-maksimir-natjecaj-2026\`](https://github.com/stepanic/stadion-maksimir-natjecaj-2026) | Fable 5.1 | \`security\` | [\`docs/review/2026-09-26-neovisni-review-glasanje.md\`](https://github.com/stepanic/stadion-maksimir-natjecaj-2026/blob/main/docs/review/2026-09-26-neovisni-review-glasanje.md) (F-01…F-12, tag \`audit-fable-2026-09-26\`) |
+| 2026-09-26 01:39 | [\`stepanic/stadion-maksimir-natjecaj-2026\`](https://github.com/stepanic/stadion-maksimir-natjecaj-2026) | Fable 5.1 | \`diff\` | [\`docs/review/2026-09-26-neovisni-review-wiring.md\`](https://github.com/stepanic/stadion-maksimir-natjecaj-2026/blob/main/docs/review/2026-09-26-neovisni-review-wiring.md) (F-13…F-22, tags \`…-wiring\`, \`…-wiring-2\`) |
+| 2026-10-02 17:05 | [\`domovinatv/pay.domovina.ai\`](https://github.com/domovinatv/pay.domovina.ai) | Fable 5.1 | \`full\` | [\`docs/reviews/2026-10-fable51/\`](https://github.com/domovinatv/pay.domovina.ai/tree/main/docs/reviews/2026-10-fable51) (5 files, 35 findings + P0–P2 plan for Opus 5.5) |
+| 2026-10-02 17:08 | [\`domovinatv/energy.domovina.ai\`](https://github.com/domovinatv/energy.domovina.ai) | Fable 5.1 | \`refactor\` | [\`docs/refactor/00-pregled.md\`](https://github.com/domovinatv/energy.domovina.ai/blob/main/docs/refactor/00-pregled.md) … \`05-alati-testovi-docs.md\` (30 items in 6 waves) |
+| 2026-10-02 17:13 | [\`domovinatv/domovina-fiskal\`](https://github.com/domovinatv/domovina-fiskal) | Fable 5.1 | \`refactor\` + \`forensic\` | [\`docs/handoff/2026-10-02-pregled-koda-i-plan-refactora.md\`](https://github.com/domovinatv/domovina-fiskal/blob/main/docs/handoff/2026-10-02-pregled-koda-i-plan-refactora.md) (K1–K24 + 9-step plan) |
+| 2026-10-09 22:47 | [\`stepanic/stadion-maksimir-natjecaj-2026\`](https://github.com/stepanic/stadion-maksimir-natjecaj-2026) | Fable 5.1 | \`diff\` | [\`2026-10-09-neovisni-review-tjedan-glasaj.md\`](https://github.com/stepanic/stadion-maksimir-natjecaj-2026/blob/main/docs/review/2026-10-09-neovisni-review-tjedan-glasaj.md) (F-23…F-37) + [\`2026-10-09-neovisni-review-opci-model-i-v2.md\`](https://github.com/stepanic/stadion-maksimir-natjecaj-2026/blob/main/docs/review/2026-10-09-neovisni-review-opci-model-i-v2.md) (E-01…E-15), tag \`audit-fable-2026-10-09\` |
+| 2026-10-09 22:57 | [\`domovinatv/pay.domovina.ai\`](https://github.com/domovinatv/pay.domovina.ai) | Fable 5.1 | \`diff\` | [\`docs/reviews/2026-10-fable51-r2/\`](https://github.com/domovinatv/pay.domovina.ai/tree/main/docs/reviews/2026-10-fable51-r2) (5 files, 32 findings over 40 Opus 5.5 commits) |
+| 2026-10-16 22:06 | [\`domovinatv/pay.domovina.ai\`](https://github.com/domovinatv/pay.domovina.ai), [\`domovinatv/pipeline.domovina.ai\`](https://github.com/domovinatv/pipeline.domovina.ai), [\`domovinatv/omm.domovina.ai\`](https://github.com/domovinatv/omm.domovina.ai) | Fable 5.1 subagents | \`security\` | \`docs/security/2026-10-16-security-audit-fable.md\` in all three repos (plus [postmortem in \`stepanic/cv\`](https://github.com/stepanic/cv/blob/main/docs/2026-10-17-postmortem-fable-subagenti-tjedni-limit.md)) |
+
+## What the prompts actually asked for
+
+Across the October 2026 sessions, the prompt converged to a fixed Friday pattern before the weekly subscription reset on Saturday at 02:00 CEST. Four verbatim examples from 2 and 9 October 2026:
+
+\`\`\`text
+# pay.domovina.ai (2026-10-02 17:05 CEST)
+zelim da mi analziras sto je napravleno trenutno u codebaseu ti kao model Fable 5.1
+mislim da ces pronaci stavri koje bi trebalo popraviti nemoj kodiratinego pisis
+markdown dokumenete s uputama sto bi trebalo eventualnons prijedlogom implememtacije
+a onda ce Opus 5.5 proci po tvojem review i raditi implememtaciju u skladu s naalziom
+
+# energy.domovina.ai (2026-10-02 17:08 CEST)
+ovako mene ti zanima sljedece development je ovdje radjen sa Opus modelima zelim da
+ti kao Fable 5.1 napravis analizu i ne radis refactor nego pises u codebase amrkdown
+dokumente s prijedlozima za refactor na temlju tvoje analize se Opus modeli proci i
+refactorati sve sto ima smisla
+
+# domovina-fiskal (2026-10-02 17:13 CEST)
+ovako implemetaciju u ocom codebaseu je vecinom radio OPus model, daj pregledaj po
+git history je li Fable 5.1 ili Fable 5 radio i daj napravi analizu postojece
+implemmetacije i nemoj raditi modifikacije nego pisis markdown dokument s prijedlogom
+implemetacije ponasaj se kao revieeer na temelju tvoje analize ce Opus 5.5. proci i
+napraviti refactor ali zelim analizu tebe kao superornijeg modela
+
+# stadion-maksimir-natjecaj-2026 (2026-10-09 22:47 CEST)
+ovaj tjedan smo radili neke izmjene sa opus 5.5 zelim da to sve pregledas nista
+nemojnrefactorsti nego prodji kroz sve i napravi markdown dokumente koji su analiza
+sa projedlozima poboljsanja osobito briga za edga caseove koje opus je preskocio ali
+pisi prijedloge implementacije
+\`\`\`
+
+In \`domovina-fiskal\`, Fable 5.1 first checked the premise against \`git log\` and disproved it: Fable 5 had written ~6,700 of the ~10,300 lines in \`backend/\` (Phases 0–3), while Opus 5.5 had written ~2,700 lines (Phase 4 and the test suite). Of the 24 findings (\`K1\`–\`K24\`), six were in Fable 5's own earlier code (\`K1\`, \`K3\`, \`K4\`, \`K13\`, \`K15\`, \`K16\`) and four in Opus 5.5's code (\`K7\`, \`K10\`, \`K11\`, \`K12\`). In \`K1\`, \`git check-ignore\` proved that \`.gitignore\`'s \`*.pem\` rule ignored \`backend/src/fiskal/ca/*.pem\`, meaning a fresh clone could not build at all. Opus 5.5 subsequently executed steps 0–8 of that plan on 12–13 November 2026, growing the test suite from 49 to 222 tests and deploying v0.5.0 to production.
+
+## Why five parallel Fable subagents burned 7% of the weekly limit in 14 minutes
+
+On Friday 16 October 2026 at 22:06 CEST, an Opus 5.5 orchestrator session (\`8d40f90b\`) queued 11 security audits on \`model: "fable"\` subagents, up to three in parallel. Fourteen minutes later, at 22:20 CEST, the fifth subagent hit \`rateLimitType: "seven_day"\` (\`status: "rejected"\`). Deduplicating the transcript \`usage\` blocks by \`message.id\` against the API price sheet (Fable 5.1: $10/MTok input, $12.50/MTok 5-minute cache write, $0.25/MTok cache read, $50/MTok output; Opus 5.5: $4 / $5 / $0.20 / $20; Sonnet 5.5: $2 / $2.50 / $0.20 / $10) explains why:
+
+| Subagent target | Calls | Max context | Cache write | Cache read | Output (thinking) | Fable 5.1 $ | Same on Opus 5.5 | Same on Sonnet 5.5 |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| \`pay.domovina.ai\` | 44 | 636k | 636,105 | 10,984,242 | 65,057 (31,370) | $13.96 | $6.68 | $4.44 |
+| \`pipeline.domovina.ai\` | 30 | 289k | 270,718 | 4,580,598 | 52,400 (23,457) | $7.16 | $3.32 | $2.12 |
+| \`omm.domovina.ai\` | 20 | 249k | 231,616 | 2,689,143 | 48,340 (19,679) | $5.99 | $2.67 | $1.60 |
+| \`energy.domovina.ai\` *(aborted on 429)* | 13 | 175k | 156,725 | 999,220 | 6,714 (1,209) | $2.55 | $1.12 | $0.66 |
+| repo X *(outside public allow-list, aborted)* | 6 | 68k | 50,040 | 257,786 | 2,196 (588) | $0.80 | $0.35 | $0.20 |
+| **Subagents total** | **113** | | **1,345,204** | **19,510,989** | **174,707** | **$30.46** | **$14.14** | **$9.02** |
+
+Three mechanisms drove the $30.46 bill:
+1. **Cache writes were 55% of total cost ($16.82).** The \`pay.domovina.ai\` agent ran \`for f in ...; do cat -n "$f"; done\` across batches of 4 to 7 files. Outputs over 30 KB were spilled to \`tool-results/*.txt\` by Claude Code, and the agent then read those spilled files with \`Read\` (25+ reads of 5–15k tokens each), and at 22:14 re-read four 55 KB tool results a second time, paying the $12.50/MTok cache-write price twice.
+2. **A 600k context resends 600k tokens on every turn.** Across 44 calls, the \`pay.domovina.ai\` agent sent **11.6M input tokens**.
+3. **Splitting one Fable session into smaller 200k sessions does not reduce API cost.** Simulating a 200k context cap over the exact \`pay.domovina.ai\` call sequence raises the API cost from $13.95 (1 session) to $14.76 (5 sessions), because cache reads on Fable cost $0.25/MTok while re-priming the base context in each new session costs $12.50/MTok. Real savings require keeping bulk file reading out of Fable's context altogether.
+
+## How \`/fable-review\` is structured
+
+The skill replaces single-pass Fable exploration with a four-step pipeline:
+
+1. **Deterministic pre-flight (\`scripts/preflight.sh\`).** Before any LLM call, a shell script counts tracked text files and lines via \`git grep -I -c ''\`, detects the tech stack and read-only ground-check commands (\`tsc --noEmit\`, \`vitest\`, \`flutter analyze\`, \`cargo check\`, \`forge test\`), finds the latest \`audit-*\` git tag and commit count since that tag, tallies \`Co-Authored-By\` trailers, greps for \`REVIEW(fable)\` markers, and prints the cost estimate for Pass A and Pass B.
+2. **Detached git worktree.** Parallel sessions frequently share a working directory, so the skill creates an isolated worktree (\`git worktree add --detach /private/tmp/fable-review-... origin/main\`).
+3. **Pass A — Sonnet 5.5 map and ground check (\`model: "sonnet"\`, \`effort: "medium"\`).** Sonnet runs the read-only test and typecheck suite, reads \`CLAUDE.md\`, \`README.md\`, and ADR summaries, lists intentional invariants that must not be flagged as bugs, and writes \`00-map.md\` with 15 to 30 prioritized \`path:line\` hotspots.
+4. **Pass B — Fable 5.1 targeted verification (\`model: "fable"\`, \`effort: "medium"\`).** Fable receives \`00-map.md\` and reads 150-line slices around each target using \`sed -n 'A,Bp'\`. It verifies documentation claims against actual code lines, writes findings to disk as it confirms them, includes a mandatory **"Confirmed GOOD — DO NOT TOUCH"** section and a phased execution plan for Opus, commits the Markdown document immediately, tags \`audit-fable-YYYY-MM-DD\`, and writes a ready-to-paste Opus 5.5 handoff prompt to \`~/.claude/handoffs/<repo>/\` and the system clipboard.
+
+The five modes cover every review shape from the 28 sessions:
+- \`diff\` — weekly delta or PR review since the last \`audit-fable-*\` tag ($2–4).
+- \`refactor\` — module boundaries, duplication, oversized files, and a wave-by-wave refactor plan for Opus ($4–7).
+- \`security\` — threat model, entry points, money/auth/secret flows, and a \`- [ ] SEC-xx\` checklist ($4–7).
+- \`full\` — subsystem-by-subsystem audit with a coverage matrix in \`INDEX.md\` and \`implementation-plan.md\` ($8–15).
+- \`forensic\` — \`Co-Authored-By\` git history attribution, shared-file diff analysis, and 0–100 rubric scoring ($3–5).
+
+## Limitations
+
+- **Subscription quota weights are inferred, not published by Anthropic.** The 45 : 7 ratio between the 5-hour window (0% → 55%) and the weekly window (93% → 100%) comes from a single $32.30 window on 16 October 2026, compared against a $369 Opus 5.5 window on 30 September 2026. Whether subscription limits weight cache reads differently from API list prices cannot be separated from these two data points.
+- **Two-pass mapping trades recall for bounded context.** In \`security\` and \`refactor\` modes, Pass B only inspects the \`file:line\` ranges listed in Pass A's \`00-map.md\` plus callers reached by following traces from those lines. A bug in an unmapped file with no incoming trace from a listed entry point can be missed unless \`full\` mode is used.
+- **Read-only code review cannot verify live external configuration.** Cloudflare WAF rules, Supabase GoTrue settings (such as \`mailer_autoconfirm\` in \`domovina-fiskal\` finding \`K5\`), and production database state are outside the git tree and remain in the *"Unverified / For human check"* section until checked against live infrastructure.
+- **Ten of the 28 sessions are excluded from the public table.** Those ten sessions ran on private or consulting-client repositories and are omitted under the repository's allow-list policy; the architecture of the skill reflects all 28 sessions, while every cited example and commit hash above comes from the 18 public sessions.
+
+## Source
+
+The skill (in English and Croatian), the deterministic \`preflight.sh\` script, and the documentation: [github.com/stepanic/cv/tree/main/skills/fable-review](https://github.com/stepanic/cv/tree/main/skills/fable-review). MIT.`,
+      hr: `Između 10. lipnja i 16. listopada 2026. u 28 Claude Code sesija na mom računalu ponavljao se isti obrazac rada: Claude Opus (4.8, 5 i 5.5) pisao je implementaciju, a Claude Fable (5 i 5.1) pregledavao je zamrznuti commit bez mijenjanja ijedne izvorne datoteke te u repozitorij zapisivao strukturirane Markdown nalaze i fazne planove refactora koje bi u idućim sesijama izvodio Opus. Dana 16. listopada 2026. pokretanje pet paralelnih Fable 5.1 subagenata za jednofazni sigurnosni audit potrošilo je preostalih 7 % tjednog limita na Claude Max 5x planu (30,46 $ po API cjeniku kroz 113 poziva) za 14 minuta, jer je svaki agent čitao cijele datoteke u kontekst koji je narastao do 636k tokena. Analizom tih 28 sesija i telemetrije tokena od 16. listopada nastao je [\`/fable-review\`](https://github.com/stepanic/cv/tree/main/skills/fable-review): dvofazni skill koji prije pokretanja Fablea izvršava determinističku pre-flight skriptu i Sonnet 5.5 prolaz za mapiranje te Fableu 5.1 predaje 15 do 30 ciljanih \`datoteka:linija\` raspona, čime trošak po repozitoriju pada sa 6–14 $ na 3–6 $, a kontekst ostaje ispod 150k tokena.
+
+## Zašto audit samog implementatora nije dovoljan
+
+Model koji pregledava vlastitu implementaciju provjerava one invarijante kojih se sjetio dok je pisao kod. Dva javna repozitorija pokazuju razliku kad drugi model neovisno i samo za čitanje pregleda zamrznuti commit:
+
+1. **Javno glasanje na Gnosis Chainu sa Semaphore ZK dokazima ([\`stepanic/stadion-maksimir-natjecaj-2026\`](https://github.com/stepanic/stadion-maksimir-natjecaj-2026)).** Dana 26. rujna 2026. Opus 5.5 izgradio je off-chain i on-chain sustav glasanja i napisao vlastiti sigurnosni audit u \`docs/blockchain/audit/\`. Pregledavajući zamrznuti commit \`faaaa5f\` samo za čitanje ([tag \`audit-fable-2026-09-26\`](https://github.com/stepanic/stadion-maksimir-natjecaj-2026/blob/main/docs/review/2026-09-26-neovisni-review-glasanje.md)), Fable 5.1 nije našao nijednu grešku u Poseidon hashevima ni provjeri SNARK dokaza koje je Opus već provjerio, ali je našao pet propusta oko njih koji su bili izvan Opusova modela prijetnji:
+   - \`F-01\`: registracija identiteta i slanje prvog listića u istom koraku povezivali su osobu i listić preko vremena i korijena Merkle stabla, suprotno tvrdnji u NatSpecu ugovora.
+   - \`F-02\`: edge funkcija \`maksimir_zk_share\` primala je anonimne upise bez provjere SNARK dokaza, što je omogućavalo punjenje baze i krivotvorenje Open Graph kartica za dijeljenje.
+   - \`F-04\`: ZK artefakti kruga dohvaćali su se s vanjskog CDN-a bez provjere SHA-256 otiska.
+   - \`F-05\`: satni GitHub Actions cron za checkpoint preskakao je izvršavanja pod opterećenjem (potvrđeno kroz \`gh run list --workflow maksimir-checkpoint.yml --json event,createdAt\`).
+   - \`F-06\`: WebAuthn \`user.id\` izvodio se iz javnog commitmenta.
+2. **Nekustodijalni EURe platni rail i passkey Safe novčanik ([\`domovinatv/pay.domovina.ai\`](https://github.com/domovinatv/pay.domovina.ai)).** Dana 10. i 11. lipnja 2026. oba su modela radila nad istim datotekama uz atribuciju svakog commita kroz \`Co-Authored-By\` trailer. Nad tom git poviješću napravljena su dva forenzička izvještaja: [Fable 5 analiza (\`557dfc9\`)](https://github.com/domovinatv/pay.domovina.ai/blob/main/docs/research/fable5-vs-opus48-side-by-side.md) i [slijepa Opus 4.8 protuanaliza (\`8addcbf\`)](https://github.com/domovinatv/pay.domovina.ai/blob/main/docs/research/opus48-independent-forensic-fable5-vs-opus48.md). U \`wallet/src/pages/Embed.tsx\` ranjivost lažiranja \`parentOrigin\` parametra uvedena u commitu \`f3399ed\` preživjela je dva Opusova sigurnosna prolaza nad tom datotekom, a Fable 5 ju je pronašao u prvom prolazu (\`cdda3bc\`). Na novčanom endpointu \`wallet/functions/api/relay.ts\` Opus 4.8 provjeravao je 2 od 10 polja (\`getCode\` prije slanja i \`to === safe\` na cold-pathu), dok je Fable 5 dodao 8 provjera (\`operation === 0\` protiv \`delegatecall\`, dopušteni selektori, format adrese primatelja, pozitivni iznos i ograničenja gasa). Obrnuto, slijepi Opus 4.8 prolaz pokazao je da je Fableova ocjena 86 naprama 67 koristila pondere koji su disciplini radijusa štete dali samo 12 % težine, jedinoj dimenziji u kojoj je Opus bio bolji (82 naprama 68) nakon što je Fable u \`fceab4d\` poslao neprovjereni WebAuthn Signal API poziv koji je morao biti revertan u \`6c83f51\`. Uz jednake pondere kroz svih devet dimenzija rezultat je bio 77 (Fable 5) naprama 75 (Opus 4.8).
+
+## Kronologija Fable analiza na javnim repozitorijima
+
+Od ukupno 28 Fable sesija izvučenih iz \`~/.claude/projects/**/*.jsonl\`, 18 ih je vođeno nad javnim repozitorijima pod vlasnicima \`domovinatv\` i \`stepanic\` (preostalih 10 vođeno je nad privatnim ili klijentskim repozitorijima i izostavljeno prema pravilima objave ovog repozitorija):
+
+| Datum (CEST) | Javni repozitorij | Model | Mod | Zapisani dokumenti u repozitoriju |
+|---|---|---|---|---|
+| 10. 6. 2026. 00:22 | [\`domovinatv/pay.domovina.ai\`](https://github.com/domovinatv/pay.domovina.ai) | Fable 5 | \`security\` + \`refactor\` | \`wallet/docs/{security-custody-model,relayer-architecture,relayer-threat-model,user-flows,passkey-onboarding-industry-standards,safe-client-compatibility}.md\` |
+| 10. 6. 2026. 08:07 | [\`domovinatv/domovina.ai\`](https://github.com/domovinatv/domovina.ai) | Fable 5 | \`refactor\` | \`docs/backend-prompts/10-account-management.md\` |
+| 10. 6. 2026. 23:35 | [\`domovinatv/pay.domovina.ai\`](https://github.com/domovinatv/pay.domovina.ai) | Fable 5 | \`forensic\` | [\`docs/research/fable5-vs-opus48-side-by-side.md\`](https://github.com/domovinatv/pay.domovina.ai/blob/main/docs/research/fable5-vs-opus48-side-by-side.md) |
+| 11. 6. 2026. 10:26 | [\`domovinatv/pay.domovina.ai\`](https://github.com/domovinatv/pay.domovina.ai) | Opus 4.8 (slijepa provjera) | \`forensic\` | [\`docs/research/opus48-independent-forensic-fable5-vs-opus48.md\`](https://github.com/domovinatv/pay.domovina.ai/blob/main/docs/research/opus48-independent-forensic-fable5-vs-opus48.md) |
+| 7. 7. 2026. 20:05 | [\`domovinatv/pay.domovina.ai\`](https://github.com/domovinatv/pay.domovina.ai) | Fable 5 + Opus 4.8 | \`full\` | [\`docs/reviews/2026-07-fable5/\`](https://github.com/domovinatv/pay.domovina.ai/tree/main/docs/reviews/2026-07-fable5) (9 datoteka, 46 nalaza, plan F0–F3) |
+| 10. 7. 2026. 21:58 | [\`domovinatv/domovina-api\`](https://github.com/domovinatv/domovina-api) | Fable 5 | \`full\` | \`docs/review-2026-07/{README,01-fixes-security-correctness,02-ops-hardening,03-consistency-refactor,04-docs-hygiene,05-roadmap-features}.md\` |
+| 19. 7. 2026. 22:31 | [\`domovinatv/izbori.domovina.ai\`](https://github.com/domovinatv/izbori.domovina.ai) | Fable 5 | \`refactor\` | \`PLAN_POBOLJSANJA.md\`, \`PLAN_UI.md\`, \`docs/STANJE_I_NASTAVAK.md\` |
+| 26. 9. 2026. 00:47 | [\`stepanic/stadion-maksimir-natjecaj-2026\`](https://github.com/stepanic/stadion-maksimir-natjecaj-2026) | Fable 5.1 | \`security\` | [\`docs/review/2026-09-26-neovisni-review-glasanje.md\`](https://github.com/stepanic/stadion-maksimir-natjecaj-2026/blob/main/docs/review/2026-09-26-neovisni-review-glasanje.md) (F-01…F-12, tag \`audit-fable-2026-09-26\`) |
+| 26. 9. 2026. 01:39 | [\`stepanic/stadion-maksimir-natjecaj-2026\`](https://github.com/stepanic/stadion-maksimir-natjecaj-2026) | Fable 5.1 | \`diff\` | [\`docs/review/2026-09-26-neovisni-review-wiring.md\`](https://github.com/stepanic/stadion-maksimir-natjecaj-2026/blob/main/docs/review/2026-09-26-neovisni-review-wiring.md) (F-13…F-22, tagovi \`…-wiring\`, \`…-wiring-2\`) |
+| 2. 10. 2026. 17:05 | [\`domovinatv/pay.domovina.ai\`](https://github.com/domovinatv/pay.domovina.ai) | Fable 5.1 | \`full\` | [\`docs/reviews/2026-10-fable51/\`](https://github.com/domovinatv/pay.domovina.ai/tree/main/docs/reviews/2026-10-fable51) (5 datoteka, 35 nalaza + plan P0–P2 za Opus 5.5) |
+| 2. 10. 2026. 17:08 | [\`domovinatv/energy.domovina.ai\`](https://github.com/domovinatv/energy.domovina.ai) | Fable 5.1 | \`refactor\` | [\`docs/refactor/00-pregled.md\`](https://github.com/domovinatv/energy.domovina.ai/blob/main/docs/refactor/00-pregled.md) … \`05-alati-testovi-docs.md\` (30 stavki u 6 valova) |
+| 2. 10. 2026. 17:13 | [\`domovinatv/domovina-fiskal\`](https://github.com/domovinatv/domovina-fiskal) | Fable 5.1 | \`refactor\` + \`forensic\` | [\`docs/handoff/2026-10-02-pregled-koda-i-plan-refactora.md\`](https://github.com/domovinatv/domovina-fiskal/blob/main/docs/handoff/2026-10-02-pregled-koda-i-plan-refactora.md) (K1–K24 + plan u 9 koraka) |
+| 9. 10. 2026. 22:47 | [\`stepanic/stadion-maksimir-natjecaj-2026\`](https://github.com/stepanic/stadion-maksimir-natjecaj-2026) | Fable 5.1 | \`diff\` | [\`2026-10-09-neovisni-review-tjedan-glasaj.md\`](https://github.com/stepanic/stadion-maksimir-natjecaj-2026/blob/main/docs/review/2026-10-09-neovisni-review-tjedan-glasaj.md) (F-23…F-37) + [\`2026-10-09-neovisni-review-opci-model-i-v2.md\`](https://github.com/stepanic/stadion-maksimir-natjecaj-2026/blob/main/docs/review/2026-10-09-neovisni-review-opci-model-i-v2.md) (E-01…E-15), tag \`audit-fable-2026-10-09\` |
+| 9. 10. 2026. 22:57 | [\`domovinatv/pay.domovina.ai\`](https://github.com/domovinatv/pay.domovina.ai) | Fable 5.1 | \`diff\` | [\`docs/reviews/2026-10-fable51-r2/\`](https://github.com/domovinatv/pay.domovina.ai/tree/main/docs/reviews/2026-10-fable51-r2) (5 datoteka, 32 nalaza nad 40 Opus 5.5 commitova) |
+| 16. 10. 2026. 22:06 | [\`domovinatv/pay.domovina.ai\`](https://github.com/domovinatv/pay.domovina.ai), [\`domovinatv/pipeline.domovina.ai\`](https://github.com/domovinatv/pipeline.domovina.ai), [\`domovinatv/omm.domovina.ai\`](https://github.com/domovinatv/omm.domovina.ai) | Fable 5.1 subagenti | \`security\` | \`docs/security/2026-10-16-security-audit-fable.md\` u sva tri repoa (uz [postmortem u \`stepanic/cv\`](https://github.com/stepanic/cv/blob/main/docs/2026-10-17-postmortem-fable-subagenti-tjedni-limit.md)) |
+
+## Kako su izgledali doslovni promptovi
+
+U listopadu 2026. promptovi su se ustalili kao petak-rutina prije subotnjeg reseta tjednog limita u 02:00 CEST. Četiri doslovna primjera od 2. i 9. listopada 2026.:
+
+\`\`\`text
+# pay.domovina.ai (2. 10. 2026. 17:05 CEST)
+zelim da mi analziras sto je napravleno trenutno u codebaseu ti kao model Fable 5.1
+mislim da ces pronaci stavri koje bi trebalo popraviti nemoj kodiratinego pisis
+markdown dokumenete s uputama sto bi trebalo eventualnons prijedlogom implememtacije
+a onda ce Opus 5.5 proci po tvojem review i raditi implememtaciju u skladu s naalziom
+
+# energy.domovina.ai (2. 10. 2026. 17:08 CEST)
+ovako mene ti zanima sljedece development je ovdje radjen sa Opus modelima zelim da
+ti kao Fable 5.1 napravis analizu i ne radis refactor nego pises u codebase amrkdown
+dokumente s prijedlozima za refactor na temlju tvoje analize se Opus modeli proci i
+refactorati sve sto ima smisla
+
+# domovina-fiskal (2. 10. 2026. 17:13 CEST)
+ovako implemetaciju u ocom codebaseu je vecinom radio OPus model, daj pregledaj po
+git history je li Fable 5.1 ili Fable 5 radio i daj napravi analizu postojece
+implemmetacije i nemoj raditi modifikacije nego pisis markdown dokument s prijedlogom
+implemetacije ponasaj se kao revieeer na temelju tvoje analize ce Opus 5.5. proci i
+napraviti refactor ali zelim analizu tebe kao superornijeg modela
+
+# stadion-maksimir-natjecaj-2026 (9. 10. 2026. 22:47 CEST)
+ovaj tjedan smo radili neke izmjene sa opus 5.5 zelim da to sve pregledas nista
+nemojnrefactorsti nego prodji kroz sve i napravi markdown dokumente koji su analiza
+sa projedlozima poboljsanja osobito briga za edga caseove koje opus je preskocio ali
+pisi prijedloge implementacije
+\`\`\`
+
+U \`domovina-fiskal\` Fable 5.1 najprije je provjerio premisu iz prompta nad \`git log\` poviješću i opovrgnuo je: Fable 5 napisao je oko 6700 od ukupno 10.300 redaka u \`backend/\` (faze 0–3), a Opus 5.5 oko 2700 redaka (faza 4 i svi testovi). Od 24 nalaza (\`K1\`–\`K24\`), šest ih je bilo u ranijem Fableovu kodu (\`K1\`, \`K3\`, \`K4\`, \`K13\`, \`K15\`, \`K16\`), a četiri u Opusovu (\`K7\`, \`K10\`, \`K11\`, \`K12\`). Kod nalaza \`K1\` naredba \`git check-ignore\` dokazala je da pravilo \`*.pem\` u \`.gitignore\` ignorira \`backend/src/fiskal/ca/*.pem\`, zbog čega se svježi klon repozitorija uopće nije mogao buildati. Opus 5.5 izveo je korake 0–8 tog plana 12. i 13. studenoga 2026., podignuo broj testova sa 49 na 222 i deployao verziju 0.5.0 na produkciju.
+
+## Zašto je pet paralelnih Fable subagenata potrošilo 7 % tjednog limita za 14 minuta
+
+U petak 16. listopada 2026. u 22:06 CEST glavna sesija na Opusu 5.5 (\`8d40f90b\`) pokrenula je red čekanja od 11 sigurnosnih audita na \`model: "fable"\` subagentima, najviše tri paralelno. Četrnaest minuta kasnije, u 22:20 CEST, peti je subagent pao na \`rateLimitType: "seven_day"\` (\`status: "rejected"\`). Deduplikacija \`usage\` zapisa u transkriptima po \`message.id\` prema API cjeniku (Fable 5.1: 10 $/MTok ulaz, 12,50 $/MTok 5-minutni cache write, 0,25 $/MTok cache read, 50 $/MTok izlaz; Opus 5.5: 4 / 5 / 0,20 / 20 $; Sonnet 5.5: 2 / 2,50 / 0,20 / 10 $) pokazuje uzrok:
+
+| Subagent | Poziva | Max kontekst | Cache write | Cache read | Output (thinking) | Fable 5.1 $ | Isto na Opusu 5.5 | Isto na Sonnetu 5.5 |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| \`pay.domovina.ai\` | 44 | 636k | 636.105 | 10.984.242 | 65.057 (31.370) | 13,96 $ | 6,68 $ | 4,44 $ |
+| \`pipeline.domovina.ai\` | 30 | 289k | 270.718 | 4.580.598 | 52.400 (23.457) | 7,16 $ | 3,32 $ | 2,12 $ |
+| \`omm.domovina.ai\` | 20 | 249k | 231.616 | 2.689.143 | 48.340 (19.679) | 5,99 $ | 2,67 $ | 1,60 $ |
+| \`energy.domovina.ai\` *(prekinut na 429)* | 13 | 175k | 156.725 | 999.220 | 6.714 (1.209) | 2,55 $ | 1,12 $ | 0,66 $ |
+| repo X *(izvan javne allow-liste, prekinut)* | 6 | 68k | 50.040 | 257.786 | 2.196 (588) | 0,80 $ | 0,35 $ | 0,20 $ |
+| **Subagenti ukupno** | **113** | | **1.345.204** | **19.510.989** | **174.707** | **30,46 $** | **14,14 $** | **9,02 $** |
+
+Tri su mehanizma stvorila trošak od 30,46 $:
+1. **Cache write činio je 55 % ukupnog troška (16,82 $).** Agent za \`pay.domovina.ai\` pokretao je \`for f in ...; do cat -n "$f"; done\` nad skupinama od 4 do 7 datoteka. Izlaze veće od 30 KB Claude Code sprema u \`tool-results/*.txt\`, pa ih je agent zatim čitao u cijelosti alatom \`Read\` (više od 25 čitanja po 5–15k tokena), a u 22:14 ponovno pročitao četiri ista spremljena izlaza od po 55 KB i tako isti kod dvaput platio po cijeni od 12,50 $/MTok.
+2. **Kontekst od 600k tokena šalje se u svakom novom pozivu.** Kroz 44 poziva agent za \`pay.domovina.ai\` poslao je **11,6 milijuna ulaznih tokena**.
+3. **Samo rezanje jedne Fable sesije na više sesija od 200k tokena ne smanjuje cijenu.** Simulacija granice od 200k nad stvarnim pozivima iz transkripta \`pay.domovina.ai\` diže API trošak s 13,95 $ (1 sesija) na 14,76 $ (5 sesija), jer je čitanje iz cachea na Fableu jeftino (0,25 $/MTok), a svaka nova sesija ponovno plaća skupi upis osnovnog konteksta (12,50 $/MTok). Stvarna ušteda nastaje tek kad široko čitanje datoteka preuzme jeftiniji model.
+
+## Kako radi \`/fable-review\`
+
+Skill zamjenjuje jednofazno Fable istraživanje četverokoračnim postupkom:
+
+1. **Deterministički pre-flight (\`scripts/preflight.sh\`).** Prije ijednog LLM poziva shell skripta u jednom prolazu prebroji tekstualne izvorne datoteke i linije koda (\`git grep -I -c ''\`), prepozna tehnologije i read-only naredbe za provjeru (\`tsc --noEmit\`, \`vitest\`, \`flutter analyze\`, \`cargo check\`, \`forge test\`), pronađe zadnji \`audit-*\` git tag i broj novih commitova, izračuna \`Co-Authored-By\` statistiku modela, potraži \`REVIEW(fable)\` markere u kodu i ispiše procjenu troška za Prolaz A i Prolaz B.
+2. **Izolirani git worktree.** Budući da u istom repozitoriju često rade paralelne sesije, skill stvara odvojeni worktree (\`git worktree add --detach /private/tmp/fable-review-... origin/main\`).
+3. **Prolaz A — Sonnet 5.5 mapa i ground check (\`model: "sonnet"\`, \`effort: "medium"\`).** Sonnet pokreće postojeće testove i typecheck, čita \`CLAUDE.md\`, \`README.md\` i sažetke ADR-ova, popisuje namjerne invarijante koje se ne smiju prijaviti kao lažni pozitivi i zapisuje \`00-map.md\` s 15 do 30 prioritetnih \`putanja:linija\` žarišta.
+4. **Prolaz B — Fable 5.1 ciljana provjera (\`model: "fable"\`, \`effort: "medium"\`).** Fable prima samo \`00-map.md\` i čita odsječke od ~150 linija oko navedenih mjesta pomoću \`sed -n 'A,Bp'\`. Svaku tvrdnju iz dokumentacije provjerava u stvarnom kodu, nalaze odmah zapisuje na disk, uključuje obavezan odjeljak **„Potvrđeno DOBRO — NE DIRATI”** i fazni plan izvedbe za Opus, odmah commita Markdown dokument, postavlja annotated tag \`audit-fable-YYYY-MM-DD\` i sprema gotov handoff prompt za Opus 5.5 u \`~/.claude/handoffs/<repo>/\` te u clipboard.
+
+Pet modova pokriva sve obrasce iz analiziranih 28 sesija:
+- \`diff\` — tjedna delta revizija ili pregled PR-a od zadnjeg \`audit-fable-*\` taga (2–4 $).
+- \`refactor\` — granice modula, duplikacija, prevelike datoteke i plan refactora u valovima za Opus (4–7 $).
+- \`security\` — model prijetnji, ulazne točke, tokovi novca/autentikacije/tajni i \`- [ ] SEC-xx\` checklista (4–7 $).
+- \`full\` — pregled po podsustavima s matricom pokrivenosti u \`INDEX.md\` i glavnim planom u \`implementation-plan.md\` (8–15 $).
+- \`forensic\` — atribucija git povijesti po \`Co-Authored-By\` trailerima, analiza zajedničkih datoteka i bodovanje 0–100 (3–5 $).
+
+## Ograničenja
+
+- **Težine u pretplatničkom limitu izvedene su iz vlastitih mjerenja, ne iz službenih podataka.** Omjer 45 : 7 između 5-satnog prozora (0 % → 55 %) i tjednog prozora (93 % → 100 %) izmjeren je na jednom prozoru od 32,30 $ 16. listopada 2026. u usporedbi s prozorom od 369 $ Opus 5.5 rada 30. rujna 2026. Iz dviju točaka ne može se razlučiti broji li pretplata čitanje iz cachea drukčije od API cjenika.
+- **Dvofazno mapiranje mijenja potpunu pokrivenost za ograničen kontekst.** U modovima \`security\` i \`refactor\` Prolaz B čita samo one \`datoteka:linija\` raspone koje je Prolaz A zapisao u \`00-map.md\` te datoteke do kojih vodi izravan trag iz tih linija. Propust u datoteci koju Prolaz A nije uvrstio i do koje ne vodi trag iz ulaznih točaka može ostati neotkriven ako se ne pokrene \`full\` mod po podsustavima.
+- **Statički pregled koda ne vidi živu vanjsku konfiguraciju.** Cloudflare WAF pravila, postavke Supabase GoTrue servisa (poput \`mailer_autoconfirm\` u nalazu \`K5\` na \`domovina-fiskal\`) i stanje produkcijske baze nalaze se izvan git stabla pa ostaju u odjeljku *„Za provjeru”* dok se ne provjere nad živom infrastrukturom.
+- **Deset od 28 sesija izostavljeno je iz javne tablice.** Tih deset sesija vođeno je nad privatnim ili klijentskim repozitorijima i isključeno prema pravilima objave ovog repozitorija; arhitektura skilla odražava svih 28 sesija, dok svi navedeni primjeri i commit hashevi dolaze iz 18 javnih sesija.
+
+## Izvor
+
+Skill (na engleskom i hrvatskom), deterministička skripta \`preflight.sh\` i popratna dokumentacija: [github.com/stepanic/cv/tree/main/skills/fable-review](https://github.com/stepanic/cv/tree/main/skills/fable-review). MIT.`,
+    },
+    sources: [
+      {
+        title: "The skill itself — SKILL.md, SKILL.hr.md, preflight.sh and README",
+        url: "https://github.com/stepanic/cv/tree/main/skills/fable-review",
+      },
+      {
+        title: "Postmortem (2026-10-17) — five Fable 5.1 subagents and the weekly subscription limit",
+        url: "https://github.com/stepanic/cv/blob/main/docs/2026-10-17-postmortem-fable-subagenti-tjedni-limit.md",
+      },
+      {
+        title: "pay.domovina.ai — Fable 5 vs Opus 4.8 forensic git history reports and codebase reviews",
+        url: "https://github.com/domovinatv/pay.domovina.ai/tree/main/docs/reviews",
+      },
+      {
+        title: "stadion-maksimir-natjecaj-2026 — tagged independent Fable 5.1 security reviews (docs/review/)",
+        url: "https://github.com/stepanic/stadion-maksimir-natjecaj-2026/tree/main/docs/review",
+      },
+    ],
+  },
+  {
     slug: "gis-domovina-pages-to-workers",
     date: "2026-10-30",
     tags: ["Cloudflare", "Workers", "Pages", "React", "SEO"],
