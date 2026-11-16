@@ -274,3 +274,27 @@ Counts: 🔴 1, 🟡 6, 🟢 8.
   ("Final report" vs "Last text before the agent stopped"). The "Final report" mislabel part of F-04 stands.
 - F-07's measured figure for this run is in the header; it was computed by the orchestrator from the transcript, which
   is exactly the gap F-07 describes.
+
+## 6. Status of fixes (Opus 5.5, 2026-11-17)
+
+All fixes in `36a8cf9`. "Verify" is the check from the finding, run before the fix (failed) and after it (passed).
+Owner decisions: F-02 own-owners accepts `host/owner` lines, bare names mean `github.com/<owner>` (file unchanged);
+F-13 effort stays `medium` unless the user names another level.
+
+| ID | Status | Verification after the fix |
+|---|---|---|
+| F-01 🔴 | ✅ fixed in 36a8cf9 | Scratch repo with bare origin: worktree on `feat/x` gives `OTHER=[app.js]`, no push to `main`; worktree on `origin/main` gives `OTHER=[]`, push lands only the review file. Guard and feature-branch case stated in SKILL.md and SKILL.hr.md step 1 and 4. |
+| F-02 🟡 | ✅ fixed in 36a8cf9 | gitlab.example.com, bitbucket.org, github.example:22 and `evil.example/s.epanic` URLs print `LOCAL-ONLY`; `git@github.com:stepanic/cv.git`, `https://github.com/Stepanic/cv`, `org-1@github.com:stepanic/x.git` and `ssh://git@github.com:22/stepanic/cv` print `COMMIT`; `github.com/evilstepanic` is `LOCAL-ONLY`; `gitlab.com/stepanic` entry matches. Real own-owners file: `stepanic/cv` → `COMMIT`. |
+| F-03 🟡 | ✅ fixed in 36a8cf9 | `--base` and `--mode` as last argument exit 2 (were 142 after the 5 s alarm). |
+| F-04 🟡 | ✅ fixed in 36a8cf9 (reduced form) | State only from the `.meta.json` flag (`finished=yes/no`); `stop_reason` labels the text. Synthetic killed transcript: `finished=no last_stop=tool_use`, heading "Last text before the agent stopped". This review's Pass B: `finished=yes last_stop=end_turn`. The `api-error` branch was not added (marker unproven, see "To verify"). |
+| F-05 🟡 | ✅ fixed in 36a8cf9 | `--mode diff` without `--base` prints `DIFF BASE (last audit tag)`; `--base nope` and `--bsae HEAD` exit 2. Fetch moved before preflight in SKILL step 0; preflight prints the last fetch time. Without a tag it warns and estimates on the whole repo. |
+| F-06 🟡 | ✅ fixed in 36a8cf9 | pass-a.md allows installs only into gitignored paths and limits LOCAL-ONLY to static checks unless the user allows tests; SKILL step 4 says what `status --porcelain` proves and asks before `--force`. Same in the agy copy. |
+| F-07 🟡 | ✅ fixed in 36a8cf9 | salvage prints `cost_usd=2.51` for this review's Pass B, equal to the hand calculation in the header. Price table keyed by model prefix, 1-hour cache write at 2× input, `--prices` override, "unknown (no price for …)" otherwise. |
+| F-08 🟢 | ✅ fixed in 36a8cf9 | Meta `{"descr` and a transcript line `[1]`: file written, exit 0. |
+| F-09 🟢 | ✅ fixed in 36a8cf9 | Stack, docs, `Co-Authored-By` and markers read `$BASE_REF` via `ls-tree`, `log` and `grep` on the tree; `node_modules` hint labelled "in live checkout". |
+| F-10 🟢 | ✅ fixed in 36a8cf9 | `--mode securty` exits 2. |
+| F-11 🟢 | ✅ fixed in 36a8cf9 | Synthetic transcript (one call split over two lines without `requestId`): `calls=3`, was 4. |
+| F-12 🟢 | ✅ fixed in 36a8cf9 | Two scratch repos named `api` under owners `one` and `two`: `reports/one-api/` and `reports/two-api/`. Preflight prints the Salvage dir; SKILL uses it. Existing `transcripts/cv/` was left in place. |
+| F-13 🟢 | ✅ fixed in 36a8cf9 | SKILL.hr.md has the feature-branch case, map commit rule, progress-file chaining, step 4 commands and worktree cleanup; effort rule in both languages and in preflight; `--base` in `argument-hint`; Pass B returns its last commit SHA; diff.md item 2 has "none, first review". |
+| F-14 🟢 | ✅ fixed in 36a8cf9 | `blog.ts` HR body: "pet Fable 5.1 subagenata (najviše tri istodobno)"; README `diff` row: no "last 7 days", `$2–5` with the measured run; preflight prints "done by the orchestrator itself" for Pass A under ~5,000 lines; README install uses `~/src`, not `/tmp`. |
+| F-15 🟢 | ✅ fixed in 36a8cf9 | With `fable-review/<today>-diff` existing, preflight prints `…-diff-2`. Remote tags are covered by the fetch with `--tags` in step 0 instead of `ls-remote`, so preflight stays offline. |
