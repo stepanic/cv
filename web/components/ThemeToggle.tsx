@@ -61,44 +61,20 @@ export function ThemeToggle() {
 }
 
 /**
- * Croatian flag as a 24x16 icon: red, white and blue stripes with the
- * checkerboard shield (šahovnica). Without the shield the stripes read as the
- * Dutch flag.
+ * Flag of Croatia, the Wikimedia Commons SVG (public domain,
+ * commons.wikimedia.org/wiki/File:Flag_of_Croatia.svg) served from
+ * public/flag-hr.svg as-is, with only a viewBox added so it scales.
  */
 function TricolorIcon() {
   return (
-    <svg viewBox="0 0 24 16" className="h-4 w-6" aria-hidden>
-      <defs>
-        <clipPath id="hr-flag">
-          <rect width="24" height="16" rx="2" />
-        </clipPath>
-        <clipPath id="hr-shield">
-          <path d="M9.5 4h6v4.6a3 3 0 0 1-3 3.4 3 3 0 0 1-3-3.4z" />
-        </clipPath>
-      </defs>
-      <g clipPath="url(#hr-flag)">
-        <rect width="24" height="5.34" fill="#ff0000" />
-        <rect y="5.33" width="24" height="5.34" fill="#ffffff" />
-        <rect y="10.66" width="24" height="5.34" fill="#171796" />
-      </g>
-      <path d="M9.5 4h6v4.6a3 3 0 0 1-3 3.4 3 3 0 0 1-3-3.4z" fill="#ffffff" />
-      <g clipPath="url(#hr-shield)" fill="#ff0000">
-        <rect x="9.5" y="4.0" width="1.2" height="1.2" />
-        <rect x="11.9" y="4.0" width="1.2" height="1.2" />
-        <rect x="14.3" y="4.0" width="1.2" height="1.2" />
-        <rect x="10.7" y="5.2" width="1.2" height="1.2" />
-        <rect x="13.1" y="5.2" width="1.2" height="1.2" />
-        <rect x="9.5" y="6.4" width="1.2" height="1.2" />
-        <rect x="11.9" y="6.4" width="1.2" height="1.2" />
-        <rect x="14.3" y="6.4" width="1.2" height="1.2" />
-        <rect x="10.7" y="7.6" width="1.2" height="1.2" />
-        <rect x="13.1" y="7.6" width="1.2" height="1.2" />
-        <rect x="9.5" y="8.8" width="1.2" height="1.2" />
-        <rect x="11.9" y="8.8" width="1.2" height="1.2" />
-        <rect x="14.3" y="8.8" width="1.2" height="1.2" />
-      </g>
-      <path d="M9.5 4h6v4.6a3 3 0 0 1-3 3.4 3 3 0 0 1-3-3.4z" fill="none" stroke="#ff0000" strokeWidth="0.4" />
-      <rect x="0.25" y="0.25" width="23.5" height="15.5" rx="1.75" fill="none" stroke="currentColor" strokeOpacity="0.25" strokeWidth="0.5" />
-    </svg>
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src="/flag-hr.svg"
+      alt=""
+      width={24}
+      height={12}
+      className="h-3 w-6 rounded-[2px] ring-1 ring-black/20"
+      aria-hidden
+    />
   );
 }
