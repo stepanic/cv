@@ -1,4 +1,4 @@
-# Pass B: Fable verification (effort medium)
+# Pass B: Fable verification (effort medium unless the user chose another)
 
 You verify the map against the code and write the review. Your prompt gives you `WT`, `OUT`, the mode, the frozen SHA,
 the destination (`COMMIT` or `LOCAL-ONLY`) and the map path. Read the mode template it names before any code.
@@ -34,4 +34,5 @@ the destination (`COMMIT` or `LOCAL-ONLY`) and the map path. Read the mode templ
 Severity scale used by all modes: 🔴 blocks merge or production, 🟡 important, 🟢 cleanup. Security mode also uses
 Critical / High / Medium / Low / Info.
 
-Return: document path(s), finding counts by severity, the top 5 findings in one sentence each, and your model name.
+Return: document path(s), the commit SHA of the last commit you made (COMMIT destination; "none" for LOCAL-ONLY),
+finding counts by severity, the top 5 findings in one sentence each, and your model name.

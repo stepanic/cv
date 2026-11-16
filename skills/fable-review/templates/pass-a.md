@@ -8,7 +8,9 @@ worktree), `OUT` (output directory), the mode, the frozen SHA, and the destinati
 - Read with `grep -rn` and `sed -n 'A,Bp'`. Never `cat` whole files. Never read the same file twice.
 - Change nothing in code, tests or configuration.
 - Never run anything that writes to production, staging, sandboxes or external services.
-- LOCAL-ONLY: write only into `OUT`, which is outside the repository. Never create a file inside `WT`. Never commit.
+- LOCAL-ONLY: write only into `OUT`, which is outside the repository. Never create or modify a tracked file, or an
+  untracked file that is not gitignored, inside `WT`. Installs into gitignored paths (`node_modules`, build caches) are
+  allowed. Never commit.
 - COMMIT: write into `OUT` inside `WT` and commit the map as soon as it is written (`git -C "$WT" add <map> && git -C "$WT" commit`).
 
 ## 1. Ground check
@@ -19,6 +21,10 @@ Run the read-only checks that preflight listed: typecheck (`npx tsc --noEmit`, `
 - The worktree has no `node_modules` or build caches. Install with lifecycle scripts disabled (`npm ci --ignore-scripts`,
   `flutter pub get`). If install fails or needs secrets, record "ground check skipped: <reason>". Never invent results.
 - Skip any test suite that needs `.env`, network credentials or a live database, and say so.
+- LOCAL-ONLY (external repository): run only static checks (typecheck, lint, `flutter analyze`, `cargo check`). Test
+  suites (`vitest`, `pytest`, `forge test`) execute the repository's own code and config on this machine, so run them
+  only if your prompt says the user allowed it. `flutter pub get` may rewrite a tracked `pubspec.lock`; if it does,
+  record it, because the orchestrator's cleanup check will show it.
 - Record each command with pass/fail and the failure count.
 
 ## 2. Context and intended invariants

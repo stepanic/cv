@@ -11,7 +11,7 @@
 - [`SKILL.hr.md`](SKILL.hr.md) — the same skill written in Croatian, for reading.
 - [`templates/`](templates/) — what the subagents read: `pass-a.md`, `pass-b.md`, and one output structure per mode.
   A subagent sees only its prompt, never the parent's SKILL.md, so these are passed to it by absolute path.
-- [`scripts/salvage.py`](scripts/salvage.py) — runs after every Fable agent and writes all recoverable output (final report, text, full Write/Edit contents, usage per call) to one local Markdown file, even when the agent crashed or hit a rate limit. Thinking is stored empty by Claude Code and cannot be recovered; its token count is reported.
+- [`scripts/salvage.py`](scripts/salvage.py) — runs after every Fable agent and writes all recoverable output (final report, text, full Write/Edit contents, usage per call, cost in USD) to one local Markdown file, even when the agent crashed or hit a rate limit. It marks a run that did not finish, so the last remark of a stopped agent is not mistaken for its report. Thinking is stored empty by Claude Code and cannot be recovered; its token count is reported.
 - [`scripts/preflight.sh`](scripts/preflight.sh) — deterministic, read-only pre-flight: review base, owner and
   visibility, **destination** (`COMMIT` / `LOCAL-ONLY` / `ASK`), lines of code, stack and ground-check candidates,
   previous `audit-*` tags and local reports, `Co-Authored-By` statistics, and a cost estimate.
@@ -32,13 +32,13 @@ flowchart LR
 Why two passes instead of handing the repository directly to Fable:
 - Fable 5.1 is **2.5× the price of Opus 5.5** ($10/$50 vs $4/$20 per MTok; 5-minute cache write $12.50/MTok) and **5× the price of Sonnet 5.5** ($2/$10 per MTok).
 - In the 2026-10-16 incident ([postmortem](../../docs/2026-10-17-postmortem-fable-subagenti-tjedni-limit.md)), a single-pass Fable agent on [`domovinatv/pay.domovina.ai`](https://github.com/domovinatv/pay.domovina.ai) (59k lines of code at the time) ran `cat -n` over whole files, grew its context to **636k tokens across 44 turns**, sent **11.6M input tokens**, and cost **$13.96** (55% cache writes).
-- Running Pass A on Sonnet 5.5 (~$1.50–3.00) to produce a 200-line map of entry points, invariants, and `file:line` hotspots lets Pass B on Fable 5.1 read 150-line slices with `sed -n`, keeping context under **150k tokens** with an *estimated* Fable cost of ~$3–6 per repository. The estimate comes from Fable 5.1 prices and the incident transcripts; it has not yet been measured on a full run of this skill.
+- Running Pass A on Sonnet 5.5 (~$1.50–3.00) to produce a 200-line map of entry points, invariants, and `file:line` hotspots lets Pass B on Fable 5.1 read 150-line slices with `sed -n`, keeping context under **150k tokens** with an *estimated* Fable cost of ~$3–6 per repository. The estimate comes from Fable 5.1 prices and the incident transcripts. The first measured run (2026-11-16, a `diff` review of this skill on Fable 5.2 at effort low) took 7 calls, a 102k peak context and $2.51.
 
 ## Five modes
 
 | Mode | Scope | Question answered | Output in repo | Estimated cost (Pass A + B) |
 |---|---|---|---|---|
-| **`diff`** *(weekly / PR)* | Commits since last `audit-fable-*` tag (or last 7 days) | *"Can this week's Opus changes ship safely, and were prior Fable findings actually fixed?"* | `docs/reviews/<date>-fable-diff-<topic>.md` | **$2–4** |
+| **`diff`** *(weekly / PR)* | Commits since the last `audit-*` tag, or since `--base <ref>` | *"Can this week's Opus changes ship safely, and were prior Fable findings actually fixed?"* | `docs/reviews/<date>-fable-diff-<topic>.md` | **$2–5** (measured: $2.51 for ~1,150 changed lines, effort low) |
 | **`refactor`** | Module boundaries, largest files, duplication, test/CI gaps | *"How should Opus split and clean up this codebase in green waves without breaking invariants?"* | `docs/refactor/<date>-code-review-and-refactor-plan.md` | **$4–7** |
 | **`security`** | Entry points, auth, money/ledger flows, secrets, DB queries | *"Where can an attacker steal funds/data, bypass auth, or trigger a race condition?"* | `docs/security/<date>-security-audit-fable.md` | **$4–7** |
 | **`full`** | Whole repo split into 2–4 subsystems (`security` + `refactor`) | *"Give me a subsystem-by-subsystem audit, coverage matrix, and master P0–P2 plan for Opus."* | `docs/reviews/<date>-fable/{INDEX,<subsystems>,implementation-plan}.md` | **$8–15** |
@@ -50,7 +50,8 @@ Why two passes instead of handing the repository directly to Fable:
 - **"Confirmed GOOD — DO NOT TOUCH" is mandatory.** In [`domovinatv/pay.domovina.ai`](https://github.com/domovinatv/pay.domovina.ai), [`domovinatv/domovina-fiskal`](https://github.com/domovinatv/domovina-fiskal), and [`domovinatv/energy.domovina.ai`](https://github.com/domovinatv/energy.domovina.ai), the most valuable section for the subsequent Opus pass was the explicit list of empirical invariants (10-line EPC QR layout for Revolut iOS, 14-field FINA HUB3 format, ZKI/XML-DSIG signing, atomic SQL latches) that a refactor must not "simplify".
 - **Every finding requires a concrete failure scenario and verification check.** Plausible concerns that cannot be proven from repo code alone go into a separate *"Unverified / For human check"* section rather than inflating the finding count.
 - **Annotated git tag `audit-fable-YYYY-MM-DD-<mode>[-N]`.** Every completed review of an own repository tags the reviewed state, giving the next `diff` run an exact baseline range. Preflight picks the next free name, so two reviews on one day do not collide.
-- **Only your own repositories get commits.** Preflight compares the origin owner with an allow-list in `~/.config/fable-review/own-owners` (one GitHub owner per line, or `FABLE_REVIEW_OWN_OWNERS`). Any other owner is `LOCAL-ONLY`: the review is written to `~/.claude/fable-review/reports/<repo>/` and nothing is committed, tagged or pushed to that repository or copied anywhere else. A repo without remote, or a missing list, yields `ASK`.
+- **Only your own repositories get commits.** Preflight parses host and owner from the origin URL and compares `host/owner` literally with an allow-list in `~/.config/fable-review/own-owners` (one entry per line, or `FABLE_REVIEW_OWN_OWNERS`). A bare entry such as `stepanic` means `github.com/stepanic`; other hosts need the full form, such as `gitlab.com/stepanic`. Anything else is `LOCAL-ONLY`: the review is written to `~/.claude/fable-review/reports/<owner>-<repo>/` and nothing is committed, tagged or pushed to that repository or copied anywhere else. A repo without remote, an unparsable URL, or a missing list yields `ASK`.
+- **Only review documents reach the default branch.** Before the push, the skill checks that the review branch differs from `origin/<default>` only in files under the output directory. A `diff` review based on an unpushed feature branch fails that check, so only the review branch is pushed and the feature commits never ship by accident.
 - **Push only after rebase, clean up only after push.** The worktree lives under `~/.claude/fable-review/worktrees/` on a named branch, so a rejected push or a reboot cannot strand the review.
 
 ## Public examples
@@ -64,9 +65,9 @@ Why two passes instead of handing the repository directly to Fable:
 ## Install
 
 ```bash
-git clone --depth 1 --filter=blob:none --sparse https://github.com/stepanic/cv /tmp/stepanic-cv
-git -C /tmp/stepanic-cv sparse-checkout set skills/fable-review
-cp -R /tmp/stepanic-cv/skills/fable-review ~/.claude/skills/
+git clone --depth 1 --filter=blob:none --sparse https://github.com/stepanic/cv ~/src/stepanic-cv
+git -C ~/src/stepanic-cv sparse-checkout set skills/fable-review
+ln -s ~/src/stepanic-cv/skills/fable-review ~/.claude/skills/fable-review   # or cp -R
 mkdir -p ~/.config/fable-review && echo "<your-github-login>" > ~/.config/fable-review/own-owners
 ```
 
