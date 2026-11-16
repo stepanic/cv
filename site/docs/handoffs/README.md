@@ -28,7 +28,7 @@ povijest.
 
 | Sesija | Paket | Stanje | Commit | Check | Napomena |
 | --- | --- | --- | --- | --- | --- |
-| S0 | Plan | gotovo | | — | plan, TODO, odluke 1–8, handoffi S1–S6 |
+| S0 | Plan | gotovo | d450622 | — | plan, TODO, odluke 1–8, handoffi S1–S6 |
 | S1 | Baseline + Astro temelj | otvoreno | | | |
 | S2 | Naslovnica I | otvoreno | | | |
 | S3 | Naslovnica II | otvoreno | | | |
