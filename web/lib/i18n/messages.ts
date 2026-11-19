@@ -36,6 +36,7 @@ const en = {
     downloadCvEn: "CV in English (PDF)",
     downloadOnePage: "One-page CV (PDF)",
     emailMe: "Email me",
+    hireMe: "Hire me",
     availability: "Open to senior engineering & AI-native product work",
   },
 
@@ -271,6 +272,7 @@ const hr: Messages = {
     downloadCvEn: "CV na engleskom (PDF)",
     downloadOnePage: "CV na jednoj stranici (PDF)",
     emailMe: "Pošalji e-mail",
+    hireMe: "Angažirajte me",
     availability: "Otvoren za senior inženjerske i AI-native projekte",
   },
 
