@@ -52,6 +52,8 @@ Claude Code skills, one markdown file each, free to copy:
 | [`wrap-up`](skills/wrap-up/) | Closes a session before `/clear`: commit and push every repo touched, refresh memory files, write down what is not yet in the codebase, put a handoff prompt in the clipboard, and report what is still open. Designed from a count of 119 real phrasings of the request across my transcripts, not from recollection. |
 | [`todo-plan`](skills/todo-plan/) | Plans a larger implementation as a linear chain of sessions written into the repo: `TODO.md` by phase, a session table with a "done when" checkable by a command, numbered decisions, and one handoff file per session that is the next empty session's prompt. `wrap-up` hands over that file instead of writing a new handoff. |
 | [`fable-review`](skills/fable-review/) | Runs an independent two-pass Fable 5.1 review across five modes (`diff`, `refactor`, `security`, `full`, `forensic`): deterministic `preflight.sh` + Sonnet 5.5 map first, then targeted Fable 5.1 verification that writes Markdown findings, "do not touch" invariants, and a phased refactor plan for Opus while keeping context under 150k tokens. |
+| [`todo-plan-exec`](skills/todo-plan-exec/) | Runs a `todo-plan` chain from two iTerm2 panes: the current session orchestrates and starts a fresh executor session per handoff in the right pane, checks each round with commands, relays questions with a 60 s fallback to the recommendation, and stops at every gate. |
+| [`glasovne`](skills/glasovne/) | Reads someone's WhatsApp messages from the local desktop database on macOS and transcribes the voice notes through `agy -p` with Gemini, so a 258 s batch of voice notes is summarised in 28 s without Claude quota. |
 
 ## Stack
 
