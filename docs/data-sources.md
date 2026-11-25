@@ -239,6 +239,35 @@ full-record gap is still a real and interesting number (it shows what a
 blind spot describes the default rather than this machine. Rewriting it is a
 content decision, not a bug fix, so it was left alone rather than changed quietly.
 
+## dotclaude-backup can stop silently
+
+Added 2026-11-25. `npm run stats:claude` is only as fresh as the last commit in
+`~/git/stepanic/dotclaude-backup`, and that job failed every night from
+2026-11-13 to 2026-11-25 without any signal outside its own log.
+
+Cause: `~/.claude/projects/-Users-ms-git-stepanic-cv-private/memory` is a symlink
+to `~/git/stepanic/cv-private/memory`. That repo was archived to DOMOVINA2TB on
+2026-09-25, so the link dangles. `rsync --copy-unsafe-links` cannot copy it and
+exits 23, and `set -euo pipefail` in `sync.sh` aborts before the commit and the
+rclone upload. launchd shows the job with last exit 23, nothing else does.
+
+Fix (local `sync.sh` only): exit 23/24 is logged as a partial transfer and the
+run continues; any other non-zero exit still aborts. The catch-up run committed
+4,407 changed files. The public template repo `stepanic/dotclaude-sync` still has
+the old `rsync` line and the same failure mode.
+
+Check before trusting the stats:
+
+```bash
+git -C ~/git/stepanic/dotclaude-backup log -1 --format='%ci'   # should be today or yesterday
+launchctl list | grep dotclaude                                # middle column = last exit code
+tail -5 ~/git/stepanic/dotclaude-backup/sync.log
+```
+
+Reading after the refresh, 2026-11-25: 10,723 sessions, 305 projects,
+44.13B tokens, $41,231.87 API-equivalent (previous reading 8,816 / 292 /
+41.22B / $38,309.29).
+
 ## Vezani dokumenti
 
 - `docs/2026-08-26-linkedin-pozicioniranje.md` — nacrti LinkedIn headlinea i
